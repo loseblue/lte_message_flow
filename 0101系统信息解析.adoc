@@ -206,6 +206,7 @@ Message dump (Hex):
 
 
 [[si_value_tag, systemInfoValueTag解析]]
+===== systemInfoValueTag解析
 对于除MIB, SIB1, SIB10和SIB11之外的所有系统信息块的公共值, 范围(0-31); SI每变化一次, systemInfoValueTag值就加1(或减1: 移动研究院测试华为网络机制是减1). 
 
 举例: UE将寻呼消息PAGING TYPE1中的MIB value tag1与自己保存的MIB value tag2进行比较:
@@ -240,95 +241,156 @@ ac-BarringForMO-Data
     [3 ] : 0
     [4 ] : 0
 radioResourceConfigCommon
-  rach-ConfigCommon
-    numberOfRA-Preambles : n52
-    sizeOfRA-PreamblesGroupA : n44
-    messageSizeGroupA : b56
-    messagePowerOffsetGroupB : dB5
-    powerRampingStep : dB2
-    preambleInitialReceivedTargetPower : dBm-90
-    preambleTransMax : n20
-    ra-ResponseWindowSize : sf10
-    mac-ContentionResolutionTimer : sf48
-    maxHARQ-Msg3Tx : 8
+  rach-ConfigCommon                                   <1>
+    numberOfRA-Preambles : n52                        <2>
+    sizeOfRA-PreamblesGroupA : n44                    <3>
+    messageSizeGroupA : b56                           <4>
+    messagePowerOffsetGroupB : dB5                    <5>
+    powerRampingStep : dB2                            <6>
+    preambleInitialReceivedTargetPower : dBm-90       <7>
+    preambleTransMax : n20                            <8>
+    ra-ResponseWindowSize : sf10                      <9>
+    mac-ContentionResolutionTimer : sf48              <10>
+    maxHARQ-Msg3Tx : 8                                <11>
   bcch-Config
-    modificationPeriodCoeff : n4
+    modificationPeriodCoeff : n4                      <12>
   pcch-Config
-    defaultPagingCycle : rf64
-    nB : oneT
+    defaultPagingCycle : rf64                         <13>
+    nB : oneT                                         <14>
   prach-Config
-    rootSequenceIndex : 22
+    rootSequenceIndex : 22                            <15>
     prach-ConfigInfo
-      prach-ConfigIndex : 0
-      highSpeedFlag : False
-      zeroCorrelationZoneConfig : 1
-      prach-FreqOffset : 10
+      prach-ConfigIndex : 0                           <16>
+      highSpeedFlag : False                           <17>
+      zeroCorrelationZoneConfig : 1                   <18>
+      prach-FreqOffset : 10                           <19>
   pdsch-ConfigCommon
-    referenceSignalPower : -10
-    p-b : 1
+    referenceSignalPower : -10                        <20>
+    p-b : 1                                           <21>
   pusch-ConfigCommon
-    n-SB : 2
-    hoppingMode : interSubFrame
-    pusch-HoppingOffset : 6
-    enable64QAM : True
+    n-SB : 2                                          <22>
+    hoppingMode : interSubFrame                       <23>
+    pusch-HoppingOffset : 6                           <24>
+    enable64QAM : True                                <25>
     ul-ReferenceSignalsPUSCH
-      groupHoppingEnabled : False
-      groupAssignmentPUSCH : 0
-      sequenceHoppingEnabled : False
-      cyclicShift : 0
+      groupHoppingEnabled : False                     <26>
+      groupAssignmentPUSCH : 0                        <27>
+      sequenceHoppingEnabled : False                  <28>
+      cyclicShift : 0                                 <29>
   pucch-ConfigCommon
-    deltaPUCCH-Shift : ds1
-    nRB-CQI : 2
-    nCS-AN : 0
-    n1PUCCH-AN : 2
+    deltaPUCCH-Shift : ds1                            <30>
+    nRB-CQI : 2                                       <31>
+    nCS-AN : 0                                        <32>
+    n1PUCCH-AN : 2                                    <33>
   soundingRS-UL-ConfigCommon
     SoundingRS-UL-ConfigCommon : release
   uplinkPowerControlCommon
-    p0-NominalPUSCH : -80
-    alpha : al1
-    p0-NominalPUCCH : -100
+    p0-NominalPUSCH : -80                             <34>
+    alpha : al1                                       <35>
+    p0-NominalPUCCH : -100                            <36>
     deltaFList-PUCCH
-      deltaF-PUCCH-Format1 : deltaF-2
+      deltaF-PUCCH-Format1 : deltaF-2                 <37>
       deltaF-PUCCH-Format1b : deltaF3
       deltaF-PUCCH-Format2 : deltaF-2
       deltaF-PUCCH-Format2a : deltaF2
       deltaF-PUCCH-Format2b : deltaF2
-    deltaPreambleMsg3 : 4
-  ul-CyclicPrefixLength : len1
+    deltaPreambleMsg3 : 4                             <38>
+  ul-CyclicPrefixLength : len1                        <39>
 ue-TimersAndConstants
-  t300 : ms1000
-  t301 : ms1000
-  t310 : ms1000
-  n310 : n1
-  t311 : ms1000
+  t300 : ms1000                                       <40>
+  t301 : ms1000                                       <41>
+  t310 : ms1000                                       <42>
+  n310 : n1                                           <43>
+  t311 : ms1000                                       <44>
   n311 : n8
-additionalSpectrumEmission : 1
-timeAlignmentTimerCommon : infinity
-
+additionalSpectrumEmission : 1                        <45>
+timeAlignmentTimerCommon : infinity                   <46>
 ....
+
+<1> 随机接入配置
+<2> 保留给竞争模式使用的随机接入前导码个数, n52即52个
+<3> 随机接入前导码组A的大小. 对于所有用于竞争随机接入的前导码, eNodeB可以选择性的将其分为两组, 称为集合A和集合B. 触发随机接入时, UE首先根据待发送的Msg3大小和路损大小确定使用哪个集合. 集合A用于Msg3较小或路损较大的场景; 集合B用于Msg3较大且路损较小的场景.n44:前导码组A包含44个前导码, B组52-44=8个前导码
+<4> Msg3消息块大小门限, 针对Preamble码集合A. 如果Group B存在, 则在选择Preamble码的集合时, 考察: 如果Msg3的大小大于该门限, 同时满足UE的路损小于: PCMAX – preambleInitialReceivedTargetPower– deltaPreambleMsg3 – messagePowerOffsetGroupB的门限值, 则选择Group B; 否则就选择Group A. b56表示56bit.
+<5> 用于配合判决UE随机接入Preamble B组的选择
+<6> 随机前导码的发射功率调整步长. dB2表明2个dB
+<7> eNodeB期望接收到的初始随机前导码的功率.当PRACH前导格式为0时, 在满足前导检测性能时, eNodeB所期望的目标功率水平. 
+<8> 随机接入前导最大重发次数. 如果初始接入过程失败, 但是还没有达到最大尝试次数preambleTransMax, 则可以继续尝试. 如果达到最大次数, 则本次随机接入过程结束
+<9> 随机接入响应窗大小. 若在窗口期未收到RAR, 则上行同步失败.Sf10表示10个子帧的长度. 响应窗起点与Msg1间隔10ms(发送了接入前导序列以后, UE需要监听PDCCH信道,是否存在ENODEB回复的RAR消息, (Random Access Response), RAR的时间窗是从UE发送了前导序列的子帧 + 3个子帧开始, 长度为Ra-ResponseWindowSize个子帧)
+<10> RA过程中UE等待接收Msg4的有效时长. 当UE初传或重传Msg3时启动. 在超时前UE收到Msg4或Msg3的NACK反馈, 则定时器停止. 定时器超时, 则随机接入失败, UE重新进行RA. 当前参数设置sf48, 即48个子帧长度. 
+<11> Msg3的HARQ最大传输次数, 该参数与preambleTransMax的区别, 该参数是在一次preamble码接入成功的基础上Msg3可以自动重传的次数
+<12> 系统消息更新周期系数, n2就是2. 在UE没有得到其他通知的情况下, LTE 规定 UE存贮的系统信息的有效期为3小时. LTE中, 系统信息的改变只能在特定的系统帧上进行, 这些特定的帧满足条件: SFN帧号 mod 系统消息更新周期 = 0; 其中系统消息更新周期 = modificationPeriodCoeff * defaultPagingCycle.
+<13> 默认的寻呼周期. 当前参数设置rf128, 即128个无线帧长度
+<14> 默认寻呼周期的系数. oneT, 即生效的默认寻呼周期=1*默认寻呼周期
+<15> 用于生成Signature的逻辑Za-doff序列索引, 每一个逻辑索引对应一个物理Zadoff-chu序列. 该值一般是按网络规划配置设置的. 当前参数设置为7, 对应物理Zadoff-chu序列为629.见36.211 Table 5.7.2-4
+<16> PRACH 配置索引, 用于指示无线帧中的PRACH时频位置, 取值范围为0 ~ 63, 不同的取值对应不同个数个PRACH信道. 对于TDD, 由于上行子帧较少, 一个subframe可以有多个PRACH, 但最多为6个. 见36.211 Table 5.7.1-2
+<17> 高速移动小区指示. 即是否是覆盖高速移动场景, 当前参数设置为False, 表示非覆盖高速移动场景
+<18> 零自相关区配置索引. 随机接入前导是由具有CAZAC(恒幅零自相关)的Zadoff-chu序列生成的, 通过逻辑根序列获取物理根序列, 然后对物理根序列进行循环移位获得. 零自相关区配置索引与Ncs的选择直接相关. 取值范围0～15, 当前参数设置为2, 即对应Ncs=15(无限集)或Ncs=22(有限集), 见36.211 Table 5.7.2-2
+<19> 该参数用于广播PRACH所占用的频域资源起始位置的偏置值码当前参数设置为10, 即在第10个PRB位置
+<20> 每逻辑天线(port)的小区参考信号功率. 下行参考信号传输功率定义为系统带宽内所有承载小区专用参考信息的资源粒子功率的线性平均.参数设置值为-10, 即RS信号功率为-10dbm
+<21> 表示PDSCH上EPRE(Energy Per Resource Element)的功率因子比率指示, 它和天线端口共同决定了功率因子比率的值,P-b实际表征的是有RS的PDSCH符号功率与没有RS的PDSCH符号的功率偏移量 见36.213 Table 5.2-1
+<22> 给定跳频模式下, 用于跳频的PUSCH子带个数. 该参数与跳频偏置决定了子带的大小, 而子带大小与跳频偏置, Vrb数一起决定PUSCH信道PRB的分配. 该参数设置为2, 即子带数为2.
+<23> PUSCH跳频模式选择. 该参数设置为interSubFrame, 表示采用子帧间跳频模式. 还有另一种模式为子帧内跳频. 不同跳频模式下pusch发送信号使用的资源块获得方式不一样
+<24> PUSCH信道的跳频偏移. 与FDD/TDD模式, 子帧配置, CP长度相关. 参与决定PUSCH信道资源分配. 
+<25> 上行PUSHC是否使用64QAM调制方式. CAT5类终端支持. 当前参数设置为TRUE, 表示上行支持64QAM使用. 
+<26> 是否允许组跳频. 所谓序列组跳, 是指小区在不同的时隙内, 使用不同序列组内的参考序列. 在非序列组跳转的情况下, 也就是说, 在不同的时隙内, 小区的参考序列都来自同一个参考序列组. 在PUCCH的情况下, 序列组的序号是小区的PCI模30后的余值. 其中, PCI在0到503之间取值. 对于PUSCH使用的序列组是通过SIB2中的参数"groupAssignmentPUSCH"来显式通知UE的. 这样做的目的是允许相邻的小区使用相同的参考信号根序列. 通过相同根序列的不同循环移位来使相邻小区的不同UE之间的RS相互正交. false, 则表示不支持
+<27>  PUSCH信道的分组指派; 一个eNodeB下所有小区的GroupAssignPUSCH取0时, 这些的PUSCH上的UL RS由不同的base序列组生成, 每个小区在生成UL RS时可以使用全部的CS(Cyclic Shift)取值, 可用的CS越多, 能够支持配对的V-MIMO用户越多. 
+<28> 是否允许USCH信道的序列跳频; 当不执行Group hopping时, 允许支持sequence hopping
+<29> PUSCH信道的循环移位; 当一个eNodeB下的所有小区使用相同的base序列组生成PUSCH上的UL RS时, 为了保证在半静态调度时这些小区使用不同的CS(Cyclic Shift)取值, 需要为这些小区配置不同的CyclicShift取值
+<30> PUCCH信道的循环移位间隔. 在组网时根据环境类型获得小区的平均时延扩展, 然后根据小区的平均时延扩展得到PUCCH信道的循环移位间隔. 与硬件处理能力相关.协助计算pucch格式1, 1a, 1b时的循环移位及正交序列索引的确定. 
+<31> 表示每个时隙中可用于PUCCH格式2/2a/2b 传输的物理资源块数.RRC层给CQI配置的RB总数. 当PUCCH资源调整开关关闭时, CQI RB个数才能够进行手动配置. 参数设置为1, 表示1个RB用于承载CQI.该参数定义与36.211 5.4章节描述不一致.规范中定义为不同PUCCH格式下一个Slot可用带宽, 即RB数
+//不清楚
+<32> 表示的是PUCCH格式1/1a/1b和格式2/2a/2b在一个物理资源块中混合传输时格式1/1a/1b可用的循环移位数. 是delta PUCCH Shift的整数倍
+<33> PUCCH占用RB数索引, 表示PUCCH 使用的RB 个数.
+<34> PUSCH的标称P0值, 应用于上行功控过程. 与p0-NominalPUCCH含义一致
+<35> 即α, 路径损耗补偿因子, 应用于上行功控过程. 是一个 3bit 的小区专用参数, 01代表0.1
+<36> 正常进行PUCCH解调, eNodeB所期望的PUCCH发射功率水平; P0NominalPUCCH设置的过高, 会增加本小区的吞吐量, 但是会降低整网的吞吐量; P0NominalPUCCH设置偏低, 降低对邻区的干扰, 导致本小区的吞吐量的降低, 提高整网吞吐量. 
+<37> PUCCH格式1的Delta值; 用于计算PUCCH信道功率, 相当于对每种PUCCH格式补偿值. 当前设置值deltaF-2, 表示-2dB
+<38> 用于随机接入响应许可的PUSCH的功率计算. 实际值= IE value * 2 [dB],4*2=8 
+<39> 小区的上行循环前缀长度, 分为普通循环前缀和扩展循环前缀, 扩展循环前缀主要用于一些较复杂的环境, 如多径效应明显, 时延严重等. 当前参数设置为len1, 即采用扩展循环前缀. 
+<40> RRC连接建立定时器. 开始于RRCConnectionRequest发送, 在收到RRCConnectionSetup或RRCConnectionReject消息, cell re-selection或连接放弃后停止, 定时器超时后,则认为本次 RRC 建立失败, UE直接进入RRC_IDLE态. 参数设置值为1000ms. 
+<41> RRC连接重建定时器. UE在发送RRCConnectionReestabilshmentRequest时启动该定时器.  定时器超时前, 如果UE收到RRCConnectionReestablishment或者RRCConnectionReestablishmentReject或者被选择小区变成不适合小区(适合小区定义参见3GPP TS 36.331), 则停止该定时器. 定时器超时后, UE进入RRC_IDLE态. 参数设置为1000ms. 
+<42> 无线链路失败定时器.在收到底层连续N310个失步指示后启动, 若在定时器时间内收到连续N311个同步指示, 无线链路恢复, 否则定时器超时, 即意味着无线链路失败. 参数设置值为1000ms
+<43> 该参数表示接收到底层的连续"失步"指示的最大数目. 改小, 可能增加重建次数, 改大可能无法及时检测到下行失步, 影响用户业务时延感受. 
+<44> 无线链路失败恢复定时器. UE 在发起 RRC 连接重建流程时启动该定时器.  定时器超时前, 如果 UE 选择了一个 EUTRAN 小区或者异系统小区后, 停止此定时器. 定时器超时后, UE 进行小区重选或者TA更新, 进入 RRC_IDLE 态. 改小此参数对掉话率有负增益. 改大此参数影响用户业务时延感受, 可以减少掉话次数. 
+<45> 附加频率散射, 限制UE功率在相应信道带宽内的水平. 即用于计算ue的上行发射功率. 这个参数对应一个Additional Maximum Power Reduction (A-MPR), 该值可以计算对应频带的上行发射功率. 该参数与Additional Maximum Power Reduction (A-MPR)的对应关系, 见 TS 36.101 Table6.2.4-1和TS 36.521 Table 6.2.4.3-1.当前参数设置值为1, 对应NS_01, 即A-MPR为NA. 
+<46> 时间调整定时器, 上行同步成功后启动, 失步后重启. 这个参数是MAC层过程参数, 是对UE上行同步状态进行维护的一个定时器. UE上行需要保持和eNodeB的同步 , 同步是利用Rach信道和过程获得的. 但是UE一次做完一次Rach, 获得同步以后, 可能由于UE, eNodeB双方的时钟偏移, 或者信道情况改变, 而又变成失步状态. 在Time Alignment Timer超时的时间内, eNodeB必需对UE的上行定时做一次调整(eNB会给UE发Timing Advance Command来调整上行同步), 或者确认, 否则UE认为上行失步, 需要重新Rand Access. 例如: 在随机接入过程的Msg2中, 基站通常会返回给UE一个TA(时间提前量), 这是为了保证Msg3的同步, sf1920, 子帧为单位, 即1920个子帧长度
+//不是很清楚意思
 
 === SIB3 (System Information Block 3) 解析
 ....
 MS1
-System Information Block 3
+System Information Block 3                            <1>
 
 Time : 17:45:36.299
-q-Hyst : dB3
-s-NonIntraSearch : 22
-threshServingLow : 15
-cellReselectionPriority : 7
-q-RxLevMin : -60
-p-Max : 23
-s-IntraSearch : 19
-allowedMeasBandwidth : mbw100
-presenceAntennaPort1 : False
-neighCellConfig
+q-Hyst : dB3                                          <2>
+s-NonIntraSearch : 22                                 <3>
+threshServingLow : 15                                 <4>
+cellReselectionPriority : 7                           <5>
+q-RxLevMin : -60                                      <6>
+p-Max : 23                                            <7>
+s-IntraSearch : 19                                    <8>
+allowedMeasBandwidth : mbw100                         <9>
+presenceAntennaPort1 : False                          <10>
+neighCellConfig                                       <11>
   Binary string (Bin) : 01
     [0 ] : 0
     [1 ] : 1
-t-ReselectionEUTRA : 1
+t-ReselectionEUTRA : 1                                <12>
 
 ....
+
+<1> 小区重选信息
+<2> 小区重选迟滞. 用于作用在(在服务小区测量RSRP值上加上该值)服务小区后作为重选判决依据
+<3> 异频搜索门限. 低于22dB开启
+<4> 由服务频率向低优先级重选时门限. 实际值=7*2=14dB
+<5> 小区重选优先级.Value is between 0-7 where 0 means: lowest priority.
+<6> 小区要求的最小接收功率RSRP值[dBm], 即当UE测量小区RSRP低于该值时, UE是无法在该小区驻留的. 实际的值为: Q~rxlevmin~ = IE value * 2, -60为-120dBm
+<7> 同频临小区上行传输功率最大值. 如果缺省, UE采用自己的传输功率最大值. 
+<8> If the field s-IntraSearchP is present, the UE applies the value of s-IntraSearchP instead. Otherwise if neither 09s-IntraSearch nor s-IntraSearchP is present, the UE applies the (default) value of infinity for SIntraSearchP.
+<9> [later]
+<10> [later]  
+<11> 用于提供临小区MBSFN和上下行配比信息. 00: 不是所有邻区均和当前服务小区有相同的MBSFN子帧配置. 10: 所有邻区均和当前服务小区有相同的MBSFN子帧配置. 01: 所有邻区均没有MBSFN子帧配置. 11: 相对于服务小区的UL/DL配置, 邻区中存在不同的UL/DL配置. 对于TDD, 00, 10, 01只用于服务小区和邻区的UL/DL配置相同情况. 
+<12> EUTRA小区重选定时器, 1s
 
 === SIB4 (System Information Block 4) 解析
 ....
@@ -370,5 +432,6 @@ interFreqCarrierFreqList
           [1 ] : 0
 ....
 
+hahahha 
 
 // vim: set syntax=asciidoc:
