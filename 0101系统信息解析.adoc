@@ -395,43 +395,61 @@ t-ReselectionEUTRA : 1                                <12>
 === SIB4 (System Information Block 4) 解析
 ....
 MS1
-System Information Block 4
+System Information Block 4                            <1>
 
 Time : 10:01:27.846
-intraFreqNeighCellList
-  IntraFreqNeighCellList :
+intraFreqNeighCellList                                <2>
+  IntraFreqNeighCellList :                           
     [0 ] :
-      physCellId : 14
-      q-OffsetCell : dB0
+      physCellId : 14                                 <3>
+      q-OffsetCell : dB0                              <4>
     [1 ] :
       physCellId : 201
       q-OffsetCell : dB0
-
 ....
+
+<1> 同频临小区重选信息
+<2> 同频临小区重选列表, 最多16个
+<3> 临小区ID
+<4> 定义两小区间的偏移. Value -24 ~ +24dB
 
 === SIB5 (System Information Block 5) 解析
 ....
 MS1
-System Information Block 5
+System Information Block 5                            <1>
 
 Time : 17:45:36.299
-interFreqCarrierFreqList
-  InterFreqCarrierFreqList :
+interFreqCarrierFreqList                              <2>
+  InterFreqCarrierFreqList :                          <2>
     [0 ] :
-      dl-CarrierFreq : 2
-      q-RxLevMin : -65
-      t-ReselectionEUTRA : 1
-      threshX-High : 12
-      threshX-Low : 11
-      allowedMeasBandwidth : mbw100
-      presenceAntennaPort1 : False
-      cellReselectionPriority : 7
-      neighCellConfig
+      dl-CarrierFreq : 2                              <3>
+      q-RxLevMin : -65                                <4>
+      t-ReselectionEUTRA : 1                          <5>
+      threshX-High : 12                               <6>
+      threshX-Low : 11                                <7>
+      allowedMeasBandwidth : mbw100                   <8>
+      presenceAntennaPort1 : False                    <9>
+      cellReselectionPriority : 7                     <10>
+      neighCellConfig                                 <11>
         Binary string (Bin) : 00
           [0 ] : 0
           [1 ] : 0
 ....
 
-hahahha 
+<1> 异频临小区重选信息
+<2> 异频临小区重选列表,最多8个
+<3> 异频临小区频点
+<4> 异频临小区最小的RSRP. Value -70 ~ -22 dBm.
+<5> 定义了小区重选时间 0 ~ 7 s
+<6> # Threshold (in dB) used by UE for cell re-selection to a HIGHER priority #  The Srxlev of the candiate cell is greater then threshX_High # Value 0 to 31 dB. Actual value= Signaled value * 2
+<7> # Threshold (in dB) used by UE for cell re-selection to a LOWER priority #  Cell re-selection is allowed only when Srxlev of the candiate cell is greater then threshX_Low and RSRP of serving cell is less than the value of ThreshServingLow singalled within SIB3 # Value 0 to 31 dB. Actual value= Signaled value * 2
+<8> 异频临小区带宽
+<9> [later]
+<10> 异频临小区优先级
+<11>用于提供临小区MBSFN和上下行配比信息. 00: 不是所有邻区均和当前服务小区有相同的MBSFN子帧配置. 10: 所有邻区均和当前服务小区有相同的MBSFN子帧配置. 01: 所有邻区均没有MBSFN子帧配置. 11: 相对于服务小区的UL/DL配置, 邻区中存在不同的UL/DL配置. 对于TDD, 00, 10, 01只用于服务小区和邻区的UL/DL配置相同情况. 
+
+
+
+
 
 // vim: set syntax=asciidoc:
