@@ -8,7 +8,7 @@ LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广�
 * SIB2:小区内所有UE共用的无线参数配置, 其它无线参数基本配置. 
 * SIB4:同频邻区列表以及每个邻区的重选参数, 同频白/黑名单小区列表. 
 * SIB5:异频相邻频点列表以及每个频点的重选参数, 异频相邻小区列表以及每个邻区的重选参数, 异频黑名单小区列表. 
-* SIB6:UTRA FDD邻频频点列表以及每个频点的重选参数, UTRA TDD邻频频点列表以及每个频点的重选参数. 
+* SIB6:UTRA FDD邻频频点列表以及每个频点的重选参数, UTRA TDD邻频频点列表以及每个频点的重选参数.(WCDMA) 
 * SIB7:GERAN邻频频点列表以及每个频点的重选参数. 
 * SIB8:CDMA2000的预注册信息, CDMA2000邻频频段列表和每个频段的重选参数, CDMA2000邻频频段的邻区列表. 
 * SIB9:Home eNodeB的名称. 
@@ -17,14 +17,14 @@ LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广�
 * SIB12:CMAS信息(CMAS notification). 
 * SIB13:请求获取跟一个或多个MBSFN区域相关的MBMS控制信息的信息. 
 
-image::images/SI_Scheduling.PNG[title="系统信息时序图",align="center"]
+image::images/SI_Scheduling.jpg[title="系统信息时序图",align="center"]
 
 
 === 系统信息(System Information)解析
 ==== MIB (Master Information Block)解析
 MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测信令)
 
-image:./images/mib.png[title="mib",align="center"]
+image:./images/mib.jpg[title="mib",align="center"]
 
 [glossary]
 DL_Bandwidth::
@@ -216,6 +216,11 @@ Message dump (Hex):
 3. 如果自己保存的systemInfoValueTag2与重新接收的systemInfoValueTag3相同, 而与寻呼消息中的systemInfoValueTag1不同的话, 认为MIB还没有广播下来, 等下一个MIB. 
 
 === SIB2 (System Information Block 2) 解析
+* SIB2包含对所有UE适用的无线资源配置信息
+* SIB2包含通用和共享信道配置，RACH相关配置，定时器，上行功控
+* 没有SIB2会导致UE无法初始化ATTACH流程
+* SIB2消息不一定显式的包含在SIB1调度信息中，但是它总是映射在IB1消息中schedulingInfoList的第一个实体
+
 ....
 MS1
 System Information Block 2
@@ -357,6 +362,9 @@ timeAlignmentTimerCommon : infinity                   <46>
 //不是很清楚意思
 
 === SIB3 (System Information Block 3) 解析
+* SIB3包含了用于同频，异频，异系统间小区重选的基本共用信息
+* 除临区相关信息之外的同频小区重选信息
+
 ....
 MS1
 System Information Block 3                            <1>
@@ -393,6 +401,10 @@ t-ReselectionEUTRA : 1                                <12>
 <12> EUTRA小区重选定时器, 1s
 
 === SIB4 (System Information Block 4) 解析
+* SIB4仅包含同频临小区重选信息
+* SIB4包括具有特定重选参数以及黑名单小区
+* SIB4包含的所有内容均是可选项，因为UE可以自动探测和完成同频临小区监测
+
 ....
 MS1
 System Information Block 4                            <1>
@@ -414,6 +426,9 @@ intraFreqNeighCellList                                <2>
 <4> 定义两小区间的偏移. Value -24 ~ +24dB
 
 === SIB5 (System Information Block 5) 解析
+* SIB5仅包含LTE异频小区重选相关的信息
+* SIB5包含普通的频率小区重选参数以及特定的小区重选参数
+
 ....
 MS1
 System Information Block 5                            <1>
@@ -422,7 +437,7 @@ Time : 17:45:36.299
 interFreqCarrierFreqList                              <2>
   InterFreqCarrierFreqList :                          <2>
     [0 ] :
-      dl-CarrierFreq : 2                              <3>
+      dl-CarrierFreq : 38950                          <3>
       q-RxLevMin : -65                                <4>
       t-ReselectionEUTRA : 1                          <5>
       threshX-High : 12                               <6>
@@ -446,9 +461,23 @@ interFreqCarrierFreqList                              <2>
 <8> 异频临小区带宽
 <9> [later]
 <10> 异频临小区优先级
-<11>用于提供临小区MBSFN和上下行配比信息. 00: 不是所有邻区均和当前服务小区有相同的MBSFN子帧配置. 10: 所有邻区均和当前服务小区有相同的MBSFN子帧配置. 01: 所有邻区均没有MBSFN子帧配置. 11: 相对于服务小区的UL/DL配置, 邻区中存在不同的UL/DL配置. 对于TDD, 00, 10, 01只用于服务小区和邻区的UL/DL配置相同情况. 
+<11> 用于提供临小区MBSFN和上下行配比信息. 00: 不是所有邻区均和当前服务小区有相同的MBSFN子帧配置. 10: 所有邻区均和当前服务小区有相同的MBSFN子帧配置. 01: 所有邻区均没有MBSFN子帧配置. 11: 相对于服务小区的UL/DL配置, 邻区中存在不同的UL/DL配置. 对于TDD, 00, 10, 01只用于服务小区和邻区的UL/DL配置相同情况. 
 
 
+=== SIB6 (System Information Block 6) 解析
+* SIB6仅包含WCDMA小区重选信息
+
+=== SIB7 (System Information Block 7) 解析
+* SIB7仅包含2G小区重选信息
+
+=== SIB8 (System Information Block 8) 解析
+
+=== SIB9 (System Information Block 9) 解析
+
+[asciidoctor-diagram]
+---------------------------------------------------------------------
+digraph G { rankdir=LR; Graphviz->AsciiDoc->HTML}
+---------------------------------------------------------------------
 
 
 

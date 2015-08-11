@@ -1,4 +1,4 @@
-=== 系统信息（SI）的调度
+﻿== 系统信息（SI）的调度
 
 小区搜索过程之后，UE已经与小区取得下行同步，得到小区的PCI（Physical Cell ID）以及检测到帧的timing（即10ms timing）。接着，UE需要获取到小区的系统信息（System Information），以便接入该小区并在该小区内正确地工作。
 系统信息是小区级别的信息，即对接入该小区的所有UE生效。系统信息是以系统信息块（System Information Block，SIB）的方式组织的，每个SIB包含了与某个功能相关的一系列参数集合。SIB的类型包括：

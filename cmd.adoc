@@ -1,0 +1,2 @@
+bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk-kai_gen_gothic -a pdf-style=KaiGenGothicCN LTE信令流程解析loseblue.adoc
+

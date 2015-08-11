@@ -1,0 +1,75 @@
+﻿=== 系统信息（SI）的调度
+
+小区搜索过程之后，UE已经与小区取得下行同步，得到小区的PCI（Physical Cell ID）以及检测到帧的timing（即10ms timing）。接着，UE需要获取到小区的系统信息（System Information），以便接入该小区并在该小区内正确地工作。
+系统信息是小区级别的信息，即对接入该小区的所有UE生效。系统信息是以系统信息块（System Information Block，SIB）的方式组织的，每个SIB包含了与某个功能相关的一系列参数集合。SIB的类型包括：
+
+
+图1：系统信息类型
+
+      并不是所有的SIB都必须存在。例如对于运营商的基站而言，就不需要SIB9，如果某小区不提供MBMS，就不需要SIB13。
+      有3种类型的RRC消息用于传输系统信息：MIB消息、SIB1消息、一个或多个SI消息。
+
+
+图2：3类用于发送系统信息的RRC消息
+
+      注意：物理层限制了某个SIB（个人觉得更好的描述是SI和SIB1）的最大size。如果使用DCI format 1C，则最大size为1736 bit（217 byte）；如果使用DCI format 1A，则最大size为2216 bit（277 byte）。
+
+      MIB在PBCH上传输。BCH时域上位于子帧0的第2个slot的前4个OFDM symbol，频域上占据72个中心子载波（不含DC）。对应RE不能用于发送DL-SCH数据。
+
+
+图3：BCH传输信道的资源映射
+
+
+
+图4：MIB在时域上的调度
+
+      SIB1的周期为80ms，且在该周期内SFN % 2 = 0的系统帧的子帧5上重复发送同一SIB1。但与MIB所在的时频位置固定不同，SIB1和SI消息都在PDSCH上传输，且SIB1和SI消息所占的RB（频域上的位置）及其传输格式是动态调度的，并由SI-RNTI加扰的PDCCH来指示。
+
+
+图5：SIB1在时域上的调度
+
+      每个SI消息包含了一个或多个除SIB1外的拥有相同调度需求的SIB（这些SIB有相同的传输周期）。一个SI消息包含哪些SIB是通过schedulingInfoList指定的。每个SIB只能包含在一个SI消息中，且SIB2总是放在schedulingInfoList指定的SI列表的第一个SI消息项中，所以schedulingInfoList中并不指定SIB2所在的SI。
+
+
+图：SIB1信息（包含了SI的调度信息）
+
+      每个SI消息只在一个SI窗口（SI-windows）中传输：1）一个SI消息跟一个SI窗口相关联，该SI窗口内只能发这个SI消息且可以重复发送多次（发多少次，在哪些子帧上发送等，取决于eNodeB的实现），但不能发送其它SI消息；2）SI窗口之间是紧挨着的，既不重叠，也不会有空隙；3）所有SI消息的SI窗口长度都相同；4）不同SI消息的周期是相互独立的。
+      前面我们已经介绍过MIB和SIB1的时域调度，接下来我们会详细介绍SI消息的时域调度。
+      首先需要确认每个SI消息对应的SI窗口的起始位置以及SI窗口的长度。
+      SI窗口的长度由SystemInformationBlockType1的si-WindowLength字段指定，其以ms为单位。
+      SystemInformationBlockType1的schedulingInfoList指定了SI消息的列表，每个SI消息在该列表中的顺序以n表示（从1开始）。假如schedulingInfoList中指定了4个SI消息，则会有4个连续的SI窗口用于发送这4个SI消息，而n表明了SI消息在第几个SI窗口。
+      此时每个SI消息有一个x = (n - 1) * w，其中w为si-WindowLength。可以看出，x是以ms为单位的。
+      则SI窗口的起始帧满足SFN % T = FLOOR(x / 10)，其中T为对应SI消息的周期，由si-Periodicity指定。SFN % T保证了SI的周期，FLOOR(x / 10)确定SI窗口在周期内的起始系统帧（一个系统帧为10ms，所以有x / 10）。
+      SI窗口的起始子帧为#a，其中a = x % 10。
+      从公式可以看出，x决定了SI窗口在该SI周期内的起始帧和起始子帧； SFN % T保证了SI窗口在SI周期内只出现一次；而x = (n - 1) * w保证了SI窗口之间紧挨，不重叠，没有空隙。(SI窗口起始帧和起始子帧的的计算，详见36.331的5.2.3节)
+      SI窗口确定了以后，eNodeB会决定在该窗口内调度多少次同一SI，不同厂商的实现可能不同。但某些子帧不能用于调度SI消息：
+•	SFN % 2 = 0的系统帧内的子帧5
+•	任一MBSFN子帧
+•	TDD中的上行子帧
+
+      下图是一个关于SI调度的例子。
+
+
+图：SI调度的一个例子
+
+      可以看出，SI不需要再时间窗内的连续子帧上传输。并且，在某个子帧上是否存在SI消息，是通过SI-RNTI加扰的PDCCH来指示的。
+      在SI较小而系统带宽较大的情况下，一个子帧可能足以发送该SI，但在其它情况下，可能需要使用多个子帧来发送一个SI消息。在后一种情况，会将整个SI消息进行信道编码后分成多份，然后放在多个子帧（不要求是连续子帧）上传输。而不是先分割成多份，然后独立地信道编码后传输。
+
+      简单小结：MIB和SIB1在时域上的位置和周期是固定的，而SI消息在时域上的位置和周期是由SIB1指定的。eNodeB 只会通过SystemInformationBlockType1告诉UE有哪些SI，每个SI包含了哪些SIB，这些SI会在哪个SI窗口发送以及SI窗口的时域位置和长度，但不会告诉UE在 SI窗口的哪些子帧调度了该SI。当UE需要某个SIB时，它就会在该SIB对应的SI消息对应的SI窗口的每个子帧（从SI窗口的起始子帧开始，共持续si-WindowLength个子帧，但不包含那些不能调度SI的子帧），使用SI-RNTI去尝试解码，直到成功接收到SI消息为止。
+
+载波聚合对系统信息的影响
+      UE只会在PCell上从广播消息中获取系统信息。对于SCell而言，其系统信息是在添加SCell时，通过RRCConnectionReconfiguration的SCellToAddMod-r10下发给UE的。如果某个SCell的系统信息发生改变，eNodeB会让UE先释放该SCell，然后重新添加该SCell以通知UE系统信息的变化。这从36.331中的5.3.10.3b中可以看出，在添加SCell（SCell addition）时，是应用radioResourceConfigCommonSCell的配置的，但在修改SCell（SCell modification）的信息时，是不应用radioResourceConfigCommonSCell的配置的，所以需要先删除再添加SCell以通知UE该SCell系统信息的变化。
+
+      注意：eNodeB在RRCConnectionReconfiguration配置的系统信息可以与该SCell广播的系统信息不同。
+
+【参考资料】
+[1]	TS 36.331 – 5.2	System Information
+[2]	《4G LTE/LTE-Advanced for Mobile Broadband》的14.2节
+[3]	《LTE - The UMTS Long Term Evolution, 2nd Edition》的3.2.2节
+[4]	SI的调度
+[5]	LTE系统中UE接收系统消息解析
+
+
+      注：更多内容，请参见我的博客：http://blog.sina.com.cn/ilte。如需转载，请标明出处。
+
+作者：温金辉
