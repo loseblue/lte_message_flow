@@ -1,5 +1,5 @@
 ﻿= 系统信息
-=== 概述
+== 概述
 LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广播消息发生改变时, 都会接收系统信息(MIB\SIB), 以帮助更新或纠正UE当前的状态, 完成相应的通信业务和物理过程. 在系统路测中可以观察的系统信息有种: MIB, SIB1和SI, 其作用分别如下. 
 
 - MIB:用于系统接入. MIB上传输几个比较重要的系统信息参数, 如小区下行带宽, PHICH配置参数, 无线系统帧号SFN(包含SIB1消息的位置), 在PBCH上发送, 表现为"RRC_MASTER_INFO_BLOCK". 
@@ -20,8 +20,8 @@ LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广�
 image::images/SI_Scheduling.jpg[title="系统信息时序图",align="center"]
 
 
-=== 系统信息(System Information)解析
-==== MIB (Master Information Block)解析
+== 系统信息(System Information)解析
+=== MIB (Master Information Block)解析
 MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测信令)
 
 image:./images/mib.jpg[title="mib",align="center"]
@@ -206,7 +206,9 @@ Message dump (Hex):
 
 
 [[si_value_tag, systemInfoValueTag解析]]
-===== systemInfoValueTag解析
+
+[big]#systemInfoValueTag解析#
+
 对于除MIB, SIB1, SIB10和SIB11之外的所有系统信息块的公共值, 范围(0-31); SI每变化一次, systemInfoValueTag值就加1(或减1: 移动研究院测试华为网络机制是减1). 
 
 举例: UE将寻呼消息PAGING TYPE1中的MIB value tag1与自己保存的MIB value tag2进行比较:
@@ -215,11 +217,11 @@ Message dump (Hex):
 2. 当重新获取得的systemInfoValueTag3与systemInfoValueTag1相同, 而systemInfoValueTag2不同的话, 读取MIB中的调度内容, 进行系统消息更新. 
 3. 如果自己保存的systemInfoValueTag2与重新接收的systemInfoValueTag3相同, 而与寻呼消息中的systemInfoValueTag1不同的话, 认为MIB还没有广播下来, 等下一个MIB. 
 
-=== SIB2 (System Information Block 2) 解析
+===  SIB2 (System Information Block 2) 解析
 * SIB2包含对所有UE适用的无线资源配置信息
-* SIB2包含通用和共享信道配置，RACH相关配置，定时器，上行功控
+* SIB2包含通用和共享信道配置, RACH相关配置, 定时器, 上行功控
 * 没有SIB2会导致UE无法初始化ATTACH流程
-* SIB2消息不一定显式的包含在SIB1调度信息中，但是它总是映射在IB1消息中schedulingInfoList的第一个实体
+* SIB2消息不一定显式的包含在SIB1调度信息中, 但是它总是映射在IB1消息中schedulingInfoList的第一个实体
 
 ....
 MS1
@@ -362,7 +364,7 @@ timeAlignmentTimerCommon : infinity                   <46>
 //不是很清楚意思
 
 === SIB3 (System Information Block 3) 解析
-* SIB3包含了用于同频，异频，异系统间小区重选的基本共用信息
+* SIB3包含了用于同频, 异频, 异系统间小区重选的基本共用信息
 * 除临区相关信息之外的同频小区重选信息
 
 ....
@@ -401,9 +403,10 @@ t-ReselectionEUTRA : 1                                <12>
 <12> EUTRA小区重选定时器, 1s
 
 === SIB4 (System Information Block 4) 解析
+
 * SIB4仅包含同频临小区重选信息
 * SIB4包括具有特定重选参数以及黑名单小区
-* SIB4包含的所有内容均是可选项，因为UE可以自动探测和完成同频临小区监测
+* SIB4包含的所有内容均是可选项, 因为UE可以自动探测和完成同频临小区监测
 
 ....
 MS1
@@ -474,7 +477,7 @@ interFreqCarrierFreqList                              <2>
 
 === SIB9 (System Information Block 9) 解析
 
-[asciidoctor-diagram]
+[graphviz]
 ---------------------------------------------------------------------
 digraph G { rankdir=LR; Graphviz->AsciiDoc->HTML}
 ---------------------------------------------------------------------
