@@ -1,0 +1,238 @@
+﻿== 信令解析
+
+=== 空口信令
+
+==== Random Access Request
+
+.Random Access Request
+----
+MS1
+ML1 Random Access Request
+
+Time : 18:02:58.666
+Length : 40
+Log Code (Hex) : 0xB167
+HW Timestamp : (71192875.00 ms) 19:46:32.875
+  1.25 ms fraction : 0.00
+  CFN : 0
+  1.25 ms counter : 868618874300
+Version : 5
+Preamble Sequence : 41
+Physical Root Index : 1
+Cyclic Shift : 533
+PRACH Tx Power : -25
+Beta PRACH : 242
+PRACH Frequency Offset : 10
+Preamble Format : 0
+Duplex Mode : TDD
+Frequency Resource Index : 0
+Resource reoccurring in : All Even Radio Frames
+Random access resource located in : First Half Frame
+UL Subframe number where preamble starts : 0
+Density per 10 ms : 0.5
+PRACH Timing SFN : 848
+PRACH Timing Sub-fn : 2
+PRACH Window Start SFN : 848
+PRACH Window Start Sub-fn : 5
+PRACH Window End SFN : 849
+PRACH Window End Sub-fn : 5
+RA RNTI : 3
+PRACH Actual Tx Power : 231
+----
+
+==== Random Access Response
+
+.Random Access Response
+----
+MS1
+ML1 Random Access Response
+
+Time : 18:02:58.666
+Length : 24
+Log Code (Hex) : 0xB168
+HW Timestamp : (71192886.25 ms) 19:46:32.886
+  1.25 ms fraction : 0.00
+  CFN : 0
+  1.25 ms counter : 868618874309
+Version : 1
+PRACH Response Timing SFN : 848
+PRACH Response Timing Sub-fn : 9
+Timing Advance : 0
+Timing Advance Included : Included
+RACH Procedure Type : Contention Based
+RACH Procedure Mode : Initial Access
+RNTI Type : TEMP_C_RNTI
+RNTI Value : 107
+----
+
+==== RRC Connection Request
+
+.RRC Connection Request
+----
+MS1
+RRC Connection Request (UL-CCCH)
+
+Time : 18:02:58.476
+Vendor Header
+  Length : 31
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71192783.75 ms) 19:46:32.784
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618874227
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 0
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : CcchUplink
+    Message Length : 6
+criticalExtensions : rrcConnectionRequest-r8
+rrcConnectionRequest-r8
+  ue-Identity
+    Initial UE Identity : Random Value
+    Random Value : 197823733579
+  establishmentCause : mo-Signalling
+  spare : 0
+    [0 ] : 0
+
+
+Message dump (Hex):
+    52 E0 F3 69 F4 B6 
+----
+
+==== RRC Connection Setup
+RRC连接请求. 终端由IDLE态转为CONNECT态, 或者终端有数据需要发送时, 会发送建立RRC连接的请求. 由UL_CCCH信道发送上来, 在SRB0上承载. 
+.RRC Connection Setup
+----
+MS1
+RRC Connection Setup (DL-CCCH)
+
+Time : 18:02:58.666
+Vendor Header
+  Length : 49
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71192916.25 ms) 19:46:32.916
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618874333
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 0
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : CcchDownlink
+    Message Length : 24
+rrc-TransactionIdentifier : 1
+criticalExtensions : c1                               <1>
+c1 : rrcConnectionSetup-r8                            <2>
+rrcConnectionSetup-r8                                 <1>
+  radioResourceConfigDedicated                        <1>
+    srb-ToAddModList                                  <1>
+      SRB-ToAddModList :                              <1>
+        [0 ] :                                        <1>
+          srb-Identity : 1                            <1>
+          rlc-Config : explicitValue                  <1>
+          explicitValue                               <1>
+            RLC-Config : am                           <1>
+            ul-AM-RLC                                 <1>
+              t-PollRetransmit : ms80                 <1>
+              pollPDU : p128                          <1>
+              pollByte : kB125                        <1>
+              maxRetxThreshold : t16                  <1>
+            dl-AM-RLC                                 <1>
+              t-Reordering : ms80                     <1>
+              t-StatusProhibit : ms15                 <1>
+          logicalChannelConfig : explicitValue        <1>
+          explicitValue                               <1>
+            priority : 1                              <1>
+            prioritisedBitRate : infinity             <1>
+            bucketSizeDuration : ms300                <1>
+            logicalChannelGroup : 0                   <1>
+    mac-MainConfig : explicitValue                    <1>
+    explicitValue                                     <1>
+      maxHARQ-Tx : n5                                 <1>
+      periodicBSR-Timer : infinity                    <1>
+      retxBSR-Timer : sf2560                          <1>
+      ttiBundling : False                             <1>
+      drx-Config                                      <1>
+        DRX-Config : release                          <1>
+      timeAlignmentTimerDedicated : infinity          <1>
+      phr-Config : setup                              <1>
+      periodicPHR-Timer : sf200                       <1>
+      prohibitPHR-Timer : sf100                       <1>
+      dl-PathlossChange : dB3                         <1>
+    physicalConfigDedicated                           <1>
+      pdsch-ConfigDedicated                           <1>
+        p-a : dB0                                     <1>
+      pucch-ConfigDedicated                           <1>
+        ackNackRepetition : release                   <1>
+        tdd-AckNackFeedbackMode : bundling            <1>
+      pusch-ConfigDedicated                           <1>
+        betaOffset-ACK-Index : 9                      <1>
+        betaOffset-RI-Index : 5                       <1>
+        betaOffset-CQI-Index : 15                     <1>
+      uplinkPowerControlDedicated                     <1>
+        p0-UE-PUSCH : 0                               <1>
+        deltaMCS-Enabled : en0                        <1>
+        accumulationEnabled : True                    <1>
+        p0-UE-PUCCH : 0                               <1>
+        pSRS-Offset : 3                               <1>
+        extensionBit0 : 0                             <1>
+        filterCoefficient : fc0                       <1>
+      cqi-ReportConfig                                <1>
+        nomPDSCH-RS-EPRE-Offset : 0                   <1>
+      antennaInfo : explicitValue                     <1>
+      explicitValue                                   <1>
+        transmissionMode : tm2                        <1>
+        ue-TransmitAntennaSelection : release         <1>
+      schedulingRequestConfig                         <1>
+        SchedulingRequestConfig : setup               <1>
+        sr-PUCCH-ResourceIndex : 0                    <1>
+        sr-ConfigIndex : 72                           <1>
+        dsr-TransMax : n64                            <1>
+
+Message dump (Hex):                              
+    68 12 98 0F A9 A0 19 83 B0 FA                
+    73 3E 45 E5 C9 2B F8 60 C0 10                
+    A0 01 22 00                                  
+----                                             
+
+
+<1> 关键扩展c1 //c1是什么意思? 
+<1> RRC连接请求, R8版本
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+<1>
+
+=== 网络层信令                                        
