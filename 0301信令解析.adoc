@@ -1,4 +1,4 @@
-﻿== 信令解析
+== 信令解析
 
 === 空口信令
 
@@ -66,6 +66,7 @@ RNTI Value : 107
 ----
 
 ==== RRC Connection Request
+RRC连接请求. 终端由IDLE态转为CONNECT态, 或者终端有数据需要发送时, 会发送建立RRC连接的请求. 由UL_CCCH信道发送上来, 在SRB0上承载. 
 
 .RRC Connection Request
 ----
@@ -91,13 +92,13 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchUplink
     Message Length : 6
-criticalExtensions : rrcConnectionRequest-r8
-rrcConnectionRequest-r8
-  ue-Identity
-    Initial UE Identity : Random Value
-    Random Value : 197823733579
-  establishmentCause : mo-Signalling
-  spare : 0
+criticalExtensions : rrcConnectionRequest-r8          <1>
+rrcConnectionRequest-r8                               <2>
+  ue-Identity                                         <3>
+    Initial UE Identity : Random Value                
+    Random Value : 197823733579                      
+  establishmentCause : mo-Signalling                  <4>
+  spare : 0                                           <5>
     [0 ] : 0
 
 
@@ -105,8 +106,15 @@ Message dump (Hex):
     52 E0 F3 69 F4 B6 
 ----
 
+<1> 关键字扩展
+<2> RRC连接请求, R8版本
+<3> UE ID, 包含randomValue和S-TMSI两种. UE接入时, 如果已经获取过TMSI, 并判断驻留cell的TA在UE的TAI list里, 即MME中保存了UE的上下文信息, 会使用TMSI作为UE ID; 其他情况使用随机数randomValue. 
+<4> 接入原因 //参考mt-Access(2)
+<5> 预留值为以后的网络扩展做准备
+
 ==== RRC Connection Setup
-RRC连接请求. 终端由IDLE态转为CONNECT态, 或者终端有数据需要发送时, 会发送建立RRC连接的请求. 由UL_CCCH信道发送上来, 在SRB0上承载. 
+RRC连接建立消息包含建立SRB1承载和无线资源配置信息, 主要目的为建立SRB1, 该消息通过DL_CCCH信道发送, 承载在SRB0上. 
+
 .RRC Connection Setup
 ----
 MS1
@@ -131,74 +139,74 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchDownlink
     Message Length : 24
-rrc-TransactionIdentifier : 1
-criticalExtensions : c1                               <1>
-c1 : rrcConnectionSetup-r8                            <2>
-rrcConnectionSetup-r8                                 <1>
-  radioResourceConfigDedicated                        <1>
-    srb-ToAddModList                                  <1>
-      SRB-ToAddModList :                              <1>
-        [0 ] :                                        <1>
-          srb-Identity : 1                            <1>
-          rlc-Config : explicitValue                  <1>
-          explicitValue                               <1>
-            RLC-Config : am                           <1>
-            ul-AM-RLC                                 <1>
-              t-PollRetransmit : ms80                 <1>
-              pollPDU : p128                          <1>
-              pollByte : kB125                        <1>
-              maxRetxThreshold : t16                  <1>
-            dl-AM-RLC                                 <1>
-              t-Reordering : ms80                     <1>
-              t-StatusProhibit : ms15                 <1>
-          logicalChannelConfig : explicitValue        <1>
-          explicitValue                               <1>
-            priority : 1                              <1>
-            prioritisedBitRate : infinity             <1>
-            bucketSizeDuration : ms300                <1>
-            logicalChannelGroup : 0                   <1>
-    mac-MainConfig : explicitValue                    <1>
-    explicitValue                                     <1>
-      maxHARQ-Tx : n5                                 <1>
-      periodicBSR-Timer : infinity                    <1>
-      retxBSR-Timer : sf2560                          <1>
-      ttiBundling : False                             <1>
-      drx-Config                                      <1>
-        DRX-Config : release                          <1>
-      timeAlignmentTimerDedicated : infinity          <1>
-      phr-Config : setup                              <1>
-      periodicPHR-Timer : sf200                       <1>
-      prohibitPHR-Timer : sf100                       <1>
-      dl-PathlossChange : dB3                         <1>
-    physicalConfigDedicated                           <1>
-      pdsch-ConfigDedicated                           <1>
-        p-a : dB0                                     <1>
-      pucch-ConfigDedicated                           <1>
-        ackNackRepetition : release                   <1>
-        tdd-AckNackFeedbackMode : bundling            <1>
-      pusch-ConfigDedicated                           <1>
-        betaOffset-ACK-Index : 9                      <1>
-        betaOffset-RI-Index : 5                       <1>
-        betaOffset-CQI-Index : 15                     <1>
-      uplinkPowerControlDedicated                     <1>
-        p0-UE-PUSCH : 0                               <1>
-        deltaMCS-Enabled : en0                        <1>
-        accumulationEnabled : True                    <1>
-        p0-UE-PUCCH : 0                               <1>
-        pSRS-Offset : 3                               <1>
-        extensionBit0 : 0                             <1>
-        filterCoefficient : fc0                       <1>
-      cqi-ReportConfig                                <1>
-        nomPDSCH-RS-EPRE-Offset : 0                   <1>
-      antennaInfo : explicitValue                     <1>
-      explicitValue                                   <1>
-        transmissionMode : tm2                        <1>
-        ue-TransmitAntennaSelection : release         <1>
-      schedulingRequestConfig                         <1>
-        SchedulingRequestConfig : setup               <1>
-        sr-PUCCH-ResourceIndex : 0                    <1>
-        sr-ConfigIndex : 72                           <1>
-        dsr-TransMax : n64                            <1>
+rrc-TransactionIdentifier : 1                         <1>
+criticalExtensions : c1                               <2>
+c1 : rrcConnectionSetup-r8                            <3>
+rrcConnectionSetup-r8                                 
+  radioResourceConfigDedicated                        <4>
+    srb-ToAddModList                                 
+      SRB-ToAddModList :                              <5>
+        [0 ] :                                        
+          srb-Identity : 1                            <6>
+          rlc-Config : explicitValue                  <7>
+          explicitValue                               
+            RLC-Config : am                           <8>
+            ul-AM-RLC                                 <9>
+              t-PollRetransmit : ms80                 <10>
+              pollPDU : p128                          <11>
+              pollByte : kB125                        <12>
+              maxRetxThreshold : t16                  <13>
+            dl-AM-RLC                                 <14>
+              t-Reordering : ms80                     <15>
+              t-StatusProhibit : ms15                 <16>
+          logicalChannelConfig : explicitValue        <17>
+          explicitValue                               
+            priority : 1                              <18>
+            prioritisedBitRate : infinity             <19>
+            bucketSizeDuration : ms300                <20>
+            logicalChannelGroup : 0                   <21>
+    mac-MainConfig : explicitValue                    <22>
+    explicitValue                                     
+      maxHARQ-Tx : n5                                 <23>
+      periodicBSR-Timer : infinity                    <24>
+      retxBSR-Timer : sf2560                          <25>
+      ttiBundling : False                             <26>
+      drx-Config                                     
+        DRX-Config : release                          <27>
+      timeAlignmentTimerDedicated : infinity          <28>
+      phr-Config : setup                              <29>
+      periodicPHR-Timer : sf200                       <30>
+      prohibitPHR-Timer : sf100                       <31>
+      dl-PathlossChange : dB3                         <32>
+    physicalConfigDedicated                           <33>
+      pdsch-ConfigDedicated                           <34>
+        p-a : dB0                                     <35>
+      pucch-ConfigDedicated                           <36>
+        ackNackRepetition : release                   <37>
+        tdd-AckNackFeedbackMode : bundling            <38>
+      pusch-ConfigDedicated                           <39>
+        betaOffset-ACK-Index : 9                      <40>
+        betaOffset-RI-Index : 5                       <41>
+        betaOffset-CQI-Index : 15                     <42>
+      uplinkPowerControlDedicated                     <43>
+        p0-UE-PUSCH : 0                               <44>
+        deltaMCS-Enabled : en0                        <45>
+        accumulationEnabled : True                    <46>
+        p0-UE-PUCCH : 0                               <47>
+        pSRS-Offset : 3                               <48>
+        extensionBit0 : 0                             <49>
+        filterCoefficient : fc0                       <50>
+      cqi-ReportConfig                                <51>
+        nomPDSCH-RS-EPRE-Offset : 0                   <52>
+      antennaInfo : explicitValue                     <53>
+      explicitValue                                  
+        transmissionMode : tm2                        <54>
+        ue-TransmitAntennaSelection : release         <55>
+      schedulingRequestConfig                         <56>
+        SchedulingRequestConfig : setup               <57>
+        sr-PUCCH-ResourceIndex : 0                    <58>
+        sr-ConfigIndex : 72                           <59>
+        dsr-TransMax : n64                            <60>
 
 Message dump (Hex):                              
     68 12 98 0F A9 A0 19 83 B0 FA                
@@ -207,32 +215,70 @@ Message dump (Hex):
 ----                                             
 
 
-<1> 关键扩展c1 //c1是什么意思? 
-<1> RRC连接请求, R8版本
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
-<1>
+<1> RRC消息ID
+<2> 关键扩展c1 //c1是什么意思? 
+<3> RRC连接建立, R8版本
+<4> 无线资源配置专用
+<5> 添加SRB
+<6> 建立SRB1
+<7> ?
+<8> SRB采用AM接收模式. 关于模式: 透明模式(TM), 非确认模式(UM)和确认模式(AM)
+<9> UE侧的上行RLC配置, 主要配置RLC数据接收侦测规则. SRB1上下行采用AM RLC模式
+<10> AMD PDU重传检测定时器时长. 发送端发送某个Poll的AMD PDU后, 如果在该定时器超时后, 还没有收到响应, 则重新触发Poll.
+<11> UE 触发Polling的PDU字节数据量门限. 轮询间隔SDU数, 该参数给出了一个触发轮询的门限值, 发送了PollSDU个SDU后触发一次轮询. 此处的p128对应为128个PDU
+<12> PollByte为AM PDU侦测字节数. 触发每个pollByte字节的一个轮询. 此处kB125对应125kB
+<13> UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE,表示RLC ARQ最大重传次数,用于限制一个AM PDU的重传次数. 当等于该值时,将向高层上报不可恢复的错误,触发RRC连接重建. t16对应16次重传输. 
+<14> UE侧的下行RLC配置, 主要配置RLC数据接收状态上报规则. 
+<15> UE AM模式接收端重排序定时器, 用于触发RESET PDU的重传. 该参数用于配置UE,表示AM 模式接收端重排序定时器的大小. 此处ms80表示80ms. 
+<16> UE禁止发送状态报告定时器. 该参数用于配置UE表示AM模式接收端禁止发送状态报告的定时器大小. 即在本时长内不允许上报状态报告. ms15表示15ms. 
+<17> SRB1的逻辑信道配置
+<18> SRB1逻辑信道优先级, 值越小优先级越高. UE调度器按逻辑信道优先级由高到低优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低依次分配资源. 
+<19> SRB1逻辑信道优先速率. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率. Infinity仅仅适用于SRB1和SRB2.
+<20> SRB1 bucket size调整持续时间, 300ms
+<21> 根据业务的不同, UE可能建立大量的无线承载(radio bearer, 每个bearer对应一个逻辑信道), 如果为每一个逻辑信道上报一个BSR, 会带来大量的信令开销. 为了避免这种开销, LTE引入了LCG(Logical Channel Group)的概念, 并将每个逻辑信道放入一个LCG(共4个)中. UE基于LCG来上报BSR, 而不是为每个逻辑信道上报一个BSR. 某个逻辑信道所属的LCG是在逻辑信道建立时通过IE: LogicalChannelConfig 的logicalChannelGroup字段来设置的 . CCCH, SRB1, SRB2默认属于LCG 0
+<22> MAC层主要配置
+<23> UL HARQ的最大传输次数.
+<24> 周期性BSR上报定时器(子帧). ENUMERATED {sf5, sf10, sf16, sf20, sf32, sf40, sf64, sf80,sf128, sf160, sf320, sf640, sf1280, sf2560,infinity, spare1},infinity表示去使能. 
+<25> SR重传定时器(子帧).为提高BSR的健壮性, LTE提供了一个重传BSR的机制: 这是为了避免UE发送了BSR却一直没有收到UL grant的情况. eNodeB通过IE: MAC-MainConfig的retxBSR-Timer字段为UE配置了一个timer, 当该timer超时且UE的任意一个LCG的任意一个逻辑信道里有数据可以发送时, 将会触发BSR. ENUMERATED {sf320, sf640, sf1280, sf2560, sf5120,sf10240, spare2, spare1} 
+<26> TTI捆绑只对FDD有效, 对TDD仅仅适用于配置为0, 1以及6的情况. FALSE不绑定, TURE表示TTI捆绑有效. 
+<27> RX-Config : release
+<28> 上行时间对齐定时器, 该参数表示UE上行时间对齐的定时器长度, 该定时器超时, 则认为UE上行失步. 
+取值范围: SF500(500个子帧), SF750(750个子帧), SF1280(1280个子帧), SF1920(1920个子帧), SF2560(2560个子帧), SF5120(5120个子帧), SF10240(10240个子帧), INFINITY(无穷大)
+<29> 功率余量报告配置, PHR(power headroom report)
+<30> 功率余量报告周期定时器
+<31> 禁止上报功率剩余报告定时器
+<32> PHR报告的下行路径损耗变化. ENUMERATED {dB1, dB3, dB6, infinity}
+什么时候报告功率余量? 功率余量报告定时器: 当UE有传输新数据的上行资源, prohibitPHR-Timer  超时或者已经超时且在上次传输功率余量报告之后, 路径损耗的变化值大于dl-PathlossChange dB. 触发功率余量报告(PHR); periodicPHR-Timer超时, 触发功率余量报告
+<33> 物理层配置专用
+<34> PDSCH配置专用
+<35> PA=0 //?
+<36> PUCCH配置专用
+<37> 此处"release"为清除此配置以及停止使用相关资源. 若设置为"setup", 采用相应的接收配置以及开始使用相关的资源. 
+<38> TDD-确认非确认反馈模式 绑定模式
+<39> PUSCH配置专用
+<40> ACK随路偏置索引, 该参数表示ACK随路偏置索引. INTEGER (0..15)
+<41> RI随路偏置索引, 该参数表示RI随路偏置索引. INTEGER (0..15)
+<42> CQI随路偏置索引, 该参数表示RI随路偏置索引. INTEGER (0..15)
+<43> 上行链路功控专用
+<44> INTEGER (-8..7) //?
+<45> 根据不同MCS格式调整UE发射功率的开关. 取值范围(0:不能够; 1:能够)
+<46> 累积使能, (0:不能够; 1:能够) //?
+<47> INTEGER (-8..7) //?
+<48> SRS相对PUSCH的功率偏置, INTEGER (0..15)
+<49> //?
+<50> RSRP滤波系数. 该参数表示UE估算路损过程中, 对RSRP测量值进行滤波的alpha滤波系数. 
+<51> CQI配置
+<52> //?
+<53> 天线配置
+<54> 传输模式TM2, 标识UE所使用的传输模式
+<55> 终端UE传输天线选择, Setup或release. Setup表示开环或者闭环. //?
+<56> 调度请求配置信息
+<57> 调度请求配置信息类型setup
+<58> SR PUCCH资源索引, SR(资源调度请求), BSR(上行数据缓冲域状态报告过程)根据规范BSR过程: UE在收到网络端的逻辑信道配置信息后, 根据其中的逻辑信道标识号, 优先级, 逻辑信道组等信息, 将每个逻辑信道归属于固定的逻辑信道组. BSR主要功能是向eNB报告UE端上行数据缓冲域中的数据量, 从而能够从eNB获取上行资源来传输缓冲域中的数据. MAC层触发了BSR过程之后, 如果没有传输BSR的资源则立即触发SR过程, 向eNB申请至少4字节的上行资源以便能够传输BSR及其对应的MAC字头. 两者关系可类似于一阶段接入和二阶段接入的关系. 
+<59> //?
+<60> //?
+
+
+
 
 === 网络层信令                                        
