@@ -1,7 +1,9 @@
 #!/bin/sh
 
-echo  "Converting to PDF..."
+echo "Converting to HTML..."
+bundle exec asciidoctor -r asciidoctor-pdf-cjk-kai_gen_gothic -r asciidoctor-diagram -a html-style=KaiGenGothicCN LTE信令流程解析loseblue.adoc
 
+echo  "Converting to PDF..."
 bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk-kai_gen_gothic -r asciidoctor-diagram -a pdf-style=KaiGenGothicCN LTE信令流程解析loseblue.adoc
 
 echo  "Claning temp files..."

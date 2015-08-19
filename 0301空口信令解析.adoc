@@ -2,8 +2,8 @@
 
 === 空口信令
 
+[[msg_radom_access_preamble]]
 ==== Random Access Request
-
 .Random Access Request
 ----
 MS1
@@ -40,8 +40,8 @@ RA RNTI : 3
 PRACH Actual Tx Power : 231
 ----
 
+[[msg_radom_access_response]]
 ==== Random Access Response
-
 .Random Access Response
 ----
 MS1
@@ -65,6 +65,7 @@ RNTI Type : TEMP_C_RNTI
 RNTI Value : 107
 ----
 
+[[msg_rrc_connection_request]]
 ==== RRC Connection Request
 RRC连接请求. 终端由IDLE态转为CONNECT态, 或者终端有数据需要发送时, 会发送建立RRC连接的请求. 由UL_CCCH信道发送上来, 在SRB0上承载. 
 
@@ -92,13 +93,13 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchUplink
     Message Length : 6
-criticalExtensions : rrcConnectionRequest-r8          <1>
-rrcConnectionRequest-r8                               <2>
-  ue-Identity                                         <3>
+criticalExtensions : rrcConnectionRequest-r8                    <1>
+rrcConnectionRequest-r8                                         <2>
+  ue-Identity                                                   <3>
     Initial UE Identity : Random Value                
     Random Value : 197823733579                      
-  establishmentCause : mo-Signalling                  <4>
-  spare : 0                                           <5>
+  establishmentCause : mo-Signalling                            <4>
+  spare : 0                                                     <5>
     [0 ] : 0
 
 
@@ -112,6 +113,7 @@ Message dump (Hex):
 <4> 接入原因 //参考mt-Access(2)
 <5> 预留值为以后的网络扩展做准备
 
+[[msg_rrc_connection_setup]]
 ==== RRC Connection Setup
 RRC连接建立消息包含建立SRB1承载和无线资源配置信息, 主要目的为建立SRB1, 该消息通过DL_CCCH信道发送, 承载在SRB0上. 
 
@@ -139,74 +141,74 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchDownlink
     Message Length : 24
-rrc-TransactionIdentifier : 1                         <1>
-criticalExtensions : c1                               <2>
-c1 : rrcConnectionSetup-r8                            <3>
+rrc-TransactionIdentifier : 1                                   <1>
+criticalExtensions : c1                                         <2>
+c1 : rrcConnectionSetup-r8                                      <3>
 rrcConnectionSetup-r8                                 
-  radioResourceConfigDedicated                        <4>
+  radioResourceConfigDedicated                                  <4>
     srb-ToAddModList                                 
-      SRB-ToAddModList :                              <5>
+      SRB-ToAddModList :                                        <5>
         [0 ] :                                        
-          srb-Identity : 1                            <6>
-          rlc-Config : explicitValue                  <7>
+          srb-Identity : 1                                      <6>
+          rlc-Config : explicitValue                            <7>
           explicitValue                               
-            RLC-Config : am                           <8>
-            ul-AM-RLC                                 <9>
-              t-PollRetransmit : ms80                 <10>
-              pollPDU : p128                          <11>
-              pollByte : kB125                        <12>
-              maxRetxThreshold : t16                  <13>
-            dl-AM-RLC                                 <14>
-              t-Reordering : ms80                     <15>
-              t-StatusProhibit : ms15                 <16>
-          logicalChannelConfig : explicitValue        <17>
+            RLC-Config : am                                     <8>
+            ul-AM-RLC                                           <9>
+              t-PollRetransmit : ms80                           <10>
+              pollPDU : p128                                    <11>
+              pollByte : kB125                                  <12>
+              maxRetxThreshold : t16                            <13>
+            dl-AM-RLC                                           <14>
+              t-Reordering : ms80                               <15>
+              t-StatusProhibit : ms15                           <16>
+          logicalChannelConfig : explicitValue                  <17>
           explicitValue                               
-            priority : 1                              <18>
-            prioritisedBitRate : infinity             <19>
-            bucketSizeDuration : ms300                <20>
-            logicalChannelGroup : 0                   <21>
-    mac-MainConfig : explicitValue                    <22>
+            priority : 1                                        <18>
+            prioritisedBitRate : infinity                       <19>
+            bucketSizeDuration : ms300                          <20>
+            logicalChannelGroup : 0                             <21>
+    mac-MainConfig : explicitValue                              <22>
     explicitValue                                     
-      maxHARQ-Tx : n5                                 <23>
-      periodicBSR-Timer : infinity                    <24>
-      retxBSR-Timer : sf2560                          <25>
-      ttiBundling : False                             <26>
+      maxHARQ-Tx : n5                                           <23>
+      periodicBSR-Timer : infinity                              <24>
+      retxBSR-Timer : sf2560                                    <25>
+      ttiBundling : False                                       <26>
       drx-Config                                     
-        DRX-Config : release                          <27>
-      timeAlignmentTimerDedicated : infinity          <28>
-      phr-Config : setup                              <29>
-      periodicPHR-Timer : sf200                       <30>
-      prohibitPHR-Timer : sf100                       <31>
-      dl-PathlossChange : dB3                         <32>
-    physicalConfigDedicated                           <33>
-      pdsch-ConfigDedicated                           <34>
-        p-a : dB0                                     <35>
-      pucch-ConfigDedicated                           <36>
-        ackNackRepetition : release                   <37>
-        tdd-AckNackFeedbackMode : bundling            <38>
-      pusch-ConfigDedicated                           <39>
-        betaOffset-ACK-Index : 9                      <40>
-        betaOffset-RI-Index : 5                       <41>
-        betaOffset-CQI-Index : 15                     <42>
-      uplinkPowerControlDedicated                     <43>
-        p0-UE-PUSCH : 0                               <44>
-        deltaMCS-Enabled : en0                        <45>
-        accumulationEnabled : True                    <46>
-        p0-UE-PUCCH : 0                               <47>
-        pSRS-Offset : 3                               <48>
-        extensionBit0 : 0                             <49>
-        filterCoefficient : fc0                       <50>
-      cqi-ReportConfig                                <51>
-        nomPDSCH-RS-EPRE-Offset : 0                   <52>
-      antennaInfo : explicitValue                     <53>
+        DRX-Config : release                                    <27>
+      timeAlignmentTimerDedicated : infinity                    <28>
+      phr-Config : setup                                        <29>
+      periodicPHR-Timer : sf200                                 <30>
+      prohibitPHR-Timer : sf100                                 <31>
+      dl-PathlossChange : dB3                                   <32>
+    physicalConfigDedicated                                     <33>
+      pdsch-ConfigDedicated                                     <34>
+        p-a : dB0                                               <35>
+      pucch-ConfigDedicated                                     <36>
+        ackNackRepetition : release                             <37>
+        tdd-AckNackFeedbackMode : bundling                      <38>
+      pusch-ConfigDedicated                                     <39>
+        betaOffset-ACK-Index : 9                                <40>
+        betaOffset-RI-Index : 5                                 <41>
+        betaOffset-CQI-Index : 15                               <42>
+      uplinkPowerControlDedicated                               <43>
+        p0-UE-PUSCH : 0                                         <44>
+        deltaMCS-Enabled : en0                                  <45>
+        accumulationEnabled : True                              <46>
+        p0-UE-PUCCH : 0                                         <47>
+        pSRS-Offset : 3                                         <48>
+        extensionBit0 : 0                                       <49>
+        filterCoefficient : fc0                                 <50>
+      cqi-ReportConfig                                          <51>
+        nomPDSCH-RS-EPRE-Offset : 0                             <52>
+      antennaInfo : explicitValue                               <53>
       explicitValue                                  
-        transmissionMode : tm2                        <54>
-        ue-TransmitAntennaSelection : release         <55>
-      schedulingRequestConfig                         <56>
-        SchedulingRequestConfig : setup               <57>
-        sr-PUCCH-ResourceIndex : 0                    <58>
-        sr-ConfigIndex : 72                           <59>
-        dsr-TransMax : n64                            <60>
+        transmissionMode : tm2                                  <54>
+        ue-TransmitAntennaSelection : release                   <55>
+      schedulingRequestConfig                                   <56>
+        SchedulingRequestConfig : setup                         <57>
+        sr-PUCCH-ResourceIndex : 0                              <58>
+        sr-ConfigIndex : 72                                     <59>
+        dsr-TransMax : n64                                      <60>
 
 Message dump (Hex):                              
     68 12 98 0F A9 A0 19 83 B0 FA                
@@ -278,7 +280,77 @@ Message dump (Hex):
 <59> //?
 <60> //?
 
+[[msg_rrc_connection_setup_complete]]
+==== RRC Connection Setup Complete
+.RRC Connection Setup Complete
+----
+MS1
+RRC Connection Setup Complete (UL-DCCH)
+
+Time : 18:02:58.666
+Vendor Header
+  Length : 101
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71192920.00 ms) 19:46:32.920
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618874336
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 1
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : DcchUplink
+    Message Length : 76
+rrc-TransactionIdentifier : 1
+criticalExtensions : c1
+c1 : rrcConnectionSetupComplete-r8
+rrcConnectionSetupComplete-r8                                   <1>
+  selectedPLMN-Identity : 1                                     <2>
+  registeredMME                                                 <3>
+    mmegi : 0000000000000010
+      [0 ] : 0
+      [1 ] : 0
+      [2 ] : 0
+      [3 ] : 0
+      [4 ] : 0
+      [5 ] : 0
+      [6 ] : 0
+      [7 ] : 0
+      [8 ] : 0
+      [9 ] : 0
+      [10] : 0
+      [11] : 0
+      [12] : 0
+      [13] : 0
+      [14] : 1
+      [15] : 0
+    mmec
+      MMEC : (0x1) : 1
+  dedicatedInfoNAS                                              <4>
+    Protocol Discriminator : 7 (EMM)
+    Message Type : Attach Request
+    Message Contents : 17 71 ...
 
 
+Message dump (Hex):
+    22 20 00 02 01 46 17 71 87 86
+    9D 04 07 41 02 0B F6 00 F1 10
+    00 02 01 01 00 00 33 05 E0 F0
+    00 00 01 00 05 02 02 D0 31 D1
+    52 00 F1 10 31 32 5C 0A 00 13
+    FF FF FF FF FE 90 11 03 4F 18
+    A6 40 08 04 02 60 04 00 02 1F
+    02 F1 5D 01 02 E0 
+----
 
-=== 网络层信令                                        
+<1> RRC连接建立完成消息
+<2> 指示UE选择的PLMN,如果是1, 表示在SIB1消息里面的第一个PLMN, 如果是2, 表示在SIB1消息里面的第二个PLMN. 以此类推
+<3> //?
+<4> 传输UE和网络层的NAS层消息. eNB层透传此消息给MME. 
+
+

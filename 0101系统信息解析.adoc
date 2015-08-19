@@ -25,7 +25,7 @@ image::images/SI_Scheduling.jpg[title="系统信息时序图",align="center"]
 === MIB (Master Information Block)解析
 MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测信令)
 
-image:./images/mib.jpg[title="mib",align="center",scaledwidth="90%"]
+image::images/mib.jpg[title="mib",align="center"]
 
 [glossary]
 DL_Bandwidth::
@@ -65,7 +65,6 @@ SIB1上主要传输评估UE能否接入小区的相关信息及其他系统信�
 * SI message type & Periodicity, SIB mapping Info, SI Window length
 - TDD配置信息(tdd-Config)
 
-
 .SIB1
 ----
 MS1
@@ -90,7 +89,7 @@ Vendor Header
       Sub frame number : N/A
     Message Type : BcchSchDownlink
     Message Length : 22
-plmn-IdentityList                                     <1>
+plmn-IdentityList                                               <1>
   PLMN-IdentityList :
     [0 ] :
       plmn-Identity
@@ -104,24 +103,24 @@ plmn-IdentityList                                     <1>
             [0 ] : 0
             [1 ] : 1
       cellReservedForOperatorUse : notReserved
-trackingAreaCode : 12594 (0x3132)                     <2>
-cellIdentity : 2 (0x2)                                <3>
-cellBarred : notBarred                                <4>
-intraFreqReselection : allowed                        <5>
-csg-Indication : False                                <6>
-q-RxLevMin : -65                                      <7>
-q-RxLevMinOffset : 1                                  <8>
-p-Max : 23                                            <9>
-freqBandIndicator : 40                                <10>
-schedulingInfoList                                    <11>
+trackingAreaCode : 12594 (0x3132)                               <2>
+cellIdentity : 2 (0x2)                                          <3>
+cellBarred : notBarred                                          <4>
+intraFreqReselection : allowed                                  <5>
+csg-Indication : False                                          <6>
+q-RxLevMin : -65                                                <7>
+q-RxLevMinOffset : 1                                            <8>
+p-Max : 23                                                      <9>
+freqBandIndicator : 40                                          <10>
+schedulingInfoList                                              <11>
   SchedulingInfoList :
     [0 ] :
-      si-Periodicity : rf16                           <12>
+      si-Periodicity : rf16                                     <12>
       sib-MappingInfo
         SIB-MappingInfo :
           [0 ] :
             extensionBit0 : 0
-            Optionalitem : sibType3                   <13>
+            Optionalitem : sibType3                             <13>
           [1 ] :
             extensionBit0 : 0
             Optionalitem : sibType5
@@ -136,10 +135,10 @@ schedulingInfoList                                    <11>
             extensionBit0 : 0
             Optionalitem : sibType7
 tdd-Config
-  subframeAssignment : sa2                            <14>
-  specialSubframePatterns : ssp7                      <15> 
-si-WindowLength : ms20                                <16>
-systemInfoValueTag : 0                                <17>
+  subframeAssignment : sa2                                      <14>
+  specialSubframePatterns : ssp7                                <15> 
+si-WindowLength : ms20                                          <16>
+systemInfoValueTag : 0                                          <17>
 
 
 Message dump (Hex):
@@ -224,6 +223,7 @@ Message dump (Hex):
 * 没有SIB2会导致UE无法初始化ATTACH流程
 * SIB2消息不一定显式的包含在SIB1调度信息中, 但是它总是映射在IB1消息中schedulingInfoList的第一个实体
 
+.SIB2
 ....
 MS1
 System Information Block 2
@@ -249,70 +249,70 @@ ac-BarringForMO-Data
     [3 ] : 0
     [4 ] : 0
 radioResourceConfigCommon
-  rach-ConfigCommon                                   <1>
-    numberOfRA-Preambles : n52                        <2>
-    sizeOfRA-PreamblesGroupA : n44                    <3>
-    messageSizeGroupA : b56                           <4>
-    messagePowerOffsetGroupB : dB5                    <5>
-    powerRampingStep : dB2                            <6>
-    preambleInitialReceivedTargetPower : dBm-90       <7>
-    preambleTransMax : n20                            <8>
-    ra-ResponseWindowSize : sf10                      <9>
-    mac-ContentionResolutionTimer : sf48              <10>
-    maxHARQ-Msg3Tx : 8                                <11>
+  rach-ConfigCommon                                             <1>
+    numberOfRA-Preambles : n52                                  <2>
+    sizeOfRA-PreamblesGroupA : n44                              <3>
+    messageSizeGroupA : b56                                     <4>
+    messagePowerOffsetGroupB : dB5                              <5>
+    powerRampingStep : dB2                                      <6>
+    preambleInitialReceivedTargetPower : dBm-90                 <7>
+    preambleTransMax : n20                                      <8>
+    ra-ResponseWindowSize : sf10                                <9>
+    mac-ContentionResolutionTimer : sf48                        <10>
+    maxHARQ-Msg3Tx : 8                                          <11>
   bcch-Config
-    modificationPeriodCoeff : n4                      <12>
+    modificationPeriodCoeff : n4                                <12>
   pcch-Config
-    defaultPagingCycle : rf64                         <13>
-    nB : oneT                                         <14>
+    defaultPagingCycle : rf64                                   <13>
+    nB : oneT                                                   <14>
   prach-Config
-    rootSequenceIndex : 22                            <15>
+    rootSequenceIndex : 22                                      <15>
     prach-ConfigInfo
-      prach-ConfigIndex : 0                           <16>
-      highSpeedFlag : False                           <17>
-      zeroCorrelationZoneConfig : 1                   <18>
-      prach-FreqOffset : 10                           <19>
+      prach-ConfigIndex : 0                                     <16>
+      highSpeedFlag : False                                     <17>
+      zeroCorrelationZoneConfig : 1                             <18>
+      prach-FreqOffset : 10                                     <19>
   pdsch-ConfigCommon
-    referenceSignalPower : -10                        <20>
-    p-b : 1                                           <21>
+    referenceSignalPower : -10                                  <20>
+    p-b : 1                                                     <21>
   pusch-ConfigCommon
-    n-SB : 2                                          <22>
-    hoppingMode : interSubFrame                       <23>
-    pusch-HoppingOffset : 6                           <24>
-    enable64QAM : True                                <25>
+    n-SB : 2                                                    <22>
+    hoppingMode : interSubFrame                                 <23>
+    pusch-HoppingOffset : 6                                     <24>
+    enable64QAM : True                                          <25>
     ul-ReferenceSignalsPUSCH
-      groupHoppingEnabled : False                     <26>
-      groupAssignmentPUSCH : 0                        <27>
-      sequenceHoppingEnabled : False                  <28>
-      cyclicShift : 0                                 <29>
+      groupHoppingEnabled : False                               <26>
+      groupAssignmentPUSCH : 0                                  <27>
+      sequenceHoppingEnabled : False                            <28>
+      cyclicShift : 0                                           <29>
   pucch-ConfigCommon
-    deltaPUCCH-Shift : ds1                            <30>
-    nRB-CQI : 2                                       <31>
-    nCS-AN : 0                                        <32>
-    n1PUCCH-AN : 2                                    <33>
+    deltaPUCCH-Shift : ds1                                      <30>
+    nRB-CQI : 2                                                 <31>
+    nCS-AN : 0                                                  <32>
+    n1PUCCH-AN : 2                                              <33>
   soundingRS-UL-ConfigCommon
     SoundingRS-UL-ConfigCommon : release
   uplinkPowerControlCommon
-    p0-NominalPUSCH : -80                             <34>
-    alpha : al1                                       <35>
-    p0-NominalPUCCH : -100                            <36>
+    p0-NominalPUSCH : -80                                       <34>
+    alpha : al1                                                 <35>
+    p0-NominalPUCCH : -100                                      <36>
     deltaFList-PUCCH
-      deltaF-PUCCH-Format1 : deltaF-2                 <37>
+      deltaF-PUCCH-Format1 : deltaF-2                           <37>
       deltaF-PUCCH-Format1b : deltaF3
       deltaF-PUCCH-Format2 : deltaF-2
       deltaF-PUCCH-Format2a : deltaF2
       deltaF-PUCCH-Format2b : deltaF2
-    deltaPreambleMsg3 : 4                             <38>
-  ul-CyclicPrefixLength : len1                        <39>
+    deltaPreambleMsg3 : 4                                       <38>
+  ul-CyclicPrefixLength : len1                                  <39>
 ue-TimersAndConstants
-  t300 : ms1000                                       <40>
-  t301 : ms1000                                       <41>
-  t310 : ms1000                                       <42>
-  n310 : n1                                           <43>
-  t311 : ms1000                                       <44>
+  t300 : ms1000                                                 <40>
+  t301 : ms1000                                                 <41>
+  t310 : ms1000                                                 <42>
+  n310 : n1                                                     <43>
+  t311 : ms1000                                                 <44>
   n311 : n8
-additionalSpectrumEmission : 1                        <45>
-timeAlignmentTimerCommon : infinity                   <46>
+additionalSpectrumEmission : 1                                  <45>
+timeAlignmentTimerCommon : infinity                             <46>
 ....
 
 <1> 随机接入配置
@@ -368,25 +368,26 @@ timeAlignmentTimerCommon : infinity                   <46>
 * SIB3包含了用于同频, 异频, 异系统间小区重选的基本共用信息
 * 除临区相关信息之外的同频小区重选信息
 
+.SIB3
 ....
 MS1
-System Information Block 3                            <1>
+System Information Block 3                                      <1>
 
 Time : 17:45:36.299
-q-Hyst : dB3                                          <2>
-s-NonIntraSearch : 22                                 <3>
-threshServingLow : 15                                 <4>
-cellReselectionPriority : 7                           <5>
-q-RxLevMin : -60                                      <6>
-p-Max : 23                                            <7>
-s-IntraSearch : 19                                    <8>
-allowedMeasBandwidth : mbw100                         <9>
-presenceAntennaPort1 : False                          <10>
-neighCellConfig                                       <11>
+q-Hyst : dB3                                                    <2>
+s-NonIntraSearch : 22                                           <3>
+threshServingLow : 15                                           <4>
+cellReselectionPriority : 7                                     <5>
+q-RxLevMin : -60                                                <6>
+p-Max : 23                                                      <7>
+s-IntraSearch : 19                                              <8>
+allowedMeasBandwidth : mbw100                                   <9>
+presenceAntennaPort1 : False                                    <10>
+neighCellConfig                                                 <11>
   Binary string (Bin) : 01
     [0 ] : 0
     [1 ] : 1
-t-ReselectionEUTRA : 1                                <12>
+t-ReselectionEUTRA : 1                                          <12>
 
 ....
 
@@ -409,16 +410,17 @@ t-ReselectionEUTRA : 1                                <12>
 * SIB4包括具有特定重选参数以及黑名单小区
 * SIB4包含的所有内容均是可选项, 因为UE可以自动探测和完成同频临小区监测
 
+.SIB4
 ....
 MS1
-System Information Block 4                            <1>
+System Information Block 4                                      <1>
 
 Time : 10:01:27.846
-intraFreqNeighCellList                                <2>
+intraFreqNeighCellList                                          <2>
   IntraFreqNeighCellList :                           
     [0 ] :
-      physCellId : 14                                 <3>
-      q-OffsetCell : dB0                              <4>
+      physCellId : 14                                           <3>
+      q-OffsetCell : dB0                                        <4>
     [1 ] :
       physCellId : 201
       q-OffsetCell : dB0
@@ -433,23 +435,24 @@ intraFreqNeighCellList                                <2>
 * SIB5仅包含LTE异频小区重选相关的信息
 * SIB5包含普通的频率小区重选参数以及特定的小区重选参数
 
+.SIB5
 ....
 MS1
-System Information Block 5                            <1>
+System Information Block 5                                      <1>
 
 Time : 17:45:36.299
-interFreqCarrierFreqList                              <2>
-  InterFreqCarrierFreqList :                          <2>
+interFreqCarrierFreqList                                        <2>
+  InterFreqCarrierFreqList :                                    <2>
     [0 ] :
-      dl-CarrierFreq : 38950                          <3>
-      q-RxLevMin : -65                                <4>
-      t-ReselectionEUTRA : 1                          <5>
-      threshX-High : 12                               <6>
-      threshX-Low : 11                                <7>
-      allowedMeasBandwidth : mbw100                   <8>
-      presenceAntennaPort1 : False                    <9>
-      cellReselectionPriority : 7                     <10>
-      neighCellConfig                                 <11>
+      dl-CarrierFreq : 38950                                    <3>
+      q-RxLevMin : -65                                          <4>
+      t-ReselectionEUTRA : 1                                    <5>
+      threshX-High : 12                                         <6>
+      threshX-Low : 11                                          <7>
+      allowedMeasBandwidth : mbw100                             <8>
+      presenceAntennaPort1 : False                              <9>
+      cellReselectionPriority : 7                               <10>
+      neighCellConfig                                           <11>
         Binary string (Bin) : 00
           [0 ] : 0
           [1 ] : 0
@@ -478,15 +481,6 @@ interFreqCarrierFreqList                              <2>
 
 === SIB9 (System Information Block 9) 解析
 
-[plantuml]
----------------------------------------------------------------------
-@startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
-@enduml
----------------------------------------------------------------------
 
 
 // vim: set syntax=asciidoc:

@@ -17,7 +17,7 @@ eNB -> UE: **MSG4** RRC Connection Setup
 UE -> eNB: RRC Connection Setup Complete
 eNB -> MME: Initial UE message
 UE <--> MME: Identity/Authentication/Security
-MME -> eNB: Initial UE message
+MME -> eNB: Initial Context Setup Request
 eNB -> UE: UE Capability Enquiry
 UE -> eNB: UE Capability Information
 eNB -> MME: UE Capability Info Indication
@@ -31,12 +31,12 @@ eNB -> MME: UPLINK NAS TRANSPORT
 
 @enduml
 ---------------------------------------------------------------------
-1. 处在RRC_IDLE态的UE进行Attach过程, 首先发起随机接入过程, 即MSG1消息; 
-2. eNB检测到MSG1消息后, 向UE发送随机接入响应消息, 即MSG2消息; 
-3. UE收到随机接入响应后, 根据MSG2的TA调整上行发送时机, 向eNB发送RRCConnectionRequest消息; 
-4. eNB向UE发送RRCConnectionSetup消息, 包含建立SRB1承载信息和无线资源配置信息; 
-5. UE完成SRB1承载和无线资源配置, 向eNB发送RRCConnectionSetupComplete消息, 包含NAS层Attach request信息; 
-6. eNB选择MME, 向MME发送INITIAL UE MESSAGE消息, 包含NAS层Attach request消息; 
+1. 处在RRC_IDLE态的UE进行Attach过程, 首先发起随机接入过程, 即MSG1消息; <<msg_radom_access_preamble, [Random Access Request]>> 
+2. eNB检测到MSG1消息后, 向UE发送随机接入响应消息, 即MSG2消息;<<msg_radom_access_response, [Random Access Response]>>  
+3. UE收到随机接入响应后, 根据MSG2的TA调整上行发送时机, 向eNB发送RRCConnectionRequest消息;<<msg_rrc_connection_request, [RRC Connection Request]>>   
+4. eNB向UE发送RRCConnectionSetup消息, 包含建立SRB1承载信息和无线资源配置信息; <<msg_rrc_connection_setup, [RRC Connection Setup]>>   
+5. UE完成SRB1承载和无线资源配置, 向eNB发送RRCConnectionSetupComplete消息, 包含NAS层Attach request信息; <<msg_rrc_connection_setup_complete, [RRC Connection Setup Complete]>>   
+6. eNB选择MME, 向MME发送INITIAL UE MESSAGE消息, 包含NAS层Attach request消息; <<msg_initial_ue_message, [InitialUEMessage]>>
 7. NAS message
 8. MME向eNB发送INITIAL CONTEXT SETUP REQUEST消息, 请求建立默认承载, 包含NAS层Attach Accept, Activate default EPS bearer context request消息; 
 9. eNB接收到INITIAL CONTEXT SETUP REQUEST消息, 如果不包含UE能力信息, 则eNB向UE发送UECapabilityEnquiry消息, 查询UE能力; 
