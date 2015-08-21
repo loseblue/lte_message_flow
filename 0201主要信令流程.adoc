@@ -16,7 +16,7 @@ UE -> eNB: **MSG3** RRC Connection Request
 eNB -> UE: **MSG4** RRC Connection Setup
 UE -> eNB: RRC Connection Setup Complete
 eNB -> MME: Initial UE message
-UE <-> MME: Identity/Authentication/Security
+UE <--> MME: Identity/Authentication/Security
 MME -> eNB: Initial Context Setup Request
 eNB -> UE: UE Capability Enquiry
 UE -> eNB: UE Capability Information
