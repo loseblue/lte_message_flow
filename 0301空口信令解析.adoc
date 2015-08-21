@@ -1,9 +1,7 @@
-== 信令解析
-
-=== 空口信令
+== 空口信令解析
 
 [[msg_radom_access_preamble]]
-==== Random Access Request
+=== Random Access Request
 .Random Access Request
 ----
 MS1
@@ -41,7 +39,7 @@ PRACH Actual Tx Power : 231
 ----
 
 [[msg_radom_access_response]]
-==== Random Access Response
+=== Random Access Response
 .Random Access Response
 ----
 MS1
@@ -66,7 +64,7 @@ RNTI Value : 107
 ----
 
 [[msg_rrc_connection_request]]
-==== RRC Connection Request
+=== RRC Connection Request
 RRC连接请求. 终端由IDLE态转为CONNECT态, 或者终端有数据需要发送时, 会发送建立RRC连接的请求. 由UL_CCCH信道发送上来, 在SRB0上承载. 
 
 .RRC Connection Request
@@ -114,7 +112,7 @@ Message dump (Hex):
 <5> 预留值为以后的网络扩展做准备
 
 [[msg_rrc_connection_setup]]
-==== RRC Connection Setup
+=== RRC Connection Setup
 RRC连接建立消息包含建立SRB1承载和无线资源配置信息, 主要目的为建立SRB1, 该消息通过DL_CCCH信道发送, 承载在SRB0上. 
 
 .RRC Connection Setup
@@ -281,7 +279,7 @@ Message dump (Hex):
 <60> //?
 
 [[msg_rrc_connection_setup_complete]]
-==== RRC Connection Setup Complete
+=== RRC Connection Setup Complete
 .RRC Connection Setup Complete
 ----
 MS1
@@ -353,4 +351,638 @@ Message dump (Hex):
 <3> //?
 <4> 传输UE和网络层的NAS层消息. eNB层透传此消息给MME. 
 
+[[msg_ue_capability_enquir]]
+=== UE Capability Enquir
+UE能力查询请求消息, 由基站发往终端. 查询UE在不同网络的接入能力. 
+.UE Capability Enquir
+------
+MS1
+UE Capability Enquiry (DL-DCCH)
 
+Time : 18:02:59.486
+Vendor Header
+  Length : 30
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71193813.75 ms) 19:46:33.814
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618875051
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 1
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : DcchDownlink
+    Message Length : 5
+rrc-TransactionIdentifier : 1
+criticalExtensions : c1
+c1 : ueCapabilityEnquiry-r8
+ueCapabilityEnquiry-r8
+  ue-CapabilityRequest                                                    <1>
+    UE-CapabilityRequest :                                                <2>
+      [0 ] : 
+        extensionBit0 : 0
+        Optionalitem : eutra
+      [1 ] : 
+        extensionBit0 : 0
+        Optionalitem : utra
+      [2 ] : 
+        extensionBit0 : 0
+        Optionalitem : geran-cs
+      [3 ] : 
+        extensionBit0 : 0
+        Optionalitem : geran-ps
+      [4 ] : 
+        extensionBit0 : 0
+        Optionalitem : cdma2000-1XRTT
+
+
+Message dump (Hex):
+    3A 10 04 8D 00 
+
+------
+<1> UE能力查询
+<2> UE能力查询的制式列表
+
+[[msg_ue_capability_info]]
+=== UE Capability Information
+UE根据前一个消息会把自己的无线接入能力上报给上层网络, 并与网络MME中存储的能力进行比对更新, 以应备后续的通信服务需求. 
+
+.UE Capability Information
+------
+MS1
+UE Capability Information (UL-DCCH)
+
+Time : 18:02:59.486
+Vendor Header
+  Length : 53
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71193813.75 ms) 19:46:33.814
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618875051
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 1
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : DcchUplink
+    Message Length : 28
+rrc-TransactionIdentifier : 1
+criticalExtensions : c1
+c1 : ueCapabilityInformation-r8
+ueCapabilityInformation-r8                                                <1>
+  ue-CapabilityRAT-ContainerList                                          <2>
+    UE-CapabilityRAT-ContainerList : 
+      [0 ] : 
+        extensionBit0 : 0
+        RAT Type : eutra                                                  <3>
+        UE EUTRA Capability
+          extensionBit0 : 0
+          accessStratumRelease : rel9                                     <4>
+          ue-Category : 3                                                 <5>
+          pdcp-Parameters                                                 <6>
+            profile0x0001 : True                                          <7>
+            profile0x0002 : True
+            profile0x0003 : False
+            profile0x0004 : False
+            profile0x0006 : False
+            profile0x0101 : False
+            profile0x0102 : False
+            profile0x0103 : False
+            profile0x0104 : False
+          phyLayerParameters                                              <8>
+            ue-TxAntennaSelectionSupported : False                        <9>
+            ue-SpecificRefSigsSupported : False                           <10>
+          rf-Parameters                                                   <11>
+            supportedBandListEUTRA                                        <12>
+              SupportedBandListEUTRA : 
+                [0 ] : 
+                  bandEUTRA : 38                                          <13>
+                  halfDuplex : False                                      <14>
+                [1 ] : 
+                  bandEUTRA : 39
+                  halfDuplex : False
+                [2 ] : 
+                  bandEUTRA : 40
+                  halfDuplex : False
+          measParameters                                                  <15>
+            bandListEUTRA                                                 <16>
+              BandListEUTRA : 
+                [0 ] : 
+                  interFreqBandList                                       <17>
+                    InterFreqBandList : 
+                      [0 ] : 
+                        interFreqNeedForGaps : True                       <18>
+                      [1 ] : 
+                        interFreqNeedForGaps : True
+                      [2 ] : 
+                        interFreqNeedForGaps : True
+                [1 ] : 
+                  interFreqBandList
+                    InterFreqBandList : 
+                      [0 ] : 
+                        interFreqNeedForGaps : True
+                      [1 ] : 
+                        interFreqNeedForGaps : True
+                      [2 ] : 
+                        interFreqNeedForGaps : True
+                [2 ] : 
+                  interFreqBandList
+                    InterFreqBandList : 
+                      [0 ] : 
+                        interFreqNeedForGaps : True
+                      [1 ] : 
+                        interFreqNeedForGaps : True
+                      [2 ] : 
+                        interFreqNeedForGaps : True
+          Feature Group Indicators
+            Contents (hex) : 7E0DD880                                     <19>
+            1 : NO : PUSCH intra-subframe hopping, DCI format 3a, TM5, Aperiodic CQI reporting mode 2-0 and 2-2
+            2 : YES : PUCCH format 2a and 2b, Absolute TPC commands for PUSCH, Resource allocation type 1 for PDSCH, Periodic CQI reporting mode 2-0 and 2-1
+            3 : YES : 5bit RLC UM SN, 7bit PDCP SN
+            4 : YES : Short DRX cycle
+            5 : YES : Long DRX cycle, DRX command MAC control element
+            6 : YES : Prioritised bit rate
+            7 : YES : RLC UM
+            8 : NO : EUTRA RRC_CONNECTED to UTRA CELL_DCH PS handover
+            9 : N/A : EUTRA RRC_CONNECTED to GERAN GSM_Dedicated handover
+            10 : NO : EUTRA RRC_CONNECTED to GERAN (Packet_) Idle by Cell Change Order with or without NACC
+            11 : N/A : EUTRA RRC_CONNECTED to CDMA2000 1xRTT CS Active handover
+            12 : N/A : EUTRA RRC_CONNECTED to CDMA2000 HRPD Active handover
+            13 : YES : Inter-frequency handover (within FDD or TDD)
+            14 : YES : Measurement reporting event A4 (Neighbour > threshold) and A5 (Serving < threshold1 & Neighbour > threshold2)
+            15 : N/A : Measurement reporting event B1 (Neighbour > threshold)
+            16 : YES : Non-ANR related periodical measurement reporting intra-frequency, inter-frequency (if applicable) and inter-RAT (if applicable)
+            17 : YES : Periodical measurement reporting for SON/ANR, ANR related intra-frequency measurement reporting events
+            18 : YES : ANR related inter-frequency measurement reporting events
+            19 : NO : ANR related inter-RAT measurement reporting events
+            20 : YES : Support for SRB1 and SRB2 for DCCH + 8x AM DRB and DCCH + 5x AM DRB + 3x UM DRB
+            21 : YES : Predefined intra- and/or inter-subframe frequency hopping for PUSCH with N_sb > 1
+            22 : NO : UTRAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode
+            23 : NO : GERAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode
+            24 : NO : 1xRTT measurements, reporting and measurement reporting event B2 in E-UTRA connected mode
+            25 : YES : Inter-frequency measurements and reporting in E-UTRA connected mode
+            26 : NO : HRPD measurements and reporting in E-UTRA connected mode
+            27 : N/A : EUTRA RRC_CONNECTED to UTRA CELL_DCH CS handover
+            28 : NO : TTI bundling
+            29 : NO : Semi-Persistent Scheduling
+            30 : NO : Handover between FDD and TDD
+          nonCriticalExtension                                            <20>
+            phyLayerParameters-v920                                       <21>
+            interRAT-ParametersGERAN-v920                                 <22>
+            csg-ProximityIndicationParameters-r9                          <23>
+            neighCellSI-AcquisitionParameters-r9                          <24>
+            son-Parameters-r9                                             <25>
+            nonCriticalExtension
+              octets : 80 00 00 00 00 
+
+
+Message dump (Hex):
+    3A 01 01 8C 51 80 02 95 32 70
+    40 B8 2E 0B BF 06 EC 40 00 10
+    01 02 C0 00 00 00 00 00 
+------
+
+<1> UE能力信息
+<2> UE支持网络制式的列表, 该列表中优先介绍LTE的支持能力, 然后介绍是否包含3G能力, 如果包含就会介绍, 最后介绍包含2G的能力. 
+<3> 系统类型 - 支持EUTRAN系统
+<4> UE使用的协议版本, R8/9/10
+<5> UE能力等级, 协议规定取值范围1～5, 一般商用终端为CAT3(E392等)或CAT4(E5375), 本UE支持CAT3. UE能力级详见[later]
+<6> UE PDCP层参数
+<7> Profile: 在ROHC的框架下, 针对不同的协议的数据流, 有不同的头部压缩算法. Profile定义了针对特定协议层数据流的压缩方式. Profile ID用于标识Profile. Profile ID为0x0000表示不压缩. 如果信令中有这一条:  maxNumberROHC-ContextSessions --- cs2(0)表示为UE支持的并发激活ROHC 上下文的最大数量. CS2表示2个上下文. 如果终端不支持ROHC profiles,网络侧会忽略此值. 
+<8> UE物理层参数
+<9> 该值如果为TURE, 则表示UE有能力支持TS 36.213[8.7]中所描述的UE传输天线选择. FALSE则表示能力不支持该传输天线选择. 参见 http://www.sharetechnote.com/html/Handbook_LTE_UeTxAntennaSelection.html[UE Transmission Antenna Selection]
+<10> 标识是否支持UE特定参考信号. 该信号在天线端口5上传输. FALSE表示不支持
+<11> UE RF参数
+<12> 支持的带宽表,本表表示支持38,  39, 40频段. 
+<13> 支持频段38
+<14> 半双工标识. 如果为TURE那么该频带仅支持半双工操作, 否则支持全双工操作. 此条消息表示支持全双工操作. 
+<15> 测量参数
+<16> 条目列表, 对应于每一个支持 EUTRA 频带, 其排列的顺序与supportedEUTRA-BandList.的排列顺序一样. 
+<17> 支持异频测量的列表
+<18> 表示当在bandListEUTRA以及在interFreqBandList 中所给出的E-UTRA 频带上进行测量时, 是否需要测量间隔. TRUE表示需要测量间隔. 
+<19> 功能组指示, 每个BIT表示一个功能, 共32bit, 具体的定义可以参考36331协议的Table B.1-1: Definitions of feature group indicators
+<20> 非关键扩展参数
+<21> R9协议新增的物理层能力参数
+<22> R9协议新增的GERAN异系统互操作参数
+<23> R9协议新增的CSG(关闭用户组)接入指示参数. 只有归属于该CSG的用户才允许接入该小区. 
+<24> 邻区系统消息获得参数. 
+<25> R9协议新增的SON能力参数
+
+[[msg_security_mode_command]]
+=== Security Mode Command
+
+.Security Mode Command
+------
+MS1
+Security Mode Command
+
+Time : 18:02:59.379
+Vendor Header
+  Length : 25
+  Log Code (Hex) : 0xB0EC
+  HW Timestamp : (71193708.75 ms) 19:46:33.709
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618874967
+Protocol Discriminator : (7) EPS mobility management messages
+Security Header Type : 0
+Message Type : 93
+Selected NAS Security Algorithms
+  Type Of Ciphering Algorithm : (0) EPS encryption algorithm EEA0 (ciphering not used)  <1>
+  Type Of Integrity Protection Algorithm : (1) EPS integrity algorithm 128-EIA1  <2>
+NAS Key Set Identifier
+  TSC : (0) Native security context
+  NAS Key Set Identifier : 0
+Replayed UE Security Capabilities
+  Length : 4
+  EPS encryption algorithm EEA0 : Supported
+  EPS encryption algorithm 128EEA1 : Supported
+  EPS encryption algorithm 128EEA2 : Supported
+  EPS encryption algorithm EEA3 : Not supported
+  EPS encryption algorithm EEA4 : Not supported
+  EPS encryption algorithm EEA5 : Not supported
+  EPS encryption algorithm EEA6 : Not supported
+  EPS encryption algorithm EEA7 : Not supported
+  EPS integrity algorithm EIA0 : Supported
+  EPS integrity algorithm 128EIA1 : Supported
+  EPS integrity algorithm 128EIA2 : Supported
+  EPS integrity algorithm EIA3 : Supported
+  EPS integrity algorithm EIA4 : Not supported
+  EPS integrity algorithm EIA5 : Not supported
+  EPS integrity algorithm EIA6 : Not supported
+  EPS integrity algorithm EIA7 : Not supported
+  UMTS encryption algorithm UEA0 : Not supported
+  UMTS encryption algorithm UEA1 : Not supported
+  UMTS encryption algorithm UEA2 : Not supported
+  UMTS encryption algorithm UEA3 : Not supported
+  UMTS encryption algorithm UEA4 : Not supported
+  UMTS encryption algorithm UEA5 : Not supported
+  UMTS encryption algorithm UEA6 : Not supported
+  UMTS encryption algorithm UEA7 : Not supported
+  UMTS integrity algorithm UIA1 : Not supported
+  UMTS integrity algorithm UIA2 : Not supported
+  UMTS integrity algorithm UIA3 : Not supported
+  UMTS integrity algorithm UIA4 : Not supported
+  UMTS integrity algorithm UIA5 : Not supported
+  UMTS integrity algorithm UIA6 : Not supported
+  UMTS integrity algorithm UIA7 : Not supported
+
+
+Message dump (Hex):
+    07 5D 01 00 04 E0 F0 00 00 
+
+------
+
+<1> 加密算法, 对SRB和DRB都有效,  R9协议规定eea2表示AES算法, EEA1表示snow 3G算法, EEA0表示为NULL; R8协议未对空算法进行定义和设置标志位. , 当前采用的是EEA0.
+<2> 完整性保护算法, 仅对SRB生效, 协议规定EIA2表示AES算法, EIA1表示snow 3G算法. UE协议版本R9是EIA0-v920为空算法加密; R8协议的spare(7)为空算法加密. UE会首先验证本条SecurityModeCommand 消息的完整性保护. 
+
+[[msg_security_mode_complete]]
+=== Security Mode Complete
+
+. Security Mode Complete
+------
+MS1
+Security Mode Complete
+
+Time : 18:02:59.380
+Vendor Header
+  Length : 24
+  Log Code (Hex) : 0xB0ED
+  HW Timestamp : (71193711.25 ms) 19:46:33.711
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618874969
+Protocol Discriminator : (7) EPS mobility management messages
+Security Header Type : 0
+Message Type : 94
+
+Message dump (Hex):
+    07 5E 00 00 00 00 00 00 
+
+------
+
+[[msg_rrc_connection_reconfig]]
+=== RRC Connection Reconfiguration
+
+.RRC Connection Reconfiguration
+------
+MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+Time : 18:02:59.504
+Vendor Header
+  Length : 220
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71193845.00 ms) 19:46:33.845
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618875076
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 1
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : DcchDownlink
+    Message Length : 195
+rrc-TransactionIdentifier : 1
+criticalExtensions : c1
+c1 : rrcConnectionReconfiguration-r8
+rrcConnectionReconfiguration-r8                                           <1>
+  measConfig                                                              <2>
+    measObjectToAddModList
+      MeasObjectToAddModList : 
+        [0 ] : 
+          measObjectId : 1
+          measObject : measObjectEUTRA
+          measObjectEUTRA
+            carrierFreq : 39150
+            allowedMeasBandwidth : mbw100
+            presenceAntennaPort1 : False
+            neighCellConfig
+              Binary string (Bin) : 00
+                [0 ] : 0
+                [1 ] : 0
+    reportConfigToAddModList                                              <3>
+      ReportConfigToAddModList : 
+        [0 ] : 
+          reportConfigId : 1
+          reportConfig : reportConfigEUTRA
+          reportConfigEUTRA
+            triggerType : event
+            eventId : eventA1
+            a1-Threshold
+              ThresholdEUTRA : threshold-RSRP
+              threshold-RSRP : 52
+            hysteresis : 1
+            timeToTrigger : ms40
+            triggerQuantity : rsrp
+            reportQuantity : sameAsTriggerQuantity
+            maxReportCells : 8
+            reportInterval : ms640
+            reportAmount : r8
+        [1 ] : 
+          reportConfigId : 2
+          reportConfig : reportConfigEUTRA
+          reportConfigEUTRA
+            triggerType : event
+            eventId : eventA2
+            a2-Threshold
+              ThresholdEUTRA : threshold-RSRP
+              threshold-RSRP : 51
+            hysteresis : 1
+            timeToTrigger : ms40
+            triggerQuantity : rsrp
+            reportQuantity : sameAsTriggerQuantity
+            maxReportCells : 8
+            reportInterval : ms640
+            reportAmount : r8
+        [2 ] : 
+          reportConfigId : 3
+          reportConfig : reportConfigEUTRA
+          reportConfigEUTRA
+            triggerType : event
+            eventId : eventA1
+            a1-Threshold
+              ThresholdEUTRA : threshold-RSRQ
+              threshold-RSRQ : 32
+            hysteresis : 1
+            timeToTrigger : ms40
+            triggerQuantity : rsrq
+            reportQuantity : sameAsTriggerQuantity
+            maxReportCells : 8
+            reportInterval : ms640
+            reportAmount : r8
+        [3 ] : 
+          reportConfigId : 4
+          reportConfig : reportConfigEUTRA
+          reportConfigEUTRA
+            triggerType : event
+            eventId : eventA2
+            a2-Threshold
+              ThresholdEUTRA : threshold-RSRQ
+              threshold-RSRQ : 1
+            hysteresis : 1
+            timeToTrigger : ms40
+            triggerQuantity : rsrq
+            reportQuantity : sameAsTriggerQuantity
+            maxReportCells : 8
+            reportInterval : ms640
+            reportAmount : r8
+    measIdToAddModList                                                    <4>
+      MeasIdToAddModList : 
+        [0 ] : 
+          measId : 1
+          measObjectId : 1
+          reportConfigId : 1
+        [1 ] : 
+          measId : 2
+          measObjectId : 1
+          reportConfigId : 2
+        [2 ] : 
+          measId : 3
+          measObjectId : 1
+          reportConfigId : 3
+        [3 ] : 
+          measId : 4
+          measObjectId : 1
+          reportConfigId : 4
+    quantityConfig                                                        <5>
+      quantityConfigEUTRA
+        extensionBit1 : 0
+        filterCoefficientRSRQ : fc6
+    s-Measure : 0                                                         <6>
+  dedicatedInfoNASList :                                                  <7>
+    [0 ] : 
+      Protocol Discriminator : 7 (EMM)
+      Message Type : Attach Accept
+      Message Contents : 27 DA C5 CD 60 02 07 42 02 49 06 40 00 F1 10 31 32 00 49 52 02 C1 05 07 FF FF FF FF 06 05 63 6D 6E 65 74 05 01 46 00 00 01 5E 04 FE B7 4E 00 58 32 27 29 80 80 21 10 02 00 00 10 81 06 08 08 08 08 83 06 04 02 02 01 C2 23 04 03 00 00 04 00 0D 04 08 08 08 08 00 0D 04 04 02 02 01 50 0B F6 00 F1 10 00 02 01 01 00 00 32 53 12 17 2C 59 49 64 01 03 
+  radioResourceConfigDedicated                                            <8>
+    srb-ToAddModList
+      SRB-ToAddModList :                                                  <9>
+        [0 ] : 
+          srb-Identity : 2                                                <10>
+          rlc-Config : explicitValue
+          explicitValue    
+            RLC-Config : am                                               <11>
+            ul-AM-RLC                                                     <12>
+              t-PollRetransmit : ms15                                     <13>
+              pollPDU : p128                                              <14>
+              pollByte : kB125                                            <15>
+              maxRetxThreshold : t16                                      <16>
+            dl-AM-RLC
+              t-Reordering : ms80
+              t-StatusProhibit : ms15
+          logicalChannelConfig : explicitValue
+          explicitValue
+            priority : 3
+            prioritisedBitRate : infinity
+            bucketSizeDuration : ms300
+            logicalChannelGroup : 0
+    drb-ToAddModList
+      DRB-ToAddModList : 
+        [0 ] : 
+          eps-BearerIdentity : 5
+          drb-Identity : 3
+          pdcp-Config
+            discardTimer : infinity
+            statusReportRequired : True
+            headerCompression : notUsed
+          rlc-Config
+            RLC-Config : am
+            ul-AM-RLC
+              t-PollRetransmit : ms80
+              pollPDU : p128
+              pollByte : kB125
+              maxRetxThreshold : t1
+            dl-AM-RLC
+              t-Reordering : ms5
+              t-StatusProhibit : ms60
+          logicalChannelIdentity : 3
+          logicalChannelConfig
+            priority : 7
+            prioritisedBitRate : kBps8
+            bucketSizeDuration : ms300
+            logicalChannelGroup : 3
+    mac-MainConfig : explicitValue
+    explicitValue
+      maxHARQ-Tx : n5
+      periodicBSR-Timer : sf5
+      retxBSR-Timer : sf320
+      ttiBundling : False
+      drx-Config
+        DRX-Config : release
+      timeAlignmentTimerDedicated : infinity
+      phr-Config : setup
+      periodicPHR-Timer : sf200
+      prohibitPHR-Timer : sf100
+      dl-PathlossChange : dB3
+    physicalConfigDedicated
+      pdsch-ConfigDedicated
+        p-a : dB0
+      pucch-ConfigDedicated
+        ackNackRepetition : release
+        tdd-AckNackFeedbackMode : bundling
+      pusch-ConfigDedicated
+        betaOffset-ACK-Index : 9
+        betaOffset-RI-Index : 5
+        betaOffset-CQI-Index : 15
+      uplinkPowerControlDedicated
+        p0-UE-PUSCH : 0
+        deltaMCS-Enabled : en0
+        accumulationEnabled : True
+        p0-UE-PUCCH : 0
+        pSRS-Offset : 3
+        extensionBit0 : 0
+        filterCoefficient : fc0
+      tpc-PDCCH-ConfigPUCCH
+        TPC-PDCCH-Config : setup
+        tpc-RNTI : 0000000101101000
+          [0 ] : 0
+          [1 ] : 0
+          [2 ] : 0
+          [3 ] : 0
+          [4 ] : 0
+          [5 ] : 0
+          [6 ] : 0
+          [7 ] : 1
+          [8 ] : 0
+          [9 ] : 1
+          [10] : 1
+          [11] : 0
+          [12] : 1
+          [13] : 0
+          [14] : 0
+          [15] : 0
+        tpc-Index
+          TPC-Index : indexOfFormat3
+          indexOfFormat3 : 1
+      cqi-ReportConfig
+        nomPDSCH-RS-EPRE-Offset : 0
+        cqi-ReportPeriodic
+          CQI-ReportPeriodic : setup
+          cqi-PUCCH-ResourceIndex : 23
+          cqi-pmi-ConfigIndex : 38
+          cqi-FormatIndicatorPeriodic : widebandCQI
+          ri-ConfigIndex : 654
+          simultaneousAckNackAndCQI : True
+      antennaInfo : explicitValue
+      explicitValue
+        transmissionMode : tm3
+        codebookSubsetRestriction : n2TxAntenna-tm3
+        n2TxAntenna-tm3 : 11
+          [0 ] : 1
+          [1 ] : 1
+        ue-TransmitAntennaSelection : release
+      schedulingRequestConfig
+        SchedulingRequestConfig : setup
+        sr-PUCCH-ResourceIndex : 0
+        sr-ConfigIndex : 72
+        dsr-TransMax : n64
+
+
+Message dump (Hex):
+    22 16 15 A0 00 00 4C 77 50 30
+    00 34 08 9C D8 40 99 84 4E 6C
+    40 30 04 6E 6C 60 60 84 6E 6C
+    60 00 02 00 88 02 18 06 84 C0
+    01 C8 9F 6B 17 35 80 08 1D 08
+    09 24 19 00 03 C4 40 C4 C8 01
+    25 48 0B 04 14 1F FF FF FF FC
+    18 15 8D B5 B9 95 D0 14 05 18
+    00 00 05 78 13 FA DD 38 01 60
+    C8 9C A6 02 00 84 40 08 00 00
+    42 04 18 20 20 20 22 0C 18 10
+    08 08 07 08 8C 10 0C 00 00 10
+    00 34 10 20 20 20 20 00 34 10
+    10 08 08 05 40 2F D8 03 C4 40
+    00 08 04 04 00 00 C9 4C 48 5C
+    B1 65 25 90 04 0D A9 C0 2A 9A
+    01 99 3B 01 F5 13 78 1F 50 04
+    C0 D8 5E 7D 00 1F 22 FA E4 95
+    FC 30 60 80 B4 01 38 17 09 94
+    75 43 40 02 44 
+------
+
+<1> RRC连接重配置
+<2> 测量配置, 详见[later]
+<3> 添加/修改报告配置, 详见[later]
+<4> 要添加或修改的测量标识列表,详见[later]
+<5> quantityConfig
+<6> s-Measure
+<7> dedicatedInfoNASList
+<8> 线资源配置专用
+<9> SRB增加模式列表
+<10> 增加SRB2, SRB2: 用于传传NAS消息的, 它必须在安全激活后才能被建立起来. 确保信令的安全性. SRB1是传送RRC信令的, 在SRB2建立前也传NAS消息, SRB2建立后SRB1就只用于传RRC信令了. 重配置等消息就是在SRB1上传送的. 
+<11> SRB为保证信令的正确接收配置为AM模式
+<12> UL-AM-RLC为针对UE侧的上行RLC配置, 主要配置RLC数据接收侦测规则. 
+<13> AM PDU重传检测定时器时长. 
+<14> UE触发Polling的PDU字节数据量门限. 此处配置为128
+<15> PollByte为AMD PDU侦测字节数. 此处配置为kB. 
+<16> UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE, 表示RLC ARQ最大重传次数, 用于限制AM PDU的重传次数. 达到最大重传次数时会触发RRC连接重建. 
+<17>
+<18>
+<19>
+<20>
+<21>
+<22>
+<23>
+<24>
+<25>
+<26>
+<27>
+<28>
+<29>

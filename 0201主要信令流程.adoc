@@ -16,7 +16,7 @@ UE -> eNB: **MSG3** RRC Connection Request
 eNB -> UE: **MSG4** RRC Connection Setup
 UE -> eNB: RRC Connection Setup Complete
 eNB -> MME: Initial UE message
-UE <--> MME: Identity/Authentication/Security
+UE <-> MME: Identity/Authentication/Security
 MME -> eNB: Initial Context Setup Request
 eNB -> UE: UE Capability Enquiry
 UE -> eNB: UE Capability Information
@@ -38,13 +38,13 @@ eNB -> MME: UPLINK NAS TRANSPORT
 5. UE完成SRB1承载和无线资源配置, 向eNB发送RRCConnectionSetupComplete消息, 包含NAS层Attach request信息; <<msg_rrc_connection_setup_complete, [RRC Connection Setup Complete]>>   
 6. eNB选择MME, 向MME发送INITIAL UE MESSAGE消息, 包含NAS层Attach request消息; <<msg_initial_ue_message, [InitialUEMessage]>>
 7. NAS message
-8. MME向eNB发送INITIAL CONTEXT SETUP REQUEST消息, 请求建立默认承载, 包含NAS层Attach Accept, Activate default EPS bearer context request消息; 
-9. eNB接收到INITIAL CONTEXT SETUP REQUEST消息, 如果不包含UE能力信息, 则eNB向UE发送UECapabilityEnquiry消息, 查询UE能力; 
-10. UE向eNB发送UECapabilityInformation消息, 报告UE能力信息; 
-11. eNB向MME发送UE CAPABILITY INFO INDICATION消息, 更新MME的UE能力信息; 
-12. eNB根据INITIAL CONTEXT SETUP REQUEST消息中UE支持的安全信息, 向UE发送SecurityModeCommand消息, 进行安全激活; 
-13. UE向eNB发送SecurityModeComplete消息, 表示安全激活完成; 
-14. eNB根据INITIAL CONTEXT SETUP REQUEST消息中的ERAB建立信息, 向UE发送RRCConnectionReconfiguration消息进行UE资源重配, 包括重配SRB1和无线资源配置, 建立SRB2, DRB(包括默认承载)等; 
+8. MME向eNB发送INITIAL CONTEXT SETUP REQUEST消息, 请求建立默认承载, 包含NAS层Attach Accept, Activate default EPS bearer context request消息;<<msg_initial_context_setup_req, [Inital Contest Setup Request]>> 
+9. eNB接收到INITIAL CONTEXT SETUP REQUEST消息, 如果不包含UE能力信息, 则eNB向UE发送UECapabilityEnquiry消息, 查询UE能力; <<msg_ue_capability_enquir, [UE Capability Enquiry]>>
+10. UE向eNB发送UECapabilityInformation消息, 报告UE能力信息; <<msg_ue_capability_info, [UE Capability Information]>>
+11. eNB向MME发送UE CAPABILITY INFO INDICATION消息, 更新MME的UE能力信息; <<msg_ue_cap_info_ind, [UE Capability Info Indication]>>
+12. eNB根据INITIAL CONTEXT SETUP REQUEST消息中UE支持的安全信息, 向UE发送SecurityModeCommand消息, 进行安全激活; <<msg_security_mode_command, [Security Mode Command]>> 
+13. UE向eNB发送SecurityModeComplete消息, 表示安全激活完成;<<msg_security_mode_complete, [Security Mode Complete]>>
+14. eNB根据INITIAL CONTEXT SETUP REQUEST消息中的ERAB建立信息, 向UE发送RRCConnectionReconfiguration消息进行UE资源重配, 包括重配SRB1和无线资源配置, 建立SRB2, DRB(包括默认承载)等; <<msg_rrc_connection_reconfig, [RRC Connection Reconfiguration]>>
 15. UE向eNB发送RRCConnectionReconfigurationComplete消息, 表示资源配置完成; 
 16. eNB向MME发送INITIAL CONTEXT SETUP RESPONSE响应消息, 表明UE上下文建立完成; 
 17. UE向eNB发送ULInformationTransfer消息, 包含NAS层Attach Complete, Activate default EPS bearer context accept消息; 

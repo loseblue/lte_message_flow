@@ -1,7 +1,7 @@
-﻿=== 网络层信令
+﻿== 网络层信令解析
 
 [[msg_initial_ue_message]]
-==== Initial UE Message
+=== Initial UE Message
 初始直传消息. 基站把从UU口收到的NAS消息发往核心网, 初始ATTACH时, 该Nas消息一般包含ATTACH REQ, 请求在核心网创建上下文. 
 
 .InitialUEMessage
@@ -70,7 +70,7 @@ S1 Application Protocol
 
 
 [[msg_initial_context_setup_req]]
-==== Initial Context Setup Request
+=== Initial Context Setup Request
 初始上下文建立请求. 由核心网发往基站, 包含Nas消息ATTACH ACCEPT, 指示基站为该UE分配资源建立数据承载. 
 
 .Initial Context Setup Request
@@ -150,8 +150,174 @@ S1 Application Protocol
 <22> 安全密钥. 核心网和UE之间NAS层的鉴权和安全过程之后, 通过初始密钥生成的KeNodeB, eNodeB收到后会导出AS层的安全密钥. 
 
 
-[[msg_initial_context_setup_resp]]
-==== Inital Context Setup Response
+[[msg_ue_cap_info_ind]]
+=== UE Capability Info Indication
+UE能力上报消息, 由基站发往核心网, 将RRC_UE_CAP_INFO中的内容转发到核心网. 这条消息与上一条消息是基站透传的结果, 上一条消息是UE向基站上报无线接入能力, 这条消息是基站把UE的无线接入能力透传给MME. 
+
+.UE Capability Info Indication
+------
+S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-UECapabilityInfoIndication (22)
+   criticality: ignore (1)
+   value
+    UECapabilityInfoIndication                                  <1>
+     protocolIEs: 3 items
+      Item 0: id-MME-UE-S1AP-ID
+         MME-UE-S1AP-ID: 33554442                               <2>
+      Item 1: id-eNB-UE-S1AP-ID
+         ENB-UE-S1AP-ID: 1                                      <3>
+      Item 2: id-UERadioCapability
+         UERadioCapability: 00da01018c518b82e0bbf06ec4...
+          UERadioAccessCapabilityInformation                    <4>          
+           criticalExtensions: c1 (0)
+            c1: ueRadioAccessCapabilityInformation-r8 (0)
+             ueRadioAccessCapabilityInformation-r8
+              ue-RadioAccessCapabilityInfo: 4020318...
+               UECapabilityInformation
+                rrc-TransactionIdentifier: 1
+                criticalExtensions: c1 (0)
+                 c1: ueCapabilityInformation-r8 (0)
+                  ueCapabilityInformation-r8
+                   ue-CapabilityRAT-ContainerList: 1 item
+                    Item 0
+                     UE-CapabilityRAT-Container
+                      rat-Type: eutra (0)                      <5>
+                      ueCapabilityRAT-Container: c51...
+                      UE-EUTRA-Capability                      <6>
+                       accessStratumRelease: rel9 (1)          <7>
+                       ue-Category: 3                          <8>
+                       pdcp-Parameters                         <9>
+                        supportedROHC-Profiles                 <10>
+                         ...1 .... profile0x0001: True
+                         .... 1... profile0x0002: True
+                         .... .0.. profile0x0003: False
+                         .... ..0. profile0x0004: False
+                         .... ...0 profile0x0006: False
+                         0... .... profile0x0101: False
+                         .0.. .... profile0x0102: False
+                         ..0. .... profile0x0103: False
+                         ...0 .... profile0x0104: False
+                       phyLayerParameters                     <11>
+                        .... 0... ue-TxAntennaSelectionSupported: False  <12>
+                        .... .0.. ue-SpecificRefSigsSupported: False     <13>
+                       rf-Parameters                          <14>
+                        supportedBandListEUTRA: 3 items
+                         Item 0
+                          SupportedBandEUTRA
+                           bandEUTRA: 38
+                           ..0. .... halfDuplex: False
+                         Item 1
+                          SupportedBandEUTRA
+                           bandEUTRA: 39
+                           .0.. .... halfDuplex: False
+                         Item 2
+                          SupportedBandEUTRA
+                           bandEUTRA: 40
+                           0... .... halfDuplex: False
+                       measParameters
+                        bandListEUTRA: 3 items
+                         Item 0
+                          BandInfoEUTRA
+                           interFreqBandList: 3 items
+                            Item 0
+                             InterFreqBandInfo
+                              .... ..1. interFreqNeedForGaps: True
+                            Item 1
+                             InterFreqBandInfo
+                              .... ...1 interFreqNeedForGaps: True
+                            Item 2
+                             InterFreqBandInfo
+                              1... .... interFreqNeedForGaps: True
+                         Item 1
+                          BandInfoEUTRA
+                           interFreqBandList: 3 items
+                            Item 0
+                             InterFreqBandInfo
+                              1... .... interFreqNeedForGaps: True
+                            Item 1
+                             InterFreqBandInfo
+                              .1.. .... interFreqNeedForGaps: True
+                            Item 2
+                             InterFreqBandInfo
+                              ..1. .... interFreqNeedForGaps: True
+                         Item 2
+                          BandInfoEUTRA
+                           interFreqBandList: 3 items
+                            Item 0
+                             InterFreqBandInfo
+                              ..1. .... interFreqNeedForGaps: True
+                            Item 1
+                             InterFreqBandInfo
+                              ...1 .... interFreqNeedForGaps: True
+                            Item 2
+                             InterFreqBandInfo
+                              .... 1... interFreqNeedForGaps: True
+                       featureGroupIndicators: 7e0dd880 [bit length 32]
+                        0... .... = Indicator 1: Intra-subframe freq hopping for PUSCH scheduled by UL grant; DCI format 3a; PDSCH transmission mode 5; Aperiodic CQI/PMI/RI report on PUSCH: Mode 2-0 and 2-2 - Not supported
+                        .1.. .... = Indicator 2: Simultaneous CQI and ACK/NACK on PUCCH (format 2a/2b); Absolute TPC command for PUSCH; Resource alloc type 1 for PDSCH; Periodic CQI/PMI/RI report on PUCCH: Mode 2-0 and 2-1 - Supported
+                        ..1. .... = Indicator 3: 5bit RLC UM SN; 7bit PDCP SN - Supported
+                        ...1 .... = Indicator 4: Short DRX cycle - Supported
+                        .... 1... = Indicator 5: Long DRX cycle; DRX command MAC control element - Supported
+                        .... .1.. = Indicator 6: Prioritised bit rate - Supported
+                        .... ..1. = Indicator 7: RLC UM - Supported
+                        .... ...0 = Indicator 8: EUTRA RRC_CONNECTED to UTRA CELL_DCH PS handover - Not supported
+                        0... .... = Indicator 9: EUTRA RRC_CONNECTED to GERAN GSM_Dedicated handover - Not Supported
+                        .0.. .... = Indicator 10: EUTRA RRC_CONNECTED to GERAN (Packet_) Idle by Cell Change Order; EUTRA RRC_CONNECTED to GERAN (Packet_) Idle by Cell Change Order with NACC - Not supported
+                        ..0. .... = Indicator 11: EUTRA RRC_CONNECTED to CDMA2000 1xRTT CS Active handover - Not supported
+                        ...0 .... = Indicator 12: EUTRA RRC_CONNECTED to CDMA2000 HRPD Active handover - Not supported
+                        .... 1... = Indicator 13: Inter-frequency handover - Supported
+                        .... .1.. = Indicator 14: Measurement reporting event: Event A4 - Neighbour > threshold; Measurement reporting event: Event A5 - Serving < threshold1 & Neighbour > threshold2 - Supported
+                        .... ..0. = Indicator 15: Measurement reporting event: Event B1 - Neighbour > threshold - Not supported
+                        .... ...1 = Indicator 16: non-ANR related periodical measurement reporting - Supported
+                        1... .... = Indicator 17: Periodical measurement reporting for SON / ANR; ANR related intra-frequency measurement reporting events - Supported
+                        .1.. .... = Indicator 18: ANR related inter-frequency measurement reporting events - Supported
+                        ..0. .... = Indicator 19: ANR related inter-RAT measurement reporting events - Not supported
+                        ...1 .... = Indicator 20: SRB1 and SRB2 for DCCH + 8x AM DRB; SRB1 and SRB2 for DCCH + 5x AM DRB + 3x UM DRB (if indicator 7 is supported) - Supported
+                        .... 1... = Indicator 21: Predefined intra- and inter-subframe frequency hopping for PUSCH with N_sb > 1; Predefined inter-subframe frequency hopping for PUSCH with N_sb > 1 - Supported
+                        .... .0.. = Indicator 22: UTRAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode - Not supported
+                        .... ..0. = Indicator 23: GERAN measurements, reporting and measurement reporting event B2 in E-UTRA connected mode - Not supported
+                        .... ...0 = Indicator 24: 1xRTT measurements, reporting and measurement reporting event B2 in E-UTRA connected mode - Not supported
+                        1... .... = Indicator 25: Inter-frequency measurements and reporting in E-UTRA connected mode - Supported
+                        .0.. .... = Indicator 26: HRPD measurements, reporting and measurement reporting event B2 in E-UTRA connected mode - Not supported
+                        ..0. .... = Indicator 27: EUTRA RRC_CONNECTED to UTRA CELL_DCH CS handover - Not supported
+                        ...0 .... = Indicator 28: TTI bundling - Not supported
+                        .... 0... = Indicator 29: Semi-Persistent Scheduling - Not supported
+                        .... .0.. = Indicator 30: Undefined - Not supported
+                        .... ..0. = Indicator 31: Undefined - Not supported
+                        .... ...0 = Indicator 32: Undefined - Not supported
+                       interRAT-Parameters
+                       nonCriticalExtension
+                        phyLayerParameters-v920
+                        interRAT-ParametersGERAN-v920
+                        csg-ProximityIndicationParameters-r9
+                        neighCellSI-AcquisitionParameters-r9
+                        son-Parameters-r9
+                        nonCriticalExtension
+                         lateNonCriticalExtension: 8000000000
+
+------
+
+<1> UE无线接入能力信息. 共三项. 
+<2> 核心网侧UE用户标识. 在eNodeB保存的UE上下文释放之前, S1接口都是用同样的一对MME-eNodeB S1AP ID来识别UE. 
+<3> 基站侧的UE用户标识. 
+<4> UE无线接入能力信息
+<5> 支持EUTRAN
+<6> UE capability
+<7> rel9
+<8> UE Category 3
+<9> PDCP 参数
+<10> 支持ROHC的能力集, 支持1, 2模式
+<11> PHY层参数
+<12> later
+<13> later
+<14> RF参数
+<15> later
+
+
+[[msg_inital_context_setup_rsp]]
+=== Inital Context Setup Response
 
 .Inital Context Setup Response
 ------
