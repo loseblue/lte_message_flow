@@ -1491,7 +1491,7 @@ interFreqCarrierFreqList                                        <b class="conum"
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="diag-3ef857777def409fc730bfbfdf16aecc.png" alt="diag 3ef857777def409fc730bfbfdf16aecc" width="590" height="661">
+<img src="diag-3424bd7d15542c8b0044dde05bd1f0f0.png" alt="diag 3424bd7d15542c8b0044dde05bd1f0f0" width="590" height="661">
 </div>
 </div>
 <div class="olist arabic">
@@ -1539,10 +1539,10 @@ interFreqCarrierFreqList                                        <b class="conum"
 <p>eNB根据INITIAL CONTEXT SETUP REQUEST消息中的ERAB建立信息, 向UE发送RRCConnectionReconfiguration消息进行UE资源重配, 包括重配SRB1和无线资源配置, 建立SRB2, DRB(包括默认承载)等; <a href="#msg_rrc_connection_reconfig">[RRC Connection Reconfiguration]</a></p>
 </li>
 <li>
-<p>UE向eNB发送RRCConnectionReconfigurationComplete消息, 表示资源配置完成;</p>
+<p>UE向eNB发送RRCConnectionReconfigurationComplete消息, 表示资源配置完成; <a href="#msg_rrc_conn_reconfig_compl">[RRC Connection Reconfiguration Complete]</a></p>
 </li>
 <li>
-<p>eNB向MME发送INITIAL CONTEXT SETUP RESPONSE响应消息, 表明UE上下文建立完成;</p>
+<p>eNB向MME发送INITIAL CONTEXT SETUP RESPONSE响应消息, 表明UE上下文建立完成; <a href="#msg_inital_context_setup_rsp">[Inital Context Setup Response]</a></p>
 </li>
 <li>
 <p>UE向eNB发送ULInformationTransfer消息, 包含NAS层Attach Complete, Activate default EPS bearer context accept消息;</p>
@@ -2609,7 +2609,7 @@ rrcConnectionReconfiguration-r8                                           <b cla
     [0 ] :
       Protocol Discriminator : 7 (EMM)
       Message Type : Attach Accept
-      Message Contents : 27 DA C5 CD 60 02 07 42 02 49 06 40 00 F1 10 31 32 00 49 52 02 C1 05 07 FF FF FF FF 06 05 63 6D 6E 65 74 05 01 46 00 00 01 5E 04 FE B7 4E 00 58 32 27 29 80 80 21 10 02 00 00 10 81 06 08 08 08 08 83 06 04 02 02 01 C2 23 04 03 00 00 04 00 0D 04 08 08 08 08 00 0D 04 04 02 02 01 50 0B F6 00 F1 10 00 02 01 01 00 00 32 53 12 17 2C 59 49 64 01 03
+      Message Contents : 27 DA ...
   radioResourceConfigDedicated                                            <b class="conum">(8)</b>
     srb-ToAddModList
       SRB-ToAddModList :                                                  <b class="conum">(9)</b>
@@ -2623,138 +2623,100 @@ rrcConnectionReconfiguration-r8                                           <b cla
               pollPDU : p128                                              <b class="conum">(14)</b>
               pollByte : kB125                                            <b class="conum">(15)</b>
               maxRetxThreshold : t16                                      <b class="conum">(16)</b>
-            dl-AM-RLC
-              t-Reordering : ms80
-              t-StatusProhibit : ms15
-          logicalChannelConfig : explicitValue
+            dl-AM-RLC                                                     <b class="conum">(17)</b>
+              t-Reordering : ms80                                         <b class="conum">(18)</b>
+              t-StatusProhibit : ms15                                     <b class="conum">(19)</b>
+          logicalChannelConfig : explicitValue                            <b class="conum">(20)</b>
           explicitValue
-            priority : 3
-            prioritisedBitRate : infinity
-            bucketSizeDuration : ms300
-            logicalChannelGroup : 0
-    drb-ToAddModList
+            priority : 3                                                  <b class="conum">(21)</b>
+            prioritisedBitRate : infinity                                 <b class="conum">(22)</b>
+            bucketSizeDuration : ms300                                    <b class="conum">(23)</b>
+            logicalChannelGroup : 0                                       <b class="conum">(24)</b>
+    drb-ToAddModList                                                      <b class="conum">(25)</b>
       DRB-ToAddModList :
-        [0 ] :
-          eps-BearerIdentity : 5
-          drb-Identity : 3
-          pdcp-Config
-            discardTimer : infinity
-            statusReportRequired : True
-            headerCompression : notUsed
-          rlc-Config
-            RLC-Config : am
-            ul-AM-RLC
-              t-PollRetransmit : ms80
-              pollPDU : p128
-              pollByte : kB125
-              maxRetxThreshold : t1
-            dl-AM-RLC
-              t-Reordering : ms5
-              t-StatusProhibit : ms60
-          logicalChannelIdentity : 3
-          logicalChannelConfig
-            priority : 7
-            prioritisedBitRate : kBps8
-            bucketSizeDuration : ms300
-            logicalChannelGroup : 3
-    mac-MainConfig : explicitValue
+        [0 ] :                                                            <b class="conum">(26)</b>
+          eps-BearerIdentity : 5                                          <b class="conum">(27)</b>
+          drb-Identity : 3                                                <b class="conum">(28)</b>
+          pdcp-Config                                                     <b class="conum">(29)</b>
+            discardTimer : infinity                                       <b class="conum">(30)</b>
+            statusReportRequired : True                                   <b class="conum">(31)</b>
+            headerCompression : notUsed                                   <b class="conum">(32)</b>
+          rlc-Config                                                      <b class="conum">(33)</b>
+            RLC-Config : am                                               <b class="conum">(34)</b>
+            ul-AM-RLC                                                     <b class="conum">(35)</b>
+              t-PollRetransmit : ms80                                     <b class="conum">(36)</b>
+              pollPDU : p128                                              <b class="conum">(37)</b>
+              pollByte : kB125                                            <b class="conum">(38)</b>
+              maxRetxThreshold : t1                                       <b class="conum">(39)</b>
+            dl-AM-RLC                                                     <b class="conum">(40)</b>
+              t-Reordering : ms5                                          <b class="conum">(41)</b>
+              t-StatusProhibit : ms60                                     <b class="conum">(42)</b>
+          logicalChannelIdentity : 3                                      <b class="conum">(43)</b>
+          logicalChannelConfig                                            <b class="conum">(44)</b>
+            priority : 7                                                  <b class="conum">(45)</b>
+            prioritisedBitRate : kBps8                                    <b class="conum">(46)</b>
+            bucketSizeDuration : ms300                                    <b class="conum">(47)</b>
+            logicalChannelGroup : 3                                       <b class="conum">(48)</b>
+    mac-MainConfig : explicitValue                                        <b class="conum">(49)</b>
     explicitValue
-      maxHARQ-Tx : n5
-      periodicBSR-Timer : sf5
-      retxBSR-Timer : sf320
-      ttiBundling : False
+      maxHARQ-Tx : n5                                                     <b class="conum">(50)</b>
+      periodicBSR-Timer : sf5                                             <b class="conum">(51)</b>
+      retxBSR-Timer : sf320                                               <b class="conum">(52)</b>
+      ttiBundling : False                                                 <b class="conum">(53)</b>
       drx-Config
-        DRX-Config : release
-      timeAlignmentTimerDedicated : infinity
-      phr-Config : setup
-      periodicPHR-Timer : sf200
-      prohibitPHR-Timer : sf100
-      dl-PathlossChange : dB3
-    physicalConfigDedicated
-      pdsch-ConfigDedicated
-        p-a : dB0
-      pucch-ConfigDedicated
-        ackNackRepetition : release
-        tdd-AckNackFeedbackMode : bundling
-      pusch-ConfigDedicated
-        betaOffset-ACK-Index : 9
-        betaOffset-RI-Index : 5
-        betaOffset-CQI-Index : 15
-      uplinkPowerControlDedicated
-        p0-UE-PUSCH : 0
-        deltaMCS-Enabled : en0
-        accumulationEnabled : True
-        p0-UE-PUCCH : 0
-        pSRS-Offset : 3
-        extensionBit0 : 0
-        filterCoefficient : fc0
-      tpc-PDCCH-ConfigPUCCH
-        TPC-PDCCH-Config : setup
-        tpc-RNTI : 0000000101101000
-          [0 ] : 0
-          [1 ] : 0
-          [2 ] : 0
-          [3 ] : 0
-          [4 ] : 0
-          [5 ] : 0
-          [6 ] : 0
-          [7 ] : 1
-          [8 ] : 0
-          [9 ] : 1
-          [10] : 1
-          [11] : 0
-          [12] : 1
-          [13] : 0
-          [14] : 0
-          [15] : 0
-        tpc-Index
-          TPC-Index : indexOfFormat3
-          indexOfFormat3 : 1
-      cqi-ReportConfig
-        nomPDSCH-RS-EPRE-Offset : 0
-        cqi-ReportPeriodic
-          CQI-ReportPeriodic : setup
-          cqi-PUCCH-ResourceIndex : 23
-          cqi-pmi-ConfigIndex : 38
-          cqi-FormatIndicatorPeriodic : widebandCQI
-          ri-ConfigIndex : 654
-          simultaneousAckNackAndCQI : True
-      antennaInfo : explicitValue
+        DRX-Config : release                                              <b class="conum">(54)</b>
+      timeAlignmentTimerDedicated : infinity                              <b class="conum">(55)</b>
+      phr-Config : setup                                                  <b class="conum">(56)</b>
+      periodicPHR-Timer : sf200                                           <b class="conum">(57)</b>
+      prohibitPHR-Timer : sf100                                           <b class="conum">(58)</b>
+      dl-PathlossChange : dB3                                             <b class="conum">(59)</b>
+    physicalConfigDedicated                                               <b class="conum">(60)</b>
+      pdsch-ConfigDedicated                                               <b class="conum">(61)</b>
+        p-a : dB0                                                         <b class="conum">(62)</b>
+      pucch-ConfigDedicated                                               <b class="conum">(63)</b>
+        ackNackRepetition : release                                       <b class="conum">(64)</b>
+        tdd-AckNackFeedbackMode : bundling                                <b class="conum">(65)</b>
+      pusch-ConfigDedicated                                               <b class="conum">(66)</b>
+        betaOffset-ACK-Index : 9                                          <b class="conum">(67)</b>
+        betaOffset-RI-Index : 5                                           <b class="conum">(68)</b>
+        betaOffset-CQI-Index : 15                                         <b class="conum">(69)</b>
+      uplinkPowerControlDedicated                                         <b class="conum">(70)</b>
+        p0-UE-PUSCH : 0                                                   <b class="conum">(71)</b>
+        deltaMCS-Enabled : en0                                            <b class="conum">(72)</b>
+        accumulationEnabled : True                                        <b class="conum">(73)</b>
+        p0-UE-PUCCH : 0                                                   <b class="conum">(74)</b>
+        pSRS-Offset : 3                                                   <b class="conum">(75)</b>
+        extensionBit0 : 0                                                 <b class="conum">(76)</b>
+        filterCoefficient : fc0                                           <b class="conum">(77)</b>
+      tpc-PDCCH-ConfigPUCCH                                               <b class="conum">(78)</b>
+        TPC-PDCCH-Config : setup                                          <b class="conum">(79)</b>
+        tpc-RNTI : 0000000101101000                                       <b class="conum">(80)</b>
+        tpc-Index                                                         <b class="conum">(81)</b>
+          TPC-Index : indexOfFormat3                                      <b class="conum">(82)</b>
+          indexOfFormat3 : 1                                              <b class="conum">(83)</b>
+      cqi-ReportConfig                                                    <b class="conum">(84)</b>
+        nomPDSCH-RS-EPRE-Offset : 0                                       <b class="conum">(85)</b>
+        cqi-ReportPeriodic                                                <b class="conum">(86)</b>
+          CQI-ReportPeriodic : setup                                      <b class="conum">(87)</b>
+          cqi-PUCCH-ResourceIndex : 23                                    <b class="conum">(88)</b>
+          cqi-pmi-ConfigIndex : 38                                        <b class="conum">(89)</b>
+          cqi-FormatIndicatorPeriodic : widebandCQI                       <b class="conum">(90)</b>
+          ri-ConfigIndex : 654                                            <b class="conum">(91)</b>
+          simultaneousAckNackAndCQI : True                                <b class="conum">(92)</b>
+      antennaInfo : explicitValue                                         <b class="conum">(93)</b>
       explicitValue
-        transmissionMode : tm3
-        codebookSubsetRestriction : n2TxAntenna-tm3
-        n2TxAntenna-tm3 : 11
-          [0 ] : 1
-          [1 ] : 1
-        ue-TransmitAntennaSelection : release
-      schedulingRequestConfig
-        SchedulingRequestConfig : setup
-        sr-PUCCH-ResourceIndex : 0
-        sr-ConfigIndex : 72
-        dsr-TransMax : n64
-
+        transmissionMode : tm3                                            <b class="conum">(94)</b>
+        codebookSubsetRestriction : n2TxAntenna-tm3                       <b class="conum">(95)</b>
+        n2TxAntenna-tm3 : 11                                              <b class="conum">(96)</b>
+        ue-TransmitAntennaSelection : release                             <b class="conum">(97)</b>
+      schedulingRequestConfig                                             <b class="conum">(98)</b>
+        SchedulingRequestConfig : setup                                   <b class="conum">(99)</b>
+        sr-PUCCH-ResourceIndex : 0                                        <b class="conum">(100)</b>
+        sr-ConfigIndex : 72                                               <b class="conum">(101)</b>
+        dsr-TransMax : n64                                                <b class="conum">(102)</b>
 
 Message dump (Hex):
-    22 16 15 A0 00 00 4C 77 50 30
-    00 34 08 9C D8 40 99 84 4E 6C
-    40 30 04 6E 6C 60 60 84 6E 6C
-    60 00 02 00 88 02 18 06 84 C0
-    01 C8 9F 6B 17 35 80 08 1D 08
-    09 24 19 00 03 C4 40 C4 C8 01
-    25 48 0B 04 14 1F FF FF FF FC
-    18 15 8D B5 B9 95 D0 14 05 18
-    00 00 05 78 13 FA DD 38 01 60
-    C8 9C A6 02 00 84 40 08 00 00
-    42 04 18 20 20 20 22 0C 18 10
-    08 08 07 08 8C 10 0C 00 00 10
-    00 34 10 20 20 20 20 00 34 10
-    10 08 08 05 40 2F D8 03 C4 40
-    00 08 04 04 00 00 C9 4C 48 5C
-    B1 65 25 90 04 0D A9 C0 2A 9A
-    01 99 3B 01 F5 13 78 1F 50 04
-    C0 D8 5E 7D 00 1F 22 FA E4 95
-    FC 30 60 80 B4 01 38 17 09 94
-    75 43 40 02 44</pre>
+    75 43 40 02 44 ...</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2805,25 +2767,311 @@ Message dump (Hex):
 <p>PollByte为AMD PDU侦测字节数. 此处配置为kB.</p>
 </li>
 <li>
-<p>UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE, 表示RLC ARQ最大重传次数, 用于限制AM PDU的重传次数. 达到最大重传次数时会触发RRC连接重建.
-&lt;17&gt;
-&lt;18&gt;
-&lt;19&gt;
-&lt;20&gt;
-&lt;21&gt;
-&lt;22&gt;
-&lt;23&gt;
-&lt;24&gt;
-&lt;25&gt;
-&lt;26&gt;
-&lt;27&gt;
-&lt;28&gt;
-&lt;29&gt;
-== 网络层信令解析</p>
+<p>UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE, 表示RLC ARQ最大重传次数, 用于限制AM PDU的重传次数. 达到最大重传次数时会触发RRC连接重建.</p>
+</li>
+<li>
+<p>下行确认RLC模式</p>
+</li>
+<li>
+<p>UE AM模式接收端重排序定时器. 该参数用于配置UE, 表示AM模式接收端重排序定时器的大小.</p>
+</li>
+<li>
+<p>UE禁止发送状态报告定时器. 该参数用于配置UE, 表示AM模式接收端禁止发送状态报告的定时器大小. 即在本时长内不允许上报状态报告.</p>
+</li>
+<li>
+<p>SRB2的逻辑信道配置</p>
+</li>
+<li>
+<p>SRB2优先级</p>
+</li>
+<li>
+<p>SRB2逻辑信道优先速率</p>
+</li>
+<li>
+<p>SRB2 bucket size调整持续时间 //?</p>
+</li>
+<li>
+<p>SRB2逻辑信道组</p>
+</li>
+<li>
+<p>DRB增加模式列表</p>
+</li>
+<li>
+<p>添加第一个DRB列表</p>
+</li>
+<li>
+<p>由MME分配, 端到端的承载, EPS承载ID为5</p>
+</li>
+<li>
+<p>DRB的ID, 由eNB分配, 无线侧数据承载</p>
+</li>
+<li>
+<p>DRB的PDCP层配置</p>
+</li>
+<li>
+<p>PDCP层丢弃定时器,根据QCI的不同设置值不同, 比如QCI6/8/9是无限长, QCI2/7是150ms. 此处为无限大</p>
+</li>
+<li>
+<p>AM模式切换时PDCP状态报告反馈指示. 如果配置为False, 目标eNodeB将传输所有源eNodeB转发的数据, 其中某些数据UE可能已收到, 造成空口资源的浪费. 如果为TRUE需要发一个状态报告.</p>
+</li>
+<li>
+<p>头压缩, 一般只在VoIP, 视频类的业务中才会根据eNB侧的配置决定是否启用. 该值默认关闭.</p>
+</li>
+<li>
+<p>RLC配置</p>
+</li>
+<li>
+<p>AM确认模式</p>
+</li>
+<li>
+<p>上行RLC确认模式, 针对UE侧的配置</p>
+</li>
+<li>
+<p>UE Polling PDU重传定时器大小. 该定时器设置过小会触发过多的Polling PDU, 且连续多次触发PDU重传使ARQ重传达到最大次数, 从而导致RRC重建; 设置过大会导致状态报告不能及时的反馈. 40ms(QCI4/5/6/8/9)</p>
+</li>
+<li>
+<p>UE 触发Polling的PDU字节数据量门限. 表示触发Polling的PDU数据量门限. 当PDU发送数据量达到该值时, 将在PDU头部设置Poll标志位. (满足个数或字节数其中一个条件就会启动POLL机制). 该参数是发送端为了防止等待确认队列太长导致缓冲区溢出, 根据发送PDU的数据量主动触发状态报告. 取值过小可能增加Polling PDU的触发次数; 取值过大则缓冲占用越大, 且会减慢发送窗的移动.</p>
+</li>
+<li>
+<p>PollByte为AMD PDU侦测字节数.</p>
+</li>
+<li>
+<p>UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE, 表示RLC ARQ最大重传次数, 用于限制AM PDU的重传次数. 达到最大重传次数时会触发RRC连接重建. 32(QCI4/5/6/8/9)</p>
+</li>
+<li>
+<p>为针对UE侧的下行RLC配置, 主要配置RLC数据接收状态上报规则.</p>
+</li>
+<li>
+<p>UE AM模式接收端重排序定时器.
+如果该定时器配置较小, 则导致发送端无效的HARQ重传及接收端触发重复的状态报告, 浪费资源; 如果配置过大, 则导致接收端判断乱序包传输失败延时较大, 不能及时的触发状态报告, 从而造成业务延时和吞吐量下降. 默认50ms</p>
+</li>
+<li>
+<p>UE禁止发送状态报告定时器. 即在本时长内不允许上报状态报告. 该定时器影响AM模式下状态报告的发送. 如果状态报告发送不频繁, 可以减少状态报告的频繁调度, 但容易导致发送端发送窗口为0, 降低发送速率; 如发送频繁, 则可以保证发送端发送窗口数据及时得到确认, 保证发送速率, 但容易导致数据状态报告的频繁调度和重复发送, 浪费资源. 默认值50ms</p>
+</li>
+<li>
+<p>对应逻辑信道ID</p>
+</li>
+<li>
+<p>DRB逻辑信道配置</p>
+</li>
+<li>
+<p>逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9~16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12</p>
+</li>
+<li>
+<p>逻辑信道优先速率. UE调度器按逻辑信道优先级由高到低保证逻辑信道的优先速率, 仅在QCI为2, 3, 4, 6, 7, 8, 9时有效. PBR_8_KBps(8千字节/秒)</p>
+</li>
+<li>
+<p>bucket size调整持续时间</p>
+</li>
+<li>
+<p>逻辑信道组. CCCH, SRB1, SRB2默认属于LCG 0; RRC消息在SRB上传输且SRB默认属于LCG 0, 比LCG 2的优先级要高.</p>
+</li>
+<li>
+<p>MAC层配置</p>
+</li>
+<li>
+<p>maxHARQ-Tx : n5</p>
+</li>
+<li>
+<p>periodicBSR-Timer</p>
+</li>
+<li>
+<p>retxBSR-Timer</p>
+</li>
+<li>
+<p>ttiBundling</p>
+</li>
+<li>
+<p>DRX-Config</p>
+</li>
+<li>
+<p>timeAlignmentTimerDedicated</p>
+</li>
+<li>
+<p>phr-Config</p>
+</li>
+<li>
+<p>periodicPHR-Timer</p>
+</li>
+<li>
+<p>prohibitPHR-Timer</p>
+</li>
+<li>
+<p>dl-PathlossChange</p>
+</li>
+<li>
+<p>物理信道配置专用, 此过程与RRC建立消息里相似, 以下字段大家可以参看前面的消息, 此不复述.</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>CQI-PUCCH资源索引</p>
+</li>
+<li>
+<p>CQI-PMI配置索引, 确定上报周期NP和偏移量NOFFSET.</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>确认非确认及CQI是否同时, PUCCH CQI 反馈类型, 取决于传输模式. FALSE为不同时.</p>
+</li>
+<li>
+<p>天线信息</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>终端UE传输天线选择, Setup或release. Setup表示开环或者闭环.</p>
+</li>
+<li>
+<p>调度请求配置</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>sr-PUCCH资源索引</p>
+</li>
+<li>
+<p>SR配置索引参数Isr</p>
+</li>
+<li>
+<p>SR传输最大次数, 当超过最大次数时, 通知RRC释放PUCCH/SRS, 发起一次随机接入过程. 本消息表明最大次数为64次.</p>
 </li>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="msg_rrc_conn_reconfig_compl">RRC Connection Reconfiguration Complete</h3>
+<div class="listingblock">
+<div class="title">RRC Connection Reconfiguration Complete</div>
+<div class="content">
+<pre>MS1
+RRC Connection Reconfiguration Complete (UL-DCCH)
+
+Time : 18:03:09.170
+Vendor Header
+  Length : 27
+  Log Code (Hex) : 0xB0C0
+  HW Timestamp : (71203491.25 ms) 19:46:43.491
+    1.25 ms fraction : 0.00
+    CFN : 0
+    1.25 ms counter : 868618882793
+  RRC Signaling Header
+    Log Packet Version : 2
+    RRC Release Number : 9.10.0
+    Radio Bearer Id : 1
+    Physical Cell Id : 2
+    E-ARFCN : 39150
+    System Frame Number
+      System frame number : N/A
+      Sub frame number : N/A
+    Message Type : DcchUplink
+    Message Length : 2
+rrc-TransactionIdentifier : 1
+criticalExtensions : rrcConnectionReconfigurationComplete-r8
+rrcConnectionReconfigurationComplete-r8
+
+Message dump (Hex):
+    12 00</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_网络层信令解析">网络层信令解析</h2>
+<div class="sectionbody">
 <div class="sect2">
 <h3 id="msg_initial_ue_message">Initial UE Message</h3>
 <div class="paragraph">
@@ -3245,9 +3493,6 @@ Message dump (Hex):
 <li>
 <p>RF参数</p>
 </li>
-<li>
-<p>later</p>
-</li>
 </ol>
 </div>
 </div>
@@ -3259,24 +3504,24 @@ Message dump (Hex):
 <pre>S1 Application Protocol
   S1AP-PDU: successfulOutcome (1)
     successfulOutcome
-      procedureCode: id-InitialContextSetup (9)
+      procedureCode: id-InitialContextSetup (9)                           <b class="conum">(1)</b>
       criticality: reject (0)
       value
         InitialContextSetupResponse
           protocolIEs: 3 items
-            Item 0: id-MME-UE-S1AP-ID
+            Item 0: id-MME-UE-S1AP-ID                                     <b class="conum">(2)</b>
               ProtocolIE-Field
                 id: id-MME-UE-S1AP-ID (0)
                 criticality: ignore (1)
                 value
                   MME-UE-S1AP-ID: 33554442
-            Item 1: id-eNB-UE-S1AP-ID
+            Item 1: id-eNB-UE-S1AP-ID                                     <b class="conum">(3)</b>
               ProtocolIE-Field
                 id: id-eNB-UE-S1AP-ID (8)
                 criticality: ignore (1)
                 value
                   ENB-UE-S1AP-ID: 1
-            Item 2: id-E-RABSetupListCtxtSURes
+            Item 2: id-E-RABSetupListCtxtSURes                            <b class="conum">(4)</b>
               ProtocolIE-Field
                 id: id-E-RABSetupListCtxtSURes (51)
                 criticality: ignore (1)
@@ -3288,13 +3533,21 @@ Message dump (Hex):
                         criticality: ignore (1)
                         value
                           E-RABSetupItemCtxtSURes
-                            e-RAB-ID: 5
+                            e-RAB-ID: 5                                  <b class="conum">(5)</b>
                             .... ...0 Extension Present Bit: False
-                            transportLayerAddress: 0a58788c [bit length 32, 0000 1010  0101 1000  0111 1000  1000 1100 decimal value 173570188]
-                              transportLayerAddress(IPv4): 10.88.120.140 (10.88.120.140)
-                            gTP-TEID: 0200000a
+                            transportLayerAddress: 0a58788c              <b class="conum">(6)</b>
+                              transportLayerAddress(IPv4): 10.88.120.140
+                            gTP-TEID: 0200000a                           <b class="conum">(7)</b>
 
-----</pre>
+----
+
+&lt;1&gt; 初始文本建立响应
+&lt;2&gt; MME侧用户标识33554442
+&lt;3&gt; ENB侧用户标识1
+&lt;4&gt; E-RABSetupListCtxt
+&lt;5&gt; e-RAB-ID 5
+&lt;6&gt; transportLayerAddress
+&lt;7&gt; 此处的GTP-TEID为下行GTP-TEID</pre>
 </div>
 </div>
 </div>

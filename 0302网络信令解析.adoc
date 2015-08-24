@@ -313,7 +313,6 @@ S1 Application Protocol
 <12> later
 <13> later
 <14> RF参数
-<15> later
 
 
 [[msg_inital_context_setup_rsp]]
@@ -324,24 +323,24 @@ S1 Application Protocol
 S1 Application Protocol
   S1AP-PDU: successfulOutcome (1)
     successfulOutcome
-      procedureCode: id-InitialContextSetup (9)
+      procedureCode: id-InitialContextSetup (9)                           <1>
       criticality: reject (0)
       value
         InitialContextSetupResponse
           protocolIEs: 3 items
-            Item 0: id-MME-UE-S1AP-ID
+            Item 0: id-MME-UE-S1AP-ID                                     <2>
               ProtocolIE-Field
                 id: id-MME-UE-S1AP-ID (0)
                 criticality: ignore (1)
                 value
                   MME-UE-S1AP-ID: 33554442
-            Item 1: id-eNB-UE-S1AP-ID
+            Item 1: id-eNB-UE-S1AP-ID                                     <3>
               ProtocolIE-Field
                 id: id-eNB-UE-S1AP-ID (8)
                 criticality: ignore (1)
                 value
                   ENB-UE-S1AP-ID: 1
-            Item 2: id-E-RABSetupListCtxtSURes
+            Item 2: id-E-RABSetupListCtxtSURes                            <4>
               ProtocolIE-Field
                 id: id-E-RABSetupListCtxtSURes (51)
                 criticality: ignore (1)
@@ -353,12 +352,20 @@ S1 Application Protocol
                         criticality: ignore (1)
                         value
                           E-RABSetupItemCtxtSURes
-                            e-RAB-ID: 5
+                            e-RAB-ID: 5                                  <5>
                             .... ...0 Extension Present Bit: False
-                            transportLayerAddress: 0a58788c [bit length 32, 0000 1010  0101 1000  0111 1000  1000 1100 decimal value 173570188]
-                              transportLayerAddress(IPv4): 10.88.120.140 (10.88.120.140)
-                            gTP-TEID: 0200000a
+                            transportLayerAddress: 0a58788c              <6>
+                              transportLayerAddress(IPv4): 10.88.120.140 
+                            gTP-TEID: 0200000a                           <7>
 
 ----
+
+<1> 初始文本建立响应
+<2> MME侧用户标识33554442
+<3> ENB侧用户标识1
+<4> E-RABSetupListCtxt 
+<5> e-RAB-ID 5
+<6> transportLayerAddress
+<7> 此处的GTP-TEID为下行GTP-TEID
 
 
