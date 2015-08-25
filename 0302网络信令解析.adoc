@@ -358,7 +358,7 @@ S1 Application Protocol
                               transportLayerAddress(IPv4): 10.88.120.140 
                             gTP-TEID: 0200000a                           <7>
 
-----
+------
 
 <1> 初始文本建立响应
 <2> MME侧用户标识33554442
@@ -369,3 +369,6 @@ S1 Application Protocol
 <7> 此处的GTP-TEID为下行GTP-TEID
 
 
+
+<<<
+// vim: set syntax=asciidoc:

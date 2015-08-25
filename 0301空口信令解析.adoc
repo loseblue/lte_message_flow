@@ -649,7 +649,7 @@ Message dump (Hex):
 [[msg_security_mode_complete]]
 === Security Mode Complete
 
-. Security Mode Complete
+.Security Mode Complete
 ------
 MS1
 Security Mode Complete
@@ -1057,3 +1057,9 @@ Message dump (Hex):
     12 00 
 
 ------
+
+
+
+<<<
+
+// vim: set syntax=asciidoc:

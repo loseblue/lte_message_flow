@@ -1,4 +1,4 @@
-﻿== 系统信息
+﻿== 系统信息解析
 
 === 概述
 LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广播消息发生改变时, 都会接收系统信息(MIB\SIB), 以帮助更新或纠正UE当前的状态, 完成相应的通信业务和物理过程. 在系统路测中可以观察的系统信息有种: MIB, SIB1和SI, 其作用分别如下. 
@@ -20,8 +20,6 @@ LTE系统内分为MIB和SIB系列消息, 对于UE当新接入一个小区或广�
 
 image::images/SI_Scheduling.jpg[title="系统信息时序图",align="center"]
 
-
-== 系统信息(System Information)解析
 === MIB (Master Information Block)解析
 MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测信令)
 
@@ -481,6 +479,6 @@ interFreqCarrierFreqList                                        <2>
 
 === SIB9 (System Information Block 9) 解析
 
-
+<<<
 
 // vim: set syntax=asciidoc:

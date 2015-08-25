@@ -73,3 +73,7 @@
       注: 更多内容, 请参见我的博客: http://blog.sina.com.cn/ilte. 如需转载, 请标明出处. 
 
 作者: 温金辉
+
+<<<
+
+// vim: set syntax=asciidoc:
