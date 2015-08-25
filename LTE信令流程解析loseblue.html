@@ -1550,6 +1550,37 @@ interFreqCarrierFreqList                                        <b class="conum"
 </div>
 <div class="sect2">
 <h3 id="_随机接入">随机接入</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_测量报告">测量报告</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-8ff408cacbcd077d705729a93ffcc8f8.png" alt="diag 8ff408cacbcd077d705729a93ffcc8f8" width="361" height="289">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>测量报告</p>
+</li>
+<li>
+<p>RRC重配置，设置测量报告。<a href="#msg_rrc_conn_reconfig_for_meas_add">[RRC Connection Reconfiguration]</a></p>
+</li>
+<li>
+<p>RRC重配置完成。</p>
+</li>
+<li>
+<p>测量报告 <a href="#msg_meas_report">[Measurement Report]</a></p>
+</li>
+<li>
+<p>RRC测量配置，设置测量报告。<a href="#msg_rrc_conn_reconfig_for_meas_remove">[RRC Connection Reconfiguration]</a></p>
+</li>
+<li>
+<p>RRC重配置完成。</p>
+</li>
+</ol>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1654,13 +1685,13 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchUplink
     Message Length : 6
-criticalExtensions : rrcConnectionRequest-r8                    <b class="conum">(1)</b>
-rrcConnectionRequest-r8                                         <b class="conum">(2)</b>
-  ue-Identity                                                   <b class="conum">(3)</b>
+criticalExtensions : rrcConnectionRequest-r8
+rrcConnectionRequest-r8                                         <b class="conum">(1)</b>
+  ue-Identity                                                   <b class="conum">(2)</b>
     Initial UE Identity : Random Value
     Random Value : 197823733579
-  establishmentCause : mo-Signalling                            <b class="conum">(4)</b>
-  spare : 0                                                     <b class="conum">(5)</b>
+  establishmentCause : mo-Signalling                            <b class="conum">(3)</b>
+  spare : 0                                                     <b class="conum">(4)</b>
     [0 ] : 0
 
 
@@ -1670,9 +1701,6 @@ Message dump (Hex):
 </div>
 <div class="colist arabic">
 <ol>
-<li>
-<p>关键字扩展</p>
-</li>
 <li>
 <p>RRC连接请求, R8版本</p>
 </li>
@@ -1699,25 +1727,6 @@ Message dump (Hex):
 <pre>MS1
 RRC Connection Setup (DL-CCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 49
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192916.25 ms) 19:46:32.916
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874333
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 0
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : CcchDownlink
-    Message Length : 24
 rrc-TransactionIdentifier : 1                                   <b class="conum">(1)</b>
 criticalExtensions : c1                                         <b class="conum">(2)</b>
 c1 : rrcConnectionSetup-r8                                      <b class="conum">(3)</b>
@@ -1785,12 +1794,7 @@ rrcConnectionSetup-r8
         SchedulingRequestConfig : setup                         <b class="conum">(57)</b>
         sr-PUCCH-ResourceIndex : 0                              <b class="conum">(58)</b>
         sr-ConfigIndex : 72                                     <b class="conum">(59)</b>
-        dsr-TransMax : n64                                      <b class="conum">(60)</b>
-
-Message dump (Hex):
-    68 12 98 0F A9 A0 19 83 B0 FA
-    73 3E 45 E5 C9 2B F8 60 C0 10
-    A0 01 22 00</pre>
+        dsr-TransMax : n64                                      <b class="conum">(60)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1988,65 +1992,16 @@ Message dump (Hex):
 <pre>MS1
 RRC Connection Setup Complete (UL-DCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 101
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192920.00 ms) 19:46:32.920
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874336
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 1
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : DcchUplink
-    Message Length : 76
-rrc-TransactionIdentifier : 1
-criticalExtensions : c1
-c1 : rrcConnectionSetupComplete-r8
 rrcConnectionSetupComplete-r8                                   <b class="conum">(1)</b>
   selectedPLMN-Identity : 1                                     <b class="conum">(2)</b>
   registeredMME                                                 <b class="conum">(3)</b>
     mmegi : 0000000000000010
-      [0 ] : 0
-      [1 ] : 0
-      [2 ] : 0
-      [3 ] : 0
-      [4 ] : 0
-      [5 ] : 0
-      [6 ] : 0
-      [7 ] : 0
-      [8 ] : 0
-      [9 ] : 0
-      [10] : 0
-      [11] : 0
-      [12] : 0
-      [13] : 0
-      [14] : 1
-      [15] : 0
     mmec
       MMEC : (0x1) : 1
   dedicatedInfoNAS                                              <b class="conum">(4)</b>
     Protocol Discriminator : 7 (EMM)
     Message Type : Attach Request
-    Message Contents : 17 71 ...
-
-
-Message dump (Hex):
-    22 20 00 02 01 46 17 71 87 86
-    9D 04 07 41 02 0B F6 00 F1 10
-    00 02 01 01 00 00 33 05 E0 F0
-    00 00 01 00 05 02 02 D0 31 D1
-    52 00 F1 10 31 32 5C 0A 00 13
-    FF FF FF FF FE 90 11 03 4F 18
-    A6 40 08 04 02 60 04 00 02 1F
-    02 F1 5D 01 02 E0</pre>
+    Message Contents : 17 71 ...</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2844,7 +2799,7 @@ Message dump (Hex):
 <p>DRB逻辑信道配置</p>
 </li>
 <li>
-<p>逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9~16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12</p>
+<p>逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9 ~ 16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12</p>
 </li>
 <li>
 <p>逻辑信道优先速率. UE调度器按逻辑信道优先级由高到低保证逻辑信道的优先速率, 仅在QCI为2, 3, 4, 6, 7, 8, 9时有效. PBR_8_KBps(8千字节/秒)</p>
@@ -3049,11 +3004,148 @@ Vendor Header
     Message Length : 2
 rrc-TransactionIdentifier : 1
 criticalExtensions : rrcConnectionReconfigurationComplete-r8
-rrcConnectionReconfigurationComplete-r8
-
-Message dump (Hex):
-    12 00</pre>
+rrcConnectionReconfigurationComplete-r8</pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_rrc_conn_reconfig_for_meas_add">RRC Connection Reconfiguration for add Measurement</h3>
+<div class="listingblock">
+<div class="title">RRC Connection Reconfiguration</div>
+<div class="content">
+<pre>MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig                                                              <b class="conum">(1)</b>
+    reportConfigToAddModList                                              <b class="conum">(2)</b>
+      ReportConfigToAddModList :
+        [0 ] :
+          reportConfigId : 7                                              <b class="conum">(3)</b>
+          reportConfig : reportConfigEUTRA                                <b class="conum">(4)</b>
+          reportConfigEUTRA
+            triggerType : periodical                                      <b class="conum">(5)</b>
+            purpose : reportStrongestCells                                <b class="conum">(6)</b>
+            triggerQuantity : rsrp                                        <b class="conum">(7)</b>
+            reportQuantity : both                                         <b class="conum">(8)</b>
+            maxReportCells : 8                                            <b class="conum">(9)</b>
+            reportInterval : ms240                                        <b class="conum">(10)</b>
+            reportAmount : infinity                                       <b class="conum">(11)</b>
+    measIdToAddModList
+      MeasIdToAddModList :                                                <b class="conum">(12)</b>
+        [0 ] :
+          measId : 7                                                      <b class="conum">(13)</b>
+          measObjectId : 1                                                <b class="conum">(14)</b>
+          reportConfigId : 7                                              <b class="conum">(15)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>测量配置相关模块</p>
+</li>
+<li>
+<p>添加测量报告</p>
+</li>
+<li>
+<p>测量报告配置ID号</p>
+</li>
+<li>
+<p>表示E-UTRA, UTRA, GERAN, 或 CDMA2000 测量的测量上报配置</p>
+</li>
+<li>
+<p>触发类型, 周期测量或事件触发测量</p>
+</li>
+<li>
+<p>目的, 报告信号最强小区</p>
+</li>
+<li>
+<p>triggerQuantity</p>
+</li>
+<li>
+<p>reportQuantity</p>
+</li>
+<li>
+<p>maxReportCells</p>
+</li>
+<li>
+<p>测量报告周期240ms</p>
+</li>
+<li>
+<p>测量报告数量</p>
+</li>
+<li>
+<p>包含要添加或修改的测量标识列表</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_meas_report">Measurement Report</h3>
+<div class="listingblock">
+<div class="title">Measurement Report</div>
+<div class="content">
+<pre>MS1
+Measurement Report (UL-DCCH)
+
+measurementReport-r8
+  measResults
+    measId : 7                                                            <b class="conum">(1)</b>
+    rsrpResult : 66                                                       <b class="conum">(2)</b>
+    rsrqResult : 28                                                       <b class="conum">(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>测量报告IE</p>
+</li>
+<li>
+<p>RSRP值</p>
+</li>
+<li>
+<p>RSRQ值</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rrc_connection_reconfiguration_for_remove_measurement">RRC Connection Reconfiguration for remove Measurement</h3>
+<div class="listingblock">
+<div class="title">RRC Connection Reconfiguration for remove Measurement</div>
+<div class="content">
+<pre>MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig
+    measIdToRemoveList                                                    <b class="conum">(1)</b>
+      MeasIdToRemoveList :
+        [0 ] : 6                                                          <b class="conum">(2)</b>
+        [1 ] : 7                                                          <b class="conum">(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>要删除的measID列表</p>
+</li>
+<li>
+<p>删除测量报告ID6</p>
+</li>
+<li>
+<p>删除测量报告ID7</p>
+</li>
+</ol>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -3563,7 +3655,7 @@ Message dump (Hex):
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2015-08-19 16:54:57 CST
+Last updated 2015-08-25 11:00:17 CST
 </div>
 </div>
 </body>

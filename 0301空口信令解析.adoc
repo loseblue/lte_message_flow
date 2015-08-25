@@ -91,13 +91,13 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchUplink
     Message Length : 6
-criticalExtensions : rrcConnectionRequest-r8                    <1>
-rrcConnectionRequest-r8                                         <2>
-  ue-Identity                                                   <3>
+criticalExtensions : rrcConnectionRequest-r8 
+rrcConnectionRequest-r8                                         <1>
+  ue-Identity                                                   <2>
     Initial UE Identity : Random Value                
     Random Value : 197823733579                      
-  establishmentCause : mo-Signalling                            <4>
-  spare : 0                                                     <5>
+  establishmentCause : mo-Signalling                            <3>
+  spare : 0                                                     <4>
     [0 ] : 0
 
 
@@ -105,11 +105,10 @@ Message dump (Hex):
     52 E0 F3 69 F4 B6 
 ----
 
-<1> 关键字扩展
-<2> RRC连接请求, R8版本
-<3> UE ID, 包含randomValue和S-TMSI两种. UE接入时, 如果已经获取过TMSI, 并判断驻留cell的TA在UE的TAI list里, 即MME中保存了UE的上下文信息, 会使用TMSI作为UE ID; 其他情况使用随机数randomValue. 
-<4> 接入原因 //参考mt-Access(2)
-<5> 预留值为以后的网络扩展做准备
+<1> RRC连接请求, R8版本
+<2> UE ID, 包含randomValue和S-TMSI两种. UE接入时, 如果已经获取过TMSI, 并判断驻留cell的TA在UE的TAI list里, 即MME中保存了UE的上下文信息, 会使用TMSI作为UE ID; 其他情况使用随机数randomValue. 
+<3> 接入原因 //参考mt-Access(2)
+<4> 预留值为以后的网络扩展做准备
 
 [[msg_rrc_connection_setup]]
 === RRC Connection Setup
@@ -120,25 +119,6 @@ RRC连接建立消息包含建立SRB1承载和无线资源配置信息, 主要�
 MS1
 RRC Connection Setup (DL-CCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 49
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192916.25 ms) 19:46:32.916
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874333
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 0
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : CcchDownlink
-    Message Length : 24
 rrc-TransactionIdentifier : 1                                   <1>
 criticalExtensions : c1                                         <2>
 c1 : rrcConnectionSetup-r8                                      <3>
@@ -207,13 +187,7 @@ rrcConnectionSetup-r8
         sr-PUCCH-ResourceIndex : 0                              <58>
         sr-ConfigIndex : 72                                     <59>
         dsr-TransMax : n64                                      <60>
-
-Message dump (Hex):                              
-    68 12 98 0F A9 A0 19 83 B0 FA                
-    73 3E 45 E5 C9 2B F8 60 C0 10                
-    A0 01 22 00                                  
 ----                                             
-
 
 <1> RRC消息ID
 <2> 关键扩展c1 //c1是什么意思? 
@@ -281,75 +255,26 @@ Message dump (Hex):
 [[msg_rrc_connection_setup_complete]]
 === RRC Connection Setup Complete
 .RRC Connection Setup Complete
-----
+------
 MS1
 RRC Connection Setup Complete (UL-DCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 101
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192920.00 ms) 19:46:32.920
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874336
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 1
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : DcchUplink
-    Message Length : 76
-rrc-TransactionIdentifier : 1
-criticalExtensions : c1
-c1 : rrcConnectionSetupComplete-r8
 rrcConnectionSetupComplete-r8                                   <1>
   selectedPLMN-Identity : 1                                     <2>
   registeredMME                                                 <3>
     mmegi : 0000000000000010
-      [0 ] : 0
-      [1 ] : 0
-      [2 ] : 0
-      [3 ] : 0
-      [4 ] : 0
-      [5 ] : 0
-      [6 ] : 0
-      [7 ] : 0
-      [8 ] : 0
-      [9 ] : 0
-      [10] : 0
-      [11] : 0
-      [12] : 0
-      [13] : 0
-      [14] : 1
-      [15] : 0
     mmec
       MMEC : (0x1) : 1
   dedicatedInfoNAS                                              <4>
     Protocol Discriminator : 7 (EMM)
     Message Type : Attach Request
     Message Contents : 17 71 ...
-
-
-Message dump (Hex):
-    22 20 00 02 01 46 17 71 87 86
-    9D 04 07 41 02 0B F6 00 F1 10
-    00 02 01 01 00 00 33 05 E0 F0
-    00 00 01 00 05 02 02 D0 31 D1
-    52 00 F1 10 31 32 5C 0A 00 13
-    FF FF FF FF FE 90 11 03 4F 18
-    A6 40 08 04 02 60 04 00 02 1F
-    02 F1 5D 01 02 E0 
-----
-
+------
 <1> RRC连接建立完成消息
 <2> 指示UE选择的PLMN,如果是1, 表示在SIB1消息里面的第一个PLMN, 如果是2, 表示在SIB1消息里面的第二个PLMN. 以此类推
 <3> //?
 <4> 传输UE和网络层的NAS层消息. eNB层透传此消息给MME. 
+
 
 [[msg_ue_capability_enquir]]
 === UE Capability Enquir
@@ -964,7 +889,7 @@ Message dump (Hex):
 <42> UE禁止发送状态报告定时器. 即在本时长内不允许上报状态报告. 该定时器影响AM模式下状态报告的发送. 如果状态报告发送不频繁, 可以减少状态报告的频繁调度, 但容易导致发送端发送窗口为0, 降低发送速率; 如发送频繁, 则可以保证发送端发送窗口数据及时得到确认, 保证发送速率, 但容易导致数据状态报告的频繁调度和重复发送, 浪费资源. 默认值50ms
 <43> 对应逻辑信道ID
 <44> DRB逻辑信道配置
-<45> 逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9~16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12
+<45> 逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9 ~ 16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12
 <46> 逻辑信道优先速率. UE调度器按逻辑信道优先级由高到低保证逻辑信道的优先速率, 仅在QCI为2, 3, 4, 6, 7, 8, 9时有效. PBR_8_KBps(8千字节/秒)
 <47> bucket size调整持续时间
 <48> 逻辑信道组. CCCH, SRB1, SRB2默认属于LCG 0; RRC消息在SRB上传输且SRB默认属于LCG 0, 比LCG 2的优先级要高. 
@@ -1052,12 +977,91 @@ Vendor Header
 rrc-TransactionIdentifier : 1
 criticalExtensions : rrcConnectionReconfigurationComplete-r8
 rrcConnectionReconfigurationComplete-r8
-
-Message dump (Hex):
-    12 00 
-
 ------
 
+[[msg_rrc_conn_reconfig_for_meas_add]]
+=== RRC Connection Reconfiguration for add Measurement 
+.RRC Connection Reconfiguration
+------
+MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig                                                              <1>
+    reportConfigToAddModList                                              <2>
+      ReportConfigToAddModList : 
+        [0 ] : 
+          reportConfigId : 7                                              <3>
+          reportConfig : reportConfigEUTRA                                <4>
+          reportConfigEUTRA
+            triggerType : periodical                                      <5>
+            purpose : reportStrongestCells                                <6>
+            triggerQuantity : rsrp                                        <7>
+            reportQuantity : both                                         <8>
+            maxReportCells : 8                                            <9>
+            reportInterval : ms240                                        <10>
+            reportAmount : infinity                                       <11>
+    measIdToAddModList 
+      MeasIdToAddModList :                                                <12> 
+        [0 ] : 
+          measId : 7                                                      <13>
+          measObjectId : 1                                                <14>
+          reportConfigId : 7                                              <15>
+------
+
+<1> 测量配置相关模块
+<2> 添加测量报告
+<3> 测量报告配置ID号
+<4> 表示E-UTRA, UTRA, GERAN, 或 CDMA2000 测量的测量上报配置
+<5> 触发类型, 周期测量或事件触发测量
+<6> 目的, 报告信号最强小区
+<7> triggerQuantity
+<8> reportQuantity
+<9> maxReportCells
+<10> 测量报告周期240ms
+<11> 测量报告数量
+<12> 包含要添加或修改的测量标识列表
+<13> //later
+<14> //later
+<15> //later
+
+[[msg_meas_report]]
+=== Measurement Report 
+.Measurement Report
+------
+MS1
+Measurement Report (UL-DCCH)
+
+measurementReport-r8
+  measResults
+    measId : 7                                                            <1>                          
+    rsrpResult : 66                                                       <2>
+    rsrqResult : 28                                                       <3>
+------
+
+<1> 测量报告IE
+<2> RSRP值
+<3> RSRQ值
+
+
+[[]]
+=== RRC Connection Reconfiguration for remove Measurement 
+.RRC Connection Reconfiguration for remove Measurement 
+------
+MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig
+    measIdToRemoveList                                                    <1>
+      MeasIdToRemoveList : 
+        [0 ] : 6                                                          <2>
+        [1 ] : 7                                                          <3>
+------
+
+<1> 要删除的measID列表
+<2> 删除测量报告ID6
+<3> 删除测量报告ID7
 
 
 <<<
