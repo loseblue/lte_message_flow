@@ -368,6 +368,192 @@ S1 Application Protocol
 <6> transportLayerAddress
 <7> 此处的GTP-TEID为下行GTP-TEID
 
+[[msg_erab_setup_req]]
+=== E-RAB Setup Request
+
+.E-RAB Setup Request
+------
+S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-E-RABSetup (5)
+   criticality: reject (0)
+   value
+    E-RABSetupRequest
+     protocolIEs: 4 items
+      Item 0: id-MME-UE-S1AP-ID
+       ProtocolIE-Field
+        id: id-MME-UE-S1AP-ID (0)
+        criticality: reject (0)
+        value
+         MME-UE-S1AP-ID: 33554442                                         <1>
+      Item 1: id-eNB-UE-S1AP-ID
+       ProtocolIE-Field
+        id: id-eNB-UE-S1AP-ID (8)
+        criticality: reject (0)
+        value
+         ENB-UE-S1AP-ID: 1                                                <2>
+      Item 2: id-uEaggregateMaximumBitrate                                <3>
+       ProtocolIE-Field
+        id: id-uEaggregateMaximumBitrate (66)
+        criticality: reject (0)
+        value
+         UEAggregateMaximumBitrate
+          uEaggregateMaximumBitRateDL: 40960000                           <4>
+          uEaggregateMaximumBitRateUL: 8192000                            <5>
+      Item 3: id-E-RABToBeSetupListBearerSUReq                            <6>
+       ProtocolIE-Field
+        id: id-E-RABToBeSetupListBearerSUReq (16)
+        criticality: reject (0)
+        value
+         E-RABToBeSetupListBearerSUReq: 1 item
+          Item 0: id-E-RABToBeSetupItemBearerSUReq
+           ProtocolIE-SingleContainer
+            id: id-E-RABToBeSetupItemBearerSUReq (17)
+            criticality: reject (0)
+            value
+             E-RABToBeSetupItemBearerSUReq
+              e-RAB-ID: 6                                                 <7>
+              e-RABlevelQoSParameters
+               qCI: 7
+               allocationRetentionPriority
+                priorityLevel: highest (1)
+                pre-emptionCapability: may-trigger-pre-emption (1)
+                pre-emptionVulnerability: pre-emptable (1)
+               gbrQosInformation
+                e-RAB-MaximumBitrateDL: 0
+                e-RAB-MaximumBitrateUL: 0
+                e-RAB-GuaranteedBitrateDL: 0
+                e-RAB-GuaranteedBitrateUL: 0
+              0... .... Extension Present Bit: False
+              transportLayerAddress: 0a5878cc 
+               transportLayerAddress(IPv4): 10.88.120.204 (10.88.120.204)
+              gTP-TEID: 00000487
+              nAS-PDU: 27cfa1c62e046203c10507ffffffff1905636d6e6574066d...
+              Non-Access-Stratum (NAS)PDU
+               0010 .... = Security header type: Integrity protected and ciphered (2)
+               .... 0111 = Protocol discriminator: EPS mobility management messages (7)
+               Message authentication code: 0xcfa1c62e
+               Sequence number: 4
+               0110 .... = EPS bearer identity: 0x06
+               .... 0010 = Protocol discriminator: EPS session management messages (2)
+               Procedure transaction identity: 3
+               NAS EPS session management messages: Activate default EPS bearer context request (0xc1)
+               EPS quality of service
+                Length: 5
+                Quality of Service Class Identifier (QCI): QCI 7 (7)
+                Maximum bit rate for uplink : 0 kbps
+                Maximum bit rate for downlink : 0 kbps
+                Guaranteed bit rate for uplink : 0 kbps
+                Guaranteed bit rate for downlink : 0 kbps
+               Access Point Name
+                Length: 25
+                APN: cmnet.mnc001.mcc001.gprs 
+               PDN address
+                Length: 5
+                0000 0... = Spare bit(s): 0x00
+                PDN type: IPv4 (1)
+                PDN IPv4: 70.0.0.2 (70.0.0.2)
+               APN aggregate maximum bit rate
+                Element ID: 94
+                Length: 4
+                APN-AMBR for downlink : 8640 kbps
+                APN-AMBR for uplink : 4096 kbps
+                APN-AMBR for downlink (extended) : 20 Mbps
+                Total APN-AMBR for downlink : 20.000 Mbps
+                Use the value indicated by the APN-AMBR for uplink
+                Total APN-AMBR for uplink : 4.096 Mbps
+               Protocol Configuration Options
+                Element ID: 39
+                Length: 41
+                [Link direction: Network to MS (1)]
+                1... .... = Ext: 0x01
+                Configuration Protocol: PPP (0)
+                Protocol or Container ID: IP Control Protocol (32801)
+                Length: 0x10 (16)
+                PPP IP Control Protocol
+                 Code: Configuration Ack (0x02)
+                 Identifier: 0x00
+                 Length: 16
+                 Options: (12 bytes)
+                  Primary DNS server IP address: 8.8.8.8
+                  Secondary DNS server IP address: 4.2.2.1
+                Protocol or Container ID: Challenge Handshake Authentication Protocol (49699)
+                Length: 0x04 (4)
+                PPP Challenge Handshake Authentication Protocol
+                 Code: Success (3)
+                 Identifier: 0
+                 Length: 4
+                Protocol or Container ID: DNS Server IPv4 Address (13)
+                Length: 0x04 (4)
+                Data (4 bytes)
+
+0000  08 08 08 08            ....
+                 Data: 08080808
+                 [Length: 4]
+                Protocol or Container ID: DNS Server IPv4 Address (13)
+                Length: 0x04 (4)
+                Data (4 bytes)
+
+0000  04 02 02 01            ....
+                 Data: 04020201
+                 [Length: 4]
+
+------
+<1> later
+<2>
+<3>
+<4>
+<5>
+<6>
+<7>
+<8>
+<9>
+
+
+[[msg_erab_setup_rsp]]
+=== E-RAB Setup Response
+
+.E-RAB Setup Response
+------
+S1 Application Protocol
+ S1AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-E-RABSetup (5)
+   criticality: reject (0)
+   value
+    E-RABSetupResponse
+     protocolIEs: 3 items
+      Item 0: id-MME-UE-S1AP-ID
+       ProtocolIE-Field
+        id: id-MME-UE-S1AP-ID (0)
+        criticality: ignore (1)
+        value
+         MME-UE-S1AP-ID: 33554442
+      Item 1: id-eNB-UE-S1AP-ID
+       ProtocolIE-Field
+        id: id-eNB-UE-S1AP-ID (8)
+        criticality: ignore (1)
+        value
+         ENB-UE-S1AP-ID: 1
+      Item 2: id-E-RABSetupListBearerSURes
+       ProtocolIE-Field
+        id: id-E-RABSetupListBearerSURes (28)
+        criticality: ignore (1)
+        value
+         E-RABSetupListBearerSURes: 1 item
+          Item 0: id-E-RABSetupItemBearerSURes
+           ProtocolIE-SingleContainer
+            id: id-E-RABSetupItemBearerSURes (39)
+            criticality: ignore (1)
+            value
+             E-RABSetupItemBearerSURes
+              e-RAB-ID: 6
+              .... ...0 Extension Present Bit: False
+              transportLayerAddress: 0a58788c 
+               transportLayerAddress(IPv4): 10.88.120.140 
+              gTP-TEID: 01000009
+------
 
 
 <<<

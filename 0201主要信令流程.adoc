@@ -72,12 +72,29 @@ UE -> eNB: RRC Connection Reconfiguration Complete
 ---------------------------------------------------------------------
 
 1. 测量报告
-2. RRC重配置，设置测量报告。<<msg_rrc_conn_reconfig_for_meas_add, [RRC Connection Reconfiguration]>>
-3. RRC重配置完成。
+2. RRC重配置, 设置添加测量报告. <<msg_rrc_conn_reconfig_for_meas_add, [RRC Connection Reconfiguration]>>
+3. RRC重配置完成.<<msg_rrc_conn_reconfig_compl, [RRC Connection Reconfiguration Complete]>> 
 4. 测量报告 <<msg_meas_report, [Measurement Report]>>
-5. RRC测量配置，设置测量报告。<<msg_rrc_conn_reconfig_for_meas_remove, [RRC Connection Reconfiguration]>>
-6. RRC重配置完成。
+5. RRC测量配置, 设置测量报告. <<msg_rrc_conn_reconfig_for_meas_remove, [RRC Connection Reconfiguration]>>
+6. RRC重配置完成. 
 
+=== E-RAB承载管理
+在CN和eNodeB上为UE建立业务通道。
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+hide footbox
+autonumber "<b><font color=red >[00]"
+
+title E-RAB承载管理
+participant eNB
+MME -> eNB: 
+eNB -> MME: E-RAB Setup Response
+
+@endumll
+---------------------------------------------------------------------
+1. <<msg_erab_setup_req, [E-RAB Setup Request]>>
+2. <<msg_erab_setup_rsp, [E-RAB Setup Response]>>
 
 <<<
 

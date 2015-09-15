@@ -270,6 +270,7 @@ rrcConnectionSetupComplete-r8                                   <1>
     Message Type : Attach Request
     Message Contents : 17 71 ...
 ------
+
 <1> RRC连接建立完成消息
 <2> 指示UE选择的PLMN,如果是1, 表示在SIB1消息里面的第一个PLMN, 如果是2, 表示在SIB1消息里面的第二个PLMN. 以此类推
 <3> //?
@@ -279,6 +280,7 @@ rrcConnectionSetupComplete-r8                                   <1>
 [[msg_ue_capability_enquir]]
 === UE Capability Enquir
 UE能力查询请求消息, 由基站发往终端. 查询UE在不同网络的接入能力. 
+
 .UE Capability Enquir
 ------
 MS1
@@ -842,8 +844,8 @@ rrcConnectionReconfiguration-r8                                           <1>
 
 Message dump (Hex):
     75 43 40 02 44 ...
-------
 
+------
 <1> RRC连接重配置
 <2> 测量配置, 详见[later]
 <3> 添加/修改报告配置, 详见[later]
@@ -870,13 +872,13 @@ Message dump (Hex):
 <24> SRB2逻辑信道组
 <25> DRB增加模式列表
 <26> 添加第一个DRB列表
-<27> 由MME分配, 端到端的承载, EPS承载ID为5
+<27> 由MME分配, 端到端的承载, 即erab ID为5. 建立了erab 和 DRB的关系
 <28> DRB的ID, 由eNB分配, 无线侧数据承载
-<29> DRB的PDCP层配置
+<29> 指定了该DRB的PDCP层处理配置
 <30> PDCP层丢弃定时器,根据QCI的不同设置值不同, 比如QCI6/8/9是无限长, QCI2/7是150ms. 此处为无限大
 <31> AM模式切换时PDCP状态报告反馈指示. 如果配置为False, 目标eNodeB将传输所有源eNodeB转发的数据, 其中某些数据UE可能已收到, 造成空口资源的浪费. 如果为TRUE需要发一个状态报告. 
 <32> 头压缩, 一般只在VoIP, 视频类的业务中才会根据eNB侧的配置决定是否启用. 该值默认关闭. 
-<33> RLC配置
+<33> 指定了该DRB在RLC处理配置
 <34> AM确认模式
 <35> 上行RLC确认模式, 针对UE侧的配置
 <36> UE Polling PDU重传定时器大小. 该定时器设置过小会触发过多的Polling PDU, 且连续多次触发PDU重传使ARQ重传达到最大次数, 从而导致RRC重建; 设置过大会导致状态报告不能及时的反馈. 40ms(QCI4/5/6/8/9)
@@ -949,7 +951,7 @@ Message dump (Hex):
 <102> SR传输最大次数, 当超过最大次数时, 通知RRC释放PUCCH/SRS, 发起一次随机接入过程. 本消息表明最大次数为64次. 
 
 [[msg_rrc_conn_reconfig_compl]]
-=== RRC Connection Reconfiguration Complete
+=== 
 .RRC Connection Reconfiguration Complete
 ------
 MS1
@@ -1021,30 +1023,11 @@ rrcConnectionReconfiguration-r8
 <10> 测量报告周期240ms
 <11> 测量报告数量
 <12> 包含要添加或修改的测量标识列表
-<13> //later
-<14> //later
+<13> 测量标识
+<14> //late
 <15> //later
 
-[[msg_meas_report]]
-=== Measurement Report 
-.Measurement Report
-------
-MS1
-Measurement Report (UL-DCCH)
-
-measurementReport-r8
-  measResults
-    measId : 7                                                            <1>                          
-    rsrpResult : 66                                                       <2>
-    rsrqResult : 28                                                       <3>
-------
-
-<1> 测量报告IE
-<2> RSRP值
-<3> RSRQ值
-
-
-[[]]
+[[msg_rrc_conn_reconfig_for_meas_remove]]
 === RRC Connection Reconfiguration for remove Measurement 
 .RRC Connection Reconfiguration for remove Measurement 
 ------
@@ -1063,6 +1046,34 @@ rrcConnectionReconfiguration-r8
 <2> 删除测量报告ID6
 <3> 删除测量报告ID7
 
+[[msg_meas_report]]
+=== Measurement Report 
+.Measurement Report
+------
+MS1
+Measurement Report (UL-DCCH)
+
+measurementReport-r8
+  measResults
+    measId : 5                                                            <1>
+    rsrpResult : 57                                                       <2>
+    rsrqResult : 15                                                       <3>
+    measResultNeighCells : measResultListEUTRA                            <4>
+    measResultListEUTRA 
+      MeasResultListEUTRA :                                               <5>  
+        [0 ] : 
+          physCellId : 3                                                  <6>
+          rsrpResult : 62                                                 <7>
+
+------
+
+<1> 服务小区测量报告IE
+<2> RSRP值
+<3> RSRQ值
+<4> 临小区测量结果
+<5> 临小区EUTRA测量结果
+<6> 对应临小区物理层标识
+<7> 临小区RSRP值
 
 <<<
 
