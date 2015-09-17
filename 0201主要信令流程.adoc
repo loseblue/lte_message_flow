@@ -96,6 +96,38 @@ eNB -> MME: E-RAB Setup Response
 1. <<msg_erab_setup_req, [E-RAB Setup Request]>>
 2. <<msg_erab_setup_rsp, [E-RAB Setup Response]>>
 
+=== X2切换
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+hide footbox
+autonumber "<b><font color=red >[00]"
+
+title X2切换
+participant UE
+
+== Handover Preparation ==
+s_eNB -> UE: RRC Connection Reconfigration
+UE -> s_eNB: RRC Connection Reconfigration Complete
+s_eNB -> UE: Measurement Report
+rnote over s_eNB: HO decision
+s_eNB -> d_eNB: Handover Request
+d_eNB -> s_eNB: Handover Request Ack
+
+== Handover  Execution ==
+s_eNB -> UE: RRC Connection Reconfigration
+UE -> d_eNB: RRC Connection Reconfigration Complete
+
+== Handover  Completion ==
+MME -> d_eNB: Path Switch Request
+d_eNB -> MME: Path Switch Request Ack
+d_eNB -> s_eNB: UE Context Release
+rnote over s_eNB: Release Resource
+
+@endumll
+---------------------------------------------------------------------
+
+
 <<<
 
 // vim: set syntax=asciidoc:
