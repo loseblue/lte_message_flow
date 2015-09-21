@@ -88,7 +88,7 @@ autonumber "<b><font color=red >[00]"
 
 title E-RAB承载管理
 participant eNB
-MME -> eNB: 
+MME -> eNB: E-RAB Setup Request
 eNB -> MME: E-RAB Setup Response
 
 @endumll
