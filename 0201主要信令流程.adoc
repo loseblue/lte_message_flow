@@ -1,6 +1,52 @@
 ﻿== 主要信令流程
 
-=== 开机附着流程
+=== 随机接入
+.Random Access Procedure
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+hide footbox
+' autonumber "<b><font color=red >[00]" 
+
+title Random Access Procedure
+participant UE1
+participant UE2
+participant UE3
+participant eNB
+
+== UE synchronize with the eNB ==
+eNB -> UE1: Primary Synchronization Signal (PSS)
+eNB -> UE1: Secondary Synchronization Signal (SSS)
+
+== UE download the system information ==
+eNB -> UE1: Master Information Block (MIB)
+eNB -> UE1: PDCCH DCI Format 1A
+note right of UE1: SI-RNTI
+eNB -> UE1: System Information Block 2 (SIB2)
+
+== Random Access Procedure ==
+
+rnote over UE1 
+	Select Preamble 1
+endrnote
+UE1 -> eNB: RACH RA Preamble 1
+note right of UE1: RA-RNTI 1 
+
+rnote over UE2
+	Select Preamble 1
+endrnote
+UE2 ->x eNB: RACH RA Preamble 1
+note right of UE2: RA-RNTI 1 
+
+rnote over UE3
+	Select Preamble 3
+endrnote
+UE3 -> eNB: RACH RA Preamble 3
+note right of UE3: RA-RNTI 1 
+@enduml
+---------------------------------------------------------------------
+
+=== 附着流程
 UE刚开机时, 先进行物理下行同步, 搜索测量进行小区选择, 选择到一个合适或者可接纳的小区后, 驻留并进行附着过程. 附着流程图如下: 
 
 [plantuml]
@@ -9,7 +55,7 @@ UE刚开机时, 先进行物理下行同步, 搜索测量进行小区选择, 选
 hide footbox
 autonumber "<b><font color=red >[00]"
 
-title 开机附着流程
+title LTE Attach and Default Bearer Setup Flow
 UE -> eNB: **MSG1** Random Access Preamble
 eNB -> UE: **MSG2** Random Access Response
 UE -> eNB: **MSG3** RRC Connection Request
@@ -28,7 +74,6 @@ UE -> eNB: RRC Connection Reconfiguration Complete
 eNB -> MME: Initial context setup response
 UE -> eNB: UL Information Transfer
 eNB -> MME: UPLINK NAS TRANSPORT
-
 @enduml
 ---------------------------------------------------------------------
 1. 处在RRC_IDLE态的UE进行Attach过程, 首先发起随机接入过程, 即MSG1消息; <<msg_radom_access_preamble, [Random Access Request]>> 
@@ -49,9 +94,6 @@ eNB -> MME: UPLINK NAS TRANSPORT
 16. eNB向MME发送INITIAL CONTEXT SETUP RESPONSE响应消息, 表明UE上下文建立完成; <<msg_inital_context_setup_rsp,[Inital Context Setup Response]>>
 17. UE向eNB发送ULInformationTransfer消息, 包含NAS层Attach Complete, Activate default EPS bearer context accept消息; 
 18. eNB向MME发送上行直传UPLINK NAS TRANSPORT消息, 包含NAS层Attach Complete, Activate default EPS bearer context accept消息. 
-
-
-=== 随机接入
 
 === 测量报告
 [plantuml]

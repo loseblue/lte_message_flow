@@ -23,10 +23,28 @@ image::images/SI_Scheduling.jpg[title="系统信息时序图",align="center"]
 === MIB (Master Information Block)解析
 MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测信令)
 
-image::images/mib.jpg[title="mib",align="center"]
+.MIB
+--------
+MS1
+LTE RRC MIB Message
+
+Time : 18:02:58.409
+Length : 21
+Log Code (Hex) : 0xB0C1
+HW Timestamp : (71192728.75 ms) 19:46:32.729
+  1.25 ms fraction : 0.00
+  CFN : 0
+  1.25 ms counter : 868618874183
+Log Packet Version : 1
+Physical Cell Id : 2
+E-ARFCN : 39150
+SFN : 832
+Number of Tx antennas detected : 2
+DL Bandwidth : (100) 20 MHz (100 RB)
+--------
 
 [glossary]
-DL_Bandwidth::
+DL Bandwidth::
 系统带宽, 范围enumerate(1.4M(6RB, 0), 3M(15RB, 1), 5M(25RB, 2), 10M(50RB, 3), 15M(75RB, 4), 20M(100RB, 5)), 上图为n100, 对应的系统带宽为20M(100RB, 带宽索引号为5). 
 Phich_Config::
 - 参见 http://blog.sina.com.cn/s/blog_927cff010101bhbi.html[PHICH分析一]
