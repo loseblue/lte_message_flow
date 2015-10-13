@@ -9,50 +9,29 @@
 S1 Application Protocol
   S1AP-PDU: initiatingMessage (0)
     initiatingMessage
-      procedureCode: id-initialUEMessage (12)                   <1>
+      procedureCode: id-initialUEMessage (12)                  <1>
       criticality: ignore (1)
-      value
-        InitialUEMessage                                        <2>
-          protocolIEs: 5 items
-            Item 0: id-eNB-UE-S1AP-ID                           <3>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: reject (0)
-                value
-                  ENB-UE-S1AP-ID: 1                             <4>
-            Item 1: id-NAS-PDU                                  <5>
-              ProtocolIE-Field
-                id: id-NAS-PDU (26)
-                criticality: reject (0)
-                value
-                  NAS-PDU: 177187869d04074102...
-                  Non-Access-Stratum (NAS)PDU
-            Item 2: id-TAI                                      <6>
-              ProtocolIE-Field
-                id: id-TAI (67)
-                criticality: reject (0)
-                value
-                  TAI
-                    pLMNidentity: 00f110                        <7>
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    tAC: 3132                                   <8>
-            Item 3: id-EUTRAN-CGI                               <9>
-              ProtocolIE-Field
-                id: id-EUTRAN-CGI (100)
-                criticality: ignore (1)
-                value
-                  EUTRAN-CGI
-                    pLMNidentity: 00f110
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    cell-ID: 00000020                           <10>
-            Item 4: id-RRC-Establishment-Cause                  <11>
-              ProtocolIE-Field
-                id: id-RRC-Establishment-Cause (134)
-                criticality: ignore (1)
-                value
-                  RRC-Establishment-Cause: mo-Signalling (3)    <12>
+       InitialUEMessage                                        <2>
+         protocolIEs: 5 items
+           Item 0: id-eNB-UE-S1AP-ID                           <3>
+               ENB-UE-S1AP-ID: 1                               <4>
+           Item 1: id-NAS-PDU                                  <5>
+               NAS-PDU: 177187869d04074102...
+               Non-Access-Stratum (NAS)PDU
+           Item 2: id-TAI                                      <6>
+               TAI
+                 pLMNidentity: 00f110                          <7>
+                 Mobile Country Code (MCC): Unknown (1)
+                 Mobile Network Code (MNC): Unknown (01)
+                 tAC: 3132                                     <8>
+           Item 3: id-EUTRAN-CGI                               <9>
+                EUTRAN-CGI
+                  pLMNidentity: 00f110
+                  Mobile Country Code (MCC): Unknown (1)
+                  Mobile Network Code (MNC): Unknown (01)
+                  cell-ID: 00000020                            <10>
+           Item 4: id-RRC-Establishment-Cause                  <11>
+               RRC-Establishment-Cause: mo-Signalling (3)      <12>
 ----
 
 <1> procedureCode
@@ -80,48 +59,47 @@ S1 Application Protocol
   initiatingMessage
    procedureCode: id-InitialContextSetup (9)
    criticality: reject (0)
-   value
-     InitialContextSetupRequest                                 <1>
-       protocolIEs: 6 items
-         Item 0: id-MME-UE-S1AP-ID
-           MME-UE-S1AP-ID: 33554442                             <2>
-         Item 1: id-eNB-UE-S1AP-ID
-           ENB-UE-S1AP-ID: 1                                    <3>
-         Item 2: id-uEaggregateMaximumBitrate
-           UEAggregateMaximumBitrate                            <4>
-             uEaggregateMaximumBitRateDL: 20480000              <5>
-             uEaggregateMaximumBitRateUL: 4096000               <6>
-         Item 3: id-E-RABToBeSetupListCtxtSUReq                 <7>
-           E-RABToBeSetupListCtxtSUReq: 1 item
-             Item 0: id-E-RABToBeSetupItemCtxtSUReq   
-               E-RABToBeSetupItemCtxtSUReq
-                 e-RAB-ID: 5                                    <8>
-                 e-RABlevelQoSParameters                        <9>
-                   qCI: 7                                       <10>
-                   allocationRetentionPriority                  <11>
-                     priorityLevel: highest (1)                 <12>
-                     pre-emptionCapability: may-trigger-pre-emption (1)   <13>
-                     pre-emptionVulnerability: pre-emptable (1)           <14>
-                   gbrQosInformation                            <15>
-                     e-RAB-MaximumBitrateDL: 0
-                     e-RAB-MaximumBitrateUL: 0
-                     e-RAB-GuaranteedBitrateDL: 0
-                     e-RAB-GuaranteedBitrateUL: 0
-                 0... .... Extension Present Bit: False
-                 transportLayerAddress: 0a5878cc 
-                   transportLayerAddress(IPv4): 10.88.120.204   <16>
-                 gTP-TEID: 0000048a                             <17>
-                 nAS-PDU: 27dac5cd...
-                 Non-Access-Stratum (NAS)PDU
-                   [message ignore]                             <18>
-         Item 4: id-UESecurityCapabilities
-           UESecurityCapabilities                               <19>
-             ..0. .... Extension Present Bit: False
-             encryptionAlgorithms: c000                         <20>
-             ...0 .... Extension Present Bit: False
-             integrityProtectionAlgorithms: c000                <21>
-         Item 5: id-SecurityKey
-           SecurityKey: dc1e1e... [bit length 256]              <22>
+    InitialContextSetupRequest                                 <1>
+      protocolIEs: 6 items
+        Item 0: id-MME-UE-S1AP-ID
+          MME-UE-S1AP-ID: 33554442                             <2>
+        Item 1: id-eNB-UE-S1AP-ID
+          ENB-UE-S1AP-ID: 1                                    <3>
+        Item 2: id-uEaggregateMaximumBitrate
+          UEAggregateMaximumBitrate                            <4>
+            uEaggregateMaximumBitRateDL: 20480000              <5>
+            uEaggregateMaximumBitRateUL: 4096000               <6>
+        Item 3: id-E-RABToBeSetupListCtxtSUReq                 <7>
+          E-RABToBeSetupListCtxtSUReq: 1 item
+            Item 0: id-E-RABToBeSetupItemCtxtSUReq   
+              E-RABToBeSetupItemCtxtSUReq
+                e-RAB-ID: 5                                    <8>
+                e-RABlevelQoSParameters                        <9>
+                  qCI: 7                                       <10>
+                  allocationRetentionPriority                  <11>
+                    priorityLevel: highest (1)                 <12>
+                    pre-emptionCapability: may-trigger-pre-emption (1)   <13>
+                    pre-emptionVulnerability: pre-emptable (1)           <14>
+                  gbrQosInformation                            <15>
+                    e-RAB-MaximumBitrateDL: 0
+                    e-RAB-MaximumBitrateUL: 0
+                    e-RAB-GuaranteedBitrateDL: 0
+                    e-RAB-GuaranteedBitrateUL: 0
+                0... .... Extension Present Bit: False
+                transportLayerAddress: 0a5878cc 
+                  transportLayerAddress(IPv4): 10.88.120.204   <16>
+                gTP-TEID: 0000048a                             <17>
+                nAS-PDU: 27dac5cd...
+                Non-Access-Stratum (NAS)PDU
+                  [message ignore]                             <18>
+        Item 4: id-UESecurityCapabilities
+          UESecurityCapabilities                               <19>
+            ..0. .... Extension Present Bit: False
+            encryptionAlgorithms: c000                         <20>
+            ...0 .... Extension Present Bit: False
+            integrityProtectionAlgorithms: c000                <21>
+        Item 5: id-SecurityKey
+          SecurityKey: dc1e1e... [bit length 256]              <22>
 
 ------
 
@@ -161,7 +139,6 @@ S1 Application Protocol
   initiatingMessage
    procedureCode: id-UECapabilityInfoIndication (22)
    criticality: ignore (1)
-   value
     UECapabilityInfoIndication                                  <1>
      protocolIEs: 3 items
       Item 0: id-MME-UE-S1AP-ID
@@ -325,38 +302,21 @@ S1 Application Protocol
     successfulOutcome
       procedureCode: id-InitialContextSetup (9)                           <1>
       criticality: reject (0)
-      value
-        InitialContextSetupResponse
-          protocolIEs: 3 items
-            Item 0: id-MME-UE-S1AP-ID                                     <2>
-              ProtocolIE-Field
-                id: id-MME-UE-S1AP-ID (0)
-                criticality: ignore (1)
-                value
-                  MME-UE-S1AP-ID: 33554442
-            Item 1: id-eNB-UE-S1AP-ID                                     <3>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: ignore (1)
-                value
-                  ENB-UE-S1AP-ID: 1
-            Item 2: id-E-RABSetupListCtxtSURes                            <4>
-              ProtocolIE-Field
-                id: id-E-RABSetupListCtxtSURes (51)
-                criticality: ignore (1)
-                value
-                  E-RABSetupListCtxtSURes: 1 item
-                    Item 0: id-E-RABSetupItemCtxtSURes
-                      ProtocolIE-SingleContainer
-                        id: id-E-RABSetupItemCtxtSURes (50)
-                        criticality: ignore (1)
-                        value
-                          E-RABSetupItemCtxtSURes
-                            e-RAB-ID: 5                                  <5>
-                            .... ...0 Extension Present Bit: False
-                            transportLayerAddress: 0a58788c              <6>
-                              transportLayerAddress(IPv4): 10.88.120.140 
-                            gTP-TEID: 0200000a                           <7>
+       InitialContextSetupResponse
+         protocolIEs: 3 items
+           Item 0: id-MME-UE-S1AP-ID                                      <2>
+            MME-UE-S1AP-ID: 33554442
+           Item 1: id-eNB-UE-S1AP-ID                                      <3>
+            ENB-UE-S1AP-ID: 1
+           Item 2: id-E-RABSetupListCtxtSURes                             <4>
+            E-RABSetupListCtxtSURes: 1 item
+              Item 0: id-E-RABSetupItemCtxtSURes
+               E-RABSetupItemCtxtSURes
+                 e-RAB-ID: 5                                              <5>
+                 .... ...0 Extension Present Bit: False
+                 transportLayerAddress: 0a58788c                          <6>
+                   transportLayerAddress(IPv4): 10.88.120.140             
+                 gTP-TEID: 0200000a                                       <7>
 
 ------
 
@@ -378,40 +338,19 @@ S1 Application Protocol
   initiatingMessage
    procedureCode: id-E-RABSetup (5)
    criticality: reject (0)
-   value
     E-RABSetupRequest
      protocolIEs: 4 items
       Item 0: id-MME-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-MME-UE-S1AP-ID (0)
-        criticality: reject (0)
-        value
          MME-UE-S1AP-ID: 33554442                                         <1>
       Item 1: id-eNB-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-eNB-UE-S1AP-ID (8)
-        criticality: reject (0)
-        value
          ENB-UE-S1AP-ID: 1                                                <2>
       Item 2: id-uEaggregateMaximumBitrate                                <3>
-       ProtocolIE-Field
-        id: id-uEaggregateMaximumBitrate (66)
-        criticality: reject (0)
-        value
          UEAggregateMaximumBitrate
           uEaggregateMaximumBitRateDL: 40960000                           <4>
           uEaggregateMaximumBitRateUL: 8192000                            <5>
       Item 3: id-E-RABToBeSetupListBearerSUReq                            <6>
-       ProtocolIE-Field
-        id: id-E-RABToBeSetupListBearerSUReq (16)
-        criticality: reject (0)
-        value
          E-RABToBeSetupListBearerSUReq: 1 item
           Item 0: id-E-RABToBeSetupItemBearerSUReq
-           ProtocolIE-SingleContainer
-            id: id-E-RABToBeSetupItemBearerSUReq (17)
-            criticality: reject (0)
-            value
              E-RABToBeSetupItemBearerSUReq
               e-RAB-ID: 6                                                 <7>
               e-RABlevelQoSParameters
@@ -521,32 +460,15 @@ S1 Application Protocol
   successfulOutcome
    procedureCode: id-E-RABSetup (5)
    criticality: reject (0)
-   value
     E-RABSetupResponse
      protocolIEs: 3 items
       Item 0: id-MME-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-MME-UE-S1AP-ID (0)
-        criticality: ignore (1)
-        value
          MME-UE-S1AP-ID: 33554442
       Item 1: id-eNB-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-eNB-UE-S1AP-ID (8)
-        criticality: ignore (1)
-        value
          ENB-UE-S1AP-ID: 1
       Item 2: id-E-RABSetupListBearerSURes
-       ProtocolIE-Field
-        id: id-E-RABSetupListBearerSURes (28)
-        criticality: ignore (1)
-        value
          E-RABSetupListBearerSURes: 1 item
           Item 0: id-E-RABSetupItemBearerSURes
-           ProtocolIE-SingleContainer
-            id: id-E-RABSetupItemBearerSURes (39)
-            criticality: ignore (1)
-            value
              E-RABSetupItemBearerSURes
               e-RAB-ID: 6
               .... ...0 Extension Present Bit: False
