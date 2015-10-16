@@ -328,6 +328,37 @@ S1 Application Protocol
 <6> transportLayerAddress
 <7> 此处的GTP-TEID为下行GTP-TEID
 
+
+[[msg_s1_setup_req]]
+=== S1 Setup Request
+
+.S1 Setup Request
+------
+S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-S1Setup (17)
+    S1SetupRequest
+     protocolIEs: 3 items
+      Item 0: id-Global-ENB-ID
+         Global-ENB-ID
+          pLMNidentity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: homeENB-ID (1)
+           homeENB-ID: 00000c80 
+      Item 1: id-SupportedTAs
+         SupportedTAs: 1 item
+            tAC: 3132
+            broadcastPLMNs: 1 item
+             Item 0
+              PLMNidentity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+      Item 2: id-DefaultPagingDRX
+         PagingDRX: v64 (1)
+------
+
 [[msg_erab_setup_req]]
 === E-RAB Setup Request
 
@@ -440,15 +471,14 @@ S1 Application Protocol
 
 ------
 <1> later
-<2>
-<3>
-<4>
-<5>
-<6>
-<7>
-<8>
-<9>
-
+<2> later
+<3> later
+<4> later
+<5> later
+<6> later
+<7> later
+<8> later
+<9> later
 
 [[msg_erab_setup_rsp]]
 === E-RAB Setup Response

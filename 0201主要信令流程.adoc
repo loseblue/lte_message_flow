@@ -53,6 +53,25 @@ eNB -> MME: UPLINK NAS TRANSPORT
 
 === 随机接入
 
+=== S1初始化
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+hide footbox
+autonumber "<b><font color=red >[00]"
+
+title S1 Setup Request
+eNB -> MME: S1 Setup Request
+MME -> eNB: S1 Setup Response
+eNB -> MME: ENB Direct Information Transfer
+
+@enduml
+---------------------------------------------------------------------
+
+1. . <<, [S1 Setup Request]>>
+2. S1 Setup Response. <<msg_s1_setup_rsp, [S1 Setup Response]>>
+3. ENB Direct Information Transfer.<<msg_ENB_direct_info_transfer, [ENB Direct Information Transfer]>> 
+
 === 测量报告
 [plantuml]
 ---------------------------------------------------------------------

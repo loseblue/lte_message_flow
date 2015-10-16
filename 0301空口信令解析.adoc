@@ -1012,7 +1012,7 @@ rrcConnectionReconfiguration-r8
 ------
 
 <1> 测量配置相关模块
-<2> 添加测量报告
+<2> 测量任务标识添加列表, 添加测量报告
 <3> 测量报告配置ID号
 <4> 表示E-UTRA, UTRA, GERAN, 或 CDMA2000 测量的测量上报配置
 <5> 触发类型, 周期测量或事件触发测量
@@ -1022,7 +1022,7 @@ rrcConnectionReconfiguration-r8
 <9> maxReportCells
 <10> 测量报告周期240ms
 <11> 测量报告数量
-<12> 包含要添加或修改的测量标识列表
+<12> 测量任务标识添加列表, 包含要添加或修改的测量标识列表
 <13> 测量标识
 <14> //late
 <15> //later
@@ -1074,6 +1074,7 @@ measurementReport-r8
 <5> 临小区EUTRA测量结果
 <6> 对应临小区物理层标识
 <7> 临小区RSRP值
+
 
 <<<
 

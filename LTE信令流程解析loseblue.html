@@ -1589,7 +1589,7 @@ interFreqCarrierFreqList                                        <b class="conum"
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="diag-acbac59c40a429f2be06f5457cd528b4.png" alt="diag acbac59c40a429f2be06f5457cd528b4" width="249" height="165">
+<img src="diag-e34da06a1450cbfad8c594a5951239d1.png" alt="diag e34da06a1450cbfad8c594a5951239d1" width="249" height="165">
 </div>
 </div>
 <div class="olist arabic">
@@ -3212,50 +3212,29 @@ measurementReport-r8
 <pre>S1 Application Protocol
   S1AP-PDU: initiatingMessage (0)
     initiatingMessage
-      procedureCode: id-initialUEMessage (12)                   <b class="conum">(1)</b>
+      procedureCode: id-initialUEMessage (12)                  <b class="conum">(1)</b>
       criticality: ignore (1)
-      value
-        InitialUEMessage                                        <b class="conum">(2)</b>
-          protocolIEs: 5 items
-            Item 0: id-eNB-UE-S1AP-ID                           <b class="conum">(3)</b>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: reject (0)
-                value
-                  ENB-UE-S1AP-ID: 1                             <b class="conum">(4)</b>
-            Item 1: id-NAS-PDU                                  <b class="conum">(5)</b>
-              ProtocolIE-Field
-                id: id-NAS-PDU (26)
-                criticality: reject (0)
-                value
-                  NAS-PDU: 177187869d04074102...
-                  Non-Access-Stratum (NAS)PDU
-            Item 2: id-TAI                                      <b class="conum">(6)</b>
-              ProtocolIE-Field
-                id: id-TAI (67)
-                criticality: reject (0)
-                value
-                  TAI
-                    pLMNidentity: 00f110                        <b class="conum">(7)</b>
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    tAC: 3132                                   <b class="conum">(8)</b>
-            Item 3: id-EUTRAN-CGI                               <b class="conum">(9)</b>
-              ProtocolIE-Field
-                id: id-EUTRAN-CGI (100)
-                criticality: ignore (1)
-                value
-                  EUTRAN-CGI
-                    pLMNidentity: 00f110
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    cell-ID: 00000020                           <b class="conum">(10)</b>
-            Item 4: id-RRC-Establishment-Cause                  <b class="conum">(11)</b>
-              ProtocolIE-Field
-                id: id-RRC-Establishment-Cause (134)
-                criticality: ignore (1)
-                value
-                  RRC-Establishment-Cause: mo-Signalling (3)    <b class="conum">(12)</b></pre>
+       InitialUEMessage                                        <b class="conum">(2)</b>
+         protocolIEs: 5 items
+           Item 0: id-eNB-UE-S1AP-ID                           <b class="conum">(3)</b>
+               ENB-UE-S1AP-ID: 1                               <b class="conum">(4)</b>
+           Item 1: id-NAS-PDU                                  <b class="conum">(5)</b>
+               NAS-PDU: 177187869d04074102...
+               Non-Access-Stratum (NAS)PDU
+           Item 2: id-TAI                                      <b class="conum">(6)</b>
+               TAI
+                 pLMNidentity: 00f110                          <b class="conum">(7)</b>
+                 Mobile Country Code (MCC): Unknown (1)
+                 Mobile Network Code (MNC): Unknown (01)
+                 tAC: 3132                                     <b class="conum">(8)</b>
+           Item 3: id-EUTRAN-CGI                               <b class="conum">(9)</b>
+                EUTRAN-CGI
+                  pLMNidentity: 00f110
+                  Mobile Country Code (MCC): Unknown (1)
+                  Mobile Network Code (MNC): Unknown (01)
+                  cell-ID: 00000020                            <b class="conum">(10)</b>
+           Item 4: id-RRC-Establishment-Cause                  <b class="conum">(11)</b>
+               RRC-Establishment-Cause: mo-Signalling (3)      <b class="conum">(12)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3312,48 +3291,47 @@ measurementReport-r8
   initiatingMessage
    procedureCode: id-InitialContextSetup (9)
    criticality: reject (0)
-   value
-     InitialContextSetupRequest                                 <b class="conum">(1)</b>
-       protocolIEs: 6 items
-         Item 0: id-MME-UE-S1AP-ID
-           MME-UE-S1AP-ID: 33554442                             <b class="conum">(2)</b>
-         Item 1: id-eNB-UE-S1AP-ID
-           ENB-UE-S1AP-ID: 1                                    <b class="conum">(3)</b>
-         Item 2: id-uEaggregateMaximumBitrate
-           UEAggregateMaximumBitrate                            <b class="conum">(4)</b>
-             uEaggregateMaximumBitRateDL: 20480000              <b class="conum">(5)</b>
-             uEaggregateMaximumBitRateUL: 4096000               <b class="conum">(6)</b>
-         Item 3: id-E-RABToBeSetupListCtxtSUReq                 <b class="conum">(7)</b>
-           E-RABToBeSetupListCtxtSUReq: 1 item
-             Item 0: id-E-RABToBeSetupItemCtxtSUReq
-               E-RABToBeSetupItemCtxtSUReq
-                 e-RAB-ID: 5                                    <b class="conum">(8)</b>
-                 e-RABlevelQoSParameters                        <b class="conum">(9)</b>
-                   qCI: 7                                       <b class="conum">(10)</b>
-                   allocationRetentionPriority                  <b class="conum">(11)</b>
-                     priorityLevel: highest (1)                 <b class="conum">(12)</b>
-                     pre-emptionCapability: may-trigger-pre-emption (1)   <b class="conum">(13)</b>
-                     pre-emptionVulnerability: pre-emptable (1)           <b class="conum">(14)</b>
-                   gbrQosInformation                            <b class="conum">(15)</b>
-                     e-RAB-MaximumBitrateDL: 0
-                     e-RAB-MaximumBitrateUL: 0
-                     e-RAB-GuaranteedBitrateDL: 0
-                     e-RAB-GuaranteedBitrateUL: 0
-                 0... .... Extension Present Bit: False
-                 transportLayerAddress: 0a5878cc
-                   transportLayerAddress(IPv4): 10.88.120.204   <b class="conum">(16)</b>
-                 gTP-TEID: 0000048a                             <b class="conum">(17)</b>
-                 nAS-PDU: 27dac5cd...
-                 Non-Access-Stratum (NAS)PDU
-                   [message ignore]                             <b class="conum">(18)</b>
-         Item 4: id-UESecurityCapabilities
-           UESecurityCapabilities                               <b class="conum">(19)</b>
-             ..0. .... Extension Present Bit: False
-             encryptionAlgorithms: c000                         <b class="conum">(20)</b>
-             ...0 .... Extension Present Bit: False
-             integrityProtectionAlgorithms: c000                <b class="conum">(21)</b>
-         Item 5: id-SecurityKey
-           SecurityKey: dc1e1e... [bit length 256]              <b class="conum">(22)</b></pre>
+    InitialContextSetupRequest                                 <b class="conum">(1)</b>
+      protocolIEs: 6 items
+        Item 0: id-MME-UE-S1AP-ID
+          MME-UE-S1AP-ID: 33554442                             <b class="conum">(2)</b>
+        Item 1: id-eNB-UE-S1AP-ID
+          ENB-UE-S1AP-ID: 1                                    <b class="conum">(3)</b>
+        Item 2: id-uEaggregateMaximumBitrate
+          UEAggregateMaximumBitrate                            <b class="conum">(4)</b>
+            uEaggregateMaximumBitRateDL: 20480000              <b class="conum">(5)</b>
+            uEaggregateMaximumBitRateUL: 4096000               <b class="conum">(6)</b>
+        Item 3: id-E-RABToBeSetupListCtxtSUReq                 <b class="conum">(7)</b>
+          E-RABToBeSetupListCtxtSUReq: 1 item
+            Item 0: id-E-RABToBeSetupItemCtxtSUReq
+              E-RABToBeSetupItemCtxtSUReq
+                e-RAB-ID: 5                                    <b class="conum">(8)</b>
+                e-RABlevelQoSParameters                        <b class="conum">(9)</b>
+                  qCI: 7                                       <b class="conum">(10)</b>
+                  allocationRetentionPriority                  <b class="conum">(11)</b>
+                    priorityLevel: highest (1)                 <b class="conum">(12)</b>
+                    pre-emptionCapability: may-trigger-pre-emption (1)   <b class="conum">(13)</b>
+                    pre-emptionVulnerability: pre-emptable (1)           <b class="conum">(14)</b>
+                  gbrQosInformation                            <b class="conum">(15)</b>
+                    e-RAB-MaximumBitrateDL: 0
+                    e-RAB-MaximumBitrateUL: 0
+                    e-RAB-GuaranteedBitrateDL: 0
+                    e-RAB-GuaranteedBitrateUL: 0
+                0... .... Extension Present Bit: False
+                transportLayerAddress: 0a5878cc
+                  transportLayerAddress(IPv4): 10.88.120.204   <b class="conum">(16)</b>
+                gTP-TEID: 0000048a                             <b class="conum">(17)</b>
+                nAS-PDU: 27dac5cd...
+                Non-Access-Stratum (NAS)PDU
+                  [message ignore]                             <b class="conum">(18)</b>
+        Item 4: id-UESecurityCapabilities
+          UESecurityCapabilities                               <b class="conum">(19)</b>
+            ..0. .... Extension Present Bit: False
+            encryptionAlgorithms: c000                         <b class="conum">(20)</b>
+            ...0 .... Extension Present Bit: False
+            integrityProtectionAlgorithms: c000                <b class="conum">(21)</b>
+        Item 5: id-SecurityKey
+          SecurityKey: dc1e1e... [bit length 256]              <b class="conum">(22)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3441,7 +3419,6 @@ measurementReport-r8
   initiatingMessage
    procedureCode: id-UECapabilityInfoIndication (22)
    criticality: ignore (1)
-   value
     UECapabilityInfoIndication                                  <b class="conum">(1)</b>
      protocolIEs: 3 items
       Item 0: id-MME-UE-S1AP-ID
@@ -3635,38 +3612,21 @@ measurementReport-r8
     successfulOutcome
       procedureCode: id-InitialContextSetup (9)                           <b class="conum">(1)</b>
       criticality: reject (0)
-      value
-        InitialContextSetupResponse
-          protocolIEs: 3 items
-            Item 0: id-MME-UE-S1AP-ID                                     <b class="conum">(2)</b>
-              ProtocolIE-Field
-                id: id-MME-UE-S1AP-ID (0)
-                criticality: ignore (1)
-                value
-                  MME-UE-S1AP-ID: 33554442
-            Item 1: id-eNB-UE-S1AP-ID                                     <b class="conum">(3)</b>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: ignore (1)
-                value
-                  ENB-UE-S1AP-ID: 1
-            Item 2: id-E-RABSetupListCtxtSURes                            <b class="conum">(4)</b>
-              ProtocolIE-Field
-                id: id-E-RABSetupListCtxtSURes (51)
-                criticality: ignore (1)
-                value
-                  E-RABSetupListCtxtSURes: 1 item
-                    Item 0: id-E-RABSetupItemCtxtSURes
-                      ProtocolIE-SingleContainer
-                        id: id-E-RABSetupItemCtxtSURes (50)
-                        criticality: ignore (1)
-                        value
-                          E-RABSetupItemCtxtSURes
-                            e-RAB-ID: 5                                  <b class="conum">(5)</b>
-                            .... ...0 Extension Present Bit: False
-                            transportLayerAddress: 0a58788c              <b class="conum">(6)</b>
-                              transportLayerAddress(IPv4): 10.88.120.140
-                            gTP-TEID: 0200000a                           <b class="conum">(7)</b></pre>
+       InitialContextSetupResponse
+         protocolIEs: 3 items
+           Item 0: id-MME-UE-S1AP-ID                                      <b class="conum">(2)</b>
+            MME-UE-S1AP-ID: 33554442
+           Item 1: id-eNB-UE-S1AP-ID                                      <b class="conum">(3)</b>
+            ENB-UE-S1AP-ID: 1
+           Item 2: id-E-RABSetupListCtxtSURes                             <b class="conum">(4)</b>
+            E-RABSetupListCtxtSURes: 1 item
+              Item 0: id-E-RABSetupItemCtxtSURes
+               E-RABSetupItemCtxtSURes
+                 e-RAB-ID: 5                                              <b class="conum">(5)</b>
+                 .... ...0 Extension Present Bit: False
+                 transportLayerAddress: 0a58788c                          <b class="conum">(6)</b>
+                   transportLayerAddress(IPv4): 10.88.120.140
+                 gTP-TEID: 0200000a                                       <b class="conum">(7)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3705,40 +3665,19 @@ measurementReport-r8
   initiatingMessage
    procedureCode: id-E-RABSetup (5)
    criticality: reject (0)
-   value
     E-RABSetupRequest
      protocolIEs: 4 items
       Item 0: id-MME-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-MME-UE-S1AP-ID (0)
-        criticality: reject (0)
-        value
          MME-UE-S1AP-ID: 33554442                                         <b class="conum">(1)</b>
       Item 1: id-eNB-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-eNB-UE-S1AP-ID (8)
-        criticality: reject (0)
-        value
          ENB-UE-S1AP-ID: 1                                                <b class="conum">(2)</b>
       Item 2: id-uEaggregateMaximumBitrate                                <b class="conum">(3)</b>
-       ProtocolIE-Field
-        id: id-uEaggregateMaximumBitrate (66)
-        criticality: reject (0)
-        value
          UEAggregateMaximumBitrate
           uEaggregateMaximumBitRateDL: 40960000                           <b class="conum">(4)</b>
           uEaggregateMaximumBitRateUL: 8192000                            <b class="conum">(5)</b>
       Item 3: id-E-RABToBeSetupListBearerSUReq                            <b class="conum">(6)</b>
-       ProtocolIE-Field
-        id: id-E-RABToBeSetupListBearerSUReq (16)
-        criticality: reject (0)
-        value
          E-RABToBeSetupListBearerSUReq: 1 item
           Item 0: id-E-RABToBeSetupItemBearerSUReq
-           ProtocolIE-SingleContainer
-            id: id-E-RABToBeSetupItemBearerSUReq (17)
-            criticality: reject (0)
-            value
              E-RABToBeSetupItemBearerSUReq
               e-RAB-ID: 6                                                 <b class="conum">(7)</b>
               e-RABlevelQoSParameters
@@ -3853,32 +3792,15 @@ measurementReport-r8
   successfulOutcome
    procedureCode: id-E-RABSetup (5)
    criticality: reject (0)
-   value
     E-RABSetupResponse
      protocolIEs: 3 items
       Item 0: id-MME-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-MME-UE-S1AP-ID (0)
-        criticality: ignore (1)
-        value
          MME-UE-S1AP-ID: 33554442
       Item 1: id-eNB-UE-S1AP-ID
-       ProtocolIE-Field
-        id: id-eNB-UE-S1AP-ID (8)
-        criticality: ignore (1)
-        value
          ENB-UE-S1AP-ID: 1
       Item 2: id-E-RABSetupListBearerSURes
-       ProtocolIE-Field
-        id: id-E-RABSetupListBearerSURes (28)
-        criticality: ignore (1)
-        value
          E-RABSetupListBearerSURes: 1 item
           Item 0: id-E-RABSetupItemBearerSURes
-           ProtocolIE-SingleContainer
-            id: id-E-RABSetupItemBearerSURes (39)
-            criticality: ignore (1)
-            value
              E-RABSetupItemBearerSURes
               e-RAB-ID: 6
               .... ...0 Extension Present Bit: False
