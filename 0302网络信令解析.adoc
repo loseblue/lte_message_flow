@@ -341,27 +341,29 @@ S1 Application Protocol
     S1SetupRequest
      protocolIEs: 3 items
       Item 0: id-Global-ENB-ID                                            <1>
-         Global-ENB-ID
-          pLMNidentity: 00f110
-          Mobile Country Code (MCC): Unknown (1)
-          Mobile Network Code (MNC): Unknown (01)
-          eNB-ID: homeENB-ID (1)
-           homeENB-ID: 00000c80 
+       Global-ENB-ID
+        pLMNidentity: 00f110
+        Mobile Country Code (MCC): Unknown (1)
+        Mobile Network Code (MNC): Unknown (01)
+        eNB-ID: homeENB-ID (1)
+         homeENB-ID: 00000c80 
       Item 1: id-SupportedTAs                                             <2>
-         SupportedTAs: 1 item
-            tAC: 3132
-            broadcastPLMNs: 1 item
-             Item 0
-              PLMNidentity: 00f110
-              Mobile Country Code (MCC): Unknown (1)
-              Mobile Network Code (MNC): Unknown (01)
+       SupportedTAs: 1 item
+          tAC: 3132
+          broadcastPLMNs: 1 item
+           Item 0
+            PLMNidentity: 00f110
+            Mobile Country Code (MCC): Unknown (1)
+            Mobile Network Code (MNC): Unknown (01)
       Item 2: id-DefaultPagingDRX                                         <3>
          PagingDRX: v64 (1)
+
 ------
       
 <1> Global-ENB-ID = PLMN ID + eNB ID
 <2> 支持的TAs列表
 <3> DefaultPagingDRX
+
 
 [[msg_s1_setup_rsp]]
 === S1 Setup Response
@@ -396,6 +398,7 @@ S1 Application Protocol
 <1> GUMMEI = PLMN ID + MMEGI + MMEC
 <2> RelativeMMECapacity
 
+
 [[msg_ENB_direct_info_transfer]]
 === ENB Direct Information Transfer
 
@@ -425,6 +428,123 @@ S1 Application Protocol
       
 <1> Inter-SystemInformationTransferType
 <2> rIMTransfer 传输RAN Information Management 
+
+[[msg_x2_setup_req]]
+=== X2 Setup Request
+
+.X2 Setup Request
+------
+EUTRAN X2 Application Protocol (X2AP)
+ X2AP-PDU: initiatingMessage (0)
+  initiatingMessage
+    X2SetupRequest
+     protocolIEs: 2 items
+      Item 0: id-GlobalENB-ID
+         GlobalENB-ID
+          pLMN-Identity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: home-eNB-ID (1)
+           home-eNB-ID: 00000c80 
+      Item 1: id-ServedCells
+         ServedCells: 1 item
+          Item 0
+           ServedCells item
+            servedCellInfo
+             pCI: 200
+             cellId
+              pLMN-Identity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+              eUTRANcellIdentifier: 00000c80 
+             tAC: 3132
+             broadcastPLMNs: 1 item
+              Item 0
+               PLMN-Identity: 00f110
+               Mobile Country Code (MCC): Unknown (1)
+               Mobile Network Code (MNC): Unknown (01)
+             eUTRA-Mode-Info: tDD (1)
+              tDD
+               eARFCN: 39150
+               transmission-Bandwidth: bw100 (5)
+               subframeAssignment: sa2 (2)
+               specialSubframe-Info
+                specialSubframePatterns: ssp7 (7)
+                cyclicPrefixDL: extended (1)
+                cyclicPrefixUL: extended (1)
+             iE-Extensions: 2 items
+              Item 0: id-Number-of-Antennaports
+                 Number-of-Antennaports: an2 (1)
+              Item 1: id-PRACH-Configuration
+                 PRACH-Configuration
+                  rootSequenceIndex: 22
+                  zeroCorrelationIndex: 1
+                  .... 0... highSpeedFlag: False
+                  prach-FreqOffset: 10
+                  prach-ConfigIndex: 0
+------
+      
+[[msg_x2_setup_rsp]]
+=== X2 Setup Response
+
+.X2 Setup Response
+------
+EUTRAN X2 Application Protocol (X2AP)
+ X2AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-x2Setup (6)
+   criticality: reject (0)
+   value
+    X2SetupResponse
+     protocolIEs: 3 items
+      Item 0: id-GlobalENB-ID
+         GlobalENB-ID
+          pLMN-Identity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: home-eNB-ID (1)
+           home-eNB-ID: 00000c80 
+      Item 1: id-ServedCells
+         ServedCells: 1 item
+          Item 0
+           ServedCells item
+            servedCellInfo
+             pCI: 200
+             cellId
+              pLMN-Identity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+              eUTRANcellIdentifier: 00000c80 
+             tAC: 3132
+             broadcastPLMNs: 1 item
+              Item 0
+               PLMN-Identity: 00f110
+               Mobile Country Code (MCC): Unknown (1)
+               Mobile Network Code (MNC): Unknown (01)
+             eUTRA-Mode-Info: tDD (1)
+              tDD
+               eARFCN: 39150
+               transmission-Bandwidth: bw100 (5)
+               subframeAssignment: sa2 (2)
+               specialSubframe-Info
+                specialSubframePatterns: ssp7 (7)
+                cyclicPrefixDL: extended (1)
+                cyclicPrefixUL: extended (1)
+             iE-Extensions: 2 items
+              Item 0: id-Number-of-Antennaports
+                 Number-of-Antennaports: an2 (1)
+              Item 1: id-PRACH-Configuration
+                 PRACH-Configuration
+                  rootSequenceIndex: 22
+                  zeroCorrelationIndex: 1
+                  .... 0... highSpeedFlag: False
+                  prach-FreqOffset: 10
+                  prach-ConfigIndex: 0
+      Item 2: id-CriticalityDiagnostics
+         CriticalityDiagnostics
+------
+      
+
 
 [[msg_erab_setup_req]]
 === E-RAB Setup Request
