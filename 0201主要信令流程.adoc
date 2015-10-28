@@ -68,9 +68,31 @@ eNB -> MME: ENB Direct Information Transfer
 @enduml
 ---------------------------------------------------------------------
 
-1. . <<, [S1 Setup Request]>>
+1. S1 Setup Request. <<msg_s1_setup_req, [S1 Setup Request]>>
 2. S1 Setup Response. <<msg_s1_setup_rsp, [S1 Setup Response]>>
 3. ENB Direct Information Transfer.<<msg_ENB_direct_info_transfer, [ENB Direct Information Transfer]>> 
+
+
+=== X2初始化
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+hide footbox
+autonumber "<b><font color=red >[00]"
+
+title S1 Setup Request
+eNB1 -> eNB2: X2 Setup Request
+eNB2 -> eNB1: X2 Setup Response
+eNB1 -> eNB2: ENB Configuration Update
+eNB2 -> eNB1: ENB Configuration Update Acknowledge
+@enduml
+---------------------------------------------------------------------
+
+1. X2 Setup Request. <<msg_x2_setup_req, [X2 Setup Request]>>
+2. X2 Setup Response. <<msg_x2_setup_rsp, [X2 Setup Response]>>
+3. ENB Configuration Update.<<msg_ENB_config_update, [ENB Configuration Update]>> 
+4. ENB Configuration Update Acknowledge.<<msg_ENB_config_update_ack, [ENB Configuration Update Acknowledge]>> 
+
 
 === 测量报告
 [plantuml]
@@ -112,8 +134,8 @@ eNB -> MME: E-RAB Setup Response
 
 @endumll
 ---------------------------------------------------------------------
-1. <<msg_erab_setup_req, [E-RAB Setup Request]>>
-2. <<msg_erab_setup_rsp, [E-RAB Setup Response]>>
+1. E-RAB Setup Request <<msg_erab_setup_req, [E-RAB Setup Request]>>
+2. E-RAB Setup Response <<, [E-RAB Setup Response]>>
 
 === X2切换
 [plantuml]

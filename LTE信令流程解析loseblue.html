@@ -1553,6 +1553,51 @@ interFreqCarrierFreqList                                        <b class="conum"
 
 </div>
 <div class="sect2">
+<h3 id="_s1初始化">S1初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-f7baf6cbcc7efae0b96fe0a4ade92a58.png" alt="diag f7baf6cbcc7efae0b96fe0a4ade92a58" width="304" height="196">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>S1 Setup Request. <a href="#msg_s1_setup_req">[S1 Setup Request]</a></p>
+</li>
+<li>
+<p>S1 Setup Response. <a href="#msg_s1_setup_rsp">[S1 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Direct Information Transfer.<a href="#msg_ENB_direct_info_transfer">[ENB Direct Information Transfer]</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_x2初始化">X2初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-4d7d25eaa01acfe57f3bba624c7eed75.png" alt="diag 4d7d25eaa01acfe57f3bba624c7eed75" width="358" height="227">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>X2 Setup Request. <a href="#msg_x2_setup_req">[X2 Setup Request]</a></p>
+</li>
+<li>
+<p>X2 Setup Response. <a href="#msg_x2_setup_rsp">[X2 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update.<a href="#msg_ENB_config_update">[ENB Configuration Update]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update Acknowledge.<a href="#msg_ENB_config_update_ack">[ENB Configuration Update Acknowledge]</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_测量报告">测量报告</h3>
 <div class="imageblock">
 <div class="content">
@@ -1595,10 +1640,10 @@ interFreqCarrierFreqList                                        <b class="conum"
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#msg_erab_setup_req">[E-RAB Setup Request]</a></p>
+<p>E-RAB Setup Request <a href="#msg_erab_setup_req">[E-RAB Setup Request]</a></p>
 </li>
 <li>
-<p><a href="#msg_erab_setup_rsp">[E-RAB Setup Response]</a></p>
+<p>E-RAB Setup Response &lt;&lt;, [E-RAB Setup Response]&gt;&gt;</p>
 </li>
 </ol>
 </div>
@@ -3074,7 +3119,7 @@ rrcConnectionReconfiguration-r8
 <p>测量配置相关模块</p>
 </li>
 <li>
-<p>添加测量报告</p>
+<p>测量任务标识添加列表, 添加测量报告</p>
 </li>
 <li>
 <p>测量报告配置ID号</p>
@@ -3104,7 +3149,7 @@ rrcConnectionReconfiguration-r8
 <p>测量报告数量</p>
 </li>
 <li>
-<p>包含要添加或修改的测量标识列表</p>
+<p>测量任务标识添加列表, 包含要添加或修改的测量标识列表</p>
 </li>
 <li>
 <p>测量标识</p>
@@ -3656,6 +3701,129 @@ measurementReport-r8
 </div>
 </div>
 <div class="sect2">
+<h3 id="msg_s1_setup_req">S1 Setup Request</h3>
+<div class="listingblock">
+<div class="title">S1 Setup Request</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-S1Setup (17)
+    S1SetupRequest
+     protocolIEs: 3 items
+      Item 0: id-Global-ENB-ID                                            <b class="conum">(1)</b>
+         Global-ENB-ID
+          pLMNidentity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: homeENB-ID (1)
+           homeENB-ID: 00000c80
+      Item 1: id-SupportedTAs                                             <b class="conum">(2)</b>
+         SupportedTAs: 1 item
+            tAC: 3132
+            broadcastPLMNs: 1 item
+             Item 0
+              PLMNidentity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+      Item 2: id-DefaultPagingDRX                                         <b class="conum">(3)</b>
+         PagingDRX: v64 (1)</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Global-ENB-ID = PLMN ID + eNB ID</p>
+</li>
+<li>
+<p>支持的TAs列表</p>
+</li>
+<li>
+<p>DefaultPagingDRX</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_s1_setup_rsp">S1 Setup Response</h3>
+<div class="listingblock">
+<div class="title">S1 Setup Response</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-S1Setup (17)
+    S1SetupResponse
+     protocolIEs: 2 items
+      Item 0: id-ServedGUMMEIs                                            <b class="conum">(1)</b>
+       ServedGUMMEIs: 1 item
+        Item 0
+         ServedGUMMEIsItem
+          servedPLMNs: 1 item
+           Item 0
+            PLMNidentity: 00f110
+            Mobile Country Code (MCC): Unknown (1)
+            Mobile Network Code (MNC): Unknown (01)
+          servedGroupIDs: 1 item
+           Item 0
+            MME-Group-ID: 0002
+          servedMMECs: 1 item
+           Item 0
+            MME-Code: 01
+      Item 1: id-RelativeMMECapacity                                      <b class="conum">(2)</b>
+         RelativeMMECapacity: 255</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>GUMMEI = PLMN ID + MMEGI + MMEC</p>
+</li>
+<li>
+<p>RelativeMMECapacity</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_ENB_direct_info_transfer">ENB Direct Information Transfer</h3>
+<div class="listingblock">
+<div class="title">ENB Direct Information Transfer</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-eNBDirectInformationTransfer (37)
+    ENBDirectInformationTransfer
+     protocolIEs: 1 item
+      Item 0: id-Inter-SystemInformationTransferTypeEDT                   <b class="conum">(1)</b>
+        id: id-Inter-SystemInformationTransferTypeEDT (121)
+         Inter-SystemInformationTransferType: rIMTransfer (0)             <b class="conum">(2)</b>
+          rIMTransfer
+           rIMInformation: 71548900211332170001002d548f0200f11031320000f110...
+           rIMRoutingAddress: gERAN-Cell-ID (0)
+            gERAN-Cell-ID
+             lAI
+              pLMNidentity: 211332
+              Mobile Country Code (MCC): Unknown (123)
+              Mobile Network Code (MNC): Unknown (123)
+              lAC: 1700
+             rAC: 01
+             cI: 002d</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Inter-SystemInformationTransferType</p>
+</li>
+<li>
+<p>rIMTransfer 传输RAN Information Management</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
 <h3 id="msg_erab_setup_req">E-RAB Setup Request</h3>
 <div class="listingblock">
 <div class="title">E-RAB Setup Request</div>
@@ -3769,15 +3937,31 @@ measurementReport-r8
 <div class="colist arabic">
 <ol>
 <li>
-<p>later
-&lt;2&gt;
-&lt;3&gt;
-&lt;4&gt;
-&lt;5&gt;
-&lt;6&gt;
-&lt;7&gt;
-&lt;8&gt;
-&lt;9&gt;</p>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
 </li>
 </ol>
 </div>
