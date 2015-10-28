@@ -1550,6 +1550,111 @@ interFreqCarrierFreqList                                        <b class="conum"
 </div>
 <div class="sect2">
 <h3 id="_随机接入">随机接入</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_s1初始化">S1初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-f7baf6cbcc7efae0b96fe0a4ade92a58.png" alt="diag f7baf6cbcc7efae0b96fe0a4ade92a58" width="304" height="196">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>S1 Setup Request. <a href="#msg_s1_setup_req">[S1 Setup Request]</a></p>
+</li>
+<li>
+<p>S1 Setup Response. <a href="#msg_s1_setup_rsp">[S1 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Direct Information Transfer.<a href="#msg_ENB_direct_info_transfer">[ENB Direct Information Transfer]</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_x2初始化">X2初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-4d7d25eaa01acfe57f3bba624c7eed75.png" alt="diag 4d7d25eaa01acfe57f3bba624c7eed75" width="358" height="227">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>X2 Setup Request. <a href="#msg_x2_setup_req">[X2 Setup Request]</a></p>
+</li>
+<li>
+<p>X2 Setup Response. <a href="#msg_x2_setup_rsp">[X2 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update.<a href="#msg_ENB_config_update">[ENB Configuration Update]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update Acknowledge.<a href="#msg_ENB_config_update_ack">[ENB Configuration Update Acknowledge]</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测量报告">测量报告</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-8ff408cacbcd077d705729a93ffcc8f8.png" alt="diag 8ff408cacbcd077d705729a93ffcc8f8" width="361" height="289">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>测量报告</p>
+</li>
+<li>
+<p>RRC重配置, 设置添加测量报告. <a href="#msg_rrc_conn_reconfig_for_meas_add">[RRC Connection Reconfiguration]</a></p>
+</li>
+<li>
+<p>RRC重配置完成.<a href="#msg_rrc_conn_reconfig_compl">[RRC Connection Reconfiguration Complete]</a></p>
+</li>
+<li>
+<p>测量报告 <a href="#msg_meas_report">[Measurement Report]</a></p>
+</li>
+<li>
+<p>RRC测量配置, 设置测量报告. <a href="#msg_rrc_conn_reconfig_for_meas_remove">[RRC Connection Reconfiguration]</a></p>
+</li>
+<li>
+<p>RRC重配置完成.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_rab承载管理">E-RAB承载管理</h3>
+<div class="paragraph">
+<p>在CN和eNodeB上为UE建立业务通道。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-e34da06a1450cbfad8c594a5951239d1.png" alt="diag e34da06a1450cbfad8c594a5951239d1" width="249" height="165">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>E-RAB Setup Request <a href="#msg_erab_setup_req">[E-RAB Setup Request]</a></p>
+</li>
+<li>
+<p>E-RAB Setup Response &lt;&lt;, [E-RAB Setup Response]&gt;&gt;</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_x2切换">X2切换</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-d1c9ad2099caf85b879df5cae776306c.png" alt="diag d1c9ad2099caf85b879df5cae776306c" width="746" height="618">
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1654,13 +1759,13 @@ Vendor Header
       Sub frame number : N/A
     Message Type : CcchUplink
     Message Length : 6
-criticalExtensions : rrcConnectionRequest-r8                    <b class="conum">(1)</b>
-rrcConnectionRequest-r8                                         <b class="conum">(2)</b>
-  ue-Identity                                                   <b class="conum">(3)</b>
+criticalExtensions : rrcConnectionRequest-r8
+rrcConnectionRequest-r8                                         <b class="conum">(1)</b>
+  ue-Identity                                                   <b class="conum">(2)</b>
     Initial UE Identity : Random Value
     Random Value : 197823733579
-  establishmentCause : mo-Signalling                            <b class="conum">(4)</b>
-  spare : 0                                                     <b class="conum">(5)</b>
+  establishmentCause : mo-Signalling                            <b class="conum">(3)</b>
+  spare : 0                                                     <b class="conum">(4)</b>
     [0 ] : 0
 
 
@@ -1670,9 +1775,6 @@ Message dump (Hex):
 </div>
 <div class="colist arabic">
 <ol>
-<li>
-<p>关键字扩展</p>
-</li>
 <li>
 <p>RRC连接请求, R8版本</p>
 </li>
@@ -1699,25 +1801,6 @@ Message dump (Hex):
 <pre>MS1
 RRC Connection Setup (DL-CCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 49
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192916.25 ms) 19:46:32.916
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874333
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 0
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : CcchDownlink
-    Message Length : 24
 rrc-TransactionIdentifier : 1                                   <b class="conum">(1)</b>
 criticalExtensions : c1                                         <b class="conum">(2)</b>
 c1 : rrcConnectionSetup-r8                                      <b class="conum">(3)</b>
@@ -1785,12 +1868,7 @@ rrcConnectionSetup-r8
         SchedulingRequestConfig : setup                         <b class="conum">(57)</b>
         sr-PUCCH-ResourceIndex : 0                              <b class="conum">(58)</b>
         sr-ConfigIndex : 72                                     <b class="conum">(59)</b>
-        dsr-TransMax : n64                                      <b class="conum">(60)</b>
-
-Message dump (Hex):
-    68 12 98 0F A9 A0 19 83 B0 FA
-    73 3E 45 E5 C9 2B F8 60 C0 10
-    A0 01 22 00</pre>
+        dsr-TransMax : n64                                      <b class="conum">(60)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1988,65 +2066,16 @@ Message dump (Hex):
 <pre>MS1
 RRC Connection Setup Complete (UL-DCCH)
 
-Time : 18:02:58.666
-Vendor Header
-  Length : 101
-  Log Code (Hex) : 0xB0C0
-  HW Timestamp : (71192920.00 ms) 19:46:32.920
-    1.25 ms fraction : 0.00
-    CFN : 0
-    1.25 ms counter : 868618874336
-  RRC Signaling Header
-    Log Packet Version : 2
-    RRC Release Number : 9.10.0
-    Radio Bearer Id : 1
-    Physical Cell Id : 2
-    E-ARFCN : 39150
-    System Frame Number
-      System frame number : N/A
-      Sub frame number : N/A
-    Message Type : DcchUplink
-    Message Length : 76
-rrc-TransactionIdentifier : 1
-criticalExtensions : c1
-c1 : rrcConnectionSetupComplete-r8
 rrcConnectionSetupComplete-r8                                   <b class="conum">(1)</b>
   selectedPLMN-Identity : 1                                     <b class="conum">(2)</b>
   registeredMME                                                 <b class="conum">(3)</b>
     mmegi : 0000000000000010
-      [0 ] : 0
-      [1 ] : 0
-      [2 ] : 0
-      [3 ] : 0
-      [4 ] : 0
-      [5 ] : 0
-      [6 ] : 0
-      [7 ] : 0
-      [8 ] : 0
-      [9 ] : 0
-      [10] : 0
-      [11] : 0
-      [12] : 0
-      [13] : 0
-      [14] : 1
-      [15] : 0
     mmec
       MMEC : (0x1) : 1
   dedicatedInfoNAS                                              <b class="conum">(4)</b>
     Protocol Discriminator : 7 (EMM)
     Message Type : Attach Request
-    Message Contents : 17 71 ...
-
-
-Message dump (Hex):
-    22 20 00 02 01 46 17 71 87 86
-    9D 04 07 41 02 0B F6 00 F1 10
-    00 02 01 01 00 00 33 05 E0 F0
-    00 00 01 00 05 02 02 D0 31 D1
-    52 00 F1 10 31 32 5C 0A 00 13
-    FF FF FF FF FE 90 11 03 4F 18
-    A6 40 08 04 02 60 04 00 02 1F
-    02 F1 5D 01 02 E0</pre>
+    Message Contents : 17 71 ...</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2069,10 +2098,10 @@ Message dump (Hex):
 <div class="sect2">
 <h3 id="msg_ue_capability_enquir">UE Capability Enquir</h3>
 <div class="paragraph">
-<p>UE能力查询请求消息, 由基站发往终端. 查询UE在不同网络的接入能力.
-.UE Capability Enquir</p>
+<p>UE能力查询请求消息, 由基站发往终端. 查询UE在不同网络的接入能力.</p>
 </div>
 <div class="listingblock">
+<div class="title">UE Capability Enquir</div>
 <div class="content">
 <pre>MS1
 UE Capability Enquiry (DL-DCCH)
@@ -2789,13 +2818,13 @@ Message dump (Hex):
 <p>添加第一个DRB列表</p>
 </li>
 <li>
-<p>由MME分配, 端到端的承载, EPS承载ID为5</p>
+<p>由MME分配, 端到端的承载, 即erab ID为5. 建立了erab 和 DRB的关系</p>
 </li>
 <li>
 <p>DRB的ID, 由eNB分配, 无线侧数据承载</p>
 </li>
 <li>
-<p>DRB的PDCP层配置</p>
+<p>指定了该DRB的PDCP层处理配置</p>
 </li>
 <li>
 <p>PDCP层丢弃定时器,根据QCI的不同设置值不同, 比如QCI6/8/9是无限长, QCI2/7是150ms. 此处为无限大</p>
@@ -2807,7 +2836,7 @@ Message dump (Hex):
 <p>头压缩, 一般只在VoIP, 视频类的业务中才会根据eNB侧的配置决定是否启用. 该值默认关闭.</p>
 </li>
 <li>
-<p>RLC配置</p>
+<p>指定了该DRB在RLC处理配置</p>
 </li>
 <li>
 <p>AM确认模式</p>
@@ -2844,7 +2873,7 @@ Message dump (Hex):
 <p>DRB逻辑信道配置</p>
 </li>
 <li>
-<p>逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9~16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12</p>
+<p>逻辑信道优先级. UE调度器按逻辑信道优先级由高到低依次保证逻辑信道的优先速率; 所有业务优先速率保证后, 按逻辑信道优先级由高到低分配资源, 仅在QCI为6, 7, 8, 9时该参数有效. 取值范围9 ~ 16, 默认值QCI6:9; QCI7:10; QCI8:11; QCI9:12</p>
 </li>
 <li>
 <p>逻辑信道优先速率. UE调度器按逻辑信道优先级由高到低保证逻辑信道的优先速率, 仅在QCI为2, 3, 4, 6, 7, 8, 9时有效. PBR_8_KBps(8千字节/秒)</p>
@@ -3019,11 +3048,11 @@ Message dump (Hex):
 </li>
 </ol>
 </div>
+<div id="msg_rrc_conn_reconfig_compl" class="paragraph">
+<p>===
+.RRC Connection Reconfiguration Complete</p>
 </div>
-<div class="sect2">
-<h3 id="msg_rrc_conn_reconfig_compl">RRC Connection Reconfiguration Complete</h3>
 <div class="listingblock">
-<div class="title">RRC Connection Reconfiguration Complete</div>
 <div class="content">
 <pre>MS1
 RRC Connection Reconfiguration Complete (UL-DCCH)
@@ -3049,11 +3078,166 @@ Vendor Header
     Message Length : 2
 rrc-TransactionIdentifier : 1
 criticalExtensions : rrcConnectionReconfigurationComplete-r8
-rrcConnectionReconfigurationComplete-r8
-
-Message dump (Hex):
-    12 00</pre>
+rrcConnectionReconfigurationComplete-r8</pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_rrc_conn_reconfig_for_meas_add">RRC Connection Reconfiguration for add Measurement</h3>
+<div class="listingblock">
+<div class="title">RRC Connection Reconfiguration</div>
+<div class="content">
+<pre>MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig                                                              <b class="conum">(1)</b>
+    reportConfigToAddModList                                              <b class="conum">(2)</b>
+      ReportConfigToAddModList :
+        [0 ] :
+          reportConfigId : 7                                              <b class="conum">(3)</b>
+          reportConfig : reportConfigEUTRA                                <b class="conum">(4)</b>
+          reportConfigEUTRA
+            triggerType : periodical                                      <b class="conum">(5)</b>
+            purpose : reportStrongestCells                                <b class="conum">(6)</b>
+            triggerQuantity : rsrp                                        <b class="conum">(7)</b>
+            reportQuantity : both                                         <b class="conum">(8)</b>
+            maxReportCells : 8                                            <b class="conum">(9)</b>
+            reportInterval : ms240                                        <b class="conum">(10)</b>
+            reportAmount : infinity                                       <b class="conum">(11)</b>
+    measIdToAddModList
+      MeasIdToAddModList :                                                <b class="conum">(12)</b>
+        [0 ] :
+          measId : 7                                                      <b class="conum">(13)</b>
+          measObjectId : 1                                                <b class="conum">(14)</b>
+          reportConfigId : 7                                              <b class="conum">(15)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>测量配置相关模块</p>
+</li>
+<li>
+<p>测量任务标识添加列表, 添加测量报告</p>
+</li>
+<li>
+<p>测量报告配置ID号</p>
+</li>
+<li>
+<p>表示E-UTRA, UTRA, GERAN, 或 CDMA2000 测量的测量上报配置</p>
+</li>
+<li>
+<p>触发类型, 周期测量或事件触发测量</p>
+</li>
+<li>
+<p>目的, 报告信号最强小区</p>
+</li>
+<li>
+<p>triggerQuantity</p>
+</li>
+<li>
+<p>reportQuantity</p>
+</li>
+<li>
+<p>maxReportCells</p>
+</li>
+<li>
+<p>测量报告周期240ms</p>
+</li>
+<li>
+<p>测量报告数量</p>
+</li>
+<li>
+<p>测量任务标识添加列表, 包含要添加或修改的测量标识列表</p>
+</li>
+<li>
+<p>测量标识</p>
+</li>
+<li>
+<p>//late</p>
+</li>
+<li>
+<p>//later</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_rrc_conn_reconfig_for_meas_remove">RRC Connection Reconfiguration for remove Measurement</h3>
+<div class="listingblock">
+<div class="title">RRC Connection Reconfiguration for remove Measurement</div>
+<div class="content">
+<pre>MS1
+RRC Connection Reconfiguration (DL-DCCH)
+
+rrcConnectionReconfiguration-r8
+  measConfig
+    measIdToRemoveList                                                    <b class="conum">(1)</b>
+      MeasIdToRemoveList :
+        [0 ] : 6                                                          <b class="conum">(2)</b>
+        [1 ] : 7                                                          <b class="conum">(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>要删除的measID列表</p>
+</li>
+<li>
+<p>删除测量报告ID6</p>
+</li>
+<li>
+<p>删除测量报告ID7</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_meas_report">Measurement Report</h3>
+<div class="listingblock">
+<div class="title">Measurement Report</div>
+<div class="content">
+<pre>MS1
+Measurement Report (UL-DCCH)
+
+measurementReport-r8
+  measResults
+    measId : 5                                                            <b class="conum">(1)</b>
+    rsrpResult : 57                                                       <b class="conum">(2)</b>
+    rsrqResult : 15                                                       <b class="conum">(3)</b>
+    measResultNeighCells : measResultListEUTRA                            <b class="conum">(4)</b>
+    measResultListEUTRA
+      MeasResultListEUTRA :                                               <b class="conum">(5)</b>
+        [0 ] :
+          physCellId : 3                                                  <b class="conum">(6)</b>
+          rsrpResult : 62                                                 <b class="conum">(7)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>服务小区测量报告IE</p>
+</li>
+<li>
+<p>RSRP值</p>
+</li>
+<li>
+<p>RSRQ值</p>
+</li>
+<li>
+<p>临小区测量结果</p>
+</li>
+<li>
+<p>临小区EUTRA测量结果</p>
+</li>
+<li>
+<p>对应临小区物理层标识</p>
+</li>
+<li>
+<p>临小区RSRP值</p>
+</li>
+</ol>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -3073,50 +3257,29 @@ Message dump (Hex):
 <pre>S1 Application Protocol
   S1AP-PDU: initiatingMessage (0)
     initiatingMessage
-      procedureCode: id-initialUEMessage (12)                   <b class="conum">(1)</b>
+      procedureCode: id-initialUEMessage (12)                  <b class="conum">(1)</b>
       criticality: ignore (1)
-      value
-        InitialUEMessage                                        <b class="conum">(2)</b>
-          protocolIEs: 5 items
-            Item 0: id-eNB-UE-S1AP-ID                           <b class="conum">(3)</b>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: reject (0)
-                value
-                  ENB-UE-S1AP-ID: 1                             <b class="conum">(4)</b>
-            Item 1: id-NAS-PDU                                  <b class="conum">(5)</b>
-              ProtocolIE-Field
-                id: id-NAS-PDU (26)
-                criticality: reject (0)
-                value
-                  NAS-PDU: 177187869d04074102...
-                  Non-Access-Stratum (NAS)PDU
-            Item 2: id-TAI                                      <b class="conum">(6)</b>
-              ProtocolIE-Field
-                id: id-TAI (67)
-                criticality: reject (0)
-                value
-                  TAI
-                    pLMNidentity: 00f110                        <b class="conum">(7)</b>
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    tAC: 3132                                   <b class="conum">(8)</b>
-            Item 3: id-EUTRAN-CGI                               <b class="conum">(9)</b>
-              ProtocolIE-Field
-                id: id-EUTRAN-CGI (100)
-                criticality: ignore (1)
-                value
-                  EUTRAN-CGI
-                    pLMNidentity: 00f110
-                    Mobile Country Code (MCC): Unknown (1)
-                    Mobile Network Code (MNC): Unknown (01)
-                    cell-ID: 00000020                           <b class="conum">(10)</b>
-            Item 4: id-RRC-Establishment-Cause                  <b class="conum">(11)</b>
-              ProtocolIE-Field
-                id: id-RRC-Establishment-Cause (134)
-                criticality: ignore (1)
-                value
-                  RRC-Establishment-Cause: mo-Signalling (3)    <b class="conum">(12)</b></pre>
+       InitialUEMessage                                        <b class="conum">(2)</b>
+         protocolIEs: 5 items
+           Item 0: id-eNB-UE-S1AP-ID                           <b class="conum">(3)</b>
+               ENB-UE-S1AP-ID: 1                               <b class="conum">(4)</b>
+           Item 1: id-NAS-PDU                                  <b class="conum">(5)</b>
+               NAS-PDU: 177187869d04074102...
+               Non-Access-Stratum (NAS)PDU
+           Item 2: id-TAI                                      <b class="conum">(6)</b>
+               TAI
+                 pLMNidentity: 00f110                          <b class="conum">(7)</b>
+                 Mobile Country Code (MCC): Unknown (1)
+                 Mobile Network Code (MNC): Unknown (01)
+                 tAC: 3132                                     <b class="conum">(8)</b>
+           Item 3: id-EUTRAN-CGI                               <b class="conum">(9)</b>
+                EUTRAN-CGI
+                  pLMNidentity: 00f110
+                  Mobile Country Code (MCC): Unknown (1)
+                  Mobile Network Code (MNC): Unknown (01)
+                  cell-ID: 00000020                            <b class="conum">(10)</b>
+           Item 4: id-RRC-Establishment-Cause                  <b class="conum">(11)</b>
+               RRC-Establishment-Cause: mo-Signalling (3)      <b class="conum">(12)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3173,48 +3336,47 @@ Message dump (Hex):
   initiatingMessage
    procedureCode: id-InitialContextSetup (9)
    criticality: reject (0)
-   value
-     InitialContextSetupRequest                                 <b class="conum">(1)</b>
-       protocolIEs: 6 items
-         Item 0: id-MME-UE-S1AP-ID
-           MME-UE-S1AP-ID: 33554442                             <b class="conum">(2)</b>
-         Item 1: id-eNB-UE-S1AP-ID
-           ENB-UE-S1AP-ID: 1                                    <b class="conum">(3)</b>
-         Item 2: id-uEaggregateMaximumBitrate
-           UEAggregateMaximumBitrate                            <b class="conum">(4)</b>
-             uEaggregateMaximumBitRateDL: 20480000              <b class="conum">(5)</b>
-             uEaggregateMaximumBitRateUL: 4096000               <b class="conum">(6)</b>
-         Item 3: id-E-RABToBeSetupListCtxtSUReq                 <b class="conum">(7)</b>
-           E-RABToBeSetupListCtxtSUReq: 1 item
-             Item 0: id-E-RABToBeSetupItemCtxtSUReq
-               E-RABToBeSetupItemCtxtSUReq
-                 e-RAB-ID: 5                                    <b class="conum">(8)</b>
-                 e-RABlevelQoSParameters                        <b class="conum">(9)</b>
-                   qCI: 7                                       <b class="conum">(10)</b>
-                   allocationRetentionPriority                  <b class="conum">(11)</b>
-                     priorityLevel: highest (1)                 <b class="conum">(12)</b>
-                     pre-emptionCapability: may-trigger-pre-emption (1)   <b class="conum">(13)</b>
-                     pre-emptionVulnerability: pre-emptable (1)           <b class="conum">(14)</b>
-                   gbrQosInformation                            <b class="conum">(15)</b>
-                     e-RAB-MaximumBitrateDL: 0
-                     e-RAB-MaximumBitrateUL: 0
-                     e-RAB-GuaranteedBitrateDL: 0
-                     e-RAB-GuaranteedBitrateUL: 0
-                 0... .... Extension Present Bit: False
-                 transportLayerAddress: 0a5878cc
-                   transportLayerAddress(IPv4): 10.88.120.204   <b class="conum">(16)</b>
-                 gTP-TEID: 0000048a                             <b class="conum">(17)</b>
-                 nAS-PDU: 27dac5cd...
-                 Non-Access-Stratum (NAS)PDU
-                   [message ignore]                             <b class="conum">(18)</b>
-         Item 4: id-UESecurityCapabilities
-           UESecurityCapabilities                               <b class="conum">(19)</b>
-             ..0. .... Extension Present Bit: False
-             encryptionAlgorithms: c000                         <b class="conum">(20)</b>
-             ...0 .... Extension Present Bit: False
-             integrityProtectionAlgorithms: c000                <b class="conum">(21)</b>
-         Item 5: id-SecurityKey
-           SecurityKey: dc1e1e... [bit length 256]              <b class="conum">(22)</b></pre>
+    InitialContextSetupRequest                                 <b class="conum">(1)</b>
+      protocolIEs: 6 items
+        Item 0: id-MME-UE-S1AP-ID
+          MME-UE-S1AP-ID: 33554442                             <b class="conum">(2)</b>
+        Item 1: id-eNB-UE-S1AP-ID
+          ENB-UE-S1AP-ID: 1                                    <b class="conum">(3)</b>
+        Item 2: id-uEaggregateMaximumBitrate
+          UEAggregateMaximumBitrate                            <b class="conum">(4)</b>
+            uEaggregateMaximumBitRateDL: 20480000              <b class="conum">(5)</b>
+            uEaggregateMaximumBitRateUL: 4096000               <b class="conum">(6)</b>
+        Item 3: id-E-RABToBeSetupListCtxtSUReq                 <b class="conum">(7)</b>
+          E-RABToBeSetupListCtxtSUReq: 1 item
+            Item 0: id-E-RABToBeSetupItemCtxtSUReq
+              E-RABToBeSetupItemCtxtSUReq
+                e-RAB-ID: 5                                    <b class="conum">(8)</b>
+                e-RABlevelQoSParameters                        <b class="conum">(9)</b>
+                  qCI: 7                                       <b class="conum">(10)</b>
+                  allocationRetentionPriority                  <b class="conum">(11)</b>
+                    priorityLevel: highest (1)                 <b class="conum">(12)</b>
+                    pre-emptionCapability: may-trigger-pre-emption (1)   <b class="conum">(13)</b>
+                    pre-emptionVulnerability: pre-emptable (1)           <b class="conum">(14)</b>
+                  gbrQosInformation                            <b class="conum">(15)</b>
+                    e-RAB-MaximumBitrateDL: 0
+                    e-RAB-MaximumBitrateUL: 0
+                    e-RAB-GuaranteedBitrateDL: 0
+                    e-RAB-GuaranteedBitrateUL: 0
+                0... .... Extension Present Bit: False
+                transportLayerAddress: 0a5878cc
+                  transportLayerAddress(IPv4): 10.88.120.204   <b class="conum">(16)</b>
+                gTP-TEID: 0000048a                             <b class="conum">(17)</b>
+                nAS-PDU: 27dac5cd...
+                Non-Access-Stratum (NAS)PDU
+                  [message ignore]                             <b class="conum">(18)</b>
+        Item 4: id-UESecurityCapabilities
+          UESecurityCapabilities                               <b class="conum">(19)</b>
+            ..0. .... Extension Present Bit: False
+            encryptionAlgorithms: c000                         <b class="conum">(20)</b>
+            ...0 .... Extension Present Bit: False
+            integrityProtectionAlgorithms: c000                <b class="conum">(21)</b>
+        Item 5: id-SecurityKey
+          SecurityKey: dc1e1e... [bit length 256]              <b class="conum">(22)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3302,7 +3464,6 @@ Message dump (Hex):
   initiatingMessage
    procedureCode: id-UECapabilityInfoIndication (22)
    criticality: ignore (1)
-   value
     UECapabilityInfoIndication                                  <b class="conum">(1)</b>
      protocolIEs: 3 items
       Item 0: id-MME-UE-S1AP-ID
@@ -3496,38 +3657,21 @@ Message dump (Hex):
     successfulOutcome
       procedureCode: id-InitialContextSetup (9)                           <b class="conum">(1)</b>
       criticality: reject (0)
-      value
-        InitialContextSetupResponse
-          protocolIEs: 3 items
-            Item 0: id-MME-UE-S1AP-ID                                     <b class="conum">(2)</b>
-              ProtocolIE-Field
-                id: id-MME-UE-S1AP-ID (0)
-                criticality: ignore (1)
-                value
-                  MME-UE-S1AP-ID: 33554442
-            Item 1: id-eNB-UE-S1AP-ID                                     <b class="conum">(3)</b>
-              ProtocolIE-Field
-                id: id-eNB-UE-S1AP-ID (8)
-                criticality: ignore (1)
-                value
-                  ENB-UE-S1AP-ID: 1
-            Item 2: id-E-RABSetupListCtxtSURes                            <b class="conum">(4)</b>
-              ProtocolIE-Field
-                id: id-E-RABSetupListCtxtSURes (51)
-                criticality: ignore (1)
-                value
-                  E-RABSetupListCtxtSURes: 1 item
-                    Item 0: id-E-RABSetupItemCtxtSURes
-                      ProtocolIE-SingleContainer
-                        id: id-E-RABSetupItemCtxtSURes (50)
-                        criticality: ignore (1)
-                        value
-                          E-RABSetupItemCtxtSURes
-                            e-RAB-ID: 5                                  <b class="conum">(5)</b>
-                            .... ...0 Extension Present Bit: False
-                            transportLayerAddress: 0a58788c              <b class="conum">(6)</b>
-                              transportLayerAddress(IPv4): 10.88.120.140
-                            gTP-TEID: 0200000a                           <b class="conum">(7)</b></pre>
+       InitialContextSetupResponse
+         protocolIEs: 3 items
+           Item 0: id-MME-UE-S1AP-ID                                      <b class="conum">(2)</b>
+            MME-UE-S1AP-ID: 33554442
+           Item 1: id-eNB-UE-S1AP-ID                                      <b class="conum">(3)</b>
+            ENB-UE-S1AP-ID: 1
+           Item 2: id-E-RABSetupListCtxtSURes                             <b class="conum">(4)</b>
+            E-RABSetupListCtxtSURes: 1 item
+              Item 0: id-E-RABSetupItemCtxtSURes
+               E-RABSetupItemCtxtSURes
+                 e-RAB-ID: 5                                              <b class="conum">(5)</b>
+                 .... ...0 Extension Present Bit: False
+                 transportLayerAddress: 0a58788c                          <b class="conum">(6)</b>
+                   transportLayerAddress(IPv4): 10.88.120.140
+                 gTP-TEID: 0200000a                                       <b class="conum">(7)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3555,6 +3699,417 @@ Message dump (Hex):
 </li>
 </ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="msg_s1_setup_req">S1 Setup Request</h3>
+<div class="listingblock">
+<div class="title">S1 Setup Request</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-S1Setup (17)
+    S1SetupRequest
+     protocolIEs: 3 items
+      Item 0: id-Global-ENB-ID                                            <b class="conum">(1)</b>
+       Global-ENB-ID
+        pLMNidentity: 00f110
+        Mobile Country Code (MCC): Unknown (1)
+        Mobile Network Code (MNC): Unknown (01)
+        eNB-ID: homeENB-ID (1)
+         homeENB-ID: 00000c80
+      Item 1: id-SupportedTAs                                             <b class="conum">(2)</b>
+       SupportedTAs: 1 item
+          tAC: 3132
+          broadcastPLMNs: 1 item
+           Item 0
+            PLMNidentity: 00f110
+            Mobile Country Code (MCC): Unknown (1)
+            Mobile Network Code (MNC): Unknown (01)
+      Item 2: id-DefaultPagingDRX                                         <b class="conum">(3)</b>
+         PagingDRX: v64 (1)</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Global-ENB-ID = PLMN ID + eNB ID</p>
+</li>
+<li>
+<p>支持的TAs列表</p>
+</li>
+<li>
+<p>DefaultPagingDRX</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_s1_setup_rsp">S1 Setup Response</h3>
+<div class="listingblock">
+<div class="title">S1 Setup Response</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-S1Setup (17)
+    S1SetupResponse
+     protocolIEs: 2 items
+      Item 0: id-ServedGUMMEIs                                            <b class="conum">(1)</b>
+       ServedGUMMEIs: 1 item
+        Item 0
+         ServedGUMMEIsItem
+          servedPLMNs: 1 item
+           Item 0
+            PLMNidentity: 00f110
+            Mobile Country Code (MCC): Unknown (1)
+            Mobile Network Code (MNC): Unknown (01)
+          servedGroupIDs: 1 item
+           Item 0
+            MME-Group-ID: 0002
+          servedMMECs: 1 item
+           Item 0
+            MME-Code: 01
+      Item 1: id-RelativeMMECapacity                                      <b class="conum">(2)</b>
+         RelativeMMECapacity: 255</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>GUMMEI = PLMN ID + MMEGI + MMEC</p>
+</li>
+<li>
+<p>RelativeMMECapacity</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_ENB_direct_info_transfer">ENB Direct Information Transfer</h3>
+<div class="listingblock">
+<div class="title">ENB Direct Information Transfer</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-eNBDirectInformationTransfer (37)
+    ENBDirectInformationTransfer
+     protocolIEs: 1 item
+      Item 0: id-Inter-SystemInformationTransferTypeEDT                   <b class="conum">(1)</b>
+        id: id-Inter-SystemInformationTransferTypeEDT (121)
+         Inter-SystemInformationTransferType: rIMTransfer (0)             <b class="conum">(2)</b>
+          rIMTransfer
+           rIMInformation: 71548900211332170001002d548f0200f11031320000f110...
+           rIMRoutingAddress: gERAN-Cell-ID (0)
+            gERAN-Cell-ID
+             lAI
+              pLMNidentity: 211332
+              Mobile Country Code (MCC): Unknown (123)
+              Mobile Network Code (MNC): Unknown (123)
+              lAC: 1700
+             rAC: 01
+             cI: 002d</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Inter-SystemInformationTransferType</p>
+</li>
+<li>
+<p>rIMTransfer 传输RAN Information Management</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_x2_setup_req">X2 Setup Request</h3>
+<div class="listingblock">
+<div class="title">X2 Setup Request</div>
+<div class="content">
+<pre>EUTRAN X2 Application Protocol (X2AP)
+ X2AP-PDU: initiatingMessage (0)
+  initiatingMessage
+    X2SetupRequest
+     protocolIEs: 2 items
+      Item 0: id-GlobalENB-ID
+         GlobalENB-ID
+          pLMN-Identity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: home-eNB-ID (1)
+           home-eNB-ID: 00000c80
+      Item 1: id-ServedCells
+         ServedCells: 1 item
+          Item 0
+           ServedCells item
+            servedCellInfo
+             pCI: 200
+             cellId
+              pLMN-Identity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+              eUTRANcellIdentifier: 00000c80
+             tAC: 3132
+             broadcastPLMNs: 1 item
+              Item 0
+               PLMN-Identity: 00f110
+               Mobile Country Code (MCC): Unknown (1)
+               Mobile Network Code (MNC): Unknown (01)
+             eUTRA-Mode-Info: tDD (1)
+              tDD
+               eARFCN: 39150
+               transmission-Bandwidth: bw100 (5)
+               subframeAssignment: sa2 (2)
+               specialSubframe-Info
+                specialSubframePatterns: ssp7 (7)
+                cyclicPrefixDL: extended (1)
+                cyclicPrefixUL: extended (1)
+             iE-Extensions: 2 items
+              Item 0: id-Number-of-Antennaports
+                 Number-of-Antennaports: an2 (1)
+              Item 1: id-PRACH-Configuration
+                 PRACH-Configuration
+                  rootSequenceIndex: 22
+                  zeroCorrelationIndex: 1
+                  .... 0... highSpeedFlag: False
+                  prach-FreqOffset: 10
+                  prach-ConfigIndex: 0</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_x2_setup_rsp">X2 Setup Response</h3>
+<div class="listingblock">
+<div class="title">X2 Setup Response</div>
+<div class="content">
+<pre>EUTRAN X2 Application Protocol (X2AP)
+ X2AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-x2Setup (6)
+   criticality: reject (0)
+   value
+    X2SetupResponse
+     protocolIEs: 3 items
+      Item 0: id-GlobalENB-ID
+         GlobalENB-ID
+          pLMN-Identity: 00f110
+          Mobile Country Code (MCC): Unknown (1)
+          Mobile Network Code (MNC): Unknown (01)
+          eNB-ID: home-eNB-ID (1)
+           home-eNB-ID: 00000c80
+      Item 1: id-ServedCells
+         ServedCells: 1 item
+          Item 0
+           ServedCells item
+            servedCellInfo
+             pCI: 200
+             cellId
+              pLMN-Identity: 00f110
+              Mobile Country Code (MCC): Unknown (1)
+              Mobile Network Code (MNC): Unknown (01)
+              eUTRANcellIdentifier: 00000c80
+             tAC: 3132
+             broadcastPLMNs: 1 item
+              Item 0
+               PLMN-Identity: 00f110
+               Mobile Country Code (MCC): Unknown (1)
+               Mobile Network Code (MNC): Unknown (01)
+             eUTRA-Mode-Info: tDD (1)
+              tDD
+               eARFCN: 39150
+               transmission-Bandwidth: bw100 (5)
+               subframeAssignment: sa2 (2)
+               specialSubframe-Info
+                specialSubframePatterns: ssp7 (7)
+                cyclicPrefixDL: extended (1)
+                cyclicPrefixUL: extended (1)
+             iE-Extensions: 2 items
+              Item 0: id-Number-of-Antennaports
+                 Number-of-Antennaports: an2 (1)
+              Item 1: id-PRACH-Configuration
+                 PRACH-Configuration
+                  rootSequenceIndex: 22
+                  zeroCorrelationIndex: 1
+                  .... 0... highSpeedFlag: False
+                  prach-FreqOffset: 10
+                  prach-ConfigIndex: 0
+      Item 2: id-CriticalityDiagnostics
+         CriticalityDiagnostics</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_erab_setup_req">E-RAB Setup Request</h3>
+<div class="listingblock">
+<div class="title">E-RAB Setup Request</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: initiatingMessage (0)
+  initiatingMessage
+   procedureCode: id-E-RABSetup (5)
+   criticality: reject (0)
+    E-RABSetupRequest
+     protocolIEs: 4 items
+      Item 0: id-MME-UE-S1AP-ID
+         MME-UE-S1AP-ID: 33554442                                         <b class="conum">(1)</b>
+      Item 1: id-eNB-UE-S1AP-ID
+         ENB-UE-S1AP-ID: 1                                                <b class="conum">(2)</b>
+      Item 2: id-uEaggregateMaximumBitrate                                <b class="conum">(3)</b>
+         UEAggregateMaximumBitrate
+          uEaggregateMaximumBitRateDL: 40960000                           <b class="conum">(4)</b>
+          uEaggregateMaximumBitRateUL: 8192000                            <b class="conum">(5)</b>
+      Item 3: id-E-RABToBeSetupListBearerSUReq                            <b class="conum">(6)</b>
+         E-RABToBeSetupListBearerSUReq: 1 item
+          Item 0: id-E-RABToBeSetupItemBearerSUReq
+             E-RABToBeSetupItemBearerSUReq
+              e-RAB-ID: 6                                                 <b class="conum">(7)</b>
+              e-RABlevelQoSParameters
+               qCI: 7
+               allocationRetentionPriority
+                priorityLevel: highest (1)
+                pre-emptionCapability: may-trigger-pre-emption (1)
+                pre-emptionVulnerability: pre-emptable (1)
+               gbrQosInformation
+                e-RAB-MaximumBitrateDL: 0
+                e-RAB-MaximumBitrateUL: 0
+                e-RAB-GuaranteedBitrateDL: 0
+                e-RAB-GuaranteedBitrateUL: 0
+              0... .... Extension Present Bit: False
+              transportLayerAddress: 0a5878cc
+               transportLayerAddress(IPv4): 10.88.120.204 (10.88.120.204)
+              gTP-TEID: 00000487
+              nAS-PDU: 27cfa1c62e046203c10507ffffffff1905636d6e6574066d...
+              Non-Access-Stratum (NAS)PDU
+               0010 .... = Security header type: Integrity protected and ciphered (2)
+               .... 0111 = Protocol discriminator: EPS mobility management messages (7)
+               Message authentication code: 0xcfa1c62e
+               Sequence number: 4
+               0110 .... = EPS bearer identity: 0x06
+               .... 0010 = Protocol discriminator: EPS session management messages (2)
+               Procedure transaction identity: 3
+               NAS EPS session management messages: Activate default EPS bearer context request (0xc1)
+               EPS quality of service
+                Length: 5
+                Quality of Service Class Identifier (QCI): QCI 7 (7)
+                Maximum bit rate for uplink : 0 kbps
+                Maximum bit rate for downlink : 0 kbps
+                Guaranteed bit rate for uplink : 0 kbps
+                Guaranteed bit rate for downlink : 0 kbps
+               Access Point Name
+                Length: 25
+                APN: cmnet.mnc001.mcc001.gprs
+               PDN address
+                Length: 5
+                0000 0... = Spare bit(s): 0x00
+                PDN type: IPv4 (1)
+                PDN IPv4: 70.0.0.2 (70.0.0.2)
+               APN aggregate maximum bit rate
+                Element ID: 94
+                Length: 4
+                APN-AMBR for downlink : 8640 kbps
+                APN-AMBR for uplink : 4096 kbps
+                APN-AMBR for downlink (extended) : 20 Mbps
+                Total APN-AMBR for downlink : 20.000 Mbps
+                Use the value indicated by the APN-AMBR for uplink
+                Total APN-AMBR for uplink : 4.096 Mbps
+               Protocol Configuration Options
+                Element ID: 39
+                Length: 41
+                [Link direction: Network to MS (1)]
+                1... .... = Ext: 0x01
+                Configuration Protocol: PPP (0)
+                Protocol or Container ID: IP Control Protocol (32801)
+                Length: 0x10 (16)
+                PPP IP Control Protocol
+                 Code: Configuration Ack (0x02)
+                 Identifier: 0x00
+                 Length: 16
+                 Options: (12 bytes)
+                  Primary DNS server IP address: 8.8.8.8
+                  Secondary DNS server IP address: 4.2.2.1
+                Protocol or Container ID: Challenge Handshake Authentication Protocol (49699)
+                Length: 0x04 (4)
+                PPP Challenge Handshake Authentication Protocol
+                 Code: Success (3)
+                 Identifier: 0
+                 Length: 4
+                Protocol or Container ID: DNS Server IPv4 Address (13)
+                Length: 0x04 (4)
+                Data (4 bytes)
+
+0000  08 08 08 08            ....
+                 Data: 08080808
+                 [Length: 4]
+                Protocol or Container ID: DNS Server IPv4 Address (13)
+                Length: 0x04 (4)
+                Data (4 bytes)
+
+0000  04 02 02 01            ....
+                 Data: 04020201
+                 [Length: 4]</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+<li>
+<p>later</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="msg_erab_setup_rsp">E-RAB Setup Response</h3>
+<div class="listingblock">
+<div class="title">E-RAB Setup Response</div>
+<div class="content">
+<pre>S1 Application Protocol
+ S1AP-PDU: successfulOutcome (1)
+  successfulOutcome
+   procedureCode: id-E-RABSetup (5)
+   criticality: reject (0)
+    E-RABSetupResponse
+     protocolIEs: 3 items
+      Item 0: id-MME-UE-S1AP-ID
+         MME-UE-S1AP-ID: 33554442
+      Item 1: id-eNB-UE-S1AP-ID
+         ENB-UE-S1AP-ID: 1
+      Item 2: id-E-RABSetupListBearerSURes
+         E-RABSetupListBearerSURes: 1 item
+          Item 0: id-E-RABSetupItemBearerSURes
+             E-RABSetupItemBearerSURes
+              e-RAB-ID: 6
+              .... ...0 Extension Present Bit: False
+              transportLayerAddress: 0a58788c
+               transportLayerAddress(IPv4): 10.88.120.140
+              gTP-TEID: 01000009</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -3563,7 +4118,7 @@ Message dump (Hex):
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2015-08-19 16:54:57 CST
+Last updated 2015-08-25 11:00:17 CST
 </div>
 </div>
 </body>
