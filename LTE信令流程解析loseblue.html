@@ -416,9 +416,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">loseblue</span><br>
 <span id="email" class="email"><a href="mailto:loseblue@163.com">loseblue@163.com</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2015年7月29日 14</span>
-<br><span id="revremark">33:29</span>
+<span id="revdate">v0.2</span>
 </div>
 </div>
 <div id="content">
@@ -1553,51 +1551,6 @@ interFreqCarrierFreqList                                        <b class="conum"
 
 </div>
 <div class="sect2">
-<h3 id="_s1初始化">S1初始化</h3>
-<div class="imageblock">
-<div class="content">
-<img src="diag-f7baf6cbcc7efae0b96fe0a4ade92a58.png" alt="diag f7baf6cbcc7efae0b96fe0a4ade92a58" width="304" height="196">
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>S1 Setup Request. <a href="#msg_s1_setup_req">[S1 Setup Request]</a></p>
-</li>
-<li>
-<p>S1 Setup Response. <a href="#msg_s1_setup_rsp">[S1 Setup Response]</a></p>
-</li>
-<li>
-<p>ENB Direct Information Transfer.<a href="#msg_ENB_direct_info_transfer">[ENB Direct Information Transfer]</a></p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_x2初始化">X2初始化</h3>
-<div class="imageblock">
-<div class="content">
-<img src="diag-4d7d25eaa01acfe57f3bba624c7eed75.png" alt="diag 4d7d25eaa01acfe57f3bba624c7eed75" width="358" height="227">
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>X2 Setup Request. <a href="#msg_x2_setup_req">[X2 Setup Request]</a></p>
-</li>
-<li>
-<p>X2 Setup Response. <a href="#msg_x2_setup_rsp">[X2 Setup Response]</a></p>
-</li>
-<li>
-<p>ENB Configuration Update.<a href="#msg_ENB_config_update">[ENB Configuration Update]</a></p>
-</li>
-<li>
-<p>ENB Configuration Update Acknowledge.<a href="#msg_ENB_config_update_ack">[ENB Configuration Update Acknowledge]</a></p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_测量报告">测量报告</h3>
 <div class="imageblock">
 <div class="content">
@@ -1643,7 +1596,64 @@ interFreqCarrierFreqList                                        <b class="conum"
 <p>E-RAB Setup Request <a href="#msg_erab_setup_req">[E-RAB Setup Request]</a></p>
 </li>
 <li>
-<p>E-RAB Setup Response &lt;&lt;, [E-RAB Setup Response]&gt;&gt;</p>
+<p>E-RAB Setup Response <a href="#msg_erab_setup_rsp">[E-RAB Setup Response]</a></p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_s1信令流程">S1信令流程</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_s1初始化">S1初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-f7baf6cbcc7efae0b96fe0a4ade92a58.png" alt="diag f7baf6cbcc7efae0b96fe0a4ade92a58" width="304" height="196">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>S1 Setup Request. <a href="#msg_s1_setup_req">[S1 Setup Request]</a></p>
+</li>
+<li>
+<p>S1 Setup Response. <a href="#msg_s1_setup_rsp">[S1 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Direct Information Transfer.<a href="#msg_ENB_direct_info_transfer">[ENB Direct Information Transfer]</a></p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_x2信令流程">X2信令流程</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_x2初始化">X2初始化</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-4d7d25eaa01acfe57f3bba624c7eed75.png" alt="diag 4d7d25eaa01acfe57f3bba624c7eed75" width="358" height="227">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>X2 Setup Request. <a href="#msg_x2_setup_req">[X2 Setup Request]</a></p>
+</li>
+<li>
+<p>X2 Setup Response. <a href="#msg_x2_setup_rsp">[X2 Setup Response]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update.<a href="#msg_ENB_config_update">[ENB Configuration Update]</a></p>
+</li>
+<li>
+<p>ENB Configuration Update Acknowledge.<a href="#msg_ENB_config_update_ack">[ENB Configuration Update Acknowledge]</a></p>
 </li>
 </ol>
 </div>
@@ -4074,12 +4084,6 @@ measurementReport-r8
 <li>
 <p>later</p>
 </li>
-<li>
-<p>later</p>
-</li>
-<li>
-<p>later</p>
-</li>
 </ol>
 </div>
 </div>
@@ -4117,8 +4121,7 @@ measurementReport-r8
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.1<br>
-Last updated 2015-08-25 11:00:17 CST
+Last updated 2015-10-30 16:04:28 CST
 </div>
 </div>
 </body>

@@ -664,8 +664,6 @@ S1 Application Protocol
 <5> later
 <6> later
 <7> later
-<8> later
-<9> later
 
 [[msg_erab_setup_rsp]]
 === E-RAB Setup Response
