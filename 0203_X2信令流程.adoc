@@ -1,7 +1,7 @@
 ﻿== X2信令流程
 
 === X2初始化
-[plantuml]
+[plantuml,file="x2_init.png"]
 ---------------------------------------------------------------------
 @startuml
 hide footbox
@@ -21,7 +21,7 @@ eNB2 -> eNB1: ENB Configuration Update Acknowledge
 4. ENB Configuration Update Acknowledge.<<msg_ENB_config_update_ack, [ENB Configuration Update Acknowledge]>> 
 
 === X2切换
-[plantuml]
+[plantuml,file="x2_ho.png"]
 ---------------------------------------------------------------------
 @startuml
 hide footbox

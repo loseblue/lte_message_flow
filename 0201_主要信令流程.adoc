@@ -3,7 +3,7 @@
 === 开机附着流程
 UE刚开机时, 先进行物理下行同步, 搜索测量进行小区选择, 选择到一个合适或者可接纳的小区后, 驻留并进行附着过程. 附着流程图如下: 
 
-[plantuml]
+[plantuml,file="power_on.png"]
 ---------------------------------------------------------------------
 @startuml
 hide footbox
@@ -53,7 +53,7 @@ eNB -> MME: UPLINK NAS TRANSPORT
 === 随机接入
 
 === 测量报告
-[plantuml]
+[plantuml,file="measurement.png"]
 ---------------------------------------------------------------------
 @startuml
 hide footbox

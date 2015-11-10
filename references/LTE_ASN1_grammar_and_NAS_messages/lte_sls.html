@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="niviuk.css" rel="stylesheet" type="text/css">
+  <title>LTE ASN1 LCS</title>
+  <meta name="keywords" content="LTE,LCS,E-SMLC,SLs">
+  <meta name="description" content="LTE Location services SLs ASN1 messages"><!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <div id="banner"></div>
+  </header>
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-inner">
+      <ul class="nav nav-pills">
+        <li><a href="index.html"><span class="glyphicon glyphicon-signal"></span></a></li>
+        <li><a href="rrc_lte.html">RRC (Radio)</a></li>
+        <li><a href="s1ap.html">S1</a></li>
+        <li><a href="x2ap.html">X2</a></li>
+        <li><a href="lpp.html">LPP </a></li>
+        <li><a href="lppa.html">LPPa </a></li>
+        <li><a href="lte_sls.html">LCS </a></li>
+        <li><a href="m2ap.html">M2 (eMBMS)</a></li>
+        <li><a href="m3ap.html">M3 (eMBMS)</a></li>
+        <li><a href="sbcap.html">SBc (Broadcast)</a></li>
+        <li><a href="lte_nas.php">Nas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+  <h1>LTE ASN1 LCS description</h1>
+  <h2><a id="LCS"></a>LCS Application Protocol</h2>
+  <h3><a href="http://www.3gpp.org/DynaReport/29171.htm">29.171</a> v11.3.0 (2013-06)</h3>
+  <p class="text-primary">Location services in E-UTRAN applicable to the SLs interface between the E-SMLC and the MME</p>
+  <ul>
+    <li>Convey LCS-AP messages and parameters between the MME to the E-SMLC</li>
+    <li>Tunnel LTE Positioning Protocols :</li>
+    <ul>
+      <li>LPP between the E-SMLC and the target UE</li>
+      <li>LPPa between the E-SMLC and the eNB</li>
+    </ul>
+  </ul>
+
+<p>
+<a href="#LetterA">A</a>&nbsp;&nbsp;
+<a href="#LetterB">B</a>&nbsp;&nbsp;
+<a href="#LetterC">C</a>&nbsp;&nbsp;
+<a href="#LetterD">D</a>&nbsp;&nbsp;
+<a href="#LetterE">E</a>&nbsp;&nbsp;
+<a href="#LetterG">G</a>&nbsp;&nbsp;
+<a href="#LetterH">H</a>&nbsp;&nbsp;
+<a href="#LetterI">I</a>&nbsp;&nbsp;
+<a href="#LetterL">L</a>&nbsp;&nbsp;
+<a href="#LetterM">M</a>&nbsp;&nbsp;
+<a href="#LetterN">N</a>&nbsp;&nbsp;
+<a href="#LetterO">O</a>&nbsp;&nbsp;
+<a href="#LetterP">P</a>&nbsp;&nbsp;
+<a href="#LetterR">R</a>&nbsp;&nbsp;
+<a href="#LetterS">S</a>&nbsp;&nbsp;
+<a href="#LetterT">T</a>&nbsp;&nbsp;
+<a href="#LetterU">U</a>&nbsp;&nbsp;
+<a href="#LetterV">V</a>&nbsp;&nbsp;
+</p>
+<div class="cpre">
+
+<span class="spcolor5">-- <a id="LetterA">A</a> --</span>
+
+<a href="#Accuracy-Fulfillment-Indicator">Accuracy-Fulfillment-Indicator</a>
+<a href="#Altitude">Altitude</a>
+<a href="#Altitude-And-Direction">Altitude-And-Direction</a>
+<a href="#Angle">Angle</a>
+<a href="#APDU">APDU</a>
+
+<span class="spcolor5">-- <a id="LetterB">B</a> --</span>
+
+<a href="#Bearing">Bearing</a>
+
+<span class="spcolor5">-- <a id="LetterC">C</a> --</span>
+
+<a href="#CellIdentity">CellIdentity</a>
+<a href="#Confidence">Confidence</a>
+<a href="#Connection-Oriented-Information">Connection-Oriented-Information</a>
+<a href="#Connection-Oriented-Information-Extensions">Connection-Oriented-Information-Extensions</a>
+<a href="#Connection-Oriented-Information-IEs">Connection-Oriented-Information-IEs</a>
+<a href="#connection-Oriented-Information-Transfer">connection-Oriented-Information-Transfer</a>
+<a href="#Connectionless-Information">Connectionless-Information</a>
+<a href="#Connectionless-Information-Extensions">Connectionless-Information-Extensions</a>
+<a href="#Connectionless-Information-IEs">Connectionless-Information-IEs</a>
+<a href="#connectionless-Information-Transfer">connectionless-Information-Transfer</a>
+<a href="#Correlation-ID">Correlation-ID</a>
+<a href="#Criticality">Criticality</a>
+
+<span class="spcolor5">-- <a id="LetterD">D</a> --</span>
+
+<a href="#DegreesLatitude">DegreesLatitude</a>
+<a href="#DegreesLongitude">DegreesLongitude</a>
+<a href="#Direction-Of-Altitude">Direction-Of-Altitude</a>
+
+<span class="spcolor5">-- <a id="LetterE">E</a> --</span>
+
+<a href="#E-CGI">E-CGI</a>
+<a href="#E-CGI-ExtIEs">E-CGI-ExtIEs</a>
+<a href="#E-SMLC-ID">E-SMLC-ID</a>
+<a href="#Ellipsoid-Arc">Ellipsoid-Arc</a>
+<a href="#Ellipsoid-Arc-ExtIEs">Ellipsoid-Arc-ExtIEs</a>
+<a href="#Ellipsoid-Point-With-Altitude">Ellipsoid-Point-With-Altitude</a>
+<a href="#Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid</a>
+<a href="#Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs</a>
+<a href="#Ellipsoid-Point-With-Altitude-ExtIEs">Ellipsoid-Point-With-Altitude-ExtIEs</a>
+<a href="#Ellipsoid-Point-With-Uncertainty-Ellipse">Ellipsoid-Point-With-Uncertainty-Ellipse</a>
+<a href="#Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs">Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs</a>
+<a href="#ENB-ID">ENB-ID</a>
+
+<span class="spcolor5">-- <a id="LetterG">G</a> --</span>
+
+<a href="#Geographical-Area">Geographical-Area</a>
+<a href="#Geographical-Coordinates">Geographical-Coordinates</a>
+<a href="#Geographical-Coordinates-ExtIEs">Geographical-Coordinates-ExtIEs</a>
+<a href="#Global-eNB-ID">Global-eNB-ID</a>
+<a href="#GNSS-Positioning-Data-Set">GNSS-Positioning-Data-Set</a>
+<a href="#GNSS-Positioning-Method-And-Usage">GNSS-Positioning-Method-And-Usage</a>
+
+<span class="spcolor5">-- <a id="LetterH">H</a> --</span>
+
+<a href="#Home-eNB-ID">Home-eNB-ID</a>
+<a href="#Horizontal-Accuracy">Horizontal-Accuracy</a>
+<a href="#Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a>
+<a href="#Horizontal-Velocity">Horizontal-Velocity</a>
+<a href="#Horizontal-Velocity-ExtIEs">Horizontal-Velocity-ExtIEs</a>
+<a href="#Horizontal-Velocity-With-Uncertainty">Horizontal-Velocity-With-Uncertainty</a>
+<a href="#Horizontal-Velocity-With-Uncertainty-ExtIEs">Horizontal-Velocity-With-Uncertainty-ExtIEs</a>
+<a href="#Horizontal-With-Vertical-Velocity">Horizontal-With-Vertical-Velocity</a>
+<a href="#Horizontal-With-Vertical-Velocity-And-Uncertainty">Horizontal-With-Vertical-Velocity-And-Uncertainty</a>
+<a href="#Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs">Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs</a>
+<a href="#Horizontal-With-Vertical-Velocity-ExtIEs">Horizontal-With-Vertical-Velocity-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterI">I</a> --</span>
+
+<a href="#id-Accuracy-Fulfillment-Indicator">id-Accuracy-Fulfillment-Indicator</a>
+<a href="#id-APDU">id-APDU</a>
+<a href="#id-Connection-Oriented-Information-Transfer">id-Connection-Oriented-Information-Transfer</a>
+<a href="#id-Connectionless-Information-Transfer">id-Connectionless-Information-Transfer</a>
+<a href="#id-Correlation-ID">id-Correlation-ID</a>
+<a href="#id-Destination-ID">id-Destination-ID</a>
+<a href="#id-E-UTRAN-Cell-Identifier">id-E-UTRAN-Cell-Identifier</a>
+<a href="#id-IMEI">id-IMEI</a>
+<a href="#id-IMSI">id-IMSI</a>
+<a href="#id-Include-Velocity">id-Include-Velocity</a>
+<a href="#id-LCS-Cause">id-LCS-Cause</a>
+<a href="#id-LCS-Client-Type">id-LCS-Client-Type</a>
+<a href="#id-LCS-Priority">id-LCS-Priority</a>
+<a href="#id-LCS-QOS">id-LCS-QOS</a>
+<a href="#id-LCS-Service-Type-ID">id-LCS-Service-Type-ID</a>
+<a href="#id-Location-Abort">id-Location-Abort</a>
+<a href="#id-Location-Estimate">id-Location-Estimate</a>
+<a href="#id-Location-Service-Request">id-Location-Service-Request</a>
+<a href="#id-Location-Type">id-Location-Type</a>
+<a href="#id-MultipleAPDUs">id-MultipleAPDUs</a>
+<a href="#id-Payload-Type">id-Payload-Type</a>
+<a href="#id-Positioning-Data">id-Positioning-Data</a>
+<a href="#id-Reset">id-Reset</a>
+<a href="#id-Return-Error-Cause">id-Return-Error-Cause</a>
+<a href="#id-Return-Error-Request">id-Return-Error-Request</a>
+<a href="#id-Source-Identity">id-Source-Identity</a>
+<a href="#id-UE-Positioning-Capability">id-UE-Positioning-Capability</a>
+<a href="#id-Velocity-Estimate">id-Velocity-Estimate</a>
+<a href="#IMEI">IMEI</a>
+<a href="#IMSI">IMSI</a>
+<a href="#Include-Velocity">Include-Velocity</a>
+<a href="#InitiatingMessage">InitiatingMessage</a>
+<a href="#Inner-Radius">Inner-Radius</a>
+
+<span class="spcolor5">-- <a id="LetterL">L</a> --</span>
+
+<a href="#LatitudeSign">LatitudeSign</a>
+<a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>
+<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>
+<a href="#LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1</a>
+<a href="#LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2</a>
+<a href="#LCS-AP-PDU">LCS-AP-PDU</a>
+<a href="#LCS-Cause">LCS-Cause</a>
+<a href="#LCS-Client-Type">LCS-Client-Type</a>
+<a href="#LCS-Priority">LCS-Priority</a>
+<a href="#LCS-QoS">LCS-QoS</a>
+<a href="#LCS-Service-Type-ID">LCS-Service-Type-ID</a>
+<a href="#location-Abort">location-Abort</a>
+<a href="#Location-Abort-Request">Location-Abort-Request</a>
+<a href="#Location-Abort-Request-Extensions">Location-Abort-Request-Extensions</a>
+<a href="#Location-Abort-Request-IEs">Location-Abort-Request-IEs</a>
+<a href="#Location-Request">Location-Request</a>
+<a href="#Location-Request-Extensions">Location-Request-Extensions</a>
+<a href="#Location-Request-IEs">Location-Request-IEs</a>
+<a href="#Location-Response">Location-Response</a>
+<a href="#Location-Response-Extensions">Location-Response-Extensions</a>
+<a href="#Location-Response-IEs">Location-Response-IEs</a>
+<a href="#location-Service-Request">location-Service-Request</a>
+<a href="#Location-Type">Location-Type</a>
+
+<span class="spcolor5">-- <a id="LetterM">M</a> --</span>
+
+<a href="#Macro-eNB-ID">Macro-eNB-ID</a>
+<a href="#max-GNSS-Set">max-GNSS-Set</a>
+<a href="#max-No-Of-Points">max-No-Of-Points</a>
+<a href="#max-Set">max-Set</a>
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>
+<a href="#maxProtocolIEs">maxProtocolIEs</a>
+<a href="#Message-Identifier">Message-Identifier</a>
+<a href="#Misc-Cause">Misc-Cause</a>
+<a href="#MultipleAPDUs">MultipleAPDUs</a>
+
+<span class="spcolor5">-- <a id="LetterN">N</a> --</span>
+
+<a href="#Network-Element">Network-Element</a>
+
+<span class="spcolor5">-- <a id="LetterO">O</a> --</span>
+
+<a href="#Orientation-Major-Axis">Orientation-Major-Axis</a>
+
+<span class="spcolor5">-- <a id="LetterP">P</a> --</span>
+
+<a href="#Payload-Type">Payload-Type</a>
+<a href="#PLMN-ID">PLMN-ID</a>
+<a href="#Point">Point</a>
+<a href="#Point-ExtIEs">Point-ExtIEs</a>
+<a href="#Point-With-Uncertainty">Point-With-Uncertainty</a>
+<a href="#Point-With-Uncertainty-ExtIEs">Point-With-Uncertainty-ExtIEs</a>
+<a href="#Polygon">Polygon</a>
+<a href="#Polygon-Point">Polygon-Point</a>
+<a href="#Polygon-Point-ExtIEs">Polygon-Point-ExtIEs</a>
+<a href="#Positioning-Data">Positioning-Data</a>
+<a href="#Positioning-Data-ExtIEs">Positioning-Data-ExtIEs</a>
+<a href="#Positioning-Data-Set">Positioning-Data-Set</a>
+<a href="#Positioning-Method-And-Usage">Positioning-Method-And-Usage</a>
+<a href="#Presence">Presence</a>
+<a href="#ProcedureCode">ProcedureCode</a>
+<a href="#Protocol-Cause">Protocol-Cause</a>
+<a href="#ProtocolExtensionID">ProtocolExtensionID</a>
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+
+<span class="spcolor5">-- <a id="LetterR">R</a> --</span>
+
+<a href="#Radio-Network-Layer-Cause">Radio-Network-Layer-Cause</a>
+<a href="#reset">reset</a>
+<a href="#Reset-Acknowledge">Reset-Acknowledge</a>
+<a href="#Reset-Acknowledge-Extensions">Reset-Acknowledge-Extensions</a>
+<a href="#Reset-Acknowledge-IEs">Reset-Acknowledge-IEs</a>
+<a href="#Reset-Request">Reset-Request</a>
+<a href="#Reset-Request-Extensions">Reset-Request-Extensions</a>
+<a href="#Reset-Request-IEs">Reset-Request-IEs</a>
+<a href="#Response-Time">Response-Time</a>
+<a href="#Return-Error-Cause">Return-Error-Cause</a>
+<a href="#Return-Error-Type">Return-Error-Type</a>
+
+<span class="spcolor5">-- <a id="LetterS">S</a> --</span>
+
+<a href="#SuccessfulOutcome">SuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterT">T</a> --</span>
+
+<a href="#TBCD-STRING">TBCD-STRING</a>
+<a href="#Transport-Layer-Cause">Transport-Layer-Cause</a>
+<a href="#TriggeringMessage">TriggeringMessage</a>
+
+<span class="spcolor5">-- <a id="LetterU">U</a> --</span>
+
+<a href="#UE-Positioning-Capability">UE-Positioning-Capability</a>
+<a href="#Uncertainty-Altitude">Uncertainty-Altitude</a>
+<a href="#Uncertainty-Code">Uncertainty-Code</a>
+<a href="#Uncertainty-Ellipse">Uncertainty-Ellipse</a>
+<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterV">V</a> --</span>
+
+<a href="#Velocity-Estimate">Velocity-Estimate</a>
+<a href="#Vertical-Accuracy">Vertical-Accuracy</a>
+<a href="#Vertical-Requested">Vertical-Requested</a>
+<a href="#Vertical-Speed-Direction">Vertical-Speed-Direction</a>
+<a href="#Vertical-Velocity">Vertical-Velocity</a>
+
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedure definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LCS-AP-PDU-Descriptions {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lcs-AP (4) version1 (1) lcs-AP-PDU-Descriptions (0)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>
+<span class="spcolor1">FROM</span> LCS-AP-CommonDataTypes
+
+<a href="#Location-Request">Location-Request</a>,
+<a href="#Location-Response">Location-Response</a>,
+<a href="#Location-Abort-Request">Location-Abort-Request</a>,
+<a href="#Connection-Oriented-Information">Connection-Oriented-Information</a>,
+<a href="#Connectionless-Information">Connectionless-Information</a>,
+<a href="#Reset-Request">Reset-Request</a>,
+<a href="#Reset-Acknowledge">Reset-Acknowledge</a>
+<span class="spcolor1">FROM</span> LCS-AP-PDU-Contents
+
+<a href="#id-Location-Service-Request">id-Location-Service-Request</a>,
+<a href="#id-Connection-Oriented-Information-Transfer">id-Connection-Oriented-Information-Transfer</a>,
+<a href="#id-Connectionless-Information-Transfer">id-Connectionless-Information-Transfer</a>,
+<a href="#id-Location-Abort">id-Location-Abort</a>,
+<a href="#id-Reset">id-Reset</a>
+<span class="spcolor1">FROM</span> LCS-AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure Class</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= <span class="spcolor1">CLASS</span> {
+   &<a href="#InitiatingMessage">InitiatingMessage</a> ,
+   &<a href="#SuccessfulOutcome">SuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   INITIATING MESSAGE &<a href="#InitiatingMessage">InitiatingMessage</a>
+   [SUCCESSFUL OUTCOME &<a href="#SuccessfulOutcome">SuccessfulOutcome</a>]
+   [UNSUCCESSFUL OUTCOME &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>]
+   PROCEDURE CODE &procedureCode
+   [CRITICALITY &criticality]
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface PDU Definition</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LCS-AP-PDU">LCS-AP-PDU</a> ::= <span class="spcolor2">CHOICE</span> {
+   initiatingMessage <a href="#InitiatingMessage">InitiatingMessage</a>,
+   successfulOutcome <a href="#SuccessfulOutcome">SuccessfulOutcome</a>,
+   unsuccessfulOutcome <a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>,
+   ...
+}
+
+<a id="InitiatingMessage">InitiatingMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#InitiatingMessage">InitiatingMessage</a> ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="SuccessfulOutcome">SuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#SuccessfulOutcome">SuccessfulOutcome</a> ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="UnsuccessfulOutcome">UnsuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> ({<a href="#LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure List</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LCS-AP-ELEMENTARY-PROCEDURES">LCS-AP-ELEMENTARY-PROCEDURES</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1</a> |
+   <a href="#LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2</a> ,
+   ...
+}
+
+<a id="LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-1</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#location-Service-Request">location-Service-Request</a> |
+   <a href="#connectionless-Information-Transfer">connectionless-Information-Transfer</a> |
+   <a href="#location-Abort">location-Abort</a> |
+   <a href="#reset">reset</a> ,
+   ...
+}
+
+<a id="LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2">LCS-AP-ELEMENTARY-PROCEDURES-CLASS-2</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#connection-Oriented-Information-Transfer">connection-Oriented-Information-Transfer</a> ,
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="location-Service-Request">location-Service-Request</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Location-Request">Location-Request</a>
+   SUCCESSFUL OUTCOME <a href="#Location-Response">Location-Response</a>
+   UNSUCCESSFUL OUTCOME <a href="#Location-Response">Location-Response</a>
+   PROCEDURE CODE <a href="#id-Location-Service-Request">id-Location-Service-Request</a>
+   CRITICALITY reject
+}
+
+<a id="connection-Oriented-Information-Transfer">connection-Oriented-Information-Transfer</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Connection-Oriented-Information">Connection-Oriented-Information</a>
+   PROCEDURE CODE <a href="#id-Connection-Oriented-Information-Transfer">id-Connection-Oriented-Information-Transfer</a>
+   CRITICALITY reject
+}
+
+<a id="connectionless-Information-Transfer">connectionless-Information-Transfer</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Connectionless-Information">Connectionless-Information</a>
+   UNSUCCESSFUL OUTCOME <a href="#Connectionless-Information">Connectionless-Information</a>
+   PROCEDURE CODE <a href="#id-Connectionless-Information-Transfer">id-Connectionless-Information-Transfer</a>
+   CRITICALITY reject
+}
+
+<a id="location-Abort">location-Abort</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Location-Abort-Request">Location-Abort-Request</a>
+   SUCCESSFUL OUTCOME <a href="#Location-Response">Location-Response</a>
+   PROCEDURE CODE <a href="#id-Location-Abort">id-Location-Abort</a>
+   CRITICALITY reject
+}
+
+<a id="reset">reset</a> <a href="#LCS-AP-ELEMENTARY-PROCEDURE">LCS-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Reset-Request">Reset-Request</a> 
+   SUCCESSFUL OUTCOME <a href="#Reset-Acknowledge">Reset-Acknowledge</a>
+   PROCEDURE CODE <a href="#id-Reset">id-Reset</a>
+   CRITICALITY reject
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PDU definitions for LCS-AP.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LCS-AP-PDU-Contents {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lcs-AP (4) version1 (1) lcs-AP-PDU-Contents (1)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+
+<a href="#APDU">APDU</a>,
+<a href="#Accuracy-Fulfillment-Indicator">Accuracy-Fulfillment-Indicator</a>,
+<a href="#Correlation-ID">Correlation-ID</a>,
+<a href="#E-CGI">E-CGI</a>,
+<a href="#Geographical-Area">Geographical-Area</a>,
+<a href="#IMSI">IMSI</a>,
+<a href="#IMEI">IMEI</a>,
+<a href="#Include-Velocity">Include-Velocity</a>,
+<a href="#LCS-Cause">LCS-Cause</a>,
+<a href="#LCS-Client-Type">LCS-Client-Type</a>, 
+<a href="#LCS-Service-Type-ID">LCS-Service-Type-ID</a>,
+<a href="#LCS-Priority">LCS-Priority</a>,
+<a href="#LCS-QoS">LCS-QoS</a>,
+<a href="#Location-Type">Location-Type</a>,
+<a href="#MultipleAPDUs">MultipleAPDUs</a>,
+<a href="#Network-Element">Network-Element</a>,
+<a href="#Payload-Type">Payload-Type</a>,
+<a href="#Positioning-Data">Positioning-Data</a>,
+<a href="#Return-Error-Type">Return-Error-Type</a>,
+<a href="#Return-Error-Cause">Return-Error-Cause</a>,
+<a href="#UE-Positioning-Capability">UE-Positioning-Capability</a>,
+<a href="#Velocity-Estimate">Velocity-Estimate</a>
+<span class="spcolor1">FROM</span> LCS-AP-IEs
+
+ProtocolExtensionContainer{},
+ProtocolIE-Container{},
+LCS-AP-PROTOCOL-EXTENSION,
+LCS-AP-PROTOCOL-IES
+<span class="spcolor1">FROM</span> LCS-AP-Containers
+
+<a href="#id-Accuracy-Fulfillment-Indicator">id-Accuracy-Fulfillment-Indicator</a>,
+<a href="#id-APDU">id-APDU</a>,
+<a href="#id-Correlation-ID">id-Correlation-ID</a>,
+<a href="#id-Destination-ID">id-Destination-ID</a>,
+<a href="#id-E-UTRAN-Cell-Identifier">id-E-UTRAN-Cell-Identifier</a>,
+<a href="#id-Include-Velocity">id-Include-Velocity</a>,
+<a href="#id-IMEI">id-IMEI</a>,
+<a href="#id-IMSI">id-IMSI</a>,
+<a href="#id-LCS-Client-Type">id-LCS-Client-Type</a>,
+<a href="#id-LCS-Priority">id-LCS-Priority</a>,
+<a href="#id-LCS-QOS">id-LCS-QOS</a>,
+<a href="#id-LCS-Cause">id-LCS-Cause</a>, 
+<a href="#id-LCS-Service-Type-ID">id-LCS-Service-Type-ID</a>,
+<a href="#id-Location-Estimate">id-Location-Estimate</a>,
+<a href="#id-Location-Type">id-Location-Type</a>,
+<a href="#id-MultipleAPDUs">id-MultipleAPDUs</a>,
+<a href="#id-Payload-Type">id-Payload-Type</a>,
+<a href="#id-Positioning-Data">id-Positioning-Data</a>,
+<a href="#id-Return-Error-Request">id-Return-Error-Request</a>,
+<a href="#id-Return-Error-Cause">id-Return-Error-Cause</a>,
+<a href="#id-Source-Identity">id-Source-Identity</a>,
+<a href="#id-UE-Positioning-Capability">id-UE-Positioning-Capability</a>,
+<a href="#id-Velocity-Estimate">id-Velocity-Estimate</a>
+<span class="spcolor1">FROM</span> LCS-AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Location-Request</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Location-Request">Location-Request</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { { <a href="#Location-Request-IEs">Location-Request-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { { <a href="#Location-Request-Extensions">Location-Request-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Location-Request-IEs">Location-Request-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-Correlation-ID">id-Correlation-ID</a> CRITICALITY reject TYPE <a href="#Correlation-ID">Correlation-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-Location-Type">id-Location-Type</a> CRITICALITY reject TYPE <a href="#Location-Type">Location-Type</a> PRESENCE mandatory } |
+   { ID <a href="#id-E-UTRAN-Cell-Identifier">id-E-UTRAN-Cell-Identifier</a> CRITICALITY ignore TYPE <a href="#E-CGI">E-CGI</a> PRESENCE mandatory } |
+   { ID <a href="#id-LCS-Client-Type">id-LCS-Client-Type</a> CRITICALITY reject TYPE <a href="#LCS-Client-Type">LCS-Client-Type</a> PRESENCE optional } |
+   { ID <a href="#id-LCS-Priority">id-LCS-Priority</a> CRITICALITY reject TYPE <a href="#LCS-Priority">LCS-Priority</a> PRESENCE optional } |
+   { ID <a href="#id-LCS-QOS">id-LCS-QOS</a> CRITICALITY reject TYPE <a href="#LCS-QoS">LCS-QoS</a> PRESENCE optional } |
+   { ID <a href="#id-UE-Positioning-Capability">id-UE-Positioning-Capability</a> CRITICALITY reject TYPE <a href="#UE-Positioning-Capability">UE-Positioning-Capability</a> PRESENCE optional } |
+   { ID <a href="#id-Include-Velocity">id-Include-Velocity</a> CRITICALITY reject TYPE <a href="#Include-Velocity">Include-Velocity</a> PRESENCE optional } |
+   { ID <a href="#id-IMSI">id-IMSI</a> CRITICALITY ignore TYPE <a href="#IMSI">IMSI</a> PRESENCE optional } |
+   { ID <a href="#id-IMEI">id-IMEI</a> CRITICALITY ignore TYPE <a href="#IMEI">IMEI</a> PRESENCE optional } |
+   { ID <a href="#id-MultipleAPDUs">id-MultipleAPDUs</a> CRITICALITY reject TYPE <a href="#MultipleAPDUs">MultipleAPDUs</a> PRESENCE optional } ,
+   ...
+}
+
+<a id="Location-Request-Extensions">Location-Request-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   { ID <a href="#id-LCS-Service-Type-ID">id-LCS-Service-Type-ID</a> CRITICALITY ignore EXTENSION LCS-Service-Type -ID PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Location-Response</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Location-Response">Location-Response</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { {<a href="#Location-Response-IEs">Location-Response-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { {<a href="#Location-Response-Extensions">Location-Response-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Location-Response-IEs">Location-Response-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-Correlation-ID">id-Correlation-ID</a> CRITICALITY reject TYPE <a href="#Correlation-ID">Correlation-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-Location-Estimate">id-Location-Estimate</a> CRITICALITY reject TYPE <a href="#Geographical-Area">Geographical-Area</a> PRESENCE optional } |
+   { ID <a href="#id-Positioning-Data">id-Positioning-Data</a> CRITICALITY reject TYPE <a href="#Positioning-Data">Positioning-Data</a> PRESENCE optional } |
+   { ID <a href="#id-Velocity-Estimate">id-Velocity-Estimate</a> CRITICALITY reject TYPE <a href="#Velocity-Estimate">Velocity-Estimate</a> PRESENCE optional } |
+   { ID <a href="#id-Accuracy-Fulfillment-Indicator">id-Accuracy-Fulfillment-Indicator</a> CRITICALITY reject TYPE <a href="#Accuracy-Fulfillment-Indicator">Accuracy-Fulfillment-Indicator</a> PRESENCE optional } |
+   { ID <a href="#id-LCS-Cause">id-LCS-Cause</a> CRITICALITY ignore TYPE <a href="#LCS-Cause">LCS-Cause</a> PRESENCE optional } ,
+   ...
+}
+
+<a id="Location-Response-Extensions">Location-Response-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Location-Abort</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Location-Abort-Request">Location-Abort-Request</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { {<a href="#Location-Abort-Request-IEs">Location-Abort-Request-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { {<a href="#Location-Abort-Request-Extensions">Location-Abort-Request-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Location-Abort-Request-IEs">Location-Abort-Request-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-Correlation-ID">id-Correlation-ID</a> CRITICALITY reject TYPE <a href="#Correlation-ID">Correlation-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-LCS-Cause">id-LCS-Cause</a> CRITICALITY ignore TYPE <a href="#LCS-Cause">LCS-Cause</a> PRESENCE mandatory } ,
+   ...
+}
+
+<a id="Location-Abort-Request-Extensions">Location-Abort-Request-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Connection-Oriented-Information </span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Connection-Oriented-Information">Connection-Oriented-Information</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { {<a href="#Connection-Oriented-Information-IEs">Connection-Oriented-Information-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { {<a href="#Connection-Oriented-Information-Extensions">Connection-Oriented-Information-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Connection-Oriented-Information-IEs">Connection-Oriented-Information-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-Correlation-ID">id-Correlation-ID</a> CRITICALITY reject TYPE <a href="#Correlation-ID">Correlation-ID</a> PRESENCE optional } |
+   { ID <a href="#id-Payload-Type">id-Payload-Type</a> CRITICALITY reject TYPE <a href="#Payload-Type">Payload-Type</a> PRESENCE optional } |
+   { ID <a href="#id-APDU">id-APDU</a> CRITICALITY reject TYPE <a href="#APDU">APDU</a> PRESENCE optional } ,
+   ...
+}
+
+<a id="Connection-Oriented-Information-Extensions">Connection-Oriented-Information-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Connectionless-Information</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Connectionless-Information">Connectionless-Information</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { {<a href="#Connectionless-Information-IEs">Connectionless-Information-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { {<a href="#Connectionless-Information-Extensions">Connectionless-Information-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Connectionless-Information-IEs">Connectionless-Information-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-Source-Identity">id-Source-Identity</a> CRITICALITY reject TYPE <a href="#Network-Element">Network-Element</a> PRESENCE mandatory } |
+   { ID <a href="#id-Destination-ID">id-Destination-ID</a> CRITICALITY reject TYPE <a href="#Network-Element">Network-Element</a> PRESENCE mandatory } |
+   { ID <a href="#id-APDU">id-APDU</a> CRITICALITY reject TYPE <a href="#APDU">APDU</a> PRESENCE mandatory } |
+   { ID <a href="#id-Return-Error-Request">id-Return-Error-Request</a> CRITICALITY reject TYPE <a href="#Return-Error-Type">Return-Error-Type</a> PRESENCE optional } |
+   { ID <a href="#id-Return-Error-Cause">id-Return-Error-Cause</a> CRITICALITY ignore TYPE <a href="#Return-Error-Cause">Return-Error-Cause</a> PRESENCE optional } ,
+   ...
+}
+
+<a id="Connectionless-Information-Extensions">Connectionless-Information-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Reset-Request </span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Reset-Request">Reset-Request</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { {<a href="#Reset-Request-IEs">Reset-Request-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { {<a href="#Reset-Request-Extensions">Reset-Request-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Reset-Request-IEs">Reset-Request-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   { ID <a href="#id-LCS-Cause">id-LCS-Cause</a> CRITICALITY ignore TYPE <a href="#LCS-Cause">LCS-Cause</a> PRESENCE mandatory } ,
+   ...
+}
+
+<a id="Reset-Request-Extensions">Reset-Request-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Reset-Acknowledge </span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Reset-Acknowledge">Reset-Acknowledge</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs ProtocolIE-Container { { <a href="#Reset-Acknowledge-IEs">Reset-Acknowledge-IEs</a>} },
+   protocolExtensions ProtocolExtensionContainer { { <a href="#Reset-Acknowledge-Extensions">Reset-Acknowledge-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Reset-Acknowledge-IEs">Reset-Acknowledge-IEs</a> LCS-AP-PROTOCOL-IES ::= {
+   ...
+}
+
+<a id="Reset-Acknowledge-Extensions">Reset-Acknowledge-Extensions</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Information Element Definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LCS-AP-IEs {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lcs-AP (4) version1 (1) lcs-AP-IEs (2)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span>
+
+<a href="#max-No-Of-Points">max-No-Of-Points</a>,
+<a href="#max-Set">max-Set</a>,
+<a href="#max-GNSS-Set">max-GNSS-Set</a>
+<span class="spcolor1">FROM</span> LCS-AP-Constants
+
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#TriggeringMessage">TriggeringMessage</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<span class="spcolor1">FROM</span> LCS-AP-CommonDataTypes
+
+ProtocolExtensionContainer{},
+LCS-AP-PROTOCOL-EXTENSION
+<span class="spcolor1">FROM</span> LCS-AP-Containers;
+
+<span class="spcolor5">-- A</span>
+
+<a id="APDU">APDU</a> ::= OCTET STRING
+
+<a id="Accuracy-Fulfillment-Indicator">Accuracy-Fulfillment-Indicator</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   requested-accuracy-fulfilled,
+   requested-accuracy-not-fulfilled,
+   ...
+}
+
+<a id="Altitude">Altitude</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+<span class="spcolor5">-- The valid value for this IE is 0 to 32767.</span>
+<span class="spcolor5">-- Reception of value greater than 32767 shall be mapped to the value 32767.</span>
+
+<a id="Altitude-And-Direction">Altitude-And-Direction</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   direction-Of-Altitude <a href="#Direction-Of-Altitude">Direction-Of-Altitude</a>,
+   altitude <a href="#Altitude">Altitude</a>,
+   ...
+}
+
+<a id="Angle">Angle</a> ::= <span class="spcolor3">INTEGER</span> (0..179)
+
+<span class="spcolor5">-- B</span>
+
+<a id="Bearing">Bearing</a> ::= <span class="spcolor3">INTEGER</span> (0..359)
+
+<span class="spcolor5">-- C</span>
+
+<a id="CellIdentity">CellIdentity</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (28))
+
+<a id="Confidence">Confidence</a> ::= <span class="spcolor3">INTEGER</span> (0..100)
+
+<a id="Correlation-ID">Correlation-ID</a> ::= OCTET STRING (SIZE (4))
+
+<span class="spcolor5">-- D</span>
+
+<a id="DegreesLatitude">DegreesLatitude</a> ::= <span class="spcolor3">INTEGER</span> (0..8388607) <span class="spcolor5">-- 23 bit field</span>
+
+<a id="DegreesLongitude">DegreesLongitude</a> ::= <span class="spcolor3">INTEGER</span> (-8388608..8388607) <span class="spcolor5">-- 24 bit field</span>
+
+<a id="Direction-Of-Altitude">Direction-Of-Altitude</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   height,
+   depth
+}
+
+<span class="spcolor5">-- E</span>
+
+<a id="E-CGI">E-CGI</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMNidentity <a href="#PLMN-ID">PLMN-ID</a>,
+   cell-ID <a href="#CellIdentity">CellIdentity</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#E-CGI-ExtIEs">E-CGI-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+...}
+
+<a id="E-CGI-ExtIEs">E-CGI-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Ellipsoid-Point-With-Uncertainty-Ellipse">Ellipsoid-Point-With-Uncertainty-Ellipse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   uncertainty-Ellipse <a href="#Uncertainty-Ellipse">Uncertainty-Ellipse</a>,
+   confidence <a href="#Confidence">Confidence</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs">Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+...}
+
+<a id="Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs">Ellipsoid-Point-With-Uncertainty-Ellipse-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Ellipsoid-Point-With-Altitude">Ellipsoid-Point-With-Altitude</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   altitude-And-Direction <a href="#Altitude-And-Direction">Altitude-And-Direction</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Ellipsoid-Point-With-Altitude-ExtIEs">Ellipsoid-Point-With-Altitude-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+...}
+
+<a id="Ellipsoid-Point-With-Altitude-ExtIEs">Ellipsoid-Point-With-Altitude-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   altitude-And-Direction <a href="#Altitude-And-Direction">Altitude-And-Direction</a>,
+   uncertainty-Ellipse <a href="#Uncertainty-Ellipse">Uncertainty-Ellipse</a>,
+   uncertainty-Altitude <a href="#Uncertainty-Altitude">Uncertainty-Altitude</a>,
+   confidence <a href="#Confidence">Confidence</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+...}
+
+<a id="Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Ellipsoid-Arc">Ellipsoid-Arc</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   inner-Radius <a href="#Inner-Radius">Inner-Radius</a>,
+   uncertainty-Radius <a href="#Uncertainty-Code">Uncertainty-Code</a>,
+   offset-Angle <a href="#Angle">Angle</a>,
+   included-Angle <a href="#Angle">Angle</a>,
+   confidence <a href="#Confidence">Confidence</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Ellipsoid-Arc-ExtIEs">Ellipsoid-Arc-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Ellipsoid-Arc-ExtIEs">Ellipsoid-Arc-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="ENB-ID">ENB-ID</a> ::= <span class="spcolor2">CHOICE</span> { 
+   macro-eNB-ID <a href="#Macro-eNB-ID">Macro-eNB-ID</a>,
+   home-eNB-ID <a href="#Home-eNB-ID">Home-eNB-ID</a>,
+   ...
+}
+
+<a id="E-SMLC-ID">E-SMLC-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<span class="spcolor5">-- F</span>
+<span class="spcolor5">-- G</span>
+
+<a id="Geographical-Area">Geographical-Area</a> ::= <span class="spcolor2">CHOICE</span> {
+   point <a href="#Point">Point</a>,
+   point-With-Uncertainty <a href="#Point-With-Uncertainty">Point-With-Uncertainty</a>,
+   ellipsoidPoint-With-Uncertainty-Ellipse <a href="#Ellipsoid-Point-With-Uncertainty-Ellipse">Ellipsoid-Point-With-Uncertainty-Ellipse</a>,
+   polygon <a href="#Polygon">Polygon</a>,
+   ellipsoid-Point-With-Altitude <a href="#Ellipsoid-Point-With-Altitude">Ellipsoid-Point-With-Altitude</a>,
+   ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid <a href="#Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid">Ellipsoid-Point-With-Altitude-And-Uncertainty-Ellipsoid</a>, 
+   ellipsoid-Arc <a href="#Ellipsoid-Arc">Ellipsoid-Arc</a>,
+   ...
+}
+
+<a id="Geographical-Coordinates">Geographical-Coordinates</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   latitudeSign <a href="#LatitudeSign">LatitudeSign</a>,
+   degreesLatitude <a href="#DegreesLatitude">DegreesLatitude</a>,
+   degreesLongitude <a href="#DegreesLongitude">DegreesLongitude</a>,
+   iE-Extensions ProtocolExtensionContainer { {<a href="#Geographical-Coordinates-ExtIEs">Geographical-Coordinates-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Geographical-Coordinates-ExtIEs">Geographical-Coordinates-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Global-eNB-ID">Global-eNB-ID</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMN-ID <a href="#PLMN-ID">PLMN-ID</a>,
+   eNB-ID <a href="#ENB-ID">ENB-ID</a>
+}
+
+<a id="GNSS-Positioning-Method-And-Usage">GNSS-Positioning-Method-And-Usage</a> ::= OCTET STRING (SIZE (1))
+
+<a id="GNSS-Positioning-Data-Set">GNSS-Positioning-Data-Set</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#max-GNSS-Set">max-GNSS-Set</a>)) <span class="spcolor2">OF</span> <a href="#GNSS-Positioning-Method-And-Usage">GNSS-Positioning-Method-And-Usage</a>
+
+<span class="spcolor5">-- H</span>
+
+<a id="Home-eNB-ID">Home-eNB-ID</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (28))
+
+<a id="Horizontal-Accuracy">Horizontal-Accuracy</a> ::= <span class="spcolor3">INTEGER</span> (0..127)
+
+<a id="Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   bearing <span class="spcolor3">INTEGER</span> (0..359),
+   horizontal-Speed <span class="spcolor3">INTEGER</span> (0..2047)
+}
+
+<a id="Horizontal-Velocity">Horizontal-Velocity</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   horizontal-Speed-And-Bearing <a href="#Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Horizontal-Velocity-ExtIEs">Horizontal-Velocity-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Horizontal-Velocity-ExtIEs">Horizontal-Velocity-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Horizontal-With-Vertical-Velocity">Horizontal-With-Vertical-Velocity</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   horizontal-Speed-And-Bearing <a href="#Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a>,
+   vertical-Velocity <a href="#Vertical-Velocity">Vertical-Velocity</a>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Horizontal-With-Vertical-Velocity-ExtIEs">Horizontal-With-Vertical-Velocity-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Horizontal-With-Vertical-Velocity-ExtIEs">Horizontal-With-Vertical-Velocity-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Horizontal-Velocity-With-Uncertainty">Horizontal-Velocity-With-Uncertainty</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   horizontal-Speed-And-Bearing <a href="#Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a>,
+   uncertainty-Speed <span class="spcolor3">INTEGER</span> (0..255),
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Horizontal-Velocity-With-Uncertainty-ExtIEs">Horizontal-Velocity-With-Uncertainty-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Horizontal-Velocity-With-Uncertainty-ExtIEs">Horizontal-Velocity-With-Uncertainty-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Horizontal-With-Vertical-Velocity-And-Uncertainty">Horizontal-With-Vertical-Velocity-And-Uncertainty</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   horizontal-Speed-And-Bearing <a href="#Horizontal-Speed-And-Bearing">Horizontal-Speed-And-Bearing</a>,
+   vertical-Velocity <a href="#Vertical-Velocity">Vertical-Velocity</a>,
+   horizontal-Uncertainty-Speed <span class="spcolor3">INTEGER</span> (0..255),
+   vertical-Uncertainty-Speed <span class="spcolor3">INTEGER</span> (0..255),
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs">Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs">Horizontal-With-Vertical-Velocity-And-Uncertainty-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<span class="spcolor5">-- I</span>
+
+<a id="IMSI">IMSI</a> ::= OCTET STRING (SIZE (3..8))
+
+<a id="IMEI">IMEI</a> ::= OCTET STRING (SIZE (8))
+
+<a id="Include-Velocity">Include-Velocity</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   requested,
+   not-Requested,
+   ...
+}
+
+<a id="Inner-Radius">Inner-Radius</a> ::= <span class="spcolor3">INTEGER</span> (0..65535) <span class="spcolor5">-- 16 bit field</span>
+
+<span class="spcolor5">-- J</span>
+<span class="spcolor5">-- K</span>
+<span class="spcolor5">-- L</span>
+
+<a id="LatitudeSign">LatitudeSign</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   north,
+   south
+}
+
+<a id="Location-Type">Location-Type</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   geographic-Information,
+   assistance-Information,
+   ...
+}
+
+<a id="LCS-Cause">LCS-Cause</a> ::= <span class="spcolor2">CHOICE</span> {
+   radio-Network-Layer <a href="#Radio-Network-Layer-Cause">Radio-Network-Layer-Cause</a>,
+   transport-Layer <a href="#Transport-Layer-Cause">Transport-Layer-Cause</a>,
+   protocol <a href="#Protocol-Cause">Protocol-Cause</a>,
+   misc <a href="#Misc-Cause">Misc-Cause</a>
+}
+
+<a id="LCS-Client-Type">LCS-Client-Type</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   emergency-Services,
+   value-Added-Services,
+   pLMN-Operator-Services,
+   lawful-Intercept-Services,
+   pLMN-Operator-broadcast-Services,
+   pLMN-Operator-OM,
+   pLMN-Operator-Anonymous-Statistics,
+   pLMN-Operator-Target-MS-Service-Support,
+   ...
+}
+
+<a id="LCS-Priority">LCS-Priority</a> ::= OCTET STRING (SIZE (1))
+
+<a id="LCS-QoS">LCS-QoS</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   horizontal-Accuracy <a href="#Horizontal-Accuracy">Horizontal-Accuracy</a> <span class="spcolor4">OPTIONAL</span>,
+   vertical-Requested <a href="#Vertical-Requested">Vertical-Requested</a> <span class="spcolor4">OPTIONAL</span>,
+   vertical-Accuracy <a href="#Vertical-Accuracy">Vertical-Accuracy</a> <span class="spcolor4">OPTIONAL</span>,
+   response-Time <a href="#Response-Time">Response-Time</a> <span class="spcolor4">OPTIONAL</span>,
+   ...
+} 
+
+<a id="LCS-Service-Type-ID">LCS-Service-Type-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..127)
+
+<span class="spcolor5">-- M</span>
+
+<a id="Macro-eNB-ID">Macro-eNB-ID</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (20))
+
+<a id="Message-Identifier">Message-Identifier</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (16))
+
+<a id="Misc-Cause">Misc-Cause</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   processing-Overload,
+   hardware-Failure,
+   o-And-M-Intervention,
+   unspecified,
+   ...
+}
+
+<a id="MultipleAPDUs">MultipleAPDUs</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. 3)) <span class="spcolor2">OF</span> <a href="#APDU">APDU</a>
+
+<span class="spcolor5">-- N</span>
+
+<a id="Network-Element">Network-Element</a> ::= <span class="spcolor2">CHOICE</span> {
+   global-eNB-ID <a href="#Global-eNB-ID">Global-eNB-ID</a>,
+   e-SMLC-ID <a href="#E-SMLC-ID">E-SMLC-ID</a>
+}
+
+<span class="spcolor5">-- O</span>
+
+<a id="Orientation-Major-Axis">Orientation-Major-Axis</a> ::= <span class="spcolor3">INTEGER</span> (0..89)
+
+<span class="spcolor5">-- P</span>
+
+<a id="Payload-Type">Payload-Type</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   lPP,
+   lPPa,
+   ...
+}
+
+<a id="PLMN-ID">PLMN-ID</a> ::= <a href="#TBCD-STRING">TBCD-STRING</a> 
+
+<a id="Point">Point</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   iE-Extensions ProtocolExtensionContainer { {<a href="#Point-ExtIEs">Point-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Point-ExtIEs">Point-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Point-With-Uncertainty">Point-With-Uncertainty</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   uncertainty-Code <a href="#Uncertainty-Code">Uncertainty-Code</a>,
+   iE-Extensions ProtocolExtensionContainer { {<a href="#Point-With-Uncertainty-ExtIEs">Point-With-Uncertainty-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+...}
+
+<a id="Point-With-Uncertainty-ExtIEs">Point-With-Uncertainty-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Polygon">Polygon</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#max-No-Of-Points">max-No-Of-Points</a>)) <span class="spcolor2">OF</span> <a href="#Polygon-Point">Polygon-Point</a>
+
+<a id="Polygon-Point">Polygon-Point</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   geographical-Coordinates <a href="#Geographical-Coordinates">Geographical-Coordinates</a>,
+   iE-Extensions ProtocolExtensionContainer { {<a href="#Polygon-Point-ExtIEs">Polygon-Point-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Polygon-Point-ExtIEs">Polygon-Point-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Positioning-Data">Positioning-Data</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   positioning-Data-Set <a href="#Positioning-Data-Set">Positioning-Data-Set</a> <span class="spcolor4">OPTIONAL</span>,
+   gNSS-Positioning-Data-Set <a href="#GNSS-Positioning-Data-Set">GNSS-Positioning-Data-Set</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions ProtocolExtensionContainer { { <a href="#Positioning-Data-ExtIEs">Positioning-Data-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Positioning-Data-ExtIEs">Positioning-Data-ExtIEs</a> LCS-AP-PROTOCOL-EXTENSION ::= {
+   ...
+}
+
+<a id="Positioning-Data-Set">Positioning-Data-Set</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#max-Set">max-Set</a>)) <span class="spcolor2">OF</span> <a href="#Positioning-Method-And-Usage">Positioning-Method-And-Usage</a>
+
+<a id="Positioning-Method-And-Usage">Positioning-Method-And-Usage</a> ::= OCTET STRING (SIZE (1))
+
+<a id="Protocol-Cause">Protocol-Cause</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   transfer-Syntax-Error,
+   abstract-Syntax-Error-Reject,
+   abstract-Syntax-Error-Ignore-And-Notify,
+   message-Not-Compatible-With-Receiver-State,
+   semantic-Error,
+   unspecified,
+   abstract-Syntax-Error,
+   ...
+}
+
+<span class="spcolor5">-- Q</span>
+<span class="spcolor5">-- R</span>
+
+<a id="Radio-Network-Layer-Cause">Radio-Network-Layer-Cause</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   unspecified,
+   ...
+}
+
+<a id="Response-Time">Response-Time</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   low-Delay(0),
+   delay-Tolerant(1),
+   ...
+}
+
+<a id="Return-Error-Type">Return-Error-Type</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   yes,
+   no
+}
+
+<a id="Return-Error-Cause">Return-Error-Cause</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   system-Failure,
+   protocol-Error,
+   destination-Unknown,
+   destination-Unreachable,
+   congestion,
+   ...
+}
+
+<span class="spcolor5">-- S</span>
+<span class="spcolor5">-- T</span>
+
+<a id="TBCD-STRING">TBCD-STRING</a> ::= OCTET STRING (SIZE (3))
+
+<a id="Transport-Layer-Cause">Transport-Layer-Cause</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   tranport-Resource-Unavailable,
+   unspecified,
+   ...
+}
+
+<span class="spcolor5">-- U</span>
+
+<a id="Uncertainty-Altitude">Uncertainty-Altitude</a> ::= <span class="spcolor3">INTEGER</span> (0..127)
+
+<a id="Uncertainty-Code">Uncertainty-Code</a> ::= <span class="spcolor3">INTEGER</span> (0..127)
+
+<a id="Uncertainty-Ellipse">Uncertainty-Ellipse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   uncertainty-SemiMajor <a href="#Uncertainty-Code">Uncertainty-Code</a>,
+   uncertainty-SemiMinor <a href="#Uncertainty-Code">Uncertainty-Code</a>,
+   orientation-Major-Axis <a href="#Orientation-Major-Axis">Orientation-Major-Axis</a>
+}
+
+<a id="UE-Positioning-Capability">UE-Positioning-Capability</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   lPP <span class="spcolor3">BOOLEAN</span>,
+   ...
+}
+
+<span class="spcolor5">-- V</span>
+
+<a id="Velocity-Estimate">Velocity-Estimate</a> ::= <span class="spcolor2">CHOICE</span> {
+   horizontal-Velocity <a href="#Horizontal-Velocity">Horizontal-Velocity</a>,
+   horizontal-With-Vertical-Velocity <a href="#Horizontal-With-Vertical-Velocity">Horizontal-With-Vertical-Velocity</a>,
+   horizontal-Velocity-With-Uncertainty <a href="#Horizontal-Velocity-With-Uncertainty">Horizontal-Velocity-With-Uncertainty</a>,
+   horizontal-With-Vertical-Velocity-And-Uncertainty <a href="#Horizontal-With-Vertical-Velocity-And-Uncertainty">Horizontal-With-Vertical-Velocity-And-Uncertainty</a>,
+   ...
+}
+
+<a id="Vertical-Requested">Vertical-Requested</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   vertical-coordinate-Is-Not-Requested(0),
+   vertical-coordinate-Is-Requested(1)
+}
+
+<a id="Vertical-Accuracy">Vertical-Accuracy</a> ::= <span class="spcolor3">INTEGER</span> (0..127)
+
+<a id="Vertical-Velocity">Vertical-Velocity</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   vertical-Speed <span class="spcolor3">INTEGER</span> (0..255),
+   vertical-Speed-Direction <a href="#Vertical-Speed-Direction">Vertical-Speed-Direction</a>
+}
+
+<a id="Vertical-Speed-Direction">Vertical-Speed-Direction</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   upward,
+   downward
+}
+
+<span class="spcolor5">-- W</span>
+<span class="spcolor5">-- X</span>
+<span class="spcolor5">-- Y</span>
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LCS-AP-CommonDataTypes {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lcs-AP (4) version1 (1) lcs-AP-CommonDataTypes (3)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<a id="Criticality">Criticality</a> ::= <span class="spcolor3">ENUMERATED</span> { reject, ignore, notify }
+
+<a id="Presence">Presence</a> ::= <span class="spcolor3">ENUMERATED</span> { optional, conditional, mandatory }
+
+<a id="ProcedureCode">ProcedureCode</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<a id="ProtocolExtensionID">ProtocolExtensionID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<a id="ProtocolIE-ID">ProtocolIE-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<a id="TriggeringMessage">TriggeringMessage</a> ::= <span class="spcolor3">ENUMERATED</span> {initiating-message, successful-outcome, unsuccessful-outcome, outcome}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Constant definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LCS-AP-Constants {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lcs-AP (4) version1 (1) lcs-AP-Constants (4)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-Location-Service-Request">id-Location-Service-Request</a> <span class="spcolor3">INTEGER</span> ::= 0
+<a id="id-Connection-Oriented-Information-Transfer">id-Connection-Oriented-Information-Transfer</a> <span class="spcolor3">INTEGER</span> ::= 1
+<a id="id-Connectionless-Information-Transfer">id-Connectionless-Information-Transfer</a> <span class="spcolor3">INTEGER</span> ::= 2
+<a id="id-Location-Abort">id-Location-Abort</a> <span class="spcolor3">INTEGER</span> ::= 3
+<a id="id-Reset">id-Reset</a> <span class="spcolor3">INTEGER</span> ::= 4
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-Accuracy-Fulfillment-Indicator">id-Accuracy-Fulfillment-Indicator</a> <span class="spcolor3">INTEGER</span> ::= 0
+<a id="id-APDU">id-APDU</a> <span class="spcolor3">INTEGER</span> ::= 1
+<a id="id-Correlation-ID">id-Correlation-ID</a> <span class="spcolor3">INTEGER</span> ::= 2
+<a id="id-Destination-ID">id-Destination-ID</a> <span class="spcolor3">INTEGER</span> ::= 3
+<a id="id-E-UTRAN-Cell-Identifier">id-E-UTRAN-Cell-Identifier</a> <span class="spcolor3">INTEGER</span> ::= 4
+<a id="id-Include-Velocity">id-Include-Velocity</a> <span class="spcolor3">INTEGER</span> ::= 5
+<a id="id-IMEI">id-IMEI</a> <span class="spcolor3">INTEGER</span> ::= 6
+<a id="id-IMSI">id-IMSI</a> <span class="spcolor3">INTEGER</span> ::= 7
+<a id="id-LCS-Client-Type">id-LCS-Client-Type</a> <span class="spcolor3">INTEGER</span> ::= 8
+<a id="id-LCS-Priority">id-LCS-Priority</a> <span class="spcolor3">INTEGER</span> ::= 9
+<a id="id-LCS-QOS">id-LCS-QOS</a> <span class="spcolor3">INTEGER</span> ::= 10
+<a id="id-LCS-Cause">id-LCS-Cause</a> <span class="spcolor3">INTEGER</span> ::= 11
+<a id="id-Location-Estimate">id-Location-Estimate</a> <span class="spcolor3">INTEGER</span> ::= 12
+<a id="id-Location-Type">id-Location-Type</a> <span class="spcolor3">INTEGER</span> ::= 13
+<a id="id-MultipleAPDUs">id-MultipleAPDUs</a> <span class="spcolor3">INTEGER</span> ::= 14
+<a id="id-Payload-Type">id-Payload-Type</a> <span class="spcolor3">INTEGER</span> ::= 15
+<a id="id-Positioning-Data">id-Positioning-Data</a> <span class="spcolor3">INTEGER</span> ::= 16
+<a id="id-Return-Error-Request">id-Return-Error-Request</a> <span class="spcolor3">INTEGER</span> ::= 17
+<a id="id-Return-Error-Cause">id-Return-Error-Cause</a> <span class="spcolor3">INTEGER</span> ::= 18
+<a id="id-Source-Identity">id-Source-Identity</a> <span class="spcolor3">INTEGER</span> ::= 19
+<a id="id-UE-Positioning-Capability">id-UE-Positioning-Capability</a> <span class="spcolor3">INTEGER</span> ::= 20
+<a id="id-Velocity-Estimate">id-Velocity-Estimate</a> <span class="spcolor3">INTEGER</span> ::= 21 
+<a id="id-LCS-Service-Type-ID">id-LCS-Service-Type-ID</a> <span class="spcolor3">INTEGER</span> ::= 22
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Extension constants</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Lists</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="max-No-Of-Points">max-No-Of-Points</a> <span class="spcolor3">INTEGER</span> ::= 15
+<a id="max-Set">max-Set</a> <span class="spcolor3">INTEGER</span> ::= 9
+<a id="max-GNSS-Set">max-GNSS-Set</a> <span class="spcolor3">INTEGER</span> ::= 9
+
+<a id="maxProtocolExtensions">maxProtocolExtensions</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolIEs">maxProtocolIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+
+<span class="spcolor1">END</span>
+</div>
+  </section>
+
+  <footer>
+    <p class="text-center">
+      <a href="#" class="btn btn-info">Back to top</a>
+    </p>
+  </footer>
+
+</div>
+<script src="sga.js"></script>
+</body>
+</html>

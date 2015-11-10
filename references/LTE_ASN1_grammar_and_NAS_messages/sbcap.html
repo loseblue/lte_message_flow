@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="niviuk.css" rel="stylesheet" type="text/css">
+  <title>29.168 SBc</title>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <div id="banner"></div>
+  </header>
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-inner">
+      <ul class="nav nav-pills">
+        <li><a href="index.html"><span class="glyphicon glyphicon-signal"></span></a></li>
+        <li><a href="rrc_lte.html">RRC (Radio)</a></li>
+        <li><a href="s1ap.html">S1</a></li>
+        <li><a href="x2ap.html">X2</a></li>
+        <li><a href="lpp.html">LPP </a></li>
+        <li><a href="lppa.html">LPPa </a></li>
+        <li><a href="lte_sls.html">LCS </a></li>
+        <li><a href="m2ap.html">M2 (eMBMS)</a></li>
+        <li><a href="m3ap.html">M3 (eMBMS)</a></li>
+        <li><a href="sbcap.html">SBc (Broadcast)</a></li>
+        <li><a href="lte_nas.php">Nas</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <section>
+  <h1>LTE ASN1 SBc description</h1>
+  <h2><a id="SBC"></a>E-UTRAN Cell Broadcast Centre Application Protocol</h2>
+  <h3><a href="http://www.3gpp.org/DynaReport/29168.htm">29.168</a> v11.4.0 (2012-09)</h3>
+
+  <p class="text-primary">Interface between the Mobility Management Entity (MME) and the Cell Broadcast Centre (CBC)</p>
+
+<p>
+<a href="#LetterC">C</a>&nbsp;&nbsp;
+<a href="#LetterD">D</a>&nbsp;&nbsp;
+<a href="#LetterE">E</a>&nbsp;&nbsp;
+<a href="#LetterI">I</a>&nbsp;&nbsp;
+<a href="#LetterL">L</a>&nbsp;&nbsp;
+<a href="#LetterM">M</a>&nbsp;&nbsp;
+<a href="#LetterN">N</a>&nbsp;&nbsp;
+<a href="#LetterO">O</a>&nbsp;&nbsp;
+<a href="#LetterP">P</a>&nbsp;&nbsp;
+<a href="#LetterR">R</a>&nbsp;&nbsp;
+<a href="#LetterS">S</a>&nbsp;&nbsp;
+<a href="#LetterT">T</a>&nbsp;&nbsp;
+<a href="#LetterU">U</a>&nbsp;&nbsp;
+<a href="#LetterW">W</a>&nbsp;&nbsp;
+</p>
+<div class="cpre">
+
+<span class="spcolor5">-- <a id="LetterC">C</a> --</span>
+
+<a href="#Cause">Cause</a>
+<a href="#CellIdentity">CellIdentity</a>
+<a href="#Concurrent-Warning-Message-Indicator">Concurrent-Warning-Message-Indicator</a>
+<a href="#Criticality">Criticality</a>
+<a href="#Criticality-Diagnostics">Criticality-Diagnostics</a>
+<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>
+<a href="#CriticalityDiagnostics-IE-Item-ExtIEs">CriticalityDiagnostics-IE-Item-ExtIEs</a>
+<a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a>
+
+<span class="spcolor5">-- <a id="LetterD">D</a> --</span>
+
+<a href="#Data-Coding-Scheme">Data-Coding-Scheme</a>
+
+<span class="spcolor5">-- <a id="LetterE">E</a> --</span>
+
+<a href="#ECGIList">ECGIList</a>
+<a href="#Emergency-Area-ID">Emergency-Area-ID</a>
+<a href="#Emergency-Area-ID-List">Emergency-Area-ID-List</a>
+<a href="#Error-Indication">Error-Indication</a>
+<a href="#error-Indication">error-Indication</a>
+<a href="#ErrorIndicationIEs">ErrorIndicationIEs</a>
+<a href="#EUTRAN-CGI">EUTRAN-CGI</a>
+<a href="#EUTRAN-CGI-ExtIEs">EUTRAN-CGI-ExtIEs</a>
+<a href="#Extended-Repetition-Period">Extended-Repetition-Period</a>
+
+<span class="spcolor5">-- <a id="LetterI">I</a> --</span>
+
+<a href="#id-Broadcast-Message-Content">id-Broadcast-Message-Content</a>
+<a href="#id-Cause">id-Cause</a>
+<a href="#id-Concurrent-Warning-Message-Indicator">id-Concurrent-Warning-Message-Indicator</a>
+<a href="#id-Criticality-Diagnostics">id-Criticality-Diagnostics</a>
+<a href="#id-Data-Coding-Scheme">id-Data-Coding-Scheme</a>
+<a href="#id-Error-Indication">id-Error-Indication</a>
+<a href="#id-Extended-Repetition-Period">id-Extended-Repetition-Period</a>
+<a href="#id-Failure-List">id-Failure-List</a>
+<a href="#id-List-of-TAIs">id-List-of-TAIs</a>
+<a href="#id-Message-Identifier">id-Message-Identifier</a>
+<a href="#id-Number-of-Broadcasts-Completed-List">id-Number-of-Broadcasts-Completed-List</a>
+<a href="#id-Number-of-Broadcasts-Requested">id-Number-of-Broadcasts-Requested</a>
+<a href="#id-Omc-Id">id-Omc-Id</a>
+<a href="#id-Radio-Resource-Loading-List">id-Radio-Resource-Loading-List</a>
+<a href="#id-Recovery-Indication">id-Recovery-Indication</a>
+<a href="#id-Repetition-Period">id-Repetition-Period</a>
+<a href="#id-Serial-Number">id-Serial-Number</a>
+<a href="#id-Service-Areas-List">id-Service-Areas-List</a>
+<a href="#id-Stop-Warning">id-Stop-Warning</a>
+<a href="#id-TypeOfError">id-TypeOfError</a>
+<a href="#id-Warning-Area-List">id-Warning-Area-List</a>
+<a href="#id-Warning-Message-Content">id-Warning-Message-Content</a>
+<a href="#id-Warning-Security-Information">id-Warning-Security-Information</a>
+<a href="#id-Warning-Type">id-Warning-Type</a>
+<a href="#id-Write-Replace-Warning">id-Write-Replace-Warning</a>
+<a href="#InitiatingMessage">InitiatingMessage</a>
+
+<span class="spcolor5">-- <a id="LetterL">L</a> --</span>
+
+<a href="#List-of-TAIs">List-of-TAIs</a>
+
+<span class="spcolor5">-- <a id="LetterM">M</a> --</span>
+
+<a href="#maxnoofCellID">maxnoofCellID</a>
+<a href="#maxnoofEmergencyAreaID">maxnoofEmergencyAreaID</a>
+<a href="#maxnoofTAIforWarning">maxnoofTAIforWarning</a>
+<a href="#maxNrOfErrors">maxNrOfErrors</a>
+<a href="#maxNrOfTAIs">maxNrOfTAIs</a>
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>
+<a href="#maxProtocolIEs">maxProtocolIEs</a>
+<a href="#Message-Identifier">Message-Identifier</a>
+
+<span class="spcolor5">-- <a id="LetterN">N</a> --</span>
+
+<a href="#Number-of-Broadcasts-Requested">Number-of-Broadcasts-Requested</a>
+
+<span class="spcolor5">-- <a id="LetterO">O</a> --</span>
+
+<a href="#Omc-Id">Omc-Id</a>
+
+<span class="spcolor5">-- <a id="LetterP">P</a> --</span>
+
+<a href="#PLMNidentity">PLMNidentity</a>
+<a href="#Presence">Presence</a>
+<a href="#ProcedureCode">ProcedureCode</a>
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a>
+<a href="#ProtocolExtensionID">ProtocolExtensionID</a>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>
+<a href="#ProtocolIE-ContainerList">ProtocolIE-ContainerList</a>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a>
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+
+<span class="spcolor5">-- <a id="LetterR">R</a> --</span>
+
+<a href="#Repetition-Period">Repetition-Period</a>
+
+<span class="spcolor5">-- <a id="LetterS">S</a> --</span>
+
+<a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>
+<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>
+<a href="#SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1</a>
+<a href="#SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2</a>
+<a href="#SBC-AP-PDU">SBC-AP-PDU</a>
+<a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>
+<a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a>
+<a href="#Serial-Number">Serial-Number</a>
+<a href="#stop-Warning">stop-Warning</a>
+<a href="#Stop-Warning-Request">Stop-Warning-Request</a>
+<a href="#Stop-Warning-Request-Extensions">Stop-Warning-Request-Extensions</a>
+<a href="#Stop-Warning-Request-IEs">Stop-Warning-Request-IEs</a>
+<a href="#Stop-Warning-Response">Stop-Warning-Response</a>
+<a href="#Stop-Warning-Response-Extensions">Stop-Warning-Response-Extensions</a>
+<a href="#Stop-Warning-Response-IEs">Stop-Warning-Response-IEs</a>
+<a href="#SuccessfulOutcome">SuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterT">T</a> --</span>
+
+<a href="#TAC">TAC</a>
+<a href="#TAI">TAI</a>
+<a href="#TAI-ExtIEs">TAI-ExtIEs</a>
+<a href="#TAI-List-for-Warning">TAI-List-for-Warning</a>
+<a href="#TBCD-STRING">TBCD-STRING</a>
+<a href="#TriggeringMessage">TriggeringMessage</a>
+<a href="#TypeOfError">TypeOfError</a>
+
+<span class="spcolor5">-- <a id="LetterU">U</a> --</span>
+
+<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterW">W</a> --</span>
+
+<a href="#Warning-Area-List">Warning-Area-List</a>
+<a href="#Warning-Message-Content">Warning-Message-Content</a>
+<a href="#Warning-Security-Information">Warning-Security-Information</a>
+<a href="#Warning-Type">Warning-Type</a>
+<a href="#write-Replace-Warning">write-Replace-Warning</a>
+<a href="#Write-Replace-Warning-Request">Write-Replace-Warning-Request</a>
+<a href="#Write-Replace-Warning-Request-Extensions">Write-Replace-Warning-Request-Extensions</a>
+<a href="#Write-Replace-Warning-Request-IEs">Write-Replace-Warning-Request-IEs</a>
+<a href="#Write-Replace-Warning-Response">Write-Replace-Warning-Response</a>
+<a href="#Write-Replace-Warning-Response-Extensions">Write-Replace-Warning-Response-Extensions</a>
+<a href="#Write-Replace-Warning-Response-IEs">Write-Replace-Warning-Response-IEs</a>
+
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedure definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-PDU-Descriptions {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-PDU-Descriptions (0)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>
+<span class="spcolor1">FROM</span> SBC-AP-CommonDataTypes
+
+<a href="#Write-Replace-Warning-Request">Write-Replace-Warning-Request</a>,
+<a href="#Write-Replace-Warning-Response">Write-Replace-Warning-Response</a>,
+<a href="#Stop-Warning-Request">Stop-Warning-Request</a>,
+<a href="#Stop-Warning-Response">Stop-Warning-Response</a>,
+<a href="#Error-Indication">Error-Indication</a> 
+
+<span class="spcolor1">FROM</span> SBC-AP-PDU-Contents
+
+<a href="#id-Write-Replace-Warning">id-Write-Replace-Warning</a>, 
+<a href="#id-Stop-Warning">id-Stop-Warning</a>,
+<a href="#id-Error-Indication">id-Error-Indication</a>
+<span class="spcolor1">FROM</span> SBC-AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure Class</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= <span class="spcolor1">CLASS</span> {
+   &<a href="#InitiatingMessage">InitiatingMessage</a> ,
+   &<a href="#SuccessfulOutcome">SuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   INITIATING MESSAGE &<a href="#InitiatingMessage">InitiatingMessage</a>
+   [SUCCESSFUL OUTCOME &<a href="#SuccessfulOutcome">SuccessfulOutcome</a>]
+   [UNSUCCESSFUL OUTCOME &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>]
+   PROCEDURE CODE &procedureCode
+   [CRITICALITY &criticality]
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface PDU Definition</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="SBC-AP-PDU">SBC-AP-PDU</a> ::= <span class="spcolor2">CHOICE</span> {
+   initiatingMessage <a href="#InitiatingMessage">InitiatingMessage</a>,
+   successfulOutcome <a href="#SuccessfulOutcome">SuccessfulOutcome</a>,
+   unsuccessfulOutcome <a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>,
+   ...
+}
+
+<a id="InitiatingMessage">InitiatingMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#InitiatingMessage">InitiatingMessage</a> ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="SuccessfulOutcome">SuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#SuccessfulOutcome">SuccessfulOutcome</a> ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="UnsuccessfulOutcome">UnsuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a>.&<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> ({<a href="#SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure List</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="SBC-AP-ELEMENTARY-PROCEDURES">SBC-AP-ELEMENTARY-PROCEDURES</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1</a> |
+   <a href="#SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2</a> ,
+   ...
+}
+
+<a id="SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-1</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#write-Replace-Warning">write-Replace-Warning</a> |
+   <a href="#stop-Warning">stop-Warning</a> ,
+   ...
+}
+
+<a id="SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2">SBC-AP-ELEMENTARY-PROCEDURES-CLASS-2</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#error-Indication">error-Indication</a> ,
+   ...
+}
+
+<a id="write-Replace-Warning">write-Replace-Warning</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Write-Replace-Warning-Request">Write-Replace-Warning-Request</a>
+   SUCCESSFUL OUTCOME <a href="#Write-Replace-Warning-Response">Write-Replace-Warning-Response</a>
+   
+   PROCEDURE CODE <a href="#id-Write-Replace-Warning">id-Write-Replace-Warning</a>
+   CRITICALITY reject
+}
+
+<a id="stop-Warning">stop-Warning</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Stop-Warning-Request">Stop-Warning-Request</a>
+   SUCCESSFUL OUTCOME <a href="#Stop-Warning-Response">Stop-Warning-Response</a>
+   
+   PROCEDURE CODE <a href="#id-Stop-Warning">id-Stop-Warning</a>
+   CRITICALITY reject
+}
+
+<a id="error-Indication">error-Indication</a> <a href="#SBC-AP-ELEMENTARY-PROCEDURE">SBC-AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Error-Indication">Error-Indication</a>
+   PROCEDURE CODE <a href="#id-Error-Indication">id-Error-Indication</a>
+   CRITICALITY ignore
+}
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PDU definitions for SBC-AP.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-PDU-Contents {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-PDU-Contents (1)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+
+<a href="#Cause">Cause</a>,
+<a href="#Concurrent-Warning-Message-Indicator">Concurrent-Warning-Message-Indicator</a>,
+<a href="#Criticality-Diagnostics">Criticality-Diagnostics</a>,
+<a href="#Data-Coding-Scheme">Data-Coding-Scheme</a>,
+<a href="#Message-Identifier">Message-Identifier</a>,
+<a href="#Serial-Number">Serial-Number</a>,
+<a href="#List-of-TAIs">List-of-TAIs</a>,
+<a href="#Warning-Area-List">Warning-Area-List</a>, 
+<a href="#Omc-Id">Omc-Id</a>,
+<a href="#Repetition-Period">Repetition-Period</a>, 
+<a href="#Extended-Repetition-Period">Extended-Repetition-Period</a>,
+<a href="#Number-of-Broadcasts-Requested">Number-of-Broadcasts-Requested</a>,
+<a href="#Warning-Type">Warning-Type</a>,
+<a href="#Warning-Security-Information">Warning-Security-Information</a>,
+<a href="#Warning-Message-Content">Warning-Message-Content</a>
+<span class="spcolor1">FROM</span> SBC-AP-IEs
+
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>{},
+<a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>,
+<a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a>
+<span class="spcolor1">FROM</span> SBC-AP-Containers
+
+<a href="#id-Concurrent-Warning-Message-Indicator">id-Concurrent-Warning-Message-Indicator</a>,
+<a href="#id-Criticality-Diagnostics">id-Criticality-Diagnostics</a>,
+<a href="#id-Cause">id-Cause</a>,
+<a href="#id-Data-Coding-Scheme">id-Data-Coding-Scheme</a>,
+<a href="#id-List-of-TAIs">id-List-of-TAIs</a>,
+<a href="#id-Message-Identifier">id-Message-Identifier</a>,
+<a href="#id-Serial-Number">id-Serial-Number</a>,
+<a href="#id-Number-of-Broadcasts-Requested">id-Number-of-Broadcasts-Requested</a>, 
+<a href="#id-Omc-Id">id-Omc-Id</a>,
+<a href="#id-Radio-Resource-Loading-List">id-Radio-Resource-Loading-List</a>,
+<a href="#id-Recovery-Indication">id-Recovery-Indication</a>,
+<a href="#id-Repetition-Period">id-Repetition-Period</a>, 
+<a href="#id-Extended-Repetition-Period">id-Extended-Repetition-Period</a>,
+<a href="#id-Warning-Area-List">id-Warning-Area-List</a>,
+<a href="#id-Warning-Message-Content">id-Warning-Message-Content</a>,
+<a href="#id-Warning-Security-Information">id-Warning-Security-Information</a>,
+<a href="#id-Warning-Type">id-Warning-Type</a>
+<span class="spcolor1">FROM</span> SBC-AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Write-Replace-Warning-Request</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Write-Replace-Warning-Request">Write-Replace-Warning-Request</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#Write-Replace-Warning-Request-IEs">Write-Replace-Warning-Request-IEs</a>} },
+   protocolExtensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#Write-Replace-Warning-Request-Extensions">Write-Replace-Warning-Request-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Write-Replace-Warning-Request-IEs">Write-Replace-Warning-Request-IEs</a> <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Message-Identifier">id-Message-Identifier</a> CRITICALITY reject TYPE <a href="#Message-Identifier">Message-Identifier</a> PRESENCE mandatory } |
+   { ID <a href="#id-Serial-Number">id-Serial-Number</a> CRITICALITY reject TYPE <a href="#Serial-Number">Serial-Number</a> PRESENCE mandatory } |
+   { ID <a href="#id-List-of-TAIs">id-List-of-TAIs</a> CRITICALITY reject TYPE <a href="#List-of-TAIs">List-of-TAIs</a> PRESENCE optional } |
+   { ID <a href="#id-Warning-Area-List">id-Warning-Area-List</a> CRITICALITY ignore TYPE <a href="#Warning-Area-List">Warning-Area-List</a> PRESENCE optional } |
+   { ID <a href="#id-Repetition-Period">id-Repetition-Period</a> CRITICALITY reject TYPE <a href="#Repetition-Period">Repetition-Period</a> PRESENCE mandatory } |
+   { ID <a href="#id-Extended-Repetition-Period">id-Extended-Repetition-Period</a> CRITICALITY reject TYPE <a href="#Extended-Repetition-Period">Extended-Repetition-Period</a> PRESENCE optional } |
+   
+   { ID <a href="#id-Number-of-Broadcasts-Requested">id-Number-of-Broadcasts-Requested</a>
+      CRITICALITY reject TYPE <a href="#Number-of-Broadcasts-Requested">Number-of-Broadcasts-Requested</a> PRESENCE mandatory } |
+   { ID <a href="#id-Warning-Type">id-Warning-Type</a> CRITICALITY ignore TYPE <a href="#Warning-Type">Warning-Type</a> PRESENCE optional } |
+   { ID <a href="#id-Warning-Security-Information">id-Warning-Security-Information</a> CRITICALITY ignore TYPE <a href="#Warning-Security-Information">Warning-Security-Information</a> PRESENCE optional } |
+   { ID <a href="#id-Data-Coding-Scheme">id-Data-Coding-Scheme</a> CRITICALITY ignore TYPE <a href="#Data-Coding-Scheme">Data-Coding-Scheme</a> PRESENCE optional } |
+   { ID <a href="#id-Warning-Message-Content">id-Warning-Message-Content</a>
+      CRITICALITY ignore TYPE <a href="#Warning-Message-Content">Warning-Message-Content</a> PRESENCE optional } |
+   { ID <a href="#id-Omc-Id">id-Omc-Id</a> CRITICALITY ignore TYPE <a href="#Omc-Id">Omc-Id</a> PRESENCE optional } |
+   { ID <a href="#id-Concurrent-Warning-Message-Indicator">id-Concurrent-Warning-Message-Indicator</a> CRITICALITY reject TYPE <a href="#Concurrent-Warning-Message-Indicator">Concurrent-Warning-Message-Indicator</a> PRESENCE optional },
+   ...
+}
+
+<a id="Write-Replace-Warning-Request-Extensions">Write-Replace-Warning-Request-Extensions</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Write-Replace-Warning-Response</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Write-Replace-Warning-Response">Write-Replace-Warning-Response</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#Write-Replace-Warning-Response-IEs">Write-Replace-Warning-Response-IEs</a>} },
+   protocolExtensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#Write-Replace-Warning-Response-Extensions">Write-Replace-Warning-Response-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Write-Replace-Warning-Response-IEs">Write-Replace-Warning-Response-IEs</a> <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Message-Identifier">id-Message-Identifier</a> CRITICALITY reject TYPE <a href="#Message-Identifier">Message-Identifier</a> PRESENCE mandatory } |
+   { ID <a href="#id-Serial-Number">id-Serial-Number</a> CRITICALITY reject TYPE <a href="#Serial-Number">Serial-Number</a> PRESENCE mandatory } |
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory } |
+   { ID <a href="#id-Criticality-Diagnostics">id-Criticality-Diagnostics</a> CRITICALITY ignore TYPE <a href="#Criticality-Diagnostics">Criticality-Diagnostics</a> PRESENCE optional },
+   ...
+}
+
+<a id="Write-Replace-Warning-Response-Extensions">Write-Replace-Warning-Response-Extensions</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Stop-Warning-Request</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Stop-Warning-Request">Stop-Warning-Request</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#Stop-Warning-Request-IEs">Stop-Warning-Request-IEs</a>} },
+   protocolExtensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#Stop-Warning-Request-Extensions">Stop-Warning-Request-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Stop-Warning-Request-IEs">Stop-Warning-Request-IEs</a> <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Message-Identifier">id-Message-Identifier</a> CRITICALITY reject TYPE <a href="#Message-Identifier">Message-Identifier</a> PRESENCE mandatory } |
+   { ID <a href="#id-Serial-Number">id-Serial-Number</a> CRITICALITY reject TYPE <a href="#Serial-Number">Serial-Number</a> PRESENCE mandatory } |
+   { ID <a href="#id-List-of-TAIs">id-List-of-TAIs</a> CRITICALITY reject TYPE <a href="#List-of-TAIs">List-of-TAIs</a> PRESENCE optional } |
+   { ID <a href="#id-Warning-Area-List">id-Warning-Area-List</a> CRITICALITY ignore TYPE <a href="#Warning-Area-List">Warning-Area-List</a> PRESENCE optional }|
+   { ID <a href="#id-Omc-Id">id-Omc-Id</a> CRITICALITY ignore TYPE <a href="#Omc-Id">Omc-Id</a> PRESENCE optional },
+   ... 
+}
+
+<a id="Stop-Warning-Request-Extensions">Stop-Warning-Request-Extensions</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Stop-Warning-Response</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Stop-Warning-Response">Stop-Warning-Response</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#Stop-Warning-Response-IEs">Stop-Warning-Response-IEs</a>} },
+   protocolExtensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#Stop-Warning-Response-Extensions">Stop-Warning-Response-Extensions</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="Stop-Warning-Response-IEs">Stop-Warning-Response-IEs</a> <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Message-Identifier">id-Message-Identifier</a> CRITICALITY reject TYPE <a href="#Message-Identifier">Message-Identifier</a> PRESENCE mandatory } |
+   { ID <a href="#id-Serial-Number">id-Serial-Number</a> CRITICALITY reject TYPE <a href="#Serial-Number">Serial-Number</a> PRESENCE mandatory } |
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory } |
+   { ID <a href="#id-Criticality-Diagnostics">id-Criticality-Diagnostics</a> CRITICALITY ignore TYPE <a href="#Criticality-Diagnostics">Criticality-Diagnostics</a> PRESENCE optional },
+   ...
+}
+
+<a id="Stop-Warning-Response-Extensions">Stop-Warning-Response-Extensions</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- ERROR INDICATION ELEMENTARY PROCEDURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Error Indication</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Error-Indication">Error-Indication</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#ErrorIndicationIEs">ErrorIndicationIEs</a>}},
+   ...
+}
+
+<a id="ErrorIndicationIEs">ErrorIndicationIEs</a> <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE optional } |
+   { ID <a href="#id-Criticality-Diagnostics">id-Criticality-Diagnostics</a> CRITICALITY ignore TYPE <a href="#Criticality-Diagnostics">Criticality-Diagnostics</a> PRESENCE optional } ,
+   ...
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Information Element Definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-IEs {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-IEs (2)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#maxNrOfErrors">maxNrOfErrors</a>,
+<a href="#maxNrOfTAIs">maxNrOfTAIs</a>,
+<a href="#maxnoofTAIforWarning">maxnoofTAIforWarning</a>,
+<a href="#maxnoofCellID">maxnoofCellID</a>,
+<a href="#maxnoofEmergencyAreaID">maxnoofEmergencyAreaID</a>,
+
+<a href="#id-TypeOfError">id-TypeOfError</a>
+
+<span class="spcolor1">FROM</span> SBC-AP-Constants
+
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#TriggeringMessage">TriggeringMessage</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<span class="spcolor1">FROM</span> SBC-AP-CommonDataTypes
+
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+
+<a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>
+<span class="spcolor1">FROM</span> SBC-AP-Containers;
+
+<span class="spcolor5">-- A</span>
+
+<span class="spcolor5">-- B</span>
+
+<span class="spcolor5">-- C</span>
+
+<a id="Cause">Cause</a> ::= <span class="spcolor3">INTEGER</span> {
+   message-accepted (0),
+   parameter-not-recognised (1),
+   parameter-value-invalid (2),
+   valid-message-not-identified (3),
+   tracking-area-not-valid (4),
+   unrecognised-message (5),
+   missing-mandatory-element (6),
+   mME-capacity-exceeded (7),
+   mME-memory-exceeded (8),
+   warning-broadcast-not-supported (9),
+   warning-broadcast-not-operational (10),
+   message-reference-already-used (11),
+   unspecifed-error (12),
+   transfer-syntax-error (13),
+   semantic-error (14),
+   message-not-compatible-with-receiver-state (15),
+   abstract-syntax-error-reject (16),
+   abstract-syntax-error-ignore-and-notify (17),
+   abstract-syntax-error-falsely-constructed-message (18)
+} (0..255)
+
+<a id="CellIdentity">CellIdentity</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (28))
+
+<a id="Concurrent-Warning-Message-Indicator">Concurrent-Warning-Message-Indicator</a> ::= <span class="spcolor3">ENUMERATED</span> {true}
+
+<a id="Criticality-Diagnostics">Criticality-Diagnostics</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor4">OPTIONAL</span>,
+   triggeringMessage <a href="#TriggeringMessage">TriggeringMessage</a> <span class="spcolor4">OPTIONAL</span>,
+   procedureCriticality <a href="#Criticality">Criticality</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-CriticalityDiagnostics <a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxNrOfErrors">maxNrOfErrors</a>)) <span class="spcolor2">OF</span>
+<span class="spcolor2">SEQUENCE</span> {
+   iECriticality <a href="#Criticality">Criticality</a>,
+   iE-ID <a href="#ProtocolIE-ID">ProtocolIE-ID</a>,
+   typeOfError <a href="#TypeOfError">TypeOfError</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> {{<a href="#CriticalityDiagnostics-IE-Item-ExtIEs">CriticalityDiagnostics-IE-Item-ExtIEs</a>}} <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-Item-ExtIEs">CriticalityDiagnostics-IE-Item-ExtIEs</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- D</span>
+
+<a id="Data-Coding-Scheme">Data-Coding-Scheme</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (8))
+
+<span class="spcolor5">-- E</span>
+
+<a id="ECGIList">ECGIList</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1..<a href="#maxnoofCellID">maxnoofCellID</a>)) <span class="spcolor2">OF</span> <a href="#EUTRAN-CGI">EUTRAN-CGI</a>
+
+<a id="Emergency-Area-ID-List">Emergency-Area-ID-List</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1..<a href="#maxnoofEmergencyAreaID">maxnoofEmergencyAreaID</a>)) <span class="spcolor2">OF</span> <a href="#Emergency-Area-ID">Emergency-Area-ID</a>
+
+<a id="Emergency-Area-ID">Emergency-Area-ID</a> ::= OCTET STRING (SIZE (3))
+
+<a id="EUTRAN-CGI">EUTRAN-CGI</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMNidentity <a href="#PLMNidentity">PLMNidentity</a>,
+   cell-ID <a href="#CellIdentity">CellIdentity</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#EUTRAN-CGI-ExtIEs">EUTRAN-CGI-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="EUTRAN-CGI-ExtIEs">EUTRAN-CGI-ExtIEs</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="Extended-Repetition-Period">Extended-Repetition-Period</a> ::= <span class="spcolor3">INTEGER</span> (4096..131071)
+
+<span class="spcolor5">-- F</span>
+
+<span class="spcolor5">-- G</span>
+
+<span class="spcolor5">-- H</span>
+
+<span class="spcolor5">-- I</span>
+
+<span class="spcolor5">-- J</span>
+
+<span class="spcolor5">-- K</span>
+
+<span class="spcolor5">-- L</span>
+
+<a id="List-of-TAIs">List-of-TAIs</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxNrOfTAIs">maxNrOfTAIs</a>)) <span class="spcolor2">OF</span>
+<span class="spcolor2">SEQUENCE</span> {
+   tai <a href="#TAI">TAI</a>
+}
+
+<span class="spcolor5">-- M</span>
+
+<a id="Message-Identifier">Message-Identifier</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (16))
+
+<span class="spcolor5">-- N</span>
+
+<a id="Number-of-Broadcasts-Requested">Number-of-Broadcasts-Requested</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<span class="spcolor5">-- For Number-of-Broadcasts-Requested = 0 and Repetition-Period = 0, then eNB action is no broadcast</span>
+<span class="spcolor5">-- for ETWS Secondary and CMAS.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- For Number-of-Broadcasts-Requested = 1 and Repetition-Period = 0, then eNB action is broadcast</span>
+<span class="spcolor5">-- only once for ETWS and CMAS.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- For Number-of-Broadcasts-Requested = 0 and Repetition-Period > 0, then eNB action is no broadcast</span>
+<span class="spcolor5">-- for the ETWS Secondary, and broadcast until further notice for the CMAS.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- For Number-of-Broadcasts-Requested > 0 and Repetition-Period > 0, then eNB action is normal</span>
+<span class="spcolor5">-- broadcast.</span>
+<span class="spcolor5">-- All other combinations of Number-of-Broadcasts-Requested and Repetition-Period are considered</span>
+<span class="spcolor5">-- invalid.</span>
+
+<span class="spcolor5">-- O </span>
+<a id="Omc-Id">Omc-Id</a> ::= OCTET STRING (SIZE (1..20))
+
+<span class="spcolor5">-- P</span>
+<a id="PLMNidentity">PLMNidentity</a> ::= <a href="#TBCD-STRING">TBCD-STRING</a> 
+
+<span class="spcolor5">-- Q</span>
+
+<span class="spcolor5">-- R</span>
+
+<a id="Repetition-Period">Repetition-Period</a> ::= <span class="spcolor3">INTEGER</span> (0..4096)
+<span class="spcolor5">-- 1 to 4096: Each unit represents a repetition of one second to a maximum of</span>
+<span class="spcolor5">-- once per 4096 seconds (~1 hour). </span>
+<span class="spcolor5">-- 0: no repetition</span>
+<span class="spcolor5">-- A CBC compliant to this version or later of this specification shall not send a repetition period</span>
+<span class="spcolor5">-- greater than 4095.</span>
+<span class="spcolor5">-- For backwards compatibility with a CBC compliant to an earlier version of this specification the</span>
+–- maximum value of the repetition period defined in ASN.1 remains at 4096.
+<span class="spcolor5">-- If the value of the Repetition Period IE received in the WRITE-REPLACE WARNING REQUEST message is</span>
+<span class="spcolor5">-- set to 4096, the MME shall set the Repetition Period IE to the maximum value 4095 supported on</span>
+<span class="spcolor5">-- the S1-MME interface as defined in [7] before forwarding to the selected eNBs. </span>
+<span class="spcolor5">-- S</span>
+
+<a id="Serial-Number">Serial-Number</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (16))
+
+<span class="spcolor5">-- T</span>
+
+<a id="TAC">TAC</a> ::= OCTET STRING (SIZE (2))
+
+<a id="TAI-List-for-Warning">TAI-List-for-Warning</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1.. <a href="#maxnoofTAIforWarning">maxnoofTAIforWarning</a>)) <span class="spcolor2">OF</span> <a href="#TAI">TAI</a>
+
+<a id="TAI">TAI</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMNidentity <a href="#PLMNidentity">PLMNidentity</a>,
+   tAC <a href="#TAC">TAC</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#TAI-ExtIEs">TAI-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>
+}
+
+<a id="TAI-ExtIEs">TAI-ExtIEs</a> <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="TBCD-STRING">TBCD-STRING</a> ::= OCTET STRING (SIZE (3))
+
+<a id="TypeOfError">TypeOfError</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   not-understood,
+   missing,
+   ...
+}
+
+<span class="spcolor5">-- U</span>
+
+<span class="spcolor5">-- V</span>
+
+<span class="spcolor5">-- W</span>
+
+<a id="Warning-Area-List">Warning-Area-List</a> ::= <span class="spcolor2">CHOICE</span> {
+   cell-ID-List <a href="#ECGIList">ECGIList</a>,
+   tracking-Area-List-for-Warning <a href="#TAI-List-for-Warning">TAI-List-for-Warning</a>,
+   emergency-Area-ID-List <a href="#Emergency-Area-ID-List">Emergency-Area-ID-List</a>,
+   ...
+}
+
+<a id="Warning-Message-Content">Warning-Message-Content</a> ::= OCTET STRING (SIZE (1..9600))
+<a id="Warning-Security-Information">Warning-Security-Information</a> ::= OCTET STRING (SIZE (50)) 
+<a id="Warning-Type">Warning-Type</a> ::= OCTET STRING (SIZE (2))
+
+<span class="spcolor5">-- X</span>
+
+<span class="spcolor5">-- Y</span>
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-CommonDataTypes {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-CommonDataTypes (3)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<a id="Criticality">Criticality</a> ::= <span class="spcolor3">ENUMERATED</span> { reject, ignore, notify }
+
+<a id="Presence">Presence</a> ::= <span class="spcolor3">ENUMERATED</span> { optional, conditional, mandatory }
+
+<a id="ProcedureCode">ProcedureCode</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<a id="ProtocolExtensionID">ProtocolExtensionID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<a id="ProtocolIE-ID">ProtocolIE-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<a id="TriggeringMessage">TriggeringMessage</a> ::= <span class="spcolor3">ENUMERATED</span> {initiating-message, successful-outcome, unsuccessful-outcome, outcome}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Constant definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-Constants {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-Constants (4)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-Write-Replace-Warning">id-Write-Replace-Warning</a> <span class="spcolor3">INTEGER</span> ::= 0 
+<a id="id-Stop-Warning">id-Stop-Warning</a> <span class="spcolor3">INTEGER</span> ::= 1 
+<a id="id-Error-Indication">id-Error-Indication</a> <span class="spcolor3">INTEGER</span> ::= 2
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-Broadcast-Message-Content">id-Broadcast-Message-Content</a> <span class="spcolor3">INTEGER</span> ::= 0
+<a id="id-Cause">id-Cause</a> <span class="spcolor3">INTEGER</span> ::= 1
+<a id="id-Criticality-Diagnostics">id-Criticality-Diagnostics</a> <span class="spcolor3">INTEGER</span> ::=2
+<a id="id-Data-Coding-Scheme">id-Data-Coding-Scheme</a> <span class="spcolor3">INTEGER</span> ::= 3
+<a id="id-Failure-List">id-Failure-List</a> <span class="spcolor3">INTEGER</span> ::= 4
+<a id="id-Message-Identifier">id-Message-Identifier</a> <span class="spcolor3">INTEGER</span> ::= 5
+<a id="id-Number-of-Broadcasts-Completed-List">id-Number-of-Broadcasts-Completed-List</a> <span class="spcolor3">INTEGER</span> ::= 6
+<a id="id-Number-of-Broadcasts-Requested">id-Number-of-Broadcasts-Requested</a> <span class="spcolor3">INTEGER</span> ::= 7
+<a id="id-Radio-Resource-Loading-List">id-Radio-Resource-Loading-List</a> <span class="spcolor3">INTEGER</span> ::= 8
+<a id="id-Recovery-Indication">id-Recovery-Indication</a> <span class="spcolor3">INTEGER</span> ::= 9
+<a id="id-Repetition-Period">id-Repetition-Period</a> <span class="spcolor3">INTEGER</span> ::= 10
+<a id="id-Serial-Number">id-Serial-Number</a> <span class="spcolor3">INTEGER</span> ::= 11
+<a id="id-Service-Areas-List">id-Service-Areas-List</a> <span class="spcolor3">INTEGER</span> ::= 12
+<a id="id-TypeOfError">id-TypeOfError</a> <span class="spcolor3">INTEGER</span> ::= 13
+<a id="id-List-of-TAIs">id-List-of-TAIs</a> <span class="spcolor3">INTEGER</span> ::= 14
+<a id="id-Warning-Area-List">id-Warning-Area-List</a> <span class="spcolor3">INTEGER</span> ::= 15
+<a id="id-Warning-Message-Content">id-Warning-Message-Content</a> <span class="spcolor3">INTEGER</span> ::= 16
+<a id="id-Warning-Security-Information">id-Warning-Security-Information</a> <span class="spcolor3">INTEGER</span> ::= 17
+<a id="id-Warning-Type">id-Warning-Type</a> <span class="spcolor3">INTEGER</span> ::= 18 
+<a id="id-Omc-Id">id-Omc-Id</a> <span class="spcolor3">INTEGER</span> ::= 19 
+<a id="id-Concurrent-Warning-Message-Indicator">id-Concurrent-Warning-Message-Indicator</a> <span class="spcolor3">INTEGER</span> ::= 20 
+<a id="id-Extended-Repetition-Period">id-Extended-Repetition-Period</a> <span class="spcolor3">INTEGER</span> ::= 21
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Extension constants</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Lists</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="maxNrOfErrors">maxNrOfErrors</a> <span class="spcolor3">INTEGER</span> ::= 256 
+<a id="maxnoofCellID">maxnoofCellID</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxNrOfTAIs">maxNrOfTAIs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxnoofEmergencyAreaID">maxnoofEmergencyAreaID</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxnoofTAIforWarning">maxnoofTAIforWarning</a> <span class="spcolor3">INTEGER</span> ::= 65535
+
+<a id="maxProtocolExtensions">maxProtocolExtensions</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolIEs">maxProtocolIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+SBC-AP-Containers {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) sbc-AP (3) version1 (1) sbc-AP-Containers (5)}
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#Criticality">Criticality</a>,
+<a href="#Presence">Presence</a>,
+<a href="#ProtocolExtensionID">ProtocolExtensionID</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<span class="spcolor1">FROM</span> SBC-AP-CommonDataTypes
+
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>,
+<a href="#maxProtocolIEs">maxProtocolIEs</a>
+<span class="spcolor1">FROM</span> SBC-AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore,
+   &Value,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   TYPE &Value
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolExtensionID">ProtocolExtensionID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore,
+   &Extension,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   EXTENSION &Extension
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-Container">ProtocolIE-Container</a> {<a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-Field">ProtocolIE-Field</a> {<a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a>.&id ({IEsSetParam}),
+   criticality <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a>.&criticality ({IEsSetParam}{@id}),
+   value <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a>.&Value ({IEsSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container Lists for Protocol IE Containers</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-ContainerList">ProtocolIE-ContainerList</a> {<span class="spcolor3">INTEGER</span> : lowerBound, <span class="spcolor3">INTEGER</span> : upperBound, <a href="#SBC-AP-PROTOCOL-IES">SBC-AP-PROTOCOL-IES</a> : IEsSetParam} ::=
+<span class="spcolor2">SEQUENCE</span> (SIZE (lowerBound..upperBound)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{IEsSetParam}}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolExtensionContainer">ProtocolExtensionContainer</a> {<a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxProtocolExtensions">maxProtocolExtensions</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a> {{ExtensionSetParam}}
+
+<a id="ProtocolExtensionField">ProtocolExtensionField</a> {<a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>.&id ({ExtensionSetParam}),
+   criticality <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>.&criticality ({ExtensionSetParam}{@id}),
+   extensionValue <a href="#SBC-AP-PROTOCOL-EXTENSION">SBC-AP-PROTOCOL-EXTENSION</a>.&Extension ({ExtensionSetParam}{@id})
+}
+
+<span class="spcolor1">END</span>
+</div>
+  <section>
+
+  <footer>
+    <p class="text-center">
+      <a href="#" class="btn btn-info">Back to top</a>
+    </p>
+  </footer>
+
+</div>
+<script src="sga.js"></script>
+</body>
+</html>

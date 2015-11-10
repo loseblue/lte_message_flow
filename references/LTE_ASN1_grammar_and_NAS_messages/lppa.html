@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="niviuk.css" rel="stylesheet" type="text/css">
+  <title>LTE ASN1 LPPa</title>
+  <meta name="keywords" content="LTE,LPPa,Location,Positioning">
+  <meta name="description" content="LTE LPPa protocol ASN1 messages">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <div id="banner"></div>
+  </header>
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-inner">
+      <ul class="nav nav-pills">
+        <li><a href="index.html"><span class="glyphicon glyphicon-signal"></span></a></li>
+        <li><a href="rrc_lte.html">RRC (Radio)</a></li>
+        <li><a href="s1ap.html">S1</a></li>
+        <li><a href="x2ap.html">X2</a></li>
+        <li><a href="lpp.html">LPP </a></li>
+        <li><a href="lppa.html">LPPa </a></li>
+        <li><a href="lte_sls.html">LCS </a></li>
+        <li><a href="m2ap.html">M2 (eMBMS)</a></li>
+        <li><a href="m3ap.html">M3 (eMBMS)</a></li>
+        <li><a href="sbcap.html">SBc (Broadcast)</a></li>
+        <li><a href="lte_nas.php">Nas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+  <h1>LTE ASN1 LPPa description</h1>
+  <h2><a id="LPPa"></a>LTE Positioning Protocol A</h2>
+  <h3><a href="http://www.3gpp.org/DynaReport/36455.htm">36.455</a> v11.3.0 (2013-06)</h3>
+
+  <blockquote>
+    <p class="text-primary">Control plane radio network layer signalling procedures between eNB and E-SMLC</p>
+    <ul>
+      <li>Transfer of positioning related information between eNB and E-SMLC</li>
+    </ul>
+  </blockquote>
+
+<p>
+<a href="#LetterC">C</a>&nbsp;&nbsp;
+<a href="#LetterE">E</a>&nbsp;&nbsp;
+<a href="#LetterI">I</a>&nbsp;&nbsp;
+<a href="#LetterL">L</a>&nbsp;&nbsp;
+<a href="#LetterM">M</a>&nbsp;&nbsp;
+<a href="#LetterN">N</a>&nbsp;&nbsp;
+<a href="#LetterO">O</a>&nbsp;&nbsp;
+<a href="#LetterP">P</a>&nbsp;&nbsp;
+<a href="#LetterR">R</a>&nbsp;&nbsp;
+<a href="#LetterS">S</a>&nbsp;&nbsp;
+<a href="#LetterT">T</a>&nbsp;&nbsp;
+<a href="#LetterU">U</a>&nbsp;&nbsp;
+<a href="#LetterV">V</a>&nbsp;&nbsp;
+</p>
+<div class="cpre">
+
+<span class="spcolor5">-- <a id="LetterC">C</a> --</span>
+
+<a href="#Cause">Cause</a>
+<a href="#CauseMisc">CauseMisc</a>
+<a href="#CauseProtocol">CauseProtocol</a>
+<a href="#CauseRadioNetwork">CauseRadioNetwork</a>
+<a href="#CPLength">CPLength</a>
+<a href="#Criticality">Criticality</a>
+<a href="#CriticalityDiagnostics">CriticalityDiagnostics</a>
+<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>
+<a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a>
+<a href="#CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterE">E</a> --</span>
+
+<a href="#E-CID-MeasurementResult">E-CID-MeasurementResult</a>
+<a href="#E-CIDMeasurementFailureIndication">E-CIDMeasurementFailureIndication</a>
+<a href="#e-CIDMeasurementFailureIndication">e-CIDMeasurementFailureIndication</a>
+<a href="#E-CIDMeasurementFailureIndication-IEs">E-CIDMeasurementFailureIndication-IEs</a>
+<a href="#e-CIDMeasurementInitiation">e-CIDMeasurementInitiation</a>
+<a href="#E-CIDMeasurementInitiationFailure">E-CIDMeasurementInitiationFailure</a>
+<a href="#E-CIDMeasurementInitiationFailure-IEs">E-CIDMeasurementInitiationFailure-IEs</a>
+<a href="#E-CIDMeasurementInitiationRequest">E-CIDMeasurementInitiationRequest</a>
+<a href="#E-CIDMeasurementInitiationRequest-IEs">E-CIDMeasurementInitiationRequest-IEs</a>
+<a href="#E-CIDMeasurementInitiationResponse">E-CIDMeasurementInitiationResponse</a>
+<a href="#E-CIDMeasurementInitiationResponse-IEs">E-CIDMeasurementInitiationResponse-IEs</a>
+<a href="#E-CIDMeasurementReport">E-CIDMeasurementReport</a>
+<a href="#e-CIDMeasurementReport">e-CIDMeasurementReport</a>
+<a href="#E-CIDMeasurementReport-IEs">E-CIDMeasurementReport-IEs</a>
+<a href="#e-CIDMeasurementTermination">e-CIDMeasurementTermination</a>
+<a href="#E-CIDMeasurementTerminationCommand">E-CIDMeasurementTerminationCommand</a>
+<a href="#E-CIDMeasurementTerminationCommand-IEs">E-CIDMeasurementTerminationCommand-IEs</a>
+<a href="#E-UTRANAccessPointPosition">E-UTRANAccessPointPosition</a>
+<a href="#EARFCN">EARFCN</a>
+<a href="#ECGI">ECGI</a>
+<a href="#ECGI-ExtIEs">ECGI-ExtIEs</a>
+<a href="#ErrorIndication">ErrorIndication</a>
+<a href="#errorIndication">errorIndication</a>
+<a href="#ErrorIndication-IEs">ErrorIndication-IEs</a>
+<a href="#EUTRANCellIdentifier">EUTRANCellIdentifier</a>
+
+<span class="spcolor5">-- <a id="LetterI">I</a> --</span>
+
+<a href="#id-Cause">id-Cause</a>
+<a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a>
+<a href="#id-E-CID-MeasurementResult">id-E-CID-MeasurementResult</a>
+<a href="#id-e-CIDMeasurementFailureIndication">id-e-CIDMeasurementFailureIndication</a>
+<a href="#id-e-CIDMeasurementInitiation">id-e-CIDMeasurementInitiation</a>
+<a href="#id-e-CIDMeasurementReport">id-e-CIDMeasurementReport</a>
+<a href="#id-e-CIDMeasurementTermination">id-e-CIDMeasurementTermination</a>
+<a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a>
+<a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a>
+<a href="#id-errorIndication">id-errorIndication</a>
+<a href="#id-MeasurementPeriodicity">id-MeasurementPeriodicity</a>
+<a href="#id-MeasurementQuantities">id-MeasurementQuantities</a>
+<a href="#id-MeasurementQuantities-Item">id-MeasurementQuantities-Item</a>
+<a href="#id-OTDOA-Information-Type-Group">id-OTDOA-Information-Type-Group</a>
+<a href="#id-OTDOA-Information-Type-Item">id-OTDOA-Information-Type-Item</a>
+<a href="#id-OTDOACells">id-OTDOACells</a>
+<a href="#id-oTDOAInformationExchange">id-oTDOAInformationExchange</a>
+<a href="#id-privateMessage">id-privateMessage</a>
+<a href="#id-ReportCharacteristics">id-ReportCharacteristics</a>
+<a href="#id-RequestedSRSTransmissionCharacteristics">id-RequestedSRSTransmissionCharacteristics</a>
+<a href="#id-ULConfiguration">id-ULConfiguration</a>
+<a href="#id-uTDOAInformationExchange">id-uTDOAInformationExchange</a>
+<a href="#id-uTDOAInformationUpdate">id-uTDOAInformationUpdate</a>
+<a href="#InitiatingMessage">InitiatingMessage</a>
+
+<span class="spcolor5">-- <a id="LetterL">L</a> --</span>
+
+<a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>
+<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>
+<a href="#LPPA-ELEMENTARY-PROCEDURES-CLASS-1">LPPA-ELEMENTARY-PROCEDURES-CLASS-1</a>
+<a href="#LPPA-ELEMENTARY-PROCEDURES-CLASS-2">LPPA-ELEMENTARY-PROCEDURES-CLASS-2</a>
+<a href="#LPPA-PDU">LPPA-PDU</a>
+<a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a>
+<a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>
+<a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>
+<a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>
+<a href="#LPPATransactionID">LPPATransactionID</a>
+
+<span class="spcolor5">-- <a id="LetterM">M</a> --</span>
+
+<a href="#maxCellineNB">maxCellineNB</a>
+<a href="#maxCellReport">maxCellReport</a>
+<a href="#maxNoMeas">maxNoMeas</a>
+<a href="#maxnoOTDOAtypes">maxnoOTDOAtypes</a>
+<a href="#maxNrOfErrors">maxNrOfErrors</a>
+<a href="#maxPrivateIEs">maxPrivateIEs</a>
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>
+<a href="#maxProtocolIEs">maxProtocolIEs</a>
+<a href="#maxServCell">maxServCell</a>
+<a href="#MeasuredResults">MeasuredResults</a>
+<a href="#MeasuredResultsValue">MeasuredResultsValue</a>
+<a href="#Measurement-ID">Measurement-ID</a>
+<a href="#MeasurementPeriodicity">MeasurementPeriodicity</a>
+<a href="#MeasurementQuantities">MeasurementQuantities</a>
+<a href="#MeasurementQuantities-Item">MeasurementQuantities-Item</a>
+<a href="#MeasurementQuantities-ItemIEs">MeasurementQuantities-ItemIEs</a>
+<a href="#MeasurementQuantitiesValue">MeasurementQuantitiesValue</a>
+<a href="#MeasurementQuantitiesValue-ExtIEs">MeasurementQuantitiesValue-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterN">N</a> --</span>
+
+<a href="#NumberOfAntennaPorts">NumberOfAntennaPorts</a>
+<a href="#NumberOfDlFrames">NumberOfDlFrames</a>
+
+<span class="spcolor5">-- <a id="LetterO">O</a> --</span>
+
+<a href="#OTDOA-Information-Item">OTDOA-Information-Item</a>
+<a href="#OTDOA-Information-Type">OTDOA-Information-Type</a>
+<a href="#OTDOA-Information-Type-Item">OTDOA-Information-Type-Item</a>
+<a href="#OTDOA-Information-Type-ItemExtIEs">OTDOA-Information-Type-ItemExtIEs</a>
+<a href="#OTDOA-Information-TypeIEs">OTDOA-Information-TypeIEs</a>
+<a href="#OTDOACell-Information">OTDOACell-Information</a>
+<a href="#OTDOACell-Information-Item">OTDOACell-Information-Item</a>
+<a href="#OTDOACells">OTDOACells</a>
+<a href="#OTDOACells-ExtIEs">OTDOACells-ExtIEs</a>
+<a href="#oTDOAInformationExchange">oTDOAInformationExchange</a>
+<a href="#OTDOAInformationFailure">OTDOAInformationFailure</a>
+<a href="#OTDOAInformationFailure-IEs">OTDOAInformationFailure-IEs</a>
+<a href="#OTDOAInformationRequest">OTDOAInformationRequest</a>
+<a href="#OTDOAInformationRequest-IEs">OTDOAInformationRequest-IEs</a>
+<a href="#OTDOAInformationResponse">OTDOAInformationResponse</a>
+<a href="#OTDOAInformationResponse-IEs">OTDOAInformationResponse-IEs</a>
+
+<span class="spcolor5">-- <a id="LetterP">P</a> --</span>
+
+<a href="#PCI">PCI</a>
+<a href="#PLMN-Identity">PLMN-Identity</a>
+<a href="#Presence">Presence</a>
+<a href="#PrivateIE-Container">PrivateIE-Container</a>
+<a href="#PrivateIE-Field">PrivateIE-Field</a>
+<a href="#PrivateIE-ID">PrivateIE-ID</a>
+<a href="#PrivateMessage">PrivateMessage</a>
+<a href="#privateMessage">privateMessage</a>
+<a href="#PrivateMessage-IEs">PrivateMessage-IEs</a>
+<a href="#ProcedureCode">ProcedureCode</a>
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>
+<a href="#ProtocolIE-ContainerList">ProtocolIE-ContainerList</a>
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a>
+<a href="#ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a>
+<a href="#ProtocolIE-FieldPair">ProtocolIE-FieldPair</a>
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>
+<a href="#PRS-Bandwidth">PRS-Bandwidth</a>
+<a href="#PRS-Configuration-Index">PRS-Configuration-Index</a>
+<a href="#PRSMutingConfiguration">PRSMutingConfiguration</a>
+
+<span class="spcolor5">-- <a id="LetterR">R</a> --</span>
+
+<a href="#ReportCharacteristics">ReportCharacteristics</a>
+<a href="#RequestedSRSTransmissionCharacteristics">RequestedSRSTransmissionCharacteristics</a>
+<a href="#ResultRSRP">ResultRSRP</a>
+<a href="#ResultRSRP-Item">ResultRSRP-Item</a>
+<a href="#ResultRSRP-Item-ExtIEs">ResultRSRP-Item-ExtIEs</a>
+<a href="#ResultRSRQ">ResultRSRQ</a>
+<a href="#ResultRSRQ-Item">ResultRSRQ-Item</a>
+<a href="#ResultRSRQ-Item-ExtIEs">ResultRSRQ-Item-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterS">S</a> --</span>
+
+<a href="#SFNInitialisationTime">SFNInitialisationTime</a>
+<a href="#SRSConfigurationForAllCells">SRSConfigurationForAllCells</a>
+<a href="#SRSConfigurationForOneCell">SRSConfigurationForOneCell</a>
+<a href="#SuccessfulOutcome">SuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterT">T</a> --</span>
+
+<a href="#TAC">TAC</a>
+<a href="#TriggeringMessage">TriggeringMessage</a>
+<a href="#TypeOfError">TypeOfError</a>
+
+<span class="spcolor5">-- <a id="LetterU">U</a> --</span>
+
+<a href="#ULConfiguration">ULConfiguration</a>
+<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>
+<a href="#uTDOAInformationExchange">uTDOAInformationExchange</a>
+<a href="#UTDOAInformationFailure">UTDOAInformationFailure</a>
+<a href="#UTDOAInformationFailure-IEs">UTDOAInformationFailure-IEs</a>
+<a href="#UTDOAInformationRequest">UTDOAInformationRequest</a>
+<a href="#UTDOAInformationRequest-IEs">UTDOAInformationRequest-IEs</a>
+<a href="#UTDOAInformationResponse">UTDOAInformationResponse</a>
+<a href="#UTDOAInformationResponse-IEs">UTDOAInformationResponse-IEs</a>
+<a href="#UTDOAInformationUpdate">UTDOAInformationUpdate</a>
+<a href="#uTDOAInformationUpdate">uTDOAInformationUpdate</a>
+<a href="#UTDOAInformationUpdate-IEs">UTDOAInformationUpdate-IEs</a>
+
+<span class="spcolor5">-- <a id="LetterV">V</a> --</span>
+
+<a href="#ValueRSRP">ValueRSRP</a>
+<a href="#ValueRSRQ">ValueRSRQ</a>
+
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedure definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-PDU-Descriptions {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-PDU-Descriptions (0) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#LPPATransactionID">LPPATransactionID</a>
+
+<span class="spcolor1">FROM</span> LPPA-CommonDataTypes
+
+<a href="#ErrorIndication">ErrorIndication</a>,
+<a href="#PrivateMessage">PrivateMessage</a>,
+<a href="#E-CIDMeasurementInitiationRequest">E-CIDMeasurementInitiationRequest</a>,
+<a href="#E-CIDMeasurementInitiationResponse">E-CIDMeasurementInitiationResponse</a>,
+<a href="#E-CIDMeasurementInitiationFailure">E-CIDMeasurementInitiationFailure</a>,
+<a href="#E-CIDMeasurementFailureIndication">E-CIDMeasurementFailureIndication</a>,
+<a href="#E-CIDMeasurementReport">E-CIDMeasurementReport</a>,
+<a href="#E-CIDMeasurementTerminationCommand">E-CIDMeasurementTerminationCommand</a>,
+<a href="#OTDOAInformationRequest">OTDOAInformationRequest</a>,
+<a href="#OTDOAInformationResponse">OTDOAInformationResponse</a>,
+<a href="#OTDOAInformationFailure">OTDOAInformationFailure</a>,
+<a href="#UTDOAInformationRequest">UTDOAInformationRequest</a>,
+<a href="#UTDOAInformationResponse">UTDOAInformationResponse</a>,
+<a href="#UTDOAInformationFailure">UTDOAInformationFailure</a>,
+<a href="#UTDOAInformationUpdate">UTDOAInformationUpdate</a>
+
+<span class="spcolor1">FROM</span> LPPA-PDU-Contents
+
+<a href="#id-errorIndication">id-errorIndication</a>,
+<a href="#id-privateMessage">id-privateMessage</a>,
+<a href="#id-e-CIDMeasurementInitiation">id-e-CIDMeasurementInitiation</a>,
+<a href="#id-e-CIDMeasurementFailureIndication">id-e-CIDMeasurementFailureIndication</a>,
+<a href="#id-e-CIDMeasurementReport">id-e-CIDMeasurementReport</a>,
+<a href="#id-e-CIDMeasurementTermination">id-e-CIDMeasurementTermination</a>,
+<a href="#id-oTDOAInformationExchange">id-oTDOAInformationExchange</a>,
+<a href="#id-uTDOAInformationExchange">id-uTDOAInformationExchange</a>,
+<a href="#id-uTDOAInformationUpdate">id-uTDOAInformationUpdate</a>
+
+<span class="spcolor1">FROM</span> LPPA-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure Class</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= <span class="spcolor1">CLASS</span> {
+   &<a href="#InitiatingMessage">InitiatingMessage</a> ,
+   &<a href="#SuccessfulOutcome">SuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   INITIATING MESSAGE &<a href="#InitiatingMessage">InitiatingMessage</a>
+   [SUCCESSFUL OUTCOME &<a href="#SuccessfulOutcome">SuccessfulOutcome</a>]
+   [UNSUCCESSFUL OUTCOME &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>]
+   PROCEDURE CODE &procedureCode
+   [CRITICALITY &criticality]
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface PDU Definition</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-PDU">LPPA-PDU</a> ::= <span class="spcolor2">CHOICE</span> {
+   initiatingMessage <a href="#InitiatingMessage">InitiatingMessage</a>,
+   successfulOutcome <a href="#SuccessfulOutcome">SuccessfulOutcome</a>,
+   unsuccessfulOutcome <a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>,
+   ...
+}
+
+<a id="InitiatingMessage">InitiatingMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   lppatransactionID <a href="#LPPATransactionID">LPPATransactionID</a>,
+   value <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&<a href="#InitiatingMessage">InitiatingMessage</a> ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="SuccessfulOutcome">SuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   lppatransactionID <a href="#LPPATransactionID">LPPATransactionID</a>,
+   value <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&<a href="#SuccessfulOutcome">SuccessfulOutcome</a> ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="UnsuccessfulOutcome">UnsuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   lppatransactionID <a href="#LPPATransactionID">LPPATransactionID</a>,
+   value <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a>.&<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> ({<a href="#LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure List</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-ELEMENTARY-PROCEDURES">LPPA-ELEMENTARY-PROCEDURES</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#LPPA-ELEMENTARY-PROCEDURES-CLASS-1">LPPA-ELEMENTARY-PROCEDURES-CLASS-1</a> |
+   <a href="#LPPA-ELEMENTARY-PROCEDURES-CLASS-2">LPPA-ELEMENTARY-PROCEDURES-CLASS-2</a> ,
+   ...
+}
+
+<a id="LPPA-ELEMENTARY-PROCEDURES-CLASS-1">LPPA-ELEMENTARY-PROCEDURES-CLASS-1</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#e-CIDMeasurementInitiation">e-CIDMeasurementInitiation</a> |
+   <a href="#oTDOAInformationExchange">oTDOAInformationExchange</a> ,
+   ...,
+   <a href="#uTDOAInformationExchange">uTDOAInformationExchange</a>
+}
+
+<a id="LPPA-ELEMENTARY-PROCEDURES-CLASS-2">LPPA-ELEMENTARY-PROCEDURES-CLASS-2</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#e-CIDMeasurementFailureIndication">e-CIDMeasurementFailureIndication</a> |
+   <a href="#e-CIDMeasurementReport">e-CIDMeasurementReport</a> |
+   <a href="#e-CIDMeasurementTermination">e-CIDMeasurementTermination</a> |
+   <a href="#errorIndication">errorIndication</a> |
+   <a href="#privateMessage">privateMessage</a> ,
+   ...,
+   <a href="#uTDOAInformationUpdate">uTDOAInformationUpdate</a>
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="e-CIDMeasurementInitiation">e-CIDMeasurementInitiation</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#E-CIDMeasurementInitiationRequest">E-CIDMeasurementInitiationRequest</a>
+   SUCCESSFUL OUTCOME <a href="#E-CIDMeasurementInitiationResponse">E-CIDMeasurementInitiationResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#E-CIDMeasurementInitiationFailure">E-CIDMeasurementInitiationFailure</a>
+   PROCEDURE CODE <a href="#id-e-CIDMeasurementInitiation">id-e-CIDMeasurementInitiation</a>
+   CRITICALITY reject
+}
+
+<a id="e-CIDMeasurementFailureIndication">e-CIDMeasurementFailureIndication</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#E-CIDMeasurementFailureIndication">E-CIDMeasurementFailureIndication</a>
+   PROCEDURE CODE <a href="#id-e-CIDMeasurementFailureIndication">id-e-CIDMeasurementFailureIndication</a>
+   CRITICALITY ignore
+}
+
+<a id="e-CIDMeasurementReport">e-CIDMeasurementReport</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#E-CIDMeasurementReport">E-CIDMeasurementReport</a>
+   PROCEDURE CODE <a href="#id-e-CIDMeasurementReport">id-e-CIDMeasurementReport</a>
+   CRITICALITY ignore
+}
+
+<a id="e-CIDMeasurementTermination">e-CIDMeasurementTermination</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#E-CIDMeasurementTerminationCommand">E-CIDMeasurementTerminationCommand</a>
+   PROCEDURE CODE <a href="#id-e-CIDMeasurementTermination">id-e-CIDMeasurementTermination</a>
+   CRITICALITY reject
+}
+
+<a id="oTDOAInformationExchange">oTDOAInformationExchange</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#OTDOAInformationRequest">OTDOAInformationRequest</a>
+   SUCCESSFUL OUTCOME <a href="#OTDOAInformationResponse">OTDOAInformationResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#OTDOAInformationFailure">OTDOAInformationFailure</a>
+   PROCEDURE CODE <a href="#id-oTDOAInformationExchange">id-oTDOAInformationExchange</a>
+   CRITICALITY reject
+}
+
+<a id="uTDOAInformationExchange">uTDOAInformationExchange</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#UTDOAInformationRequest">UTDOAInformationRequest</a>
+   SUCCESSFUL OUTCOME <a href="#UTDOAInformationResponse">UTDOAInformationResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#UTDOAInformationFailure">UTDOAInformationFailure</a>
+   PROCEDURE CODE <a href="#id-uTDOAInformationExchange">id-uTDOAInformationExchange</a>
+   CRITICALITY reject
+}
+
+<a id="uTDOAInformationUpdate">uTDOAInformationUpdate</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#UTDOAInformationUpdate">UTDOAInformationUpdate</a>
+   PROCEDURE CODE <a href="#id-uTDOAInformationUpdate">id-uTDOAInformationUpdate</a>
+   CRITICALITY ignore
+}
+
+<a id="errorIndication">errorIndication</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#ErrorIndication">ErrorIndication</a>
+   PROCEDURE CODE <a href="#id-errorIndication">id-errorIndication</a>
+   CRITICALITY ignore
+}
+
+<a id="privateMessage">privateMessage</a> <a href="#LPPA-ELEMENTARY-PROCEDURE">LPPA-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#PrivateMessage">PrivateMessage</a>
+   PROCEDURE CODE <a href="#id-privateMessage">id-privateMessage</a>
+   CRITICALITY ignore
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PDU definitions for LPPa.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-PDU-Contents {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-PDU-Contents (1) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span> 
+
+<a href="#Cause">Cause</a>,
+<a href="#CriticalityDiagnostics">CriticalityDiagnostics</a>,
+<a href="#E-CID-MeasurementResult">E-CID-MeasurementResult</a>,
+<a href="#OTDOACells">OTDOACells</a>,
+<a href="#OTDOA-Information-Item">OTDOA-Information-Item</a>,
+<a href="#Measurement-ID">Measurement-ID</a>,
+<a href="#MeasurementPeriodicity">MeasurementPeriodicity</a>,
+<a href="#MeasurementQuantities">MeasurementQuantities</a>,
+<a href="#ReportCharacteristics">ReportCharacteristics</a>,
+<a href="#RequestedSRSTransmissionCharacteristics">RequestedSRSTransmissionCharacteristics</a>,
+<a href="#ULConfiguration">ULConfiguration</a>
+
+<span class="spcolor1">FROM</span> LPPA-IEs
+
+<a href="#PrivateIE-Container">PrivateIE-Container</a>{},
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>{},
+<a href="#ProtocolIE-ContainerList">ProtocolIE-ContainerList</a>{},
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a>{},
+<a href="#ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a>{},
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>{},
+<a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a>,
+<a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>,
+<a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>,
+<a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>
+<span class="spcolor1">FROM</span> LPPA-Containers
+
+<a href="#maxnoOTDOAtypes">maxnoOTDOAtypes</a>,
+<a href="#id-Cause">id-Cause</a>,
+<a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a>,
+<a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a>,
+<a href="#id-OTDOACells">id-OTDOACells</a>,
+<a href="#id-OTDOA-Information-Type-Group">id-OTDOA-Information-Type-Group</a>,
+<a href="#id-OTDOA-Information-Type-Item">id-OTDOA-Information-Type-Item</a>,
+<a href="#id-ReportCharacteristics">id-ReportCharacteristics</a>,
+<a href="#id-MeasurementPeriodicity">id-MeasurementPeriodicity</a>,
+<a href="#id-MeasurementQuantities">id-MeasurementQuantities</a>,
+<a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a>,
+<a href="#id-E-CID-MeasurementResult">id-E-CID-MeasurementResult</a>,
+<a href="#id-RequestedSRSTransmissionCharacteristics">id-RequestedSRSTransmissionCharacteristics</a>,
+<a href="#id-ULConfiguration">id-ULConfiguration</a>
+
+<span class="spcolor1">FROM</span> LPPA-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT INITIATION REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementInitiationRequest">E-CIDMeasurementInitiationRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementInitiationRequest-IEs">E-CIDMeasurementInitiationRequest-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementInitiationRequest-IEs">E-CIDMeasurementInitiationRequest-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-ReportCharacteristics">id-ReportCharacteristics</a> CRITICALITY reject TYPE <a href="#ReportCharacteristics">ReportCharacteristics</a> PRESENCE mandatory}|
+   { ID <a href="#id-MeasurementPeriodicity">id-MeasurementPeriodicity</a> CRITICALITY reject TYPE <a href="#MeasurementPeriodicity">MeasurementPeriodicity</a> PRESENCE conditional}|
+   <span class="spcolor5">-- The IE shall be present if the Report Characteritics IE is set to "periodic" --</span>
+   { ID <a href="#id-MeasurementQuantities">id-MeasurementQuantities</a> CRITICALITY reject TYPE <a href="#MeasurementQuantities">MeasurementQuantities</a> PRESENCE mandatory},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT INITIATION RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementInitiationResponse">E-CIDMeasurementInitiationResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementInitiationResponse-IEs">E-CIDMeasurementInitiationResponse-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementInitiationResponse-IEs">E-CIDMeasurementInitiationResponse-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-E-CID-MeasurementResult">id-E-CID-MeasurementResult</a> CRITICALITY ignore TYPE <a href="#E-CID-MeasurementResult">E-CID-MeasurementResult</a> PRESENCE optional}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT INITIATION FAILURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementInitiationFailure">E-CIDMeasurementInitiationFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementInitiationFailure-IEs">E-CIDMeasurementInitiationFailure-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementInitiationFailure-IEs">E-CIDMeasurementInitiationFailure-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT FAILURE INDICATION</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementFailureIndication">E-CIDMeasurementFailureIndication</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementFailureIndication-IEs">E-CIDMeasurementFailureIndication-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementFailureIndication-IEs">E-CIDMeasurementFailureIndication-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT REPORT</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementReport">E-CIDMeasurementReport</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementReport-IEs">E-CIDMeasurementReport-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementReport-IEs">E-CIDMeasurementReport-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-E-CID-MeasurementResult">id-E-CID-MeasurementResult</a> CRITICALITY ignore TYPE <a href="#E-CID-MeasurementResult">E-CID-MeasurementResult</a> PRESENCE mandatory},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- E-CID MEASUREMENT TERMINATION </span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="E-CIDMeasurementTerminationCommand">E-CIDMeasurementTerminationCommand</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#E-CIDMeasurementTerminationCommand-IEs">E-CIDMeasurementTerminationCommand-IEs</a>}},
+   ...
+}
+
+<a id="E-CIDMeasurementTerminationCommand-IEs">E-CIDMeasurementTerminationCommand-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a> CRITICALITY reject TYPE <a href="#Measurement-ID">Measurement-ID</a> PRESENCE mandatory},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- OTDOA INFORMATION REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="OTDOAInformationRequest">OTDOAInformationRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#OTDOAInformationRequest-IEs">OTDOAInformationRequest-IEs</a>}},
+   ...
+}
+
+<a id="OTDOAInformationRequest-IEs">OTDOAInformationRequest-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-OTDOA-Information-Type-Group">id-OTDOA-Information-Type-Group</a> CRITICALITY reject TYPE <a href="#OTDOA-Information-Type">OTDOA-Information-Type</a> PRESENCE mandatory},
+   ...
+}
+
+<a id="OTDOA-Information-Type">OTDOA-Information-Type</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1..<a href="#maxnoOTDOAtypes">maxnoOTDOAtypes</a>)) <span class="spcolor2">OF</span> <a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> { { <a href="#OTDOA-Information-TypeIEs">OTDOA-Information-TypeIEs</a>} }
+
+<a id="OTDOA-Information-TypeIEs">OTDOA-Information-TypeIEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-OTDOA-Information-Type-Item">id-OTDOA-Information-Type-Item</a> CRITICALITY reject TYPE <a href="#OTDOA-Information-Type-Item">OTDOA-Information-Type-Item</a> PRESENCE mandatory},
+   ...
+}
+
+<a id="OTDOA-Information-Type-Item">OTDOA-Information-Type-Item</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   oTDOA-Information-Type-Item <a href="#OTDOA-Information-Item">OTDOA-Information-Item</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#OTDOA-Information-Type-ItemExtIEs">OTDOA-Information-Type-ItemExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="OTDOA-Information-Type-ItemExtIEs">OTDOA-Information-Type-ItemExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- OTDOA INFORMATION RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="OTDOAInformationResponse">OTDOAInformationResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#OTDOAInformationResponse-IEs">OTDOAInformationResponse-IEs</a>}},
+   ...
+}
+
+<a id="OTDOAInformationResponse-IEs">OTDOAInformationResponse-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-OTDOACells">id-OTDOACells</a> CRITICALITY ignore TYPE <a href="#OTDOACells">OTDOACells</a> PRESENCE mandatory}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- OTDOA INFORMATION FAILURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="OTDOAInformationFailure">OTDOAInformationFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#OTDOAInformationFailure-IEs">OTDOAInformationFailure-IEs</a>}},
+   ...
+}
+
+<a id="OTDOAInformationFailure-IEs">OTDOAInformationFailure-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- UTDOA INFORMATION REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="UTDOAInformationRequest">UTDOAInformationRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#UTDOAInformationRequest-IEs">UTDOAInformationRequest-IEs</a>}},
+   ...
+}
+
+<a id="UTDOAInformationRequest-IEs">UTDOAInformationRequest-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-RequestedSRSTransmissionCharacteristics">id-RequestedSRSTransmissionCharacteristics</a> CRITICALITY ignore TYPE <a href="#RequestedSRSTransmissionCharacteristics">RequestedSRSTransmissionCharacteristics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- UTDOA INFORMATION RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="UTDOAInformationResponse">UTDOAInformationResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#UTDOAInformationResponse-IEs">UTDOAInformationResponse-IEs</a>}},
+   ...
+}
+
+<a id="UTDOAInformationResponse-IEs">UTDOAInformationResponse-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-ULConfiguration">id-ULConfiguration</a> CRITICALITY reject TYPE <a href="#ULConfiguration">ULConfiguration</a> PRESENCE mandatory}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- UTDOA INFORMATION FAILURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="UTDOAInformationFailure">UTDOAInformationFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#UTDOAInformationFailure-IEs">UTDOAInformationFailure-IEs</a>}},
+   ...
+}
+
+<a id="UTDOAInformationFailure-IEs">UTDOAInformationFailure-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- UTDOA INFORMATION UPDATE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="UTDOAInformationUpdate">UTDOAInformationUpdate</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#UTDOAInformationUpdate-IEs">UTDOAInformationUpdate-IEs</a>}},
+   ...
+}
+
+<a id="UTDOAInformationUpdate-IEs">UTDOAInformationUpdate-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-ULConfiguration">id-ULConfiguration</a> CRITICALITY ignore TYPE <a href="#ULConfiguration">ULConfiguration</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- ERROR INDICATION</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ErrorIndication">ErrorIndication</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#ErrorIndication-IEs">ErrorIndication-IEs</a>}},
+   ...
+}
+
+<a id="ErrorIndication-IEs">ErrorIndication-IEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE optional}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PRIVATE MESSAGE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="PrivateMessage">PrivateMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   privateIEs <a href="#PrivateIE-Container">PrivateIE-Container</a> {{<a href="#PrivateMessage-IEs">PrivateMessage-IEs</a>}},
+   ...
+}
+
+<a id="PrivateMessage-IEs">PrivateMessage-IEs</a> <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a> ::= {
+   ...
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Information Element Definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-IEs {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-IEs (2) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span> 
+
+<a href="#id-MeasurementQuantities-Item">id-MeasurementQuantities-Item</a>,
+<a href="#maxCellineNB">maxCellineNB</a>,
+<a href="#maxCellReport">maxCellReport</a>,
+<a href="#maxNrOfErrors">maxNrOfErrors</a>,
+<a href="#maxNoMeas">maxNoMeas</a>,
+<a href="#maxnoOTDOAtypes">maxnoOTDOAtypes</a>,
+<a href="#maxServCell">maxServCell</a>
+
+<span class="spcolor1">FROM</span> LPPA-Constants
+
+<a href="#Criticality">Criticality</a>,
+<a href="#LPPATransactionID">LPPATransactionID</a>,
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>,
+<a href="#TriggeringMessage">TriggeringMessage</a>
+
+<span class="spcolor1">FROM</span> LPPA-CommonDataTypes
+
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>{},
+
+<a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>,
+<a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>
+<span class="spcolor1">FROM</span> LPPA-Containers;
+
+<span class="spcolor5">-- A</span>
+<span class="spcolor5">-- B</span>
+
+<span class="spcolor5">-- C</span>
+
+<a id="Cause">Cause</a> ::= <span class="spcolor2">CHOICE</span> {
+   radioNetwork <a href="#CauseRadioNetwork">CauseRadioNetwork</a>,
+   protocol <a href="#CauseProtocol">CauseProtocol</a>,
+   misc <a href="#CauseMisc">CauseMisc</a>,
+   ...
+}
+
+<a id="CauseMisc">CauseMisc</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   unspecified,
+   ...
+}
+
+<a id="CauseProtocol">CauseProtocol</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   transfer-syntax-error,
+   abstract-syntax-error-reject,
+   abstract-syntax-error-ignore-and-notify,
+   message-not-compatible-with-receiver-state,
+   semantic-error,
+   unspecified,
+   abstract-syntax-error-falsely-constructed-message,
+   ...
+}
+
+<a id="CauseRadioNetwork">CauseRadioNetwork</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   unspecified, 
+   requested-item-not-supported,
+   requested-item-temporarily-not-available,
+   ...
+   
+}
+
+<a id="CPLength">CPLength</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   normal,
+   extended,
+   ...
+}
+
+<a id="CriticalityDiagnostics">CriticalityDiagnostics</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor4">OPTIONAL</span>,
+   triggeringMessage <a href="#TriggeringMessage">TriggeringMessage</a> <span class="spcolor4">OPTIONAL</span>,
+   procedureCriticality <a href="#Criticality">Criticality</a> <span class="spcolor4">OPTIONAL</span>,
+   lppatransactionID <a href="#LPPATransactionID">LPPATransactionID</a> <span class="spcolor4">OPTIONAL</span>,
+   iEsCriticalityDiagnostics <a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxNrOfErrors">maxNrOfErrors</a>)) <span class="spcolor2">OF</span>
+<span class="spcolor2">SEQUENCE</span> {
+   iECriticality <a href="#Criticality">Criticality</a>,
+   iE-ID <a href="#ProtocolIE-ID">ProtocolIE-ID</a>,
+   typeOfError <a href="#TypeOfError">TypeOfError</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- D</span>
+<span class="spcolor5">-- E</span>
+
+<a id="E-CID-MeasurementResult">E-CID-MeasurementResult</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   servingCell-ID <a href="#ECGI">ECGI</a>,
+   servingCellTAC <a href="#TAC">TAC</a>,
+   e-UTRANAccessPointPosition <a href="#E-UTRANAccessPointPosition">E-UTRANAccessPointPosition</a> <span class="spcolor4">OPTIONAL</span>,
+   measuredResults <a href="#MeasuredResults">MeasuredResults</a> <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="ECGI">ECGI</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMN-Identity <a href="#PLMN-Identity">PLMN-Identity</a>,
+   eUTRANcellIdentifier <a href="#EUTRANCellIdentifier">EUTRANCellIdentifier</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#ECGI-ExtIEs">ECGI-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="ECGI-ExtIEs">ECGI-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="EUTRANCellIdentifier">EUTRANCellIdentifier</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (28))
+
+<a id="EARFCN">EARFCN</a> ::= <span class="spcolor3">INTEGER</span> (0..65535, ..., 65536..262143)
+
+<a id="E-UTRANAccessPointPosition">E-UTRANAccessPointPosition</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   latitudeSign <span class="spcolor3">ENUMERATED</span> {north, south},
+   latitude <span class="spcolor3">INTEGER</span> (0..8388607),
+   longitude <span class="spcolor3">INTEGER</span> (-8388608..8388607),
+   directionOfAltitude <span class="spcolor3">ENUMERATED</span> {height, depth},
+   altitude <span class="spcolor3">INTEGER</span> (0..32767),
+   uncertaintySemi-major <span class="spcolor3">INTEGER</span> (0..127),
+   uncertaintySemi-minor <span class="spcolor3">INTEGER</span> (0..127),
+   orientationOfMajorAxis <span class="spcolor3">INTEGER</span> (0..179),
+   uncertaintyAltitude <span class="spcolor3">INTEGER</span> (0..127),
+   confidence <span class="spcolor3">INTEGER</span> (0..100),
+   ...
+}
+
+<span class="spcolor5">-- F</span>
+<span class="spcolor5">-- G</span>
+<span class="spcolor5">-- H</span>
+<span class="spcolor5">-- I</span>
+<span class="spcolor5">-- J</span>
+<span class="spcolor5">-- K</span>
+<span class="spcolor5">-- L</span>
+<span class="spcolor5">-- M</span>
+
+<a id="Measurement-ID">Measurement-ID</a> ::= <span class="spcolor3">INTEGER</span> (1..15, ...)
+
+<a id="MeasurementPeriodicity">MeasurementPeriodicity</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   ms120,
+   ms240,
+   ms480,
+   ms640,
+   ms1024,
+   ms2048,
+   ms5120,
+   ms10240,
+   min1,
+   min6,
+   min12,
+   min30,
+   min60,
+   ...
+}
+
+<a id="MeasurementQuantities">MeasurementQuantities</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxNoMeas">maxNoMeas</a>)) <span class="spcolor2">OF</span> <a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> { {<a href="#MeasurementQuantities-ItemIEs">MeasurementQuantities-ItemIEs</a>} }
+
+<a id="MeasurementQuantities-ItemIEs">MeasurementQuantities-ItemIEs</a> <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MeasurementQuantities-Item">id-MeasurementQuantities-Item</a> CRITICALITY reject TYPE <a href="#MeasurementQuantities-Item">MeasurementQuantities-Item</a> PRESENCE mandatory}
+}
+
+<a id="MeasurementQuantities-Item">MeasurementQuantities-Item</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   measurementQuantitiesValue <a href="#MeasurementQuantitiesValue">MeasurementQuantitiesValue</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#MeasurementQuantitiesValue-ExtIEs">MeasurementQuantitiesValue-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="MeasurementQuantitiesValue-ExtIEs">MeasurementQuantitiesValue-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="MeasurementQuantitiesValue">MeasurementQuantitiesValue</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   cell-ID,
+   angleOfArrival,
+   timingAdvanceType1,
+   timingAdvanceType2,
+   rSRP,
+   rSRQ,
+   ...
+}
+
+<a id="MeasuredResults">MeasuredResults</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxNoMeas">maxNoMeas</a>)) <span class="spcolor2">OF</span> <a href="#MeasuredResultsValue">MeasuredResultsValue</a>
+
+<a id="MeasuredResultsValue">MeasuredResultsValue</a> ::= <span class="spcolor2">CHOICE</span> { 
+   valueAngleOfArrival <span class="spcolor3">INTEGER</span> (0..719),
+   valueTimingAdvanceType1 <span class="spcolor3">INTEGER</span> (0..7690),
+   valueTimingAdvanceType2 <span class="spcolor3">INTEGER</span> (0..7690),
+   resultRSRP <a href="#ResultRSRP">ResultRSRP</a>,
+   resultRSRQ <a href="#ResultRSRQ">ResultRSRQ</a>,
+   ...
+}
+
+<span class="spcolor5">-- N</span>
+
+<a id="NumberOfAntennaPorts">NumberOfAntennaPorts</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   n1-or-n2,
+   n4,
+   ...
+}
+
+<a id="NumberOfDlFrames">NumberOfDlFrames</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   sf1,
+   sf2,
+   sf4,
+   sf6,
+   ...
+}
+
+<span class="spcolor5">-- O</span>
+
+<a id="OTDOACells">OTDOACells</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxCellineNB">maxCellineNB</a>)) <span class="spcolor2">OF</span> <span class="spcolor2">SEQUENCE</span> {
+   oTDOACellInfo <a href="#OTDOACell-Information">OTDOACell-Information</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#OTDOACells-ExtIEs">OTDOACells-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="OTDOACells-ExtIEs">OTDOACells-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="OTDOACell-Information">OTDOACell-Information</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxnoOTDOAtypes">maxnoOTDOAtypes</a>)) <span class="spcolor2">OF</span> <a href="#OTDOACell-Information-Item">OTDOACell-Information-Item</a>
+
+<a id="OTDOACell-Information-Item">OTDOACell-Information-Item</a> ::= <span class="spcolor2">CHOICE</span> {
+   pCI <a href="#PCI">PCI</a>,
+   cellId <a href="#ECGI">ECGI</a>,
+   tAC <a href="#TAC">TAC</a>,
+   eARFCN <a href="#EARFCN">EARFCN</a>,
+   pRS-Bandwidth <a href="#PRS-Bandwidth">PRS-Bandwidth</a>,
+   pRS-ConfigurationIndex <a href="#PRS-Configuration-Index">PRS-Configuration-Index</a>, 
+   cPLength <a href="#CPLength">CPLength</a>,
+   numberOfDlFrames <a href="#NumberOfDlFrames">NumberOfDlFrames</a>,
+   numberOfAntennaPorts <a href="#NumberOfAntennaPorts">NumberOfAntennaPorts</a>,
+   sFNInitialisationTime <a href="#SFNInitialisationTime">SFNInitialisationTime</a>,
+   e-UTRANAccessPointPosition <a href="#E-UTRANAccessPointPosition">E-UTRANAccessPointPosition</a>,
+   ...,
+   pRSMutingConfiguration <a href="#PRSMutingConfiguration">PRSMutingConfiguration</a>
+}
+
+<a id="OTDOA-Information-Item">OTDOA-Information-Item</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   pci,
+   cellid,
+   tac,
+   earfcn,
+   prsBandwidth,
+   prsConfigIndex,
+   cpLength,
+   noDlFrames,
+   noAntennaPorts,
+   sFNInitTime,
+   ...,
+   e-UTRANAccessPointPosition,
+   prsmutingconfiguration
+}
+
+<span class="spcolor5">-- P</span>
+
+<a id="PCI">PCI</a> ::= <span class="spcolor3">INTEGER</span> (0..503, ...)
+
+<a id="PLMN-Identity">PLMN-Identity</a> ::= OCTET STRING (SIZE(3))
+
+<a id="PRS-Bandwidth">PRS-Bandwidth</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   bw6,
+   bw15,
+   bw25,
+   bw50,
+   bw75,
+   bw100,
+   ...
+}
+
+<a id="PRS-Configuration-Index">PRS-Configuration-Index</a> ::= <span class="spcolor3">INTEGER</span> (0..4095, ...)
+
+<a id="PRSMutingConfiguration">PRSMutingConfiguration</a> ::= <span class="spcolor2">CHOICE</span> {
+   two <span class="spcolor3">BIT STRING</span> (SIZE (2)),
+   four <span class="spcolor3">BIT STRING</span> (SIZE (4)),
+   eight <span class="spcolor3">BIT STRING</span> (SIZE (8)),
+   sixteen <span class="spcolor3">BIT STRING</span> (SIZE (16)),
+   ...
+}
+
+<span class="spcolor5">-- Q</span>
+<span class="spcolor5">-- R</span>
+
+<a id="ReportCharacteristics">ReportCharacteristics</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   onDemand,
+   periodic,
+   ...
+}
+
+<a id="RequestedSRSTransmissionCharacteristics">RequestedSRSTransmissionCharacteristics</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   numberOfTransmissions <span class="spcolor3">INTEGER</span> (0..500, ...),
+   bandwidth <span class="spcolor3">INTEGER</span> (1..100, ...),
+   ...
+}
+
+<a id="ResultRSRP">ResultRSRP</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxCellReport">maxCellReport</a>)) <span class="spcolor2">OF</span> <a href="#ResultRSRP-Item">ResultRSRP-Item</a>
+
+<a id="ResultRSRP-Item">ResultRSRP-Item</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pCI <a href="#PCI">PCI</a>,
+   eARFCN <a href="#EARFCN">EARFCN</a>,
+   eCGI <a href="#ECGI">ECGI</a> <span class="spcolor4">OPTIONAL</span>,
+   valueRSRP <a href="#ValueRSRP">ValueRSRP</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#ResultRSRP-Item-ExtIEs">ResultRSRP-Item-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="ResultRSRP-Item-ExtIEs">ResultRSRP-Item-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="ResultRSRQ">ResultRSRQ</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxCellReport">maxCellReport</a>)) <span class="spcolor2">OF</span> <a href="#ResultRSRQ-Item">ResultRSRQ-Item</a>
+
+<a id="ResultRSRQ-Item">ResultRSRQ-Item</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pCI <a href="#PCI">PCI</a>,
+   eARFCN <a href="#EARFCN">EARFCN</a>,
+   eCGI <a href="#ECGI">ECGI</a> <span class="spcolor4">OPTIONAL</span>,
+   valueRSRQ <a href="#ValueRSRQ">ValueRSRQ</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#ResultRSRQ-Item-ExtIEs">ResultRSRQ-Item-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="ResultRSRQ-Item-ExtIEs">ResultRSRQ-Item-ExtIEs</a> <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- S</span>
+
+<a id="SFNInitialisationTime">SFNInitialisationTime</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (64))
+
+<a id="SRSConfigurationForAllCells">SRSConfigurationForAllCells</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1.. <a href="#maxServCell">maxServCell</a>)) <span class="spcolor2">OF</span> <a href="#SRSConfigurationForOneCell">SRSConfigurationForOneCell</a>
+
+<a id="SRSConfigurationForOneCell">SRSConfigurationForOneCell</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pci <a href="#PCI">PCI</a>,
+   ul-earfcn <a href="#EARFCN">EARFCN</a>,
+   ul-bandwidth <span class="spcolor3">ENUMERATED</span> {n6, n15, n25, n50, n75, n100},
+   ul-cyclicPrefixLength <a href="#CPLength">CPLength</a>,
+   srs-BandwidthConfig <span class="spcolor3">ENUMERATED</span> {bw0, bw1, bw2, bw3, bw4, bw5, bw6, bw7},
+   srs-Bandwidth <span class="spcolor3">ENUMERATED</span> {bw0, bw1, bw2, bw3},
+   srs-AntennaPort <span class="spcolor3">ENUMERATED</span> {an1, an2, an4, ...},
+   srs-HoppingBandwidth <span class="spcolor3">ENUMERATED</span> {hbw0, hbw1, hbw2, hbw3},
+   srs-cyclicShift <span class="spcolor3">ENUMERATED</span> {cs0, cs1, cs2, cs3, cs4, cs5, cs6, cs7},
+   srs-ConfigIndex <span class="spcolor3">INTEGER</span> (0..1023),
+   maxUpPts <span class="spcolor3">ENUMERATED</span> {true} <span class="spcolor4">OPTIONAL</span>, <span class="spcolor5">-- Cond ifTDD</span>
+   transmissionComb <span class="spcolor3">INTEGER</span> (0..1),
+   freqDomainPosition <span class="spcolor3">INTEGER</span> (0..23),
+   groupHoppingEnabled <span class="spcolor3">BOOLEAN</span>,
+   deltaSS <span class="spcolor3">INTEGER</span> (0..29) <span class="spcolor4">OPTIONAL</span>,
+   sfnInitialisationTime <a href="#SFNInitialisationTime">SFNInitialisationTime</a>,
+   ...
+}
+
+<span class="spcolor5">-- T</span>
+
+<a id="TAC">TAC</a> ::= OCTET STRING (SIZE(2))
+
+<a id="TypeOfError">TypeOfError</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   not-understood,
+   missing,
+   ...
+}
+
+<span class="spcolor5">-- U</span>
+
+<a id="ULConfiguration">ULConfiguration</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pci <a href="#PCI">PCI</a>,
+   ul-earfcn <a href="#EARFCN">EARFCN</a>,
+   timingAdvanceType1 <span class="spcolor3">INTEGER</span> (0..7690) <span class="spcolor4">OPTIONAL</span>,
+   timingAdvanceType2 <span class="spcolor3">INTEGER</span> (0..7690) <span class="spcolor4">OPTIONAL</span>,
+   numberOfTransmissions <span class="spcolor3">INTEGER</span> (0..500,...),
+   srsConfiguration <a href="#SRSConfigurationForAllCells">SRSConfigurationForAllCells</a>,
+   ...
+}
+
+<span class="spcolor5">-- V</span>
+
+<a id="ValueRSRP">ValueRSRP</a> ::= <span class="spcolor3">INTEGER</span> (0..97, ...)
+
+<a id="ValueRSRQ">ValueRSRQ</a> ::= <span class="spcolor3">INTEGER</span> (0..34, ...)
+
+<span class="spcolor5">-- W</span>
+<span class="spcolor5">-- X</span>
+<span class="spcolor5">-- Y</span>
+<span class="spcolor5">-- Z</span>
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-CommonDataTypes {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-CommonDataTypes (3) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Extension constants</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="maxPrivateIEs">maxPrivateIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolExtensions">maxProtocolExtensions</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolIEs">maxProtocolIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common Data Types</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Criticality">Criticality</a> ::= <span class="spcolor3">ENUMERATED</span> { reject, ignore, notify }
+
+<a id="LPPATransactionID">LPPATransactionID</a> ::= <span class="spcolor3">INTEGER</span> (0..32767)
+
+<a id="Presence">Presence</a> ::= <span class="spcolor3">ENUMERATED</span> { optional, conditional, mandatory }
+
+<a id="PrivateIE-ID">PrivateIE-ID</a> ::= <span class="spcolor2">CHOICE</span> {
+   local <span class="spcolor3">INTEGER</span> (0.. <a href="#maxPrivateIEs">maxPrivateIEs</a>),
+   global <span class="spcolor3">OBJECT IDENTIFIER</span>
+}
+
+<a id="ProcedureCode">ProcedureCode</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<a id="ProtocolIE-ID">ProtocolIE-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)
+
+<a id="TriggeringMessage">TriggeringMessage</a> ::= <span class="spcolor3">ENUMERATED</span> { initiating-message, successful-outcome, unsuccessful-outcome}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Constant definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-Constants {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-Constants (4) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<span class="spcolor1">FROM</span> LPPA-CommonDataTypes;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-errorIndication">id-errorIndication</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 0
+<a id="id-privateMessage">id-privateMessage</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 1
+<a id="id-e-CIDMeasurementInitiation">id-e-CIDMeasurementInitiation</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 2
+<a id="id-e-CIDMeasurementFailureIndication">id-e-CIDMeasurementFailureIndication</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 3
+<a id="id-e-CIDMeasurementReport">id-e-CIDMeasurementReport</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 4
+<a id="id-e-CIDMeasurementTermination">id-e-CIDMeasurementTermination</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 5
+<a id="id-oTDOAInformationExchange">id-oTDOAInformationExchange</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 6
+<a id="id-uTDOAInformationExchange">id-uTDOAInformationExchange</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 7
+<a id="id-uTDOAInformationUpdate">id-uTDOAInformationUpdate</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 8
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Lists</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="maxNrOfErrors">maxNrOfErrors</a> <span class="spcolor3">INTEGER</span> ::= 256
+<a id="maxCellineNB">maxCellineNB</a> <span class="spcolor3">INTEGER</span> ::= 256
+<a id="maxNoMeas">maxNoMeas</a> <span class="spcolor3">INTEGER</span> ::= 63
+<a id="maxCellReport">maxCellReport</a> <span class="spcolor3">INTEGER</span> ::= 9
+<a id="maxnoOTDOAtypes">maxnoOTDOAtypes</a> <span class="spcolor3">INTEGER</span> ::= 63
+<a id="maxServCell">maxServCell</a> <span class="spcolor3">INTEGER</span> ::= 5
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-Cause">id-Cause</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 0
+<a id="id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 1
+<a id="id-E-SMLC-UE-Measurement-ID">id-E-SMLC-UE-Measurement-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 2
+<a id="id-ReportCharacteristics">id-ReportCharacteristics</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 3
+<a id="id-MeasurementPeriodicity">id-MeasurementPeriodicity</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 4
+<a id="id-MeasurementQuantities">id-MeasurementQuantities</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 5
+<a id="id-eNB-UE-Measurement-ID">id-eNB-UE-Measurement-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 6
+<a id="id-E-CID-MeasurementResult">id-E-CID-MeasurementResult</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 7
+<a id="id-OTDOACells">id-OTDOACells</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 8
+<a id="id-OTDOA-Information-Type-Group">id-OTDOA-Information-Type-Group</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 9
+<a id="id-OTDOA-Information-Type-Item">id-OTDOA-Information-Type-Item</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 10
+<a id="id-MeasurementQuantities-Item">id-MeasurementQuantities-Item</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 11
+<a id="id-RequestedSRSTransmissionCharacteristics">id-RequestedSRSTransmissionCharacteristics</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 12
+<a id="id-ULConfiguration">id-ULConfiguration</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 13
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+LPPA-Containers {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) lppa (6) version1 (1) lppa-Containers (5) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#maxPrivateIEs">maxPrivateIEs</a>,
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>,
+<a href="#maxProtocolIEs">maxProtocolIEs</a>,
+<a href="#Criticality">Criticality</a>,
+<a href="#Presence">Presence</a>,
+<a href="#PrivateIE-ID">PrivateIE-ID</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a> 
+<span class="spcolor1">FROM</span> LPPA-CommonDataTypes;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Value,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   TYPE &Value
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &firstCriticality <a href="#Criticality">Criticality</a>,
+   &FirstValue,
+   &secondCriticality <a href="#Criticality">Criticality</a>,
+   &SecondValue,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   FIRST CRITICALITY &firstCriticality
+   FIRST TYPE &FirstValue
+   SECOND CRITICALITY &secondCriticality
+   SECOND TYPE &SecondValue
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Extension,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   EXTENSION &Extension
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Private IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#PrivateIE-ID">PrivateIE-ID</a>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Value,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   TYPE &Value
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-Container">ProtocolIE-Container</a> { <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> { <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> : IEsSetParam} ::= 
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-Field">ProtocolIE-Field</a> { <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>.&id ({IEsSetParam}),
+   criticality <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>.&criticality ({IEsSetParam}{@id}),
+   value <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a>.&Value ({IEsSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol IE Pairs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a> { <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-FieldPair">ProtocolIE-FieldPair</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-FieldPair">ProtocolIE-FieldPair</a> { <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>.&id ({IEsSetParam}),
+   firstCriticality <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>.&firstCriticality ({IEsSetParam}{@id}),
+   firstValue <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>.&FirstValue ({IEsSetParam}{@id}),
+   secondCriticality <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>.&secondCriticality ({IEsSetParam}{@id}),
+   secondValue <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a>.&SecondValue ({IEsSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container Lists for Protocol IE Containers</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-ContainerList">ProtocolIE-ContainerList</a> {<span class="spcolor3">INTEGER</span> : lowerBound, <span class="spcolor3">INTEGER</span> : upperBound, <a href="#LPPA-PROTOCOL-IES">LPPA-PROTOCOL-IES</a> : IEsSetParam} ::=
+<span class="spcolor2">SEQUENCE</span> (SIZE (lowerBound..upperBound)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a> {<span class="spcolor3">INTEGER</span> : lowerBound, <span class="spcolor3">INTEGER</span> : upperBound, <a href="#LPPA-PROTOCOL-IES-PAIR">LPPA-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::=
+<span class="spcolor2">SEQUENCE</span> (SIZE (lowerBound..upperBound)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a> {{IEsSetParam}}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolExtensionContainer">ProtocolExtensionContainer</a> { <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxProtocolExtensions">maxProtocolExtensions</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a> {{ExtensionSetParam}}
+
+<a id="ProtocolExtensionField">ProtocolExtensionField</a> { <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>.&id ({ExtensionSetParam}),
+   criticality <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>.&criticality ({ExtensionSetParam}{@id}),
+   extensionValue <a href="#LPPA-PROTOCOL-EXTENSION">LPPA-PROTOCOL-EXTENSION</a>.&Extension ({ExtensionSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Private IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="PrivateIE-Container">PrivateIE-Container</a> { <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxPrivateIEs">maxPrivateIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#PrivateIE-Field">PrivateIE-Field</a> {{IEsSetParam}}
+
+<a id="PrivateIE-Field">PrivateIE-Field</a> { <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a>.&id ({IEsSetParam}),
+   criticality <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a>.&criticality ({IEsSetParam}{@id}),
+   value <a href="#LPPA-PRIVATE-IES">LPPA-PRIVATE-IES</a>.&Value ({IEsSetParam}{@id})
+}
+
+<span class="spcolor1">END</span>
+</div>
+  </section>
+
+  <footer>
+    <p class="text-center">
+      <a href="#" class="btn btn-info">Back to top</a>
+    </p>
+  </footer>
+
+</div>
+<script src="sga.js"></script>
+</body>
+</html>

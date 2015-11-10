@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="niviuk.css" rel="stylesheet" type="text/css">
+  <title>LTE ASN1 M3</title>
+  <meta name="keywords" content="LTE,MBMS,EPC,M3,MCE,asn1">
+  <meta name="description" content="LTE M3 ASN1 description">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <div id="banner"></div>
+  </header>
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-inner">
+      <ul class="nav nav-pills">
+        <li><a href="index.html"><span class="glyphicon glyphicon-signal"></span></a></li>
+        <li><a href="rrc_lte.html">RRC (Radio)</a></li>
+        <li><a href="s1ap.html">S1</a></li>
+        <li><a href="x2ap.html">X2</a></li>
+        <li><a href="lpp.html">LPP </a></li>
+        <li><a href="lppa.html">LPPa </a></li>
+        <li><a href="lte_sls.html">LCS </a></li>
+        <li><a href="m2ap.html">M2 (eMBMS)</a></li>
+        <li><a href="m3ap.html">M3 (eMBMS)</a></li>
+        <li><a href="sbcap.html">SBc (Broadcast)</a></li>
+        <li><a href="lte_nas.php">Nas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+  <h1>LTE ASN1 M3 description</h1>
+  <h2><a id="M3"></a>E-UTRAN M3 Application Protocol</h2>
+  <h3><a href="http://www.3gpp.org/DynaReport/36444.htm">36.444</a> v12.1.0 (2014-06)</h3>
+  <p class="text-primary">Signalling service between MCE (Multi-cell / multicast Coordination Entity) and EPC (Evolved Packet Core)</p>
+  <ul>
+    <li>M3 interface configuration</li>
+    <li>Starting, stopping and updating MBMS sessions</li>
+    <li>MCE configuration update</li>
+  </ul>
+
+<p>
+<a href="#LetterA">A</a>&nbsp;&nbsp;
+<a href="#LetterB">B</a>&nbsp;&nbsp;
+<a href="#LetterC">C</a>&nbsp;&nbsp;
+<a href="#LetterE">E</a>&nbsp;&nbsp;
+<a href="#LetterG">G</a>&nbsp;&nbsp;
+<a href="#LetterI">I</a>&nbsp;&nbsp;
+<a href="#LetterM">M</a>&nbsp;&nbsp;
+<a href="#LetterP">P</a>&nbsp;&nbsp;
+<a href="#LetterQ">Q</a>&nbsp;&nbsp;
+<a href="#LetterR">R</a>&nbsp;&nbsp;
+<a href="#LetterS">S</a>&nbsp;&nbsp;
+<a href="#LetterT">T</a>&nbsp;&nbsp;
+<a href="#LetterU">U</a>&nbsp;&nbsp;
+</p>
+<div class="cpre">
+
+<span class="spcolor5">-- <a id="LetterA">A</a> --</span>
+
+<a href="#Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a>
+<a href="#AllocationAndRetentionPriority">AllocationAndRetentionPriority</a>
+<a href="#AllocationAndRetentionPriority-ExtIEs">AllocationAndRetentionPriority-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterB">B</a> --</span>
+
+<a href="#BitRate">BitRate</a>
+
+<span class="spcolor5">-- <a id="LetterC">C</a> --</span>
+
+<a href="#Cause">Cause</a>
+<a href="#CauseMisc">CauseMisc</a>
+<a href="#CauseNAS">CauseNAS</a>
+<a href="#CauseProtocol">CauseProtocol</a>
+<a href="#CauseRadioNetwork">CauseRadioNetwork</a>
+<a href="#CauseTransport">CauseTransport</a>
+<a href="#Criticality">Criticality</a>
+<a href="#CriticalityDiagnostics">CriticalityDiagnostics</a>
+<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>
+<a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a>
+<a href="#CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a>
+
+<span class="spcolor5">-- <a id="LetterE">E</a> --</span>
+
+<a href="#ErrorIndication">ErrorIndication</a>
+<a href="#errorIndication">errorIndication</a>
+<a href="#ErrorIndication-IEs">ErrorIndication-IEs</a>
+<a href="#ExtendedMCE-ID">ExtendedMCE-ID</a>
+
+<span class="spcolor5">-- <a id="LetterG">G</a> --</span>
+
+<a href="#GBR-QosInformation">GBR-QosInformation</a>
+<a href="#GBR-QosInformation-ExtIEs">GBR-QosInformation-ExtIEs</a>
+<a href="#Global-MCE-ID">Global-MCE-ID</a>
+<a href="#GlobalMCE-ID-ExtIEs">GlobalMCE-ID-ExtIEs</a>
+<a href="#GTP-TEID">GTP-TEID</a>
+
+<span class="spcolor5">-- <a id="LetterI">I</a> --</span>
+
+<a href="#id-AllocationAndRetentionPriority">id-AllocationAndRetentionPriority</a>
+<a href="#id-Cause">id-Cause</a>
+<a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a>
+<a href="#id-errorIndication">id-errorIndication</a>
+<a href="#id-Global-MCE-ID">id-Global-MCE-ID</a>
+<a href="#id-m3Setup">id-m3Setup</a>
+<a href="#id-MBMS-E-RAB-QoS-Parameters">id-MBMS-E-RAB-QoS-Parameters</a>
+<a href="#id-MBMS-Service-Area">id-MBMS-Service-Area</a>
+<a href="#id-MBMS-Service-Area-List">id-MBMS-Service-Area-List</a>
+<a href="#id-MBMS-Service-Area-List-Item">id-MBMS-Service-Area-List-Item</a>
+<a href="#id-MBMS-Service-associatedLogicalM3-ConnectionItem">id-MBMS-Service-associatedLogicalM3-ConnectionItem</a>
+<a href="#id-MBMS-Service-associatedLogicalM3-ConnectionListResAck">id-MBMS-Service-associatedLogicalM3-ConnectionListResAck</a>
+<a href="#id-MBMS-Session-Duration">id-MBMS-Session-Duration</a>
+<a href="#id-MBMS-Session-ID">id-MBMS-Session-ID</a>
+<a href="#id-MBMSServiceAreaList">id-MBMSServiceAreaList</a>
+<a href="#id-mBMSsessionStart">id-mBMSsessionStart</a>
+<a href="#id-mBMSsessionStop">id-mBMSsessionStop</a>
+<a href="#id-mBMSsessionUpdate">id-mBMSsessionUpdate</a>
+<a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a>
+<a href="#id-mCEConfigurationUpdate">id-mCEConfigurationUpdate</a>
+<a href="#id-MCEname">id-MCEname</a>
+<a href="#id-MinimumTimeToMBMSDataTransfer">id-MinimumTimeToMBMSDataTransfer</a>
+<a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a>
+<a href="#id-privateMessage">id-privateMessage</a>
+<a href="#id-Reestablishment">id-Reestablishment</a>
+<a href="#id-Reset">id-Reset</a>
+<a href="#id-ResetType">id-ResetType</a>
+<a href="#id-Time-ofMBMS-DataStop">id-Time-ofMBMS-DataStop</a>
+<a href="#id-Time-ofMBMS-DataTransfer">id-Time-ofMBMS-DataTransfer</a>
+<a href="#id-TimeToWait">id-TimeToWait</a>
+<a href="#id-TMGI">id-TMGI</a>
+<a href="#id-TNL-Information">id-TNL-Information</a>
+<a href="#InitiatingMessage">InitiatingMessage</a>
+<a href="#IPAddress">IPAddress</a>
+
+<span class="spcolor5">-- <a id="LetterM">M</a> --</span>
+
+<a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>
+<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>
+<a href="#M3AP-ELEMENTARY-PROCEDURES-CLASS-1">M3AP-ELEMENTARY-PROCEDURES-CLASS-1</a>
+<a href="#M3AP-ELEMENTARY-PROCEDURES-CLASS-2">M3AP-ELEMENTARY-PROCEDURES-CLASS-2</a>
+<a href="#M3AP-PDU">M3AP-PDU</a>
+<a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a>
+<a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>
+<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>
+<a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>
+<a href="#m3Setup">m3Setup</a>
+<a href="#M3SetupFailure">M3SetupFailure</a>
+<a href="#M3SetupFailureIEs">M3SetupFailureIEs</a>
+<a href="#M3SetupRequest">M3SetupRequest</a>
+<a href="#M3SetupRequestIEs">M3SetupRequestIEs</a>
+<a href="#M3SetupResponse">M3SetupResponse</a>
+<a href="#M3SetupResponseIEs">M3SetupResponseIEs</a>
+<a href="#maxnooferrors">maxnooferrors</a>
+<a href="#maxnoofMBMSServiceAreaIdentitiesPerMCE">maxnoofMBMSServiceAreaIdentitiesPerMCE</a>
+<a href="#maxNrOfIndividualM3ConnectionsToReset">maxNrOfIndividualM3ConnectionsToReset</a>
+<a href="#maxPrivateIEs">maxPrivateIEs</a>
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>
+<a href="#maxProtocolIEs">maxProtocolIEs</a>
+<a href="#MBMS-E-RAB-QoS-Parameters">MBMS-E-RAB-QoS-Parameters</a>
+<a href="#MBMS-E-RAB-QoS-Parameters-ExtIEs">MBMS-E-RAB-QoS-Parameters-ExtIEs</a>
+<a href="#MBMS-Service-Area">MBMS-Service-Area</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionItem">MBMS-Service-associatedLogicalM3-ConnectionItem</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs">MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionItemRes">MBMS-Service-associatedLogicalM3-ConnectionItemRes</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionItemResAck">MBMS-Service-associatedLogicalM3-ConnectionItemResAck</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionListRes">MBMS-Service-associatedLogicalM3-ConnectionListRes</a>
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionListResAck">MBMS-Service-associatedLogicalM3-ConnectionListResAck</a>
+<a href="#MBMS-Session-Duration">MBMS-Session-Duration</a>
+<a href="#MBMS-Session-ID">MBMS-Session-ID</a>
+<a href="#MBMSServiceArea1">MBMSServiceArea1</a>
+<a href="#MBMSServiceAreaListItem">MBMSServiceAreaListItem</a>
+<a href="#mBMSsessionStart">mBMSsessionStart</a>
+<a href="#MBMSSessionStartFailure">MBMSSessionStartFailure</a>
+<a href="#MBMSSessionStartFailure-IEs">MBMSSessionStartFailure-IEs</a>
+<a href="#MBMSSessionStartRequest">MBMSSessionStartRequest</a>
+<a href="#MBMSSessionStartRequest-IEs">MBMSSessionStartRequest-IEs</a>
+<a href="#MBMSSessionStartResponse">MBMSSessionStartResponse</a>
+<a href="#MBMSSessionStartResponse-IEs">MBMSSessionStartResponse-IEs</a>
+<a href="#mBMSsessionStop">mBMSsessionStop</a>
+<a href="#MBMSSessionStopRequest">MBMSSessionStopRequest</a>
+<a href="#MBMSSessionStopRequest-IEs">MBMSSessionStopRequest-IEs</a>
+<a href="#MBMSSessionStopResponse">MBMSSessionStopResponse</a>
+<a href="#MBMSSessionStopResponse-IEs">MBMSSessionStopResponse-IEs</a>
+<a href="#mBMSsessionUpdate">mBMSsessionUpdate</a>
+<a href="#MBMSSessionUpdateFailure">MBMSSessionUpdateFailure</a>
+<a href="#MBMSSessionUpdateFailure-IEs">MBMSSessionUpdateFailure-IEs</a>
+<a href="#MBMSSessionUpdateRequest">MBMSSessionUpdateRequest</a>
+<a href="#MBMSSessionUpdateRequest-IEs">MBMSSessionUpdateRequest-IEs</a>
+<a href="#MBMSSessionUpdateResponse">MBMSSessionUpdateResponse</a>
+<a href="#MBMSSessionUpdateResponse-IEs">MBMSSessionUpdateResponse-IEs</a>
+<a href="#MCE-ID">MCE-ID</a>
+<a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a>
+<a href="#MCEConfigurationUpdate">MCEConfigurationUpdate</a>
+<a href="#mCEConfigurationUpdate">mCEConfigurationUpdate</a>
+<a href="#MCEConfigurationUpdateAcknowledge">MCEConfigurationUpdateAcknowledge</a>
+<a href="#MCEConfigurationUpdateAcknowledgeIEs">MCEConfigurationUpdateAcknowledgeIEs</a>
+<a href="#MCEConfigurationUpdateFailure">MCEConfigurationUpdateFailure</a>
+<a href="#MCEConfigurationUpdateFailureIEs">MCEConfigurationUpdateFailureIEs</a>
+<a href="#MCEConfigurationUpdateIEs">MCEConfigurationUpdateIEs</a>
+<a href="#MCEname">MCEname</a>
+<a href="#MinimumTimeToMBMSDataTransfer">MinimumTimeToMBMSDataTransfer</a>
+<a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a>
+
+<span class="spcolor5">-- <a id="LetterP">P</a> --</span>
+
+<a href="#PLMN-Identity">PLMN-Identity</a>
+<a href="#Pre-emptionCapability">Pre-emptionCapability</a>
+<a href="#Pre-emptionVulnerability">Pre-emptionVulnerability</a>
+<a href="#Presence">Presence</a>
+<a href="#PriorityLevel">PriorityLevel</a>
+<a href="#PrivateIE-Container">PrivateIE-Container</a>
+<a href="#PrivateIE-Field">PrivateIE-Field</a>
+<a href="#PrivateIE-ID">PrivateIE-ID</a>
+<a href="#PrivateMessage">PrivateMessage</a>
+<a href="#privateMessage">privateMessage</a>
+<a href="#PrivateMessage-IEs">PrivateMessage-IEs</a>
+<a href="#ProcedureCode">ProcedureCode</a>
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>
+<a href="#ProtocolIE-ContainerList">ProtocolIE-ContainerList</a>
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a>
+<a href="#ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a>
+<a href="#ProtocolIE-FieldPair">ProtocolIE-FieldPair</a>
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>
+
+<span class="spcolor5">-- <a id="LetterQ">Q</a> --</span>
+
+<a href="#QCI">QCI</a>
+
+<span class="spcolor5">-- <a id="LetterR">R</a> --</span>
+
+<a href="#Reestablishment">Reestablishment</a>
+<a href="#Reset">Reset</a>
+<a href="#reset">reset</a>
+<a href="#ResetAcknowledge">ResetAcknowledge</a>
+<a href="#ResetAcknowledgeIEs">ResetAcknowledgeIEs</a>
+<a href="#ResetAll">ResetAll</a>
+<a href="#ResetIEs">ResetIEs</a>
+<a href="#ResetType">ResetType</a>
+
+<span class="spcolor5">-- <a id="LetterS">S</a> --</span>
+
+<a href="#SuccessfulOutcome">SuccessfulOutcome</a>
+
+<span class="spcolor5">-- <a id="LetterT">T</a> --</span>
+
+<a href="#TimeToWait">TimeToWait</a>
+<a href="#TMGI">TMGI</a>
+<a href="#TMGI-ExtIEs">TMGI-ExtIEs</a>
+<a href="#TNL-Information">TNL-Information</a>
+<a href="#TNL-Information-ExtIEs">TNL-Information-ExtIEs</a>
+<a href="#TriggeringMessage">TriggeringMessage</a>
+<a href="#TypeOfError">TypeOfError</a>
+
+<span class="spcolor5">-- <a id="LetterU">U</a> --</span>
+
+<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>
+
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedure definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-PDU-Descriptions {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-PDU-Descriptions (0) }
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>
+<span class="spcolor1">FROM</span> M3AP-CommonDataTypes
+
+<a href="#MBMSSessionStartRequest">MBMSSessionStartRequest</a>,
+<a href="#MBMSSessionStartResponse">MBMSSessionStartResponse</a>,
+<a href="#MBMSSessionStartFailure">MBMSSessionStartFailure</a>,
+<a href="#MBMSSessionStopRequest">MBMSSessionStopRequest</a>,
+<a href="#MBMSSessionStopResponse">MBMSSessionStopResponse</a>,
+<a href="#MBMSSessionUpdateRequest">MBMSSessionUpdateRequest</a>,
+<a href="#MBMSSessionUpdateResponse">MBMSSessionUpdateResponse</a>,
+<a href="#MBMSSessionUpdateFailure">MBMSSessionUpdateFailure</a>,
+<a href="#MCEConfigurationUpdate">MCEConfigurationUpdate</a>,
+<a href="#MCEConfigurationUpdateAcknowledge">MCEConfigurationUpdateAcknowledge</a>,
+<a href="#MCEConfigurationUpdateFailure">MCEConfigurationUpdateFailure</a>,
+<a href="#M3SetupRequest">M3SetupRequest</a>,
+<a href="#M3SetupResponse">M3SetupResponse</a>,
+<a href="#M3SetupFailure">M3SetupFailure</a>,
+<a href="#ErrorIndication">ErrorIndication</a>,
+<a href="#Reset">Reset</a>,
+<a href="#ResetAcknowledge">ResetAcknowledge</a>,
+<a href="#PrivateMessage">PrivateMessage</a>
+
+<span class="spcolor1">FROM</span> M3AP-PDU-Contents
+
+<a href="#id-mBMSsessionStart">id-mBMSsessionStart</a>,
+<a href="#id-mBMSsessionStop">id-mBMSsessionStop</a>,
+<a href="#id-mBMSsessionUpdate">id-mBMSsessionUpdate</a>,
+<a href="#id-mCEConfigurationUpdate">id-mCEConfigurationUpdate</a>,
+<a href="#id-m3Setup">id-m3Setup</a>,
+<a href="#id-errorIndication">id-errorIndication</a>,
+<a href="#id-Reset">id-Reset</a>,
+<a href="#id-privateMessage">id-privateMessage</a>
+<span class="spcolor1">FROM</span> M3AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure Class</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= <span class="spcolor1">CLASS</span> {
+   &<a href="#InitiatingMessage">InitiatingMessage</a> ,
+   &<a href="#SuccessfulOutcome">SuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> <span class="spcolor4">OPTIONAL</span>,
+   &procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a> <span class="spcolor4">DEFAULT</span> ignore
+}
+
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   INITIATING MESSAGE &<a href="#InitiatingMessage">InitiatingMessage</a>
+   [SUCCESSFUL OUTCOME &<a href="#SuccessfulOutcome">SuccessfulOutcome</a>]
+   [UNSUCCESSFUL OUTCOME &<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>]
+   PROCEDURE CODE &procedureCode
+   [CRITICALITY &criticality]
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface PDU Definition</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-PDU">M3AP-PDU</a> ::= <span class="spcolor2">CHOICE</span> {
+   initiatingMessage <a href="#InitiatingMessage">InitiatingMessage</a>,
+   successfulOutcome <a href="#SuccessfulOutcome">SuccessfulOutcome</a>,
+   unsuccessfulOutcome <a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a>,
+   ...
+}
+
+<a id="InitiatingMessage">InitiatingMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&<a href="#InitiatingMessage">InitiatingMessage</a> ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="SuccessfulOutcome">SuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&<a href="#SuccessfulOutcome">SuccessfulOutcome</a> ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<a id="UnsuccessfulOutcome">UnsuccessfulOutcome</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&procedureCode ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}),
+   criticality <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&criticality ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode}),
+   value <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a>.&<a href="#UnsuccessfulOutcome">UnsuccessfulOutcome</a> ({<a href="#M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a>}{@procedureCode})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedure List</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-ELEMENTARY-PROCEDURES">M3AP-ELEMENTARY-PROCEDURES</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#M3AP-ELEMENTARY-PROCEDURES-CLASS-1">M3AP-ELEMENTARY-PROCEDURES-CLASS-1</a> |
+   <a href="#M3AP-ELEMENTARY-PROCEDURES-CLASS-2">M3AP-ELEMENTARY-PROCEDURES-CLASS-2</a> ,
+   ...
+}
+
+<a id="M3AP-ELEMENTARY-PROCEDURES-CLASS-1">M3AP-ELEMENTARY-PROCEDURES-CLASS-1</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#mBMSsessionStart">mBMSsessionStart</a> |
+   <a href="#mBMSsessionStop">mBMSsessionStop</a> |
+   <a href="#mBMSsessionUpdate">mBMSsessionUpdate</a> |
+   <a href="#reset">reset</a> |
+   <a href="#m3Setup">m3Setup</a> |
+   <a href="#mCEConfigurationUpdate">mCEConfigurationUpdate</a> ,
+   ...
+}
+
+<a id="M3AP-ELEMENTARY-PROCEDURES-CLASS-2">M3AP-ELEMENTARY-PROCEDURES-CLASS-2</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   <a href="#errorIndication">errorIndication</a> |
+   <a href="#privateMessage">privateMessage</a> ,
+   ...
+   
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Interface Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="mBMSsessionStart">mBMSsessionStart</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#MBMSSessionStartRequest">MBMSSessionStartRequest</a>
+   SUCCESSFUL OUTCOME <a href="#MBMSSessionStartResponse">MBMSSessionStartResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#MBMSSessionStartFailure">MBMSSessionStartFailure</a>
+   PROCEDURE CODE <a href="#id-mBMSsessionStart">id-mBMSsessionStart</a>
+   CRITICALITY reject
+}
+
+<a id="mBMSsessionStop">mBMSsessionStop</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#MBMSSessionStopRequest">MBMSSessionStopRequest</a>
+   SUCCESSFUL OUTCOME <a href="#MBMSSessionStopResponse">MBMSSessionStopResponse</a>
+   PROCEDURE CODE <a href="#id-mBMSsessionStop">id-mBMSsessionStop</a>
+   CRITICALITY reject
+}
+
+<a id="mBMSsessionUpdate">mBMSsessionUpdate</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#MBMSSessionUpdateRequest">MBMSSessionUpdateRequest</a>
+   SUCCESSFUL OUTCOME <a href="#MBMSSessionUpdateResponse">MBMSSessionUpdateResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#MBMSSessionUpdateFailure">MBMSSessionUpdateFailure</a>
+   PROCEDURE CODE <a href="#id-mBMSsessionUpdate">id-mBMSsessionUpdate</a>
+   CRITICALITY reject
+}
+
+<a id="errorIndication">errorIndication</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#ErrorIndication">ErrorIndication</a>
+   PROCEDURE CODE <a href="#id-errorIndication">id-errorIndication</a>
+   CRITICALITY ignore
+}
+
+<a id="reset">reset</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#Reset">Reset</a>
+   SUCCESSFUL OUTCOME <a href="#ResetAcknowledge">ResetAcknowledge</a>
+   PROCEDURE CODE <a href="#id-Reset">id-Reset</a>
+   CRITICALITY reject
+}
+
+<a id="privateMessage">privateMessage</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#PrivateMessage">PrivateMessage</a>
+   PROCEDURE CODE <a href="#id-privateMessage">id-privateMessage</a>
+   CRITICALITY ignore
+}
+
+<a id="mCEConfigurationUpdate">mCEConfigurationUpdate</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#MCEConfigurationUpdate">MCEConfigurationUpdate</a>
+   SUCCESSFUL OUTCOME <a href="#MCEConfigurationUpdateAcknowledge">MCEConfigurationUpdateAcknowledge</a>
+   UNSUCCESSFUL OUTCOME <a href="#MCEConfigurationUpdateFailure">MCEConfigurationUpdateFailure</a>
+   PROCEDURE CODE <a href="#id-mCEConfigurationUpdate">id-mCEConfigurationUpdate</a>
+   CRITICALITY reject
+}
+
+<a id="m3Setup">m3Setup</a> <a href="#M3AP-ELEMENTARY-PROCEDURE">M3AP-ELEMENTARY-PROCEDURE</a> ::= {
+   INITIATING MESSAGE <a href="#M3SetupRequest">M3SetupRequest</a>
+   SUCCESSFUL OUTCOME <a href="#M3SetupResponse">M3SetupResponse</a>
+   UNSUCCESSFUL OUTCOME <a href="#M3SetupFailure">M3SetupFailure</a>
+   PROCEDURE CODE <a href="#id-m3Setup">id-m3Setup</a>
+   CRITICALITY reject
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PDU definitions for M3AP.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-PDU-Contents {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-PDU-Contents (1) }
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+
+<a href="#Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a>,
+<a href="#Cause">Cause</a>,
+<a href="#CriticalityDiagnostics">CriticalityDiagnostics</a>,
+<a href="#Global-MCE-ID">Global-MCE-ID</a>,
+<a href="#MBMS-E-RAB-QoS-Parameters">MBMS-E-RAB-QoS-Parameters</a>,
+<a href="#MBMS-Service-associatedLogicalM3-ConnectionItem">MBMS-Service-associatedLogicalM3-ConnectionItem</a>,
+<a href="#MBMS-Service-Area">MBMS-Service-Area</a>,
+<a href="#MBMSServiceArea1">MBMSServiceArea1</a>,
+<a href="#MBMS-Session-Duration">MBMS-Session-Duration</a>,
+<a href="#MBMS-Session-ID">MBMS-Session-ID</a>,
+<a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a>,
+<a href="#MCEname">MCEname</a>,
+<a href="#MinimumTimeToMBMSDataTransfer">MinimumTimeToMBMSDataTransfer</a>,
+<a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a>,
+<a href="#TimeToWait">TimeToWait</a>,
+<a href="#TMGI">TMGI</a>,
+<a href="#TNL-Information">TNL-Information</a>,
+<a href="#Reestablishment">Reestablishment</a>
+
+<span class="spcolor1">FROM</span> M3AP-IEs
+
+<a href="#PrivateIE-Container">PrivateIE-Container</a>{},
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a>{},
+<a href="#ProtocolIE-ContainerList">ProtocolIE-ContainerList</a>{},
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a>{},
+<a href="#ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a>{},
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>{},
+<a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a>,
+<a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>,
+<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>,
+<a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>
+
+<span class="spcolor1">FROM</span> M3AP-Containers
+
+<a href="#id-AllocationAndRetentionPriority">id-AllocationAndRetentionPriority</a>,
+<a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a>,
+<a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a>,
+<a href="#id-TMGI">id-TMGI</a>,
+<a href="#id-MBMS-Session-ID">id-MBMS-Session-ID</a>,
+<a href="#id-MBMS-E-RAB-QoS-Parameters">id-MBMS-E-RAB-QoS-Parameters</a>,
+<a href="#id-MBMS-Session-Duration">id-MBMS-Session-Duration</a>,
+<a href="#id-MBMS-Service-Area">id-MBMS-Service-Area</a>,
+<a href="#id-TNL-Information">id-TNL-Information</a>,
+<a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a>,
+<a href="#id-Cause">id-Cause</a>,
+<a href="#id-MBMS-Service-Area-List">id-MBMS-Service-Area-List</a>,
+<a href="#id-MBMS-Service-Area-List-Item">id-MBMS-Service-Area-List-Item</a>,
+<a href="#id-TimeToWait">id-TimeToWait</a>,
+<a href="#id-ResetType">id-ResetType</a>,
+<a href="#id-MBMS-Service-associatedLogicalM3-ConnectionItem">id-MBMS-Service-associatedLogicalM3-ConnectionItem</a>,
+<a href="#id-MBMS-Service-associatedLogicalM3-ConnectionListResAck">id-MBMS-Service-associatedLogicalM3-ConnectionListResAck</a>,
+<a href="#id-MBMSServiceAreaList">id-MBMSServiceAreaList</a>,
+<a href="#id-MinimumTimeToMBMSDataTransfer">id-MinimumTimeToMBMSDataTransfer</a>,
+<a href="#id-Time-ofMBMS-DataStop">id-Time-ofMBMS-DataStop</a>,
+<a href="#id-Time-ofMBMS-DataTransfer">id-Time-ofMBMS-DataTransfer</a>,
+<a href="#id-Global-MCE-ID">id-Global-MCE-ID</a>,
+<a href="#id-MCEname">id-MCEname</a>,
+<a href="#id-Reestablishment">id-Reestablishment</a>,
+<a href="#maxnoofMBMSServiceAreaIdentitiesPerMCE">maxnoofMBMSServiceAreaIdentitiesPerMCE</a>,
+<a href="#maxnooferrors">maxnooferrors</a>,
+<a href="#maxNrOfIndividualM3ConnectionsToReset">maxNrOfIndividualM3ConnectionsToReset</a>
+
+<span class="spcolor1">FROM</span> M3AP-Constants;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION START REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionStartRequest">MBMSSessionStartRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#MBMSSessionStartRequest-IEs">MBMSSessionStartRequest-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionStartRequest-IEs">MBMSSessionStartRequest-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY reject TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-TMGI">id-TMGI</a> CRITICALITY reject TYPE <a href="#TMGI">TMGI</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Session-ID">id-MBMS-Session-ID</a> CRITICALITY ignore TYPE <a href="#MBMS-Session-ID">MBMS-Session-ID</a> PRESENCE optional}|
+   { ID <a href="#id-MBMS-E-RAB-QoS-Parameters">id-MBMS-E-RAB-QoS-Parameters</a> CRITICALITY reject TYPE <a href="#MBMS-E-RAB-QoS-Parameters">MBMS-E-RAB-QoS-Parameters</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Session-Duration">id-MBMS-Session-Duration</a> CRITICALITY reject TYPE <a href="#MBMS-Session-Duration">MBMS-Session-Duration</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Service-Area">id-MBMS-Service-Area</a> CRITICALITY reject TYPE <a href="#MBMS-Service-Area">MBMS-Service-Area</a> PRESENCE mandatory}|
+   { ID <a href="#id-MinimumTimeToMBMSDataTransfer">id-MinimumTimeToMBMSDataTransfer</a> CRITICALITY reject TYPE <a href="#MinimumTimeToMBMSDataTransfer">MinimumTimeToMBMSDataTransfer</a> PRESENCE mandatory}|
+   { ID <a href="#id-TNL-Information">id-TNL-Information</a> CRITICALITY reject TYPE <a href="#TNL-Information">TNL-Information</a> PRESENCE mandatory}|
+   { ID <a href="#id-Time-ofMBMS-DataTransfer">id-Time-ofMBMS-DataTransfer</a> CRITICALITY ignore TYPE <a href="#Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a> PRESENCE optional}|
+   { ID <a href="#id-Reestablishment">id-Reestablishment</a> CRITICALITY ignore TYPE <a href="#Reestablishment">Reestablishment</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION START RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionStartResponse">MBMSSessionStartResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{ <a href="#MBMSSessionStartResponse-IEs">MBMSSessionStartResponse-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionStartResponse-IEs">MBMSSessionStartResponse-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION START FAILURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionStartFailure">MBMSSessionStartFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{ <a href="#MBMSSessionStartFailure-IEs">MBMSSessionStartFailure-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionStartFailure-IEs">MBMSSessionStartFailure-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION STOP REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionStopRequest">MBMSSessionStopRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#MBMSSessionStopRequest-IEs">MBMSSessionStopRequest-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionStopRequest-IEs">MBMSSessionStopRequest-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY reject TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY reject TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-Time-ofMBMS-DataStop">id-Time-ofMBMS-DataStop</a> CRITICALITY ignore TYPE <a href="#Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION STOP RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionStopResponse">MBMSSessionStopResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{ <a href="#MBMSSessionStopResponse-IEs">MBMSSessionStopResponse-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionStopResponse-IEs">MBMSSessionStopResponse-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional } ,
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION UPDATE REQUEST</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionUpdateRequest">MBMSSessionUpdateRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#MBMSSessionUpdateRequest-IEs">MBMSSessionUpdateRequest-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionUpdateRequest-IEs">MBMSSessionUpdateRequest-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY reject TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY reject TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-TMGI">id-TMGI</a> CRITICALITY reject TYPE <a href="#TMGI">TMGI</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Session-ID">id-MBMS-Session-ID</a> CRITICALITY ignore TYPE <a href="#MBMS-Session-ID">MBMS-Session-ID</a> PRESENCE optional}|
+   { ID <a href="#id-MBMS-E-RAB-QoS-Parameters">id-MBMS-E-RAB-QoS-Parameters</a> CRITICALITY reject TYPE <a href="#MBMS-E-RAB-QoS-Parameters">MBMS-E-RAB-QoS-Parameters</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Session-Duration">id-MBMS-Session-Duration</a> CRITICALITY reject TYPE <a href="#MBMS-Session-Duration">MBMS-Session-Duration</a> PRESENCE mandatory}|
+   { ID <a href="#id-MBMS-Service-Area">id-MBMS-Service-Area</a> CRITICALITY ignore TYPE <a href="#MBMS-Service-Area">MBMS-Service-Area</a> PRESENCE optional}|
+   { ID <a href="#id-MinimumTimeToMBMSDataTransfer">id-MinimumTimeToMBMSDataTransfer</a> CRITICALITY reject TYPE <a href="#MinimumTimeToMBMSDataTransfer">MinimumTimeToMBMSDataTransfer</a> PRESENCE mandatory}|
+   { ID <a href="#id-TNL-Information">id-TNL-Information</a> CRITICALITY ignore TYPE <a href="#TNL-Information">TNL-Information</a> PRESENCE optional}|
+   { ID <a href="#id-Time-ofMBMS-DataTransfer">id-Time-ofMBMS-DataTransfer</a> CRITICALITY ignore TYPE <a href="#Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION UPDATE RESPONSE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionUpdateResponse">MBMSSessionUpdateResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{ <a href="#MBMSSessionUpdateResponse-IEs">MBMSSessionUpdateResponse-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionUpdateResponse-IEs">MBMSSessionUpdateResponse-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MBMS SESSION UPDATE FAILURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MBMSSessionUpdateFailure">MBMSSessionUpdateFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{ <a href="#MBMSSessionUpdateFailure-IEs">MBMSSessionUpdateFailure-IEs</a>}},
+   ...
+}
+
+<a id="MBMSSessionUpdateFailure-IEs">MBMSSessionUpdateFailure-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE mandatory } |
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- ERROR INDICATION</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ErrorIndication">ErrorIndication</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{<a href="#ErrorIndication-IEs">ErrorIndication-IEs</a>}},
+   ...
+}
+
+<a id="ErrorIndication-IEs">ErrorIndication-IEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> PRESENCE optional } |
+   { ID <a href="#id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> CRITICALITY ignore TYPE <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> PRESENCE optional } |
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE optional } |
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional } ,
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Reset</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Reset">Reset</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#ResetIEs">ResetIEs</a>} },
+   ...
+}
+
+<a id="ResetIEs">ResetIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory }|
+   { ID <a href="#id-ResetType">id-ResetType</a> CRITICALITY reject TYPE <a href="#ResetType">ResetType</a> PRESENCE mandatory },
+   ...
+}
+
+<a id="ResetType">ResetType</a> ::= <span class="spcolor2">CHOICE</span> {
+   m3-Interface <a href="#ResetAll">ResetAll</a>,
+   partOfM3-Interface <a href="#MBMS-Service-associatedLogicalM3-ConnectionListRes">MBMS-Service-associatedLogicalM3-ConnectionListRes</a>,
+   ...
+}
+
+<a id="ResetAll">ResetAll</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   reset-all,
+   ...
+}
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionListRes">MBMS-Service-associatedLogicalM3-ConnectionListRes</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1.. <a href="#maxNrOfIndividualM3ConnectionsToReset">maxNrOfIndividualM3ConnectionsToReset</a>)) <span class="spcolor2">OF</span>
+   <a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> { { <a href="#MBMS-Service-associatedLogicalM3-ConnectionItemRes">MBMS-Service-associatedLogicalM3-ConnectionItemRes</a> } }
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionItemRes">MBMS-Service-associatedLogicalM3-ConnectionItemRes</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MBMS-Service-associatedLogicalM3-ConnectionItem">id-MBMS-Service-associatedLogicalM3-ConnectionItem</a> CRITICALITY reject TYPE
+      <a href="#MBMS-Service-associatedLogicalM3-ConnectionItem">MBMS-Service-associatedLogicalM3-ConnectionItem</a> PRESENCE mandatory },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Reset Acknowledge</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ResetAcknowledge">ResetAcknowledge</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#ResetAcknowledgeIEs">ResetAcknowledgeIEs</a>} },
+   ...
+}
+
+<a id="ResetAcknowledgeIEs">ResetAcknowledgeIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MBMS-Service-associatedLogicalM3-ConnectionListResAck">id-MBMS-Service-associatedLogicalM3-ConnectionListResAck</a> CRITICALITY ignore TYPE
+      <a href="#MBMS-Service-associatedLogicalM3-ConnectionListResAck">MBMS-Service-associatedLogicalM3-ConnectionListResAck</a> PRESENCE optional }|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionListResAck">MBMS-Service-associatedLogicalM3-ConnectionListResAck</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1.. <a href="#maxNrOfIndividualM3ConnectionsToReset">maxNrOfIndividualM3ConnectionsToReset</a>)) <span class="spcolor2">OF</span>
+   <a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> { { <a href="#MBMS-Service-associatedLogicalM3-ConnectionItemResAck">MBMS-Service-associatedLogicalM3-ConnectionItemResAck</a> } }
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionItemResAck">MBMS-Service-associatedLogicalM3-ConnectionItemResAck</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-MBMS-Service-associatedLogicalM3-ConnectionItem">id-MBMS-Service-associatedLogicalM3-ConnectionItem</a> CRITICALITY ignore TYPE
+      <a href="#MBMS-Service-associatedLogicalM3-ConnectionItem">MBMS-Service-associatedLogicalM3-ConnectionItem</a> PRESENCE mandatory },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- PRIVATE MESSAGE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="PrivateMessage">PrivateMessage</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   privateIEs <a href="#PrivateIE-Container">PrivateIE-Container</a> {{<a href="#PrivateMessage-IEs">PrivateMessage-IEs</a>}},
+   ...
+}
+
+<a id="PrivateMessage-IEs">PrivateMessage-IEs</a> <a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- M3 SETUP ELEMENTARY PROCEDURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- M3 Setup Request</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3SetupRequest">M3SetupRequest</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#M3SetupRequestIEs">M3SetupRequestIEs</a>} },
+   ...
+}
+
+<a id="M3SetupRequestIEs">M3SetupRequestIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Global-MCE-ID">id-Global-MCE-ID</a> CRITICALITY reject TYPE <a href="#Global-MCE-ID">Global-MCE-ID</a> PRESENCE mandatory}|
+   { ID <a href="#id-MCEname">id-MCEname</a> CRITICALITY ignore TYPE <a href="#MCEname">MCEname</a> PRESENCE optional}|
+   { ID <a href="#id-MBMSServiceAreaList">id-MBMSServiceAreaList</a> CRITICALITY reject TYPE <a href="#MBMSServiceAreaListItem">MBMSServiceAreaListItem</a> PRESENCE mandatory},
+   ...
+}
+
+<a id="MBMSServiceAreaListItem">MBMSServiceAreaListItem</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE(1..<a href="#maxnoofMBMSServiceAreaIdentitiesPerMCE">maxnoofMBMSServiceAreaIdentitiesPerMCE</a>)) <span class="spcolor2">OF</span> <a href="#MBMSServiceArea1">MBMSServiceArea1</a>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- M3 Setup Response</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3SetupResponse">M3SetupResponse</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#M3SetupResponseIEs">M3SetupResponseIEs</a>} },
+   ...
+}
+
+<a id="M3SetupResponseIEs">M3SetupResponseIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- M3 Setup Failure</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3SetupFailure">M3SetupFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#M3SetupFailureIEs">M3SetupFailureIEs</a>} },
+   ...
+}
+
+<a id="M3SetupFailureIEs">M3SetupFailureIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory}|
+   { ID <a href="#id-TimeToWait">id-TimeToWait</a> CRITICALITY ignore TYPE <a href="#TimeToWait">TimeToWait</a> PRESENCE optional}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MCE CONFIGURATION UPDATE ELEMENTARY PROCEDURE</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MCE Configuration Update </span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MCEConfigurationUpdate">MCEConfigurationUpdate</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#MCEConfigurationUpdateIEs">MCEConfigurationUpdateIEs</a>} },
+   ...
+}
+
+<a id="MCEConfigurationUpdateIEs">MCEConfigurationUpdateIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Global-MCE-ID">id-Global-MCE-ID</a> CRITICALITY reject TYPE <a href="#Global-MCE-ID">Global-MCE-ID</a> PRESENCE optional}|
+   { ID <a href="#id-MCEname">id-MCEname</a> CRITICALITY ignore TYPE <a href="#MCEname">MCEname</a> PRESENCE optional}|
+   { ID <a href="#id-MBMSServiceAreaList">id-MBMSServiceAreaList</a> CRITICALITY reject TYPE <a href="#MBMSServiceAreaListItem">MBMSServiceAreaListItem</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MCE Configuration Update Acknowledge</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MCEConfigurationUpdateAcknowledge">MCEConfigurationUpdateAcknowledge</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#MCEConfigurationUpdateAcknowledgeIEs">MCEConfigurationUpdateAcknowledgeIEs</a>} },
+   ...
+}
+
+<a id="MCEConfigurationUpdateAcknowledgeIEs">MCEConfigurationUpdateAcknowledgeIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional },
+   ...
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- MCE Configuration Update Failure</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="MCEConfigurationUpdateFailure">MCEConfigurationUpdateFailure</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   protocolIEs <a href="#ProtocolIE-Container">ProtocolIE-Container</a> { {<a href="#MCEConfigurationUpdateFailureIEs">MCEConfigurationUpdateFailureIEs</a>} },
+   ...
+}
+
+<a id="MCEConfigurationUpdateFailureIEs">MCEConfigurationUpdateFailureIEs</a> <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= {
+   { ID <a href="#id-Cause">id-Cause</a> CRITICALITY ignore TYPE <a href="#Cause">Cause</a> PRESENCE mandatory}|
+   { ID <a href="#id-TimeToWait">id-TimeToWait</a> CRITICALITY ignore TYPE <a href="#TimeToWait">TimeToWait</a> PRESENCE optional}|
+   { ID <a href="#id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> CRITICALITY ignore TYPE <a href="#CriticalityDiagnostics">CriticalityDiagnostics</a> PRESENCE optional},
+   ...
+}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Information Element Definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-IEs {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-IEs (2) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#id-AllocationAndRetentionPriority">id-AllocationAndRetentionPriority</a>,
+<a href="#maxnooferrors">maxnooferrors</a>
+
+<span class="spcolor1">FROM</span> M3AP-Constants
+
+<a href="#Criticality">Criticality</a>,
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>,
+<a href="#TriggeringMessage">TriggeringMessage</a>
+<span class="spcolor1">FROM</span> M3AP-CommonDataTypes
+
+<a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a>{},
+<a href="#ProtocolIE-Single-Container">ProtocolIE-Single-Container</a>{},
+<a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>,
+<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>
+<span class="spcolor1">FROM</span> M3AP-Containers;
+
+<span class="spcolor5">-- A</span>
+
+<a id="Absolute-Time-ofMBMS-Data">Absolute-Time-ofMBMS-Data</a> ::= <span class="spcolor3">BIT STRING</span> (SIZE (64))
+
+<a id="AllocationAndRetentionPriority">AllocationAndRetentionPriority</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   priorityLevel <a href="#PriorityLevel">PriorityLevel</a>,
+   pre-emptionCapability <a href="#Pre-emptionCapability">Pre-emptionCapability</a>,
+   pre-emptionVulnerability <a href="#Pre-emptionVulnerability">Pre-emptionVulnerability</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#AllocationAndRetentionPriority-ExtIEs">AllocationAndRetentionPriority-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>
+}
+
+<a id="AllocationAndRetentionPriority-ExtIEs">AllocationAndRetentionPriority-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- B</span>
+
+<a id="BitRate">BitRate</a> ::= <span class="spcolor3">INTEGER</span> (0..10000000000) 
+
+<span class="spcolor5">-- C</span>
+
+<a id="Cause">Cause</a> ::= <span class="spcolor2">CHOICE</span> {
+   radioNetwork <a href="#CauseRadioNetwork">CauseRadioNetwork</a>,
+   transport <a href="#CauseTransport">CauseTransport</a>,
+   nAS <a href="#CauseNAS">CauseNAS</a>,
+   protocol <a href="#CauseProtocol">CauseProtocol</a>,
+   misc <a href="#CauseMisc">CauseMisc</a>,
+   ...
+}
+
+<a id="CauseMisc">CauseMisc</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   control-processing-overload,
+   not-enough-user-plane-processing-resources,
+   hardware-failure,
+   om-intervention,
+   unspecified,
+   ...
+}
+
+<a id="CauseNAS">CauseNAS</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   unspecified,
+   ...
+}
+
+<a id="CauseProtocol">CauseProtocol</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   transfer-syntax-error,
+   abstract-syntax-error-reject,
+   abstract-syntax-error-ignore-and-notify,
+   message-not-compatible-with-receiver-state,
+   semantic-error,
+   abstract-syntax-error-falsely-constructed-message,
+   unspecified,
+   ...
+}
+
+<a id="CauseRadioNetwork">CauseRadioNetwork</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   unknown-or-already-allocated-MME-MBMS-M3AP-ID,
+   unknown-or-already-allocated-MCE-MBMS-M3AP-ID,
+   unknown-or-inconsistent-pair-of-MBMS-M3AP-IDs,
+   radio-resources-not-available,
+   invalid-QoS-combination,
+   interaction-with-other-procedure,
+   not-supported-QCI-value,
+   unspecified,
+   ...
+}
+
+<a id="CauseTransport">CauseTransport</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   transport-resource-unavailable,
+   unspecified,
+   ...
+}
+
+<a id="CriticalityDiagnostics">CriticalityDiagnostics</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   procedureCode <a href="#ProcedureCode">ProcedureCode</a> <span class="spcolor4">OPTIONAL</span>,
+   triggeringMessage <a href="#TriggeringMessage">TriggeringMessage</a> <span class="spcolor4">OPTIONAL</span>,
+   procedureCriticality <a href="#Criticality">Criticality</a> <span class="spcolor4">OPTIONAL</span>,
+   iEsCriticalityDiagnostics <a href="#CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-ExtIEs">CriticalityDiagnostics-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-List">CriticalityDiagnostics-IE-List</a> ::= <span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxnooferrors">maxnooferrors</a>)) <span class="spcolor2">OF</span>
+<span class="spcolor2">SEQUENCE</span> {
+   iECriticality <a href="#Criticality">Criticality</a>,
+   iE-ID <a href="#ProtocolIE-ID">ProtocolIE-ID</a>,
+   typeOfError <a href="#TypeOfError">TypeOfError</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="CriticalityDiagnostics-IE-List-ExtIEs">CriticalityDiagnostics-IE-List-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<span class="spcolor5">-- D</span>
+<span class="spcolor5">-- E</span>
+
+<a id="ExtendedMCE-ID">ExtendedMCE-ID</a> ::= OCTET STRING (SIZE(1))
+
+<span class="spcolor5">-- F</span>
+<span class="spcolor5">-- G</span>
+
+<a id="Global-MCE-ID">Global-MCE-ID</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMN-Identity <a href="#PLMN-Identity">PLMN-Identity</a>,
+   mCE-ID <a href="#MCE-ID">MCE-ID</a>,
+   extendedMCE-ID <a href="#ExtendedMCE-ID">ExtendedMCE-ID</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#GlobalMCE-ID-ExtIEs">GlobalMCE-ID-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="GlobalMCE-ID-ExtIEs">GlobalMCE-ID-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="GBR-QosInformation">GBR-QosInformation</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   mBMS-E-RAB-MaximumBitrateDL <a href="#BitRate">BitRate</a>,
+   mBMS-E-RAB-GuaranteedBitrateDL <a href="#BitRate">BitRate</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#GBR-QosInformation-ExtIEs">GBR-QosInformation-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="GBR-QosInformation-ExtIEs">GBR-QosInformation-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="GTP-TEID">GTP-TEID</a> ::= OCTET STRING (SIZE (4))
+
+<span class="spcolor5">-- H</span>
+<span class="spcolor5">-- I</span>
+
+<a id="IPAddress">IPAddress</a> ::= OCTET STRING (SIZE(4..16, ...))
+
+<span class="spcolor5">-- J</span>
+<span class="spcolor5">-- K</span>
+<span class="spcolor5">-- L</span>
+<span class="spcolor5">-- M</span>
+
+<a id="MBMS-E-RAB-QoS-Parameters">MBMS-E-RAB-QoS-Parameters</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   qCI <a href="#QCI">QCI</a>,
+   gbrQosInformation <a href="#GBR-QosInformation">GBR-QosInformation</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#MBMS-E-RAB-QoS-Parameters-ExtIEs">MBMS-E-RAB-QoS-Parameters-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="MBMS-E-RAB-QoS-Parameters-ExtIEs">MBMS-E-RAB-QoS-Parameters-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   <span class="spcolor5">-- Extension for Release 10 ARP support --</span>
+   {ID <a href="#id-AllocationAndRetentionPriority">id-AllocationAndRetentionPriority</a> CRITICALITY ignore EXTENSION <a href="#AllocationAndRetentionPriority">AllocationAndRetentionPriority</a> PRESENCE mandatory},
+   ...
+}
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionItem">MBMS-Service-associatedLogicalM3-ConnectionItem</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   mME-MBMS-M3AP-ID <a href="#MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> <span class="spcolor4">OPTIONAL</span>,
+   mCE-MBMS-M3AP-ID <a href="#MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> <span class="spcolor4">OPTIONAL</span>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { { <a href="#MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs">MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs">MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="MBMSServiceArea1">MBMSServiceArea1</a> ::= OCTET STRING (SIZE (2))
+
+<a id="MBMS-Service-Area">MBMS-Service-Area</a> ::= OCTET STRING
+
+<a id="MBMS-Session-Duration">MBMS-Session-Duration</a> ::= OCTET STRING (SIZE (3))
+
+<a id="MBMS-Session-ID">MBMS-Session-ID</a> ::= OCTET STRING (SIZE (1))
+
+<a id="MCE-MBMS-M3AP-ID">MCE-MBMS-M3AP-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<a id="MCE-ID">MCE-ID</a> ::= OCTET STRING (SIZE(2))
+
+<a id="MCEname">MCEname</a> ::= PrintableString (SIZE (1..150,...))
+
+<a id="MinimumTimeToMBMSDataTransfer">MinimumTimeToMBMSDataTransfer</a> ::= OCTET STRING (SIZE (1))
+
+<a id="MME-MBMS-M3AP-ID">MME-MBMS-M3AP-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..65535)
+
+<span class="spcolor5">-- N</span>
+<span class="spcolor5">-- O</span>
+<span class="spcolor5">-- P</span>
+
+<a id="Pre-emptionCapability">Pre-emptionCapability</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   shall-not-trigger-pre-emption,
+   may-trigger-pre-emption
+}
+
+<a id="Pre-emptionVulnerability">Pre-emptionVulnerability</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   not-pre-emptable,
+   pre-emptable
+}
+
+<a id="PriorityLevel">PriorityLevel</a> ::= <span class="spcolor3">INTEGER</span> { spare (0), highest (1), lowest (14), no-priority (15) } (0..15)
+
+<a id="PLMN-Identity">PLMN-Identity</a> ::= OCTET STRING (SIZE(3))
+
+<span class="spcolor5">-- Q</span>
+
+<a id="QCI">QCI</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<span class="spcolor5">-- R</span>
+
+<a id="Reestablishment">Reestablishment</a> ::= <span class="spcolor3">ENUMERATED</span> {true, ...}
+
+<span class="spcolor5">-- S</span>
+<span class="spcolor5">-- T</span>
+
+<a id="TimeToWait">TimeToWait</a> ::= <span class="spcolor3">ENUMERATED</span> {v1s, v2s, v5s, v10s, v20s, v60s, ...}
+
+<a id="TMGI">TMGI</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   pLMNidentity <a href="#PLMN-Identity">PLMN-Identity</a>,
+   serviceID OCTET STRING (SIZE (3)),
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#TMGI-ExtIEs">TMGI-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>
+}
+
+<a id="TMGI-ExtIEs">TMGI-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="TNL-Information">TNL-Information</a> ::= <span class="spcolor2">SEQUENCE</span> {
+   iPMCAddress <a href="#IPAddress">IPAddress</a>, 
+   iPSourceAddress <a href="#IPAddress">IPAddress</a>,
+   gTP-DLTEID <a href="#GTP-TEID">GTP-TEID</a>,
+   iE-Extensions <a href="#ProtocolExtensionContainer">ProtocolExtensionContainer</a> { {<a href="#TNL-Information-ExtIEs">TNL-Information-ExtIEs</a>} } <span class="spcolor4">OPTIONAL</span>,
+   ...
+}
+
+<a id="TNL-Information-ExtIEs">TNL-Information-ExtIEs</a> <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= {
+   ...
+}
+
+<a id="TypeOfError">TypeOfError</a> ::= <span class="spcolor3">ENUMERATED</span> {
+   not-understood,
+   missing,
+   ...
+}
+
+<span class="spcolor5">-- U</span>
+<span class="spcolor5">-- V</span>
+<span class="spcolor5">-- W</span>
+<span class="spcolor5">-- X</span>
+<span class="spcolor5">-- Y</span>
+<span class="spcolor5">-- Z</span>
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-CommonDataTypes {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-CommonDataTypes (3) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Extension constants</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="maxPrivateIEs">maxPrivateIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolExtensions">maxProtocolExtensions</a> <span class="spcolor3">INTEGER</span> ::= 65535
+<a id="maxProtocolIEs">maxProtocolIEs</a> <span class="spcolor3">INTEGER</span> ::= 65535
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Common Data Types</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="Criticality">Criticality</a> ::= <span class="spcolor3">ENUMERATED</span> { reject, ignore, notify }
+
+<a id="Presence">Presence</a> ::= <span class="spcolor3">ENUMERATED</span> { optional, conditional, mandatory }
+
+<a id="PrivateIE-ID">PrivateIE-ID</a> ::= <span class="spcolor2">CHOICE</span> {
+   local <span class="spcolor3">INTEGER</span> (0.. <a href="#maxPrivateIEs">maxPrivateIEs</a>),
+   global <span class="spcolor3">OBJECT IDENTIFIER</span>
+}
+
+<a id="ProcedureCode">ProcedureCode</a> ::= <span class="spcolor3">INTEGER</span> (0..255)
+
+<a id="ProtocolIE-ID">ProtocolIE-ID</a> ::= <span class="spcolor3">INTEGER</span> (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)
+
+<a id="TriggeringMessage">TriggeringMessage</a> ::= <span class="spcolor3">ENUMERATED</span> { initiating-message, successful-outcome, unsuccessful-outcome}
+
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Constant definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-Constants {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-Constants (4) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#ProcedureCode">ProcedureCode</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a>
+<span class="spcolor1">FROM</span> M3AP-CommonDataTypes;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Elementary Procedures</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-mBMSsessionStart">id-mBMSsessionStart</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 0
+<a id="id-mBMSsessionStop">id-mBMSsessionStop</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 1
+<a id="id-errorIndication">id-errorIndication</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 2
+<a id="id-privateMessage">id-privateMessage</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 3
+<a id="id-Reset">id-Reset</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 4
+<a id="id-mBMSsessionUpdate">id-mBMSsessionUpdate</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 5
+<a id="id-mCEConfigurationUpdate">id-mCEConfigurationUpdate</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 6
+<a id="id-m3Setup">id-m3Setup</a> <a href="#ProcedureCode">ProcedureCode</a> ::= 7
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Lists</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="maxnoofMBMSServiceAreaIdentitiesPerMCE">maxnoofMBMSServiceAreaIdentitiesPerMCE</a> <span class="spcolor3">INTEGER</span> ::= 65536
+<a id="maxnooferrors">maxnooferrors</a> <span class="spcolor3">INTEGER</span> ::= 256
+<a id="maxNrOfIndividualM3ConnectionsToReset">maxNrOfIndividualM3ConnectionsToReset</a> <span class="spcolor3">INTEGER</span> ::= 256
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="id-MME-MBMS-M3AP-ID">id-MME-MBMS-M3AP-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 0
+<a id="id-MCE-MBMS-M3AP-ID">id-MCE-MBMS-M3AP-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 1
+<a id="id-TMGI">id-TMGI</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 2
+<a id="id-MBMS-Session-ID">id-MBMS-Session-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 3
+<a id="id-MBMS-E-RAB-QoS-Parameters">id-MBMS-E-RAB-QoS-Parameters</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 4
+<a id="id-MBMS-Session-Duration">id-MBMS-Session-Duration</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 5
+<a id="id-MBMS-Service-Area">id-MBMS-Service-Area</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 6
+<a id="id-TNL-Information">id-TNL-Information</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 7
+<a id="id-CriticalityDiagnostics">id-CriticalityDiagnostics</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 8
+<a id="id-Cause">id-Cause</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 9
+<a id="id-MBMS-Service-Area-List">id-MBMS-Service-Area-List</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 10
+<a id="id-MBMS-Service-Area-List-Item">id-MBMS-Service-Area-List-Item</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 11
+<a id="id-TimeToWait">id-TimeToWait</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 12
+<a id="id-ResetType">id-ResetType</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 13
+<a id="id-MBMS-Service-associatedLogicalM3-ConnectionItem">id-MBMS-Service-associatedLogicalM3-ConnectionItem</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 14
+<a id="id-MBMS-Service-associatedLogicalM3-ConnectionListResAck">id-MBMS-Service-associatedLogicalM3-ConnectionListResAck</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 15
+<a id="id-MinimumTimeToMBMSDataTransfer">id-MinimumTimeToMBMSDataTransfer</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 16
+<a id="id-AllocationAndRetentionPriority">id-AllocationAndRetentionPriority</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 17
+<a id="id-Global-MCE-ID">id-Global-MCE-ID</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 18
+<a id="id-MCEname">id-MCEname</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 19
+<a id="id-MBMSServiceAreaList">id-MBMSServiceAreaList</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 20
+<a id="id-Time-ofMBMS-DataTransfer">id-Time-ofMBMS-DataTransfer</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 21
+<a id="id-Time-ofMBMS-DataStop">id-Time-ofMBMS-DataStop</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 22
+<a id="id-Reestablishment">id-Reestablishment</a> <a href="#ProtocolIE-ID">ProtocolIE-ID</a> ::= 23
+<span class="spcolor1">END</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container definitions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+M3AP-Containers {
+   itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m3ap (5) version1 (1) m3ap-Containers (5) }
+
+<span class="spcolor1">DEFINITIONS</span> <span class="spcolor1">AUTOMATIC TAGS</span> ::= 
+
+<span class="spcolor1">BEGIN</span>
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- IE parameter types from other modules.</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<span class="spcolor1">IMPORTS</span>
+<a href="#maxPrivateIEs">maxPrivateIEs</a>,
+<a href="#maxProtocolExtensions">maxProtocolExtensions</a>,
+<a href="#maxProtocolIEs">maxProtocolIEs</a>,
+<a href="#Criticality">Criticality</a>,
+<a href="#Presence">Presence</a>,
+<a href="#PrivateIE-ID">PrivateIE-ID</a>,
+<a href="#ProtocolIE-ID">ProtocolIE-ID</a> 
+<span class="spcolor1">FROM</span> M3AP-CommonDataTypes;
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Value,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   TYPE &Value
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &firstCriticality <a href="#Criticality">Criticality</a>,
+   &FirstValue,
+   &secondCriticality <a href="#Criticality">Criticality</a>,
+   &SecondValue,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   FIRST CRITICALITY &firstCriticality
+   FIRST TYPE &FirstValue
+   SECOND CRITICALITY &secondCriticality
+   SECOND TYPE &SecondValue
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#ProtocolIE-ID">ProtocolIE-ID</a> <span class="spcolor1">UNIQUE</span>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Extension,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   EXTENSION &Extension
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Class Definition for Private IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a> ::= <span class="spcolor1">CLASS</span> {
+   &id <a href="#PrivateIE-ID">PrivateIE-ID</a>,
+   &criticality <a href="#Criticality">Criticality</a>,
+   &Value,
+   &presence <a href="#Presence">Presence</a>
+}
+<span class="spcolor1">WITH</span> <span class="spcolor1">SYNTAX</span> {
+   ID &id
+   CRITICALITY &criticality
+   TYPE &Value
+   PRESENCE &presence
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-Container">ProtocolIE-Container</a> {<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-Single-Container">ProtocolIE-Single-Container</a> {<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> : IEsSetParam} ::= 
+<a href="#ProtocolIE-Field">ProtocolIE-Field</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-Field">ProtocolIE-Field</a> {<a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>.&id ({IEsSetParam}),
+   criticality <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>.&criticality ({IEsSetParam}{@id}),
+   value <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a>.&Value ({IEsSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol IE Pairs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a> {<a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (0..<a href="#maxProtocolIEs">maxProtocolIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-FieldPair">ProtocolIE-FieldPair</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-FieldPair">ProtocolIE-FieldPair</a> {<a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>.&id ({IEsSetParam}),
+   firstCriticality <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>.&firstCriticality ({IEsSetParam}{@id}),
+   firstValue <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>.&FirstValue ({IEsSetParam}{@id}),
+   secondCriticality <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>.&secondCriticality ({IEsSetParam}{@id}),
+   secondValue <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a>.&SecondValue ({IEsSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container Lists for Protocol IE Containers</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolIE-ContainerList">ProtocolIE-ContainerList</a> {<span class="spcolor3">INTEGER</span> : lowerBound, <span class="spcolor3">INTEGER</span> : upperBound, <a href="#M3AP-PROTOCOL-IES">M3AP-PROTOCOL-IES</a> : IEsSetParam} ::=
+<span class="spcolor2">SEQUENCE</span> (SIZE (lowerBound..upperBound)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-Container">ProtocolIE-Container</a> {{IEsSetParam}}
+
+<a id="ProtocolIE-ContainerPairList">ProtocolIE-ContainerPairList</a> {<span class="spcolor3">INTEGER</span> : lowerBound, <span class="spcolor3">INTEGER</span> : upperBound, <a href="#M3AP-PROTOCOL-IES-PAIR">M3AP-PROTOCOL-IES-PAIR</a> : IEsSetParam} ::=
+<span class="spcolor2">SEQUENCE</span> (SIZE (lowerBound..upperBound)) <span class="spcolor2">OF</span>
+<a href="#ProtocolIE-ContainerPair">ProtocolIE-ContainerPair</a> {{IEsSetParam}}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Protocol Extensions</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="ProtocolExtensionContainer">ProtocolExtensionContainer</a> {<a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxProtocolExtensions">maxProtocolExtensions</a>)) <span class="spcolor2">OF</span>
+<a href="#ProtocolExtensionField">ProtocolExtensionField</a> {{ExtensionSetParam}}
+
+<a id="ProtocolExtensionField">ProtocolExtensionField</a> {<a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a> : ExtensionSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>.&id ({ExtensionSetParam}),
+   criticality <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>.&criticality ({ExtensionSetParam}{@id}),
+   extensionValue <a href="#M3AP-PROTOCOL-EXTENSION">M3AP-PROTOCOL-EXTENSION</a>.&Extension ({ExtensionSetParam}{@id})
+}
+
+<span class="spcolor5">-- **************************************************************</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- Container for Private IEs</span>
+<span class="spcolor5">--</span>
+<span class="spcolor5">-- **************************************************************</span>
+
+<a id="PrivateIE-Container">PrivateIE-Container</a> {<a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a> : IEsSetParam} ::= 
+<span class="spcolor2">SEQUENCE</span> (SIZE (1..<a href="#maxPrivateIEs">maxPrivateIEs</a>)) <span class="spcolor2">OF</span>
+<a href="#PrivateIE-Field">PrivateIE-Field</a> {{IEsSetParam}}
+
+<a id="PrivateIE-Field">PrivateIE-Field</a> {<a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a> : IEsSetParam} ::= <span class="spcolor2">SEQUENCE</span> {
+   id <a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a>.&id ({IEsSetParam}),
+   criticality <a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a>.&criticality ({IEsSetParam}{@id}),
+   value <a href="#M3AP-PRIVATE-IES">M3AP-PRIVATE-IES</a>.&Value ({IEsSetParam}{@id})
+}
+
+<span class="spcolor1">END</span>
+</div>
+  </section>
+
+  <footer>
+    <p class="text-center">
+      <a href="#" class="btn btn-info">Back to top</a>
+    </p>
+  </footer>
+
+</div>
+<script src="sga.js"></script>
+</body>
+</html>

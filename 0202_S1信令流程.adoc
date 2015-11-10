@@ -1,7 +1,7 @@
 ﻿== S1信令流程
 
 === S1初始化
-[plantuml]
+[plantuml,file="s1_init.png"]
 ---------------------------------------------------------------------
 @startuml
 hide footbox
