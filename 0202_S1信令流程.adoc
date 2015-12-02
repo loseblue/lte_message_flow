@@ -19,5 +19,9 @@ eNB -> MME: ENB Direct Information Transfer
 2. S1 Setup Response. <<msg_s1_setup_rsp, [S1 Setup Response]>>
 3. ENB Direct Information Transfer.<<msg_ENB_direct_info_transfer, [ENB Direct Information Transfer]>> 
 
+
+
+=== S1 Handover
+
 <<<
 // vim: set syntax=asciidoc:
