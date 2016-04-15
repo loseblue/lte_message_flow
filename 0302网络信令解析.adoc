@@ -572,18 +572,18 @@ S1 Application Protocol
              E-RABToBeSetupItemBearerSUReq
               e-RAB-ID: 6                                                 <7>
               e-RABlevelQoSParameters
-               qCI: 7
-               allocationRetentionPriority
+               qCI: 7                                                     <8>
+               allocationRetentionPriority                                <9>
                 priorityLevel: highest (1)
                 pre-emptionCapability: may-trigger-pre-emption (1)
                 pre-emptionVulnerability: pre-emptable (1)
-               gbrQosInformation
+               gbrQosInformation                                          <10>
                 e-RAB-MaximumBitrateDL: 0
                 e-RAB-MaximumBitrateUL: 0
                 e-RAB-GuaranteedBitrateDL: 0
                 e-RAB-GuaranteedBitrateUL: 0
               0... .... Extension Present Bit: False
-              transportLayerAddress: 0a5878cc 
+              transportLayerAddress: 0a5878cc                             <11>
                transportLayerAddress(IPv4): 10.88.120.204 (10.88.120.204)
               gTP-TEID: 00000487
               nAS-PDU: 27cfa1c62e046203c10507ffffffff1905636d6e6574066d...
@@ -657,15 +657,18 @@ S1 Application Protocol
                  [Length: 4]
 
 ------
-<1> later
-<2> later
-<3> later
+<1> MME-UE-S1AP-ID
+<2> ENB-UE-S1AP-ID
+<3> 指示eNB中为调度这个UE所使用的AMBR. 该参数保存在UE的签约数据中, MME从HSS中获得这个参数
 <4> later
 <5> later
-<6> later
-<7> later
-<8> later
+<6> 列出需要建立的E-RAB
+<7> MME为每个E-RAB分配的标识
+<8> 每个E-RAB级别的QoS参数取值 数值越小优先级越高, 1 VoLTE语音承载, 5VoLTE信令承载, 7或9默认承载 
 <9> later
+<10>
+<11> S1口上为这个E-RAB所分配的地址
+<12> eNB与S-GW之间传输这个E-RAB的GTP隧道端点标识. 这里给出的是S-GW一端的GTP-TEID
 
 [[msg_erab_setup_rsp]]
 === E-RAB Setup Response
@@ -679,21 +682,33 @@ S1 Application Protocol
    criticality: reject (0)
     E-RABSetupResponse
      protocolIEs: 3 items
-      Item 0: id-MME-UE-S1AP-ID
+      Item 0: id-MME-UE-S1AP-ID                                           <1>
          MME-UE-S1AP-ID: 33554442
-      Item 1: id-eNB-UE-S1AP-ID
+      Item 1: id-eNB-UE-S1AP-ID                                           <2>
          ENB-UE-S1AP-ID: 1
-      Item 2: id-E-RABSetupListBearerSURes
+      Item 2: id-E-RABSetupListBearerSURes                                <3>
          E-RABSetupListBearerSURes: 1 item
-          Item 0: id-E-RABSetupItemBearerSURes
-             E-RABSetupItemBearerSURes
-              e-RAB-ID: 6
+          Item 0: id-E-RABSetupItemBearerSURes                            <4>
+             E-RABSetupItemBearerSURes                                    <5>
+              e-RAB-ID: 6                                                 <6>
               .... ...0 Extension Present Bit: False
-              transportLayerAddress: 0a58788c 
+              transportLayerAddress: 0a58788c                             <7>
                transportLayerAddress(IPv4): 10.88.120.140 
-              gTP-TEID: 01000009
+              gTP-TEID: 01000009                                          <8>
 ------
+<1> MME-UE-S1AP-ID
+<2> ENB-UE-S1AP-ID
+<3> eNBRABSetupListBearerSURes 响应
+<4> later
+<5> later
+<6> 列出需要建立的E-RAB
+<7> S1口上为这个E-RAB所分配的地址
+<8> eNB与S-GW之间传输这个E-RAB的GTP隧道端点标识. 这里给出的是S-GW一端的GTP-TEID
 
+
+<11> E-RAB failed to be Setup List 未能成功建立的E-RAB列表
+<12> E-RAB ID 
+<13> Cause 例如"无线资源无效", "无线接口失败"等
 
 <<<
 // vim: set syntax=asciidoc:

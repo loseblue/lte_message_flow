@@ -135,7 +135,7 @@ eNB -> MME: E-RAB Setup Response
 @endumll
 ---------------------------------------------------------------------
 1. E-RAB Setup Request <<msg_erab_setup_req, [E-RAB Setup Request]>>
-2. E-RAB Setup Response <<, [E-RAB Setup Response]>>
+2. E-RAB Setup Response <<msg_erab_setup_rsp, [E-RAB Setup Response]>>
 
 === X2切换
 [plantuml]

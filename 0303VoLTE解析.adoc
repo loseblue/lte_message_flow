@@ -1,0 +1,105 @@
+﻿== VoLTE流程及信令解析
+
+== VoLTE注册
+
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+title VoLTE注册
+hide footbox
+autonumber "<b>[00]"
+
+participant "Caller A (UE A)" as UEa
+participant eNB
+participant MME
+participant "S-GW" as SGW
+participant "CSCF" as CSCF
+
+hnote over UEa : Idle
+
+[-[#black]> UEa : A 发起呼叫
+note over UEa, MME: UE A 接入
+activate UEa
+note over UEa, SGW: UE A 建立默认承载(QCI=9)
+note over UEa, SGW: UE A 建立VoLTE信令承载(QCI=5)
+
+UEa -> CSCF : REGISTER 
+CSCF -> UEa : 401 Unauthorized
+UEa -> CSCF : REGISTER 
+CSCF -> UEa : 200 OK
+UEa -> CSCF : SUBSCRIBE 
+CSCF -> UEa : 200 OK
+CSCF -> UEa : NOTIFY
+
+@enduml
+---------------------------------------------------------------------
+
+== VoLTE通话
+
+[plantuml]
+---------------------------------------------------------------------
+@startuml
+
+title VoLTE通话
+hide footbox
+autonumber "<b>[00]"
+
+participant "Caller A (UE A)" as UEa
+participant "Callee B (UE B)" as UEb
+participant eNB
+participant MME
+participant "IMS" as IMS 
+
+hnote over UEa : Idle
+hnote over UEb : Idle
+
+[-[#black]> UEa : A 发起呼叫
+rnote over UEa, eNB #white : Server Request
+activate UEa
+rnote over UEa, MME #white : Default Bearer Establishment(QCI=9)
+rnote over UEa, MME #white : Dedicated EPS Bearer Establishment(QCI=5)
+    
+UEa -> IMS : INVITE 
+IMS -> UEa : 100 Trying
+IMS -> MME : INVITE
+
+MME -[#blue]> UEb: Paging
+|||
+rnote over UEb, eNB #white : Server Request
+activate UEb
+rnote over UEb, MME #white : Default Bearer Establishment(QCI=9)
+rnote over UEb, MME #white : Dedicated EPS Bearer Establishment(QCI=5)
+
+IMS -> UEb : INVITE
+UEb -> IMS : 100 Trying
+UEb -> IMS : 183 session progress
+
+...
+
+IMS -> MME : 183 session progress
+IMS -> UEa : 183 session progress
+rnote over UEa, MME #white : Dedicated EPS Bearer Establishment(QCI=1)
+UEa -> IMS : PRACK
+IMS -> UEb : PRACK
+UEb -> IMS : 200 OK(PRACK)
+IMS -> UEa : 200 OK(PRACK)
+
+
+UEa -> IMS : UPDATE
+IMS -> UEb : UPDATE
+UEb -> IMS : 180 Ringing
+IMS -> UEa : 180 Ringing
+UEb -> IMS : 200 OK
+IMS -> UEa : 200 OK
+rnote over UEb, MME #white : ? Dedicated EPS Bearer Establishment(QCI=1)
+UEa -> IMS : ACK
+IMS -> UEb : ACK
+
+@enduml
+
+---------------------------------------------------------------------
+
+
+
+<<<
+// vim: set syntax=asciidoc:
