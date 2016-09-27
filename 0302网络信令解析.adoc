@@ -668,7 +668,7 @@ S1 Application Protocol
 <9> later
 <10>
 <11> S1口上为这个E-RAB所分配的地址
-<12> eNB与S-GW之间传输这个E-RAB的GTP隧道端点标识. 这里给出的是S-GW一端的GTP-TEID
+// <12> eNB与S-GW之间传输这个E-RAB的GTP隧道端点标识. 这里给出的是S-GW一端的GTP-TEID
 
 [[msg_erab_setup_rsp]]
 === E-RAB Setup Response
@@ -706,9 +706,8 @@ S1 Application Protocol
 <8> eNB与S-GW之间传输这个E-RAB的GTP隧道端点标识. 这里给出的是S-GW一端的GTP-TEID
 
 
-<11> E-RAB failed to be Setup List 未能成功建立的E-RAB列表
-<12> E-RAB ID 
-<13> Cause 例如"无线资源无效", "无线接口失败"等
+// <11> E-RAB failed to be Setup List 未能成功建立的E-RAB列表
+// <12> E-RAB ID
+// <13> Cause 例如"无线资源无效", "无线接口失败"等
 
-<<<
-// vim: set syntax=asciidoc:
+end

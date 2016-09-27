@@ -199,10 +199,10 @@ rrcConnectionSetup-r8
 <8> SRB采用AM接收模式. 关于模式: 透明模式(TM), 非确认模式(UM)和确认模式(AM)
 <9> UE侧的上行RLC配置, 主要配置RLC数据接收侦测规则. SRB1上下行采用AM RLC模式
 <10> AMD PDU重传检测定时器时长. 发送端发送某个Poll的AMD PDU后, 如果在该定时器超时后, 还没有收到响应, 则重新触发Poll.
-<11> UE 触发Polling的PDU字节数据量门限. 轮询间隔SDU数, 该参数给出了一个触发轮询的门限值, 发送了PollSDU个SDU后触发一次轮询. 此处的p128对应为128个PDU
+<11> UE触发Polling的PDU字节数据量门限. 轮询间隔SDU数, 该参数给出了一个触发轮询的门限值, 发送了PollSDU个SDU后触发一次轮询. 此处的p128对应为128个PDU
 <12> PollByte为AM PDU侦测字节数. 触发每个pollByte字节的一个轮询. 此处kB125对应125kB
 <13> UE AM模式RLC ARQ最大重传次数. 该参数用于配置UE,表示RLC ARQ最大重传次数,用于限制一个AM PDU的重传次数. 当等于该值时,将向高层上报不可恢复的错误,触发RRC连接重建. t16对应16次重传输. 
-<14> UE侧的下行RLC配置, 主要配置RLC数据接收状态上报规则. 
+<14> UE侧的下行RLC配置,主要配置RLC数据接收状态上报规则. 
 <15> UE AM模式接收端重排序定时器, 用于触发RESET PDU的重传. 该参数用于配置UE,表示AM 模式接收端重排序定时器的大小. 此处ms80表示80ms. 
 <16> UE禁止发送状态报告定时器. 该参数用于配置UE表示AM模式接收端禁止发送状态报告的定时器大小. 即在本时长内不允许上报状态报告. ms15表示15ms. 
 <17> SRB1的逻辑信道配置
@@ -255,26 +255,119 @@ rrcConnectionSetup-r8
 [[msg_rrc_connection_setup_complete]]
 === RRC Connection Setup Complete
 .RRC Connection Setup Complete
-------
-MS1
-RRC Connection Setup Complete (UL-DCCH)
+....
+LTE RRC-->RRC Connection Setup Complete
+ UL-DCCH-Message
+  message
+   c1
+    rrcConnectionSetupComplete                                                 
+     rrc-TransactionIdentifier = 0
+     criticalExtensions
+      c1
+       rrcConnectionSetupComplete-r8
+        selectedPLMN-Identity = 1                                                               <1>
+        dedicatedInfoNAS = 17864E5EC90707480...
+ L3Message
+  dir = UPLINK
+  message
+   TRACKING_AREA_UPDATE_REQUEST
+    ActiveFlag = (0)Bearer establishment requested
+    EPSUpdateTypeValue = (1)combined TA/LA updating
+    NAS_key_Set_identifier
+     TSC = (0)native security context (for KSI_ASME)
+     NAS_Key_Set_Identifer = (0)possible values for the NAS key set identifier
+    Old_GUTI
+     odd_even_indic = (0)even number of identity digits and also when the GUTI is used
+     Type_Of_Indetity = (6)GUTI
+     MCC = 449
+     MNC = 44
+     MME_Group_ID = 1234
+     MME_Code = 65
+     M_TMSI = 0x574963F4
+    UE_Network_Capability
+     EEA0 = (1)EPS encryption algorithm EEA0 supported
+     EEA1 = (1)EPS encryption algorithm 128-EEA1 supported
+     EEA2 = (1)EPS encryption algorithm 128-EEA2 supported
+     EEA3 = (0)EPS encryption algorithm EEA3 not supported
+     EEA4 = (0)EPS encryption algorithm EEA4 not supported
+     EEA5 = (0)EPS encryption algorithm EEA5 not supported
+     EEA6 = (0)EPS encryption algorithm EEA6 not supported
+     EEA7 = (0)EPS encryption algorithm EEA7 not supported
+     EIA1 = (1)EPS integrity algorithm 128-EIA1 supported
+     EIA2 = (1)EPS integrity algorithm 128-EIA2 supported
+     EIA3 = (0)EPS integrity algorithm EIA3 not supported
+     EIA4 = (0)EPS integrity algorithm EIA4 not supported
+     EIA5 = (0)EPS integrity algorithm EIA5 not supported
+     EIA6 = (0)EPS integrity algorithm EIA6 not supported
+     EIA7 = (0)EPS integrity algorithm EIA7 not supported
+     UEA0 = (0)UMTS encryption algorithm UEA0 not supported
+     UEA1 = (1)UMTS encryption algorithm UEA1 supported
+     UEA2 = (0)UMTS encryption algorithm UEA2 not supported
+     UEA3 = (1)UMTS encryption algorithm UEA3 supported
+     UEA4 = (0)UMTS encryption algorithm UEA4 not supported
+     UEA5 = (0)UMTS encryption algorithm UEA5 not supported
+     UEA6 = (1)UMTS encryption algorithm UEA6 supported
+     UEA7 = (0)UMTS encryption algorithm UEA7 not supported
+     UCS2 = (0)The UE has no preference between the use of the default alphabet and the use of UCS2
+     UIA1 = (1)UMTS integrity algorithm UIA1 supported
+     UIA2 = (0)UMTS integrity algorithm UIA2 not supported
+     UIA3 = (0)UMTS integrity algorithm UIA3 not supported
+     UIA4 = (0)UMTS integrity algorithm UIA4 not supported
+     UIA5 = (1)UMTS integrity algorithm UIA5 supported
+     UIA6 = (0)UMTS integrity algorithm UIA6 not supported
+     UIA7 = (0)UMTS integrity algorithm UIA7 not supported
+     SRVCC = (0)SRVCC from E-UTRAN to cdma2000 1x CS not supported
+    Last_visited_registered_TAI
+     MCC = 449
+     MNC = 44
+     TAC = 1
+    EPS_bear_context_status
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (1)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-ACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+     EBI = (0)the ESM state of the corresponding EPS bearer context is BEARER CONTEXT-INACTIVE
+    Old_location_area_identification
+     MCC = 449
+     MNC = 44
+     LAC = 1
+    Mobile_Station_classmark2
+     Revision_Level = (2)Used by mobile stations supporting R99 or later versions of the protocol
+     ES_IND = (0)Controlled Early Classmark Sending option is not implemented in the MS
+     A5_1 = (1)encryption algorithm A5/1 not available
+     RF_Power_capability = (7)reserved
+     PS_capability = (0)PS capability not present
+     SS_Screen_Indicator = 1
+     SM_capability = (1)Mobile station supports mobile terminated point to point SMS
+     VBS_notification_reception = (0)VBS capability or no notifications wanted
+     VGCS_notification_reception = (0)VGCS capability or no notifications wanted
+     FC_Frequency_Capability = 0
+     CM3 = (1)The MS supports options that are indicated in classmark 3 IE
+     LCS_VA_capability = (1)location request notification via CS domain not supported
+     UCS2_treatment = (0)the ME has a preference for the default alphabet over UCS2
+     SoLSA = (0)The ME does not support SoLSA
+     CM_Service_Prompt = (1)Network initiated MO CM connection request supported for at least one CM protocol
+     A5_3 = (1)encryption algorithm A5/3 available
+     A5_2 = (0)encryption algorithm A5/2 not available
 
-rrcConnectionSetupComplete-r8                                   <1>
-  selectedPLMN-Identity : 1                                     <2>
-  registeredMME                                                 <3>
-    mmegi : 0000000000000010
-    mmec
-      MMEC : (0x1) : 1
-  dedicatedInfoNAS                                              <4>
-    Protocol Discriminator : 7 (EMM)
-    Message Type : Attach Request
-    Message Contents : 17 71 ...
-------
+....
 
-<1> RRC连接建立完成消息
-<2> 指示UE选择的PLMN,如果是1, 表示在SIB1消息里面的第一个PLMN, 如果是2, 表示在SIB1消息里面的第二个PLMN. 以此类推
-<3> //?
-<4> 传输UE和网络层的NAS层消息. eNB层透传此消息给MME. 
+
+<1> RRC连接建立完成消息.
+// <2> 指示UE选择的PLMN,如果是1, 表示在SIB1消息里面的第一个PLMN, 如果是2, 表示在SIB1消息里面的第二个PLMN. 以此类推
+// <3> later
+// <4> 传输UE和网络层的NAS层消息. eNB层透传此消息给MME. 
 
 
 [[msg_ue_capability_enquir]]
@@ -1075,7 +1168,4 @@ measurementReport-r8
 <6> 对应临小区物理层标识
 <7> 临小区RSRP值
 
-
-<<<
-
-// vim: set syntax=asciidoc:
+end

@@ -1,12 +1,26 @@
-﻿= LTE信令流程解析
-loseblue <loseblue@163.com>
-v0.1, 2015年7月29日 14:33:29
+= LTE信令流程解析
+loseblue <loseblue[a)g_m_a_i_l.com>
+:email: loseblue[a)g_m_a_i_l.com
+:revdate: 27-09-2016
+:doctype: book
+:encoding: utf-8
+:toc:
+:numbered:
+
 
 
 include::0101系统信息解析.adoc[]
+
 include::0201主要信令流程.adoc[]
+
 include::0301空口信令解析.adoc[]
+
 include::0302网络信令解析.adoc[]
+
 include::0303VoLTE解析.adoc[]
 
 
+[appendix]
+== test
+
+*LTE信令流程解析* ddddddd

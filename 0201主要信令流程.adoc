@@ -52,6 +52,7 @@ eNB -> MME: UPLINK NAS TRANSPORT
 
 
 === 随机接入
+later
 
 === S1初始化
 [plantuml]
@@ -169,6 +170,4 @@ rnote over s_eNB: Release Resource
 ---------------------------------------------------------------------
 
 
-<<<
-
-// vim: set syntax=asciidoc:
+end

@@ -25,7 +25,6 @@ MIB主要包含系统带宽, PHICH配置信息, 系统帧号. (下图为实测�
 
 image::images/mib.jpg[title="mib",align="center"]
 
-[glossary]
 DL_Bandwidth::
 系统带宽, 范围enumerate(1.4M(6RB, 0), 3M(15RB, 1), 5M(25RB, 2), 10M(50RB, 3), 15M(75RB, 4), 20M(100RB, 5)), 上图为n100, 对应的系统带宽为20M(100RB, 带宽索引号为5). 
 Phich_Config::
@@ -476,9 +475,10 @@ interFreqCarrierFreqList                                        <2>
 * SIB7仅包含2G小区重选信息
 
 === SIB8 (System Information Block 8) 解析
+* SIB8
 
 === SIB9 (System Information Block 9) 解析
+* SIB9
 
-<<<
 
-// vim: set syntax=asciidoc:
+end

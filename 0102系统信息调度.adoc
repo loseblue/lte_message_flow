@@ -74,6 +74,4 @@
 
 作者: 温金辉
 
-<<<
-
-// vim: set syntax=asciidoc:
+end
