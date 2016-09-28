@@ -480,5 +480,4 @@ interFreqCarrierFreqList                                        <2>
 === SIB9 (System Information Block 9) 解析
 * SIB9
 
-
-end
+// vim: set syntax=asciidoc:

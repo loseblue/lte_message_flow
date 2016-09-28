@@ -1,4 +1,4 @@
-﻿== 主要信令流程
+﻿== 异常信令流程
 
 === 开机附着流程
 UE刚开机时, 先进行物理下行同步, 搜索测量进行小区选择, 选择到一个合适或者可接纳的小区后, 驻留并进行附着过程. 附着流程图如下: 
@@ -52,48 +52,7 @@ eNB -> MME: UPLINK NAS TRANSPORT
 
 
 === 随机接入
-随机接入分为基于冲突的随机接入和基于非冲突的随机接入两个流程. 其区别为针对两种流程其选择随机接入前缀的方式.
-
-* 基于冲突的随机接入   UE从基于冲突的随机接入前缀中依照一定算法随机选择一个随机前缀
-* 基于非冲突的随机接入 基站侧通过下行专用信令给UE指派非冲突的随机接入前缀. 
-
-==== 基于冲突的随机接入
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title 基于冲突的随机接入
-UE -> eNB: Random Access Preamble
-eNB -> UE: Random Access Response
-UE -> eNB: Scheduled Transmission
-eNB -> UE: Contention Resolution
-
-@enduml
----------------------------------------------------------------------
-1. UE在RACH上发送随机接入前缀; 
-2. ENb的MAC层产生随机接入响应, 并在DL-SCH上发送; 
-3. UE的RRC层产生RRC Connection Request 并在映射到UL–SCH上的CCCH逻辑信道上发送; 
-4. RRC Contention Resolution 由ENb的RRC层产生, 并在映射到DL–SCH上的CCCH or DCCH(FFS)逻辑信道上发送. 
-
-==== 基于非冲突的随机接入
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title 基于非冲突的随机接入
-eNB -> UE: RA Preamble assignment
-UE -> eNB: Random Access Preamble
-eNB -> UE: Radom Access Response
-
-@enduml
----------------------------------------------------------------------
-1. ENb 通过下行专用信令给UE指派非冲突的随机接入前缀(non-contention Random Access Preamble), 这个前缀不在BCH上广播的集合中. 
-2. UE在RACH上发送指派的随机接入前缀. 
-3. ENb的MAC层产生随机接入响应, 并在DL-SCH上发送. 
+later
 
 === S1初始化
 [plantuml]
@@ -122,7 +81,7 @@ eNB -> MME: ENB Direct Information Transfer
 hide footbox
 autonumber "<b><font color=red >[00]"
 
-title X2 Setup Request
+title S1 Setup Request
 eNB1 -> eNB2: X2 Setup Request
 eNB2 -> eNB1: X2 Setup Response
 eNB1 -> eNB2: ENB Configuration Update
@@ -134,128 +93,6 @@ eNB2 -> eNB1: ENB Configuration Update Acknowledge
 2. X2 Setup Response. <<msg_x2_setup_rsp, [X2 Setup Response]>>
 3. ENB Configuration Update.<<msg_ENB_config_update, [ENB Configuration Update]>> 
 4. ENB Configuration Update Acknowledge.<<msg_ENB_config_update_ack, [ENB Configuration Update Acknowledge]>> 
-
-=== Service Request
-UE在IDLE模式下, 需要发送业务数据时, 发起service request过程.
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title Service Request
-UE -> eNB: **MSG1** Random Access Preamble
-eNB -> UE: **MSG2** Random Access Response
-UE -> eNB: **MSG3** RRC Connection Request
-eNB -> UE: **MSG4** RRC Connection Setup
-UE -> eNB: RRC Connection Setup Complete, Service request
-eNB -> MME: Initial UE message, Service request
-UE <--> MME: Identity/Authentication/Security
-MME -> eNB: Initial Context Setup Request
-eNB -> UE: UE Capability Enquiry
-UE -> eNB: UE Capability Information
-eNB -> MME: UE Capability Info Indication
-eNB -> UE: Security Mode Command
-UE -> eNB: Security Mode Complete
-eNB -> UE: RRC Connection Reconfiguration
-UE -> eNB: RRC Connection Reconfiguration Complete
-eNB -> MME: Initial context setup response
-UE -> eNB: UL Information Transfer
-eNB -> MME: UPLINK NAS TRANSPORT
-
-@enduml
----------------------------------------------------------------------
-
-=== Paging
-==== s_TMSI Paging
-UE在IDLE模式下, 当网络需要给该UE发送数据(业务或者信令)时, 发起寻呼过程.
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title s_TMSI Paging
-participant UE
-participant eNB
-MME -> eNB: NAS: Paging(S_TMSI)
-eNB -> UE: NAS: Paging(S_TMSI)
-note over MME, UE: Continue with Service Request
-
-@enduml
----------------------------------------------------------------------
-
-==== IMSI Paging
-当网络发生错误需要恢复时(例如S-TMSI不可用), 可发起IMSI寻呼, UE收到后执行本地detach, 然后再开始attach. 
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title s_TMSI Paging
-participant UE
-participant eNB
-MME -> eNB: NAS: Paging(IMSI)
-eNB -> UE: NAS: Paging(IMSI)
-note over MME, UE: Continue with Attach Request
-
-@enduml
----------------------------------------------------------------------
-
-=== TAU
-当UE进入一个小区, 该小区所属TAI不在UE保存的TAI list内时, UE发起正常TAU流程, 分为IDLE和CONNECTED(即切换时)下. 如果TAU accept分配了一个新的GUTI, 则UE需要回复TAU complete, 否则不用回复. 
-
-==== IDLE态
-IDLE下, 如果有上行数据或者上行信令(与TAU无关的)发送, UE可以在TAU request消息中设置an "active"标识, 来请求建立用户面资源, 并且TAU完成后保持NAS信令连接. 如果没有设置"active"标识, 则TAU完成后释放NAS信令连接.         
-IDLE下发起的也可以带EPS bearer context status IE, 如果UE带该IE, MME回复消息也带该IE, 双方EPS承载通过这个IE保持同步. 
-
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title IDLE TAU
-UE -> eNB: **MSG1** Random Access Preamble
-eNB -> UE: **MSG2** Random Access Response
-UE -> eNB: **MSG3** RRC Connection Request
-eNB -> UE: **MSG4** RRC Connection Setup
-UE -> eNB: RRC Connection Setup Complete (with TAU request)
-eNB -> MME: initialUEMessage, Tracking area update request
-MME -> eNB: downlinkNASTransprot, Tracking area update accept
-eNB -> UE: DL Information Transfer, Tracking area update accept
-UE -> eNB: UL Information Transfer, Tracking area update commplete
-eNB -> MME: uplinkNASTransport, Tracking area update commplete
-MME -> eNB: UEContextReleaseCommand [NAS-cause=normal-release]
-eNB -> UE: RRC Connection Release
-eNB -> MME: UEContextRelease
-
-@enduml
----------------------------------------------------------------------
-
-==== CONNECTED态
-1. 如果TAU accept未分配一个新的GUTI, 则无过程5,6
-2. 切换下发起的TAU, 完成后不会释放NAS信令连接
-3. CONNECTED下发起的TAU, 不能带"active"标识
-
-[plantuml]
----------------------------------------------------------------------
-@startuml
-hide footbox
-autonumber "<b><font color=red >[00]"
-
-title CONNECTED TAU
-UE -> eNB: UL Information Transfer, Tracking area update request
-eNB -> MME: uplinkNASTransport, Tracking area update request
-rnote over MME: Update UE CONTEXT between MMEs
-MME -> eNB: downlinkNASTransprot, Tracking area update accept
-eNB -> UE: DL Information Transfer, Tracking area update accept
-UE -> eNB: UL Information Transfer, Tracking area update commplete
-eNB -> MME: uplinkNASTransport, Tracking area update commplete
-
-@enduml
----------------------------------------------------------------------
 
 
 === 测量报告
@@ -284,7 +121,7 @@ UE -> eNB: RRC Connection Reconfiguration Complete
 6. RRC重配置完成. 
 
 === E-RAB承载管理
-在CN和eNodeB上为UE建立业务通道. 
+在CN和eNodeB上为UE建立业务通道。
 [plantuml]
 ---------------------------------------------------------------------
 @startuml
@@ -333,6 +170,4 @@ rnote over s_eNB: Release Resource
 ---------------------------------------------------------------------
 
 
-
 // vim: set syntax=asciidoc:
-

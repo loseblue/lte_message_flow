@@ -1168,4 +1168,4 @@ measurementReport-r8
 <6> 对应临小区物理层标识
 <7> 临小区RSRP值
 
-end
+// vim: set syntax=asciidoc:

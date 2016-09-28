@@ -710,4 +710,4 @@ S1 Application Protocol
 // <12> E-RAB ID
 // <13> Cause 例如"无线资源无效", "无线接口失败"等
 
-end
+// vim: set syntax=asciidoc:
